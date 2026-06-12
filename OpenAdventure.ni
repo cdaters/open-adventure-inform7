@@ -1,4 +1,4 @@
-"Open Adventure" by Eric S. Raymond, William Crowther, and Don Woods
+"Open Adventure" by Eric S Raymond.
 
 [
 Open Adventure Inform 7 Edition
@@ -40,4 +40,5 @@ Include "generated/Travel.ni".
 Include "generated/Vocabulary.ni".
 Include "OpenAdventure_State.ni".
 Include "OpenAdventure_Conditions.ni".
+Include "OpenAdventure_Plover.ni".
 Include "OpenAdventure_Runtime.ni".

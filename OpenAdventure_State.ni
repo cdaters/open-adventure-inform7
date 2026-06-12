@@ -69,13 +69,10 @@ The openadventure-subsystem-endgame is false.
 Section 4 - Data binding for IDs and per-object state
 
 A thing has a text called adventure-id.
-The adventure-id of every thing is "".
 
 A room has a text called adventure-id.
-The adventure-id of every room is "".
 
 A thing has a text called adventure-state.
-The adventure-state of every thing is "".
 
 Section 5 - Scoring scaffolding
 
@@ -88,23 +85,24 @@ The openadventure-score-event-reason is "".
 The openadventure-score-event-source is a text that varies.
 The openadventure-score-event-source is "".
 
-Section 6 - Utility: ID normalization and bootstrapping
+Section 6 - Utility
+
+This section contains ID normalization helpers and project bootstrapping.
 
 To decide what text is the normalized adventure id from (token - text):
 	let normalized-id be token;
 	replace the text " " in normalized-id with "_";
-	replace the text "[" in normalized-id with "";
-	replace the text "]" in normalized-id with "";
-	replace the text """" in normalized-id with "";
-	replace the text "'" in normalized-id with "";
 	decide on normalized-id.
+
+Section 7 - Runtime dispatch scratch state
+
+The openadventure-runtime-check-result is a truth state that varies.
+The openadventure-runtime-check-result is false.
 
 To initialize framework IDs:
 	now openadventure-framework-in-lookup is true;
-	let candidate-room be a room;
-	let candidate-thing be a thing;
-	repeat with candidate-room running through rooms:
+	repeat with candidate-room running through the rooms:
 		now adventure-id of candidate-room is the normalized adventure id from the printed name of candidate-room;
-	repeat with candidate-thing running through things:
+	repeat with candidate-thing running through the things:
 		now adventure-id of candidate-thing is the normalized adventure id from the printed name of candidate-thing;
 	now openadventure-framework-in-lookup is false.

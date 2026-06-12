@@ -1,0 +1,1 @@
+[smoke] generation and artifact checks passed

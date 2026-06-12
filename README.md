@@ -1,179 +1,88 @@
-# Open Adventure Inform 7
+# Open Adventure in Inform 7
 
-An Inform 7 10.1.2 implementation of Eric S. Raymond's Open Adventure.
+Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-This project aims to create a modern Inform 7 version of Open Adventure using the Open Adventure `adventure.yaml` file as the canonical world model and the Open Adventure C implementation as the canonical behavioral reference.
+## Current status (Milestone 3F refresh)
 
-The resulting game is intended to compile under Inform 7 10.1.2 and target the Z-Machine Version 8 format for distribution through TerpVault and other Interactive Fiction archives.
+Current snapshot after work completed up through:
+- Milestone 3E (first compilable Inform 7 build)
+- Milestone 4A (Plover subsystem implementation)
+- Milestone 3F (repository documentation refresh)
 
----
+## What is working today
 
-## Project Goals
+- Inform 7 compilation is functional:
+  - `./build.sh --compile` completes.
+  - Build artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`.
+- Generated core world generation still drives rooms, objects, travel rows, vocabulary, and base gameplay constants.
+- Runtime scaffolding is present:
+  - `OpenAdventure_State.ni`
+  - `OpenAdventure_Conditions.ni`
+  - `OpenAdventure_Runtime.ni`
+  - `OpenAdventure_Plover.ni`
+- Travel dispatch runtime exists with generated row integration:
+  - direct travel dispatch
+  - forced travel dispatch
+  - random travel dispatch
+  - magic-word dispatch
+- Explicit unresolved gameplay rules remain as stubs where behavior is not yet safely generated.
 
-* Preserve Open Adventure gameplay and content.
-* Use `adventure.yaml` as the authoritative source of world data.
-* Generate world-model source automatically where practical.
-* Maintain gameplay systems in hand-written Inform 7.
-* Produce a clean, modern Inform 7 codebase.
-* Build a playable `.z8` release.
+## Remaining work (behavioral parity)
 
----
+- Dwarf system and encounter restrictions
+- Troll/bridge/chasm gating behavior
+- Bear system
+- Pirate system
+- Dragon system
+- Cave-closing system
+- Endgame and full scoring flow
+- Final parser/UX alignment and transcript regression harness
 
-## Canonical Sources
+## Milestone completion matrix
 
-### Open Adventure
+| Milestone | Status | Notes |
+|---|---|---|
+| 2A | ✅ | Data extraction and command scaffolding |
+| 2B | ✅ | Vocabulary and command analysis |
+| 2C | ✅ | World model normalization and baseline architecture docs |
+| 2D | ✅ | Unresolved travel rules traced and categorized |
+| 3A | ✅ | Gameplay systems identification and runtime boundaries |
+| 3B | ✅ | Runtime framework foundation added |
+| 3C | ✅ | Runtime travel dispatch wired to generated rules |
+| 3D | ✅ | Unresolved travel dependencies documented and implemented for plover travel |
+| 3E | ✅ | First real Inform 7 build succeeds |
+| 3F | ✅ | Documentation refresh and roadmap added |
+| 4A | ✅ | Plover runtime subsystem and notes |
+| 4B+ | 🚧 Planned | Remaining gameplay systems + transcript-level verification |
 
-* William Crowther's original Adventure (1975–1976)
-* Don Woods' expanded Adventure (1977)
-* Eric S. Raymond's Open Adventure
+## Build and validation entry points
 
-### Reference Implementations
+- `./build.sh --generate` — regenerate source files from `source/adventure.yaml`.
+- `./build.sh --compile` — assemble and compile an Inform 7 build.
+- `./test.sh` — smoke-style build test entrypoint.
 
-* Open Adventure (C)
-* adventure.yaml
-* Chris Conley's Inform 7 Adventure port
-* Graham Nelson's Advent.inf
+See:
+- `docs/build-and-test.md`
+- `docs/build-status.md`
+- `docs/testing-environment.md`
 
----
+## Key docs
 
-## Source Hierarchy
+- `PROJECT.md` — overall project plan and milestone tracking
+- `docs/architecture/current-state.md` — canonical state overview
+- `docs/architecture/project-roadmap.md` — recommended implementation path
+- `docs/architecture/runtime-framework.md` — runtime architecture contract
+- `docs/architecture/travel-dispatch.md` — travel dispatch and condition flow
+- `docs/architecture/plover-system.md` — plover behavior and dependencies
 
-When multiple implementations disagree, the following precedence applies:
+## References
 
-1. Open Adventure C implementation
-2. adventure.yaml
-3. Original Crowther/Woods Adventure behavior
-4. Graham Nelson's Advent.inf
-5. Chris Conley's Inform 7 Adventure port
+- `references/open-adventure-c/` (authoritative behavior for porting)
+- `references/conley-inform7/` (Inform 7 reference implementation)
+- `references/nelson-inform6/` (Inform 6 reference implementation)
 
-Reference implementations may be consulted for implementation techniques and historical behavior but do not override Open Adventure.
+## Contributing notes
 
-
----
-
-## Repository Structure
-
-```text
-open-adventure-inform7/
-├── OpenAdventure.ni
-├── PROJECT.md
-│
-├── source/
-│   └── adventure.yaml
-│
-├── references/
-│   ├── open-adventure-c/
-│   │   ├── adventure.c
-│   │   ├── adv440.c
-│   │   ├── travel.c
-│   │   └── ...
-│   │
-│   ├── conley-inform7/
-│   │   └── Adventure.ni
-│   │
-│   └── nelson-inform6/
-│       └── Advent.inf
-│
-├── generated/
-│   ├── Rooms.ni
-│   ├── Travel.ni
-│   ├── Objects.ni
-│   ├── Vocabulary.ni
-│   ├── Messages.ni
-│   └── Hints.ni
-│
-├── tools/
-│   ├── yaml2inform.py
-│   └── generators/
-│
-└── docs/
-```
-
----
-
-## Generated vs Hand-Maintained Code
-
-### Generated
-
-These files are generated automatically from `adventure.yaml`:
-
-* Rooms.ni
-* Travel.ni
-* Objects.ni
-* Vocabulary.ni
-* Messages.ni
-* Hints.ni
-
-Do not edit generated files manually.
-
-### Hand-Maintained
-
-Gameplay systems remain hand-written Inform 7:
-
-* Dwarf AI
-* Pirate behavior
-* Troll behavior
-* Dragon behavior
-* Lamp and battery logic
-* Scoring
-* Cave-closing sequence
-* Repository/endgame logic
-* Parser enhancements
-
----
-
-## Building Generated Sources
-
-Generate Inform 7 source files from the YAML world model:
-
-```bash
-python3 tools/yaml2inform.py
-```
-
-Generated files will be written to:
-
-```text
-generated/
-```
-
----
-
-## Current Status
-
-### Completed
-
-* Repository initialization
-* GitHub integration
-* YAML parsing
-* Room generation prototype
-* Travel extraction prototype
-
-### In Progress
-
-* Travel translation
-* Object generation
-* Vocabulary generation
-
-### Planned
-
-* Full movement system
-* Object placement
-* Puzzle logic
-* Dwarves
-* Pirate
-* Cave closing
-* Endgame
-* Z8 release
-
----
-
-## License
-
-This project is released under the BSD 2-Clause License.
-
-Open Adventure is Copyright © Eric S. Raymond and contributors.
-
-Original Adventure was created by William Crowther and expanded by Don Woods.
-
-This repository contains an Inform 7 implementation and associated conversion tooling maintained by Craig Daters.
-
+- `source/adventure.yaml` remains authoritative for world data.
+- Generated files are regenerated artifacts and should not be hand-edited except when intentionally updating generator output contracts.
+- Gameplay-specific systems should be implemented as dedicated runtime modules once behavior is fully traced.

@@ -20,13 +20,13 @@ To decide whether openadventure pre-travel hooks allow source (source - room) de
 	decide yes.
 
 To run openadventure post-travel hooks for source (source - room) destination (target - room) verb (verb-token - text):
-	nothing.
+	do nothing.
 
 To run openadventure inventory hooks for carried object (item - thing):
-	nothing.
+	do nothing.
 
 To run openadventure inventory hooks for dropped object (item - thing):
-	nothing.
+	do nothing.
 
 To run openadventure scoring hooks for delta (delta - number) reason (reason - text):
 	now openadventure-score-delta is delta;
@@ -34,7 +34,7 @@ To run openadventure scoring hooks for delta (delta - number) reason (reason - t
 	now openadventure-score-event-source is "openadventure_runtime".
 
 To run openadventure command hooks for action-verb (action-verb - text):
-	nothing.
+	do nothing.
 
 Section 3 - Subsystem registration and dispatch gates
 
@@ -95,57 +95,24 @@ To decide whether random-travel chance (chance - number) allows dispatch:
 		decide yes;
 	decide no.
 
-To decide whether generated travel row (rule-id - number) from source-id (source-id - text) to destination-id (dest-id - text) using verb-set (verb-list - text) and condition-kind (condition-kind - text) arg1 (arg1 - text) arg2 (arg2 - text) and travel-category (travel-category - text) random-chance (random-chance - number) is-magic-word (is-magic-word - truth state) for verb token (verb-token - text) can be selected:
+To oa-init-and-test-openadventure-travel-row (source-id - text) with verb-token (verb-token - text):
+	now openadventure-runtime-check-result is false;
 	let source-room be the room for adventure-id source-id;
-	let target-room be the room for adventure-id dest-id;
-	if travel-category is "goto_forced":
-		if verb-token is not "":
-			decide no;
-	else:
-		if verb-token is "":
-			decide no;
-		if openadventure movement token (verb-token) appears in token list (verb-list) is false:
-			decide no;
-	if travel-category is "goto_magic_word":
-		if is-magic-word is false:
-			decide no;
 	if openadventure-framework-ready is false:
 		set up OpenAdventure runtime framework;
-	if source-room is LOC_NOWHERE:
-		decide no;
-	if travel-category is "goto_random":
-		if openadventure random-travel chance random-chance allows dispatch is false:
-			decide no;
-	else:
-		if condition condition-kind with arg1 arg1 and arg2 arg2 currently holds in source-room is false:
-			decide no;
-	if openadventure-subsystem-dwarves is true:
-		if subsystem dwarves currently handles this travel from source-room to target-room with verb-token is true:
-			decide no;
-	if openadventure-subsystem-pirate is true:
-		if subsystem pirate currently handles this travel from source-room to target-room with verb-token is true:
-			decide no;
-	if openadventure-subsystem-dragon is true:
-		if subsystem dragon currently handles this travel from source-room to target-room with verb-token is true:
-			decide no;
-	if openadventure-subsystem-troll is true:
-		if subsystem troll currently handles this travel from source-room to target-room with verb-token is true:
-			decide no;
-	if openadventure-subsystem-bear is true:
-		if subsystem bear currently handles this travel from source-room to target-room with verb-token is true:
-			decide no;
-	now openadventure-current-travel-rule-id is rule-id;
 	now openadventure-active-source-loc is source-id;
 	now openadventure-active-verb-token is verb-token;
-	now openadventure-active-travel-result is dest-id;
-	decide yes.
+	if source-room is LOC_NOWHERE:
+		now openadventure-runtime-check-result is false;
+		stop;
+	now openadventure-runtime-check-result is true.
 
 To decide whether openadventure runtime is idle:
 	if openadventure-framework-ready is true and openadventure-subsystem-registration-locked is true:
 		decide yes;
 	decide no.
 
-To decide whether a movement token (verb-token - text) appears in token list (verb-list - text):
+To decide whether movement token (verb-token - text) is in token list (verb-list - text):
 	let normalized-token be the normalized adventure id from verb-token;
 	let normalized-verb-list be the normalized adventure id from verb-list;
 	if normalized-verb-list is "<forced>":
@@ -160,74 +127,60 @@ To decide whether a movement token (verb-token - text) appears in token list (ve
 	while token-index <= number of words in normalized-verb-list:
 		if word number token-index in normalized-verb-list is normalized-token:
 			decide yes;
-		increment token-index;
+		increase token-index by 1;
 	decide no.
 
-To decide whether openadventure forced travel can be executed from source-id (source-id - text):
-	let source-room be the room for adventure-id source-id;
+To process openadventure forced travel from source-room (source-room - room):
 	let handled be false;
+	now openadventure-runtime-check-result is false;
 	if openadventure-framework-has-pending-travel is true:
-		decide no;
+		now openadventure-runtime-check-result is false;
+		stop;
 	if source-room is LOC_NOWHERE:
-		decide no;
+		now openadventure-runtime-check-result is false;
+		stop;
 	now openadventure-framework-has-pending-travel is true;
 	repeat through the Table of Generated Travel Non-Direct Rules:
 		if handled is false:
-			if source-loc entry is source-id:
-				if forced entry is true:
-					if openadventure travel row rule-id entry from source-id entry to target entry using verb-set verb entry and condition-kind entry and arg1 entry and arg2 entry and travel-category entry random-chance entry is-magic-word entry for verb token "" can be selected:
+			if source-loc entry is adventure-id of source-room and forced entry is true:
+				oa-init-and-test-openadventure-travel-row source-loc entry with verb-token "";
+				if openadventure-runtime-check-result is true:
+					oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
+					if openadventure-runtime-check-result is true:
 						now handled is true;
-						if openadventure execute generated travel entry is true:
-							now handled is true;
-						else:
-							now handled is false;
 	if handled is false:
 		now openadventure-framework-has-pending-travel is false;
-		decide no;
+		now openadventure-runtime-check-result is false;
+		stop;
 	now openadventure-framework-has-pending-travel is false;
-	decide yes.
+	now openadventure-runtime-check-result is true.
 
-To decide whether openadventure execute generated travel entry:
-	if travel-category entry is "goto":
-		decide whether openadventure execute generated goto action-kind entry with destination target entry from source-loc entry and token (openadventure-active-verb-token) succeeds;
-	if travel-category entry is "goto_non_direct":
-		decide whether openadventure execute generated goto action-kind entry with destination target entry from source-loc entry and token (openadventure-active-verb-token) succeeds;
-	if travel-category entry is "goto_conditional":
-		decide whether openadventure execute generated goto action-kind entry with destination target entry from source-loc entry and token (openadventure-active-verb-token) succeeds;
-	if travel-category entry is "goto_forced":
-		decide whether openadventure execute generated goto action-kind entry with destination target entry from source-loc entry and token (openadventure-active-verb-token) succeeds;
-	if travel-category entry is "goto_random":
-		decide whether openadventure execute generated goto action-kind entry with destination target entry from source-loc entry and token (openadventure-active-verb-token) succeeds;
-	if travel-category entry is "goto_magic_word":
-		decide whether openadventure execute generated goto action-kind entry with destination target entry from source-loc entry and token (openadventure-active-verb-token) succeeds;
-	if travel-category entry is "speak":
-		openadventure emit travel message target entry;
-		decide yes;
-	if travel-category entry is "speak_conditional":
-		openadventure emit travel message target entry;
-		decide yes;
-	if travel-category entry is "special":
-		decide whether openadventure execute generated special target entry from source-loc entry and token (openadventure-active-verb-token);
-	if travel-category entry is "special_conditional":
-		decide whether openadventure execute generated special target entry from source-loc entry and token (openadventure-active-verb-token);
-	decide no.
+To oa-dispatch-openadventure-travel-entry (source-id - text) with rule-id (travel-rule-id - number) and category (travel-category - text) target (target-id - text):
+	now openadventure-runtime-check-result is false;
+	now openadventure-current-travel-rule-id is travel-rule-id;
+	now openadventure-active-source-loc is source-id;
+	now openadventure-active-travel-result is target-id;
+	if travel-category is "goto" or travel-category is "goto_non_direct" or travel-category is "goto_conditional" or travel-category is "goto_forced" or travel-category is "goto_random" or travel-category is "goto_magic_word":
+		oa-dispatch-openadventure-goto source-id to target-id with verb-token openadventure-active-verb-token;
+	if travel-category is "speak" or travel-category is "speak_conditional":
+		openadventure emit travel message target-id;
+		now openadventure-runtime-check-result is true;
+	if travel-category is "special" or travel-category is "special_conditional":
+		oa-dispatch-openadventure-special target-id from source-id with verb-token openadventure-active-verb-token;
+	if openadventure-runtime-check-result is true:
+		now openadventure-framework-has-pending-travel is false.
 
-To decide whether openadventure execute generated goto action-kind (action-kind - text) with destination (destination-id - text) from source-id (source-id - text) and token (verb-token - text) succeeds:
+To oa-dispatch-openadventure-goto (source-id - text) to (destination-id - text) with verb-token (verb-token - text):
 	let source-room be the room for adventure-id source-id;
 	let destination-room be the room for adventure-id destination-id;
-	let can-move be whether openadventure pre-travel hooks allow source source-room destination destination-room verb verb-token;
-	if can-move is false:
-		now openadventure-framework-has-pending-travel is false;
-		decide no;
+	now openadventure-runtime-check-result is false;
 	if destination-room is LOC_NOWHERE:
-		now openadventure-framework-has-pending-travel is false;
-		decide yes;
+		now openadventure-runtime-check-result is true;
+		stop;
 	move the player to destination-room;
-	now openadventure-framework-has-pending-travel is false;
 	run openadventure post-travel hooks for source source-room destination destination-room verb verb-token;
-	if openadventure forced travel can be executed from source-id (adventure-id of destination-room) is true:
-		decide yes;
-	decide yes.
+	now openadventure-framework-has-pending-travel is false;
+	now openadventure-runtime-check-result is true;
 
 To openadventure emit travel message (message-id - text):
 	if message-id is "NO_MESSAGE":
@@ -236,19 +189,15 @@ To openadventure emit travel message (message-id - text):
 		stop;
 	say "[message-id]";
 
-To decide whether openadventure execute generated special (special-id - text) from source-id (source-id - text) and token (verb-token - text):
-	let parsed-special be the number understood by special-id;
-	let source-room be the room for adventure-id source-id;
-	if parsed-special is 1:
-		say "Special movement case 1 is not yet implemented (plover passage capacity gating).";
-		decide no;
-	if parsed-special is 2:
-		say "Special movement case 2 is not yet implemented (plover/emerald forced retry logic).";
-		decide no;
-	if parsed-special is 3:
+To oa-dispatch-openadventure-special (special-id - text) from (source-id - text) with verb-token (verb-token - text):
+	now openadventure-runtime-check-result is false;
+	if special-id is "1":
+		oa-handle-plover-passage-special source-id with verb-token verb-token;
+	if special-id is "2":
+		oa-handle-plover-emerald-drop-special source-id with verb-token verb-token;
+	if special-id is "3":
 		say "Special movement case 3 is not yet implemented (troll bridge/chasm behavior).";
-		decide no;
-	decide no.
+		now openadventure-runtime-check-result is false;
 
 To decide whether openadventure non-direct travel from source-id (source-id - text) with verb token (verb-token - text):
 	let handled be false;
@@ -260,12 +209,12 @@ To decide whether openadventure non-direct travel from source-id (source-id - te
 	now openadventure-framework-has-pending-travel is true;
 	repeat through the Table of Generated Travel Non-Direct Rules:
 		if handled is false:
-			if source-loc entry is source-id:
-				if forced entry is false:
-					if openadventure travel row rule-id entry from source-id entry to target entry using verb-set verb entry and condition-kind entry and arg1 entry and arg2 entry and travel-category entry random-chance entry is-magic-word entry for verb token verb-token can be selected:
+			if source-loc entry is source-id and forced entry is false:
+				oa-init-and-test-openadventure-travel-row source-loc entry with verb-token verb-token;
+				if openadventure-runtime-check-result is true:
+					oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
+					if openadventure-runtime-check-result is true:
 						now handled is true;
-						if openadventure execute generated travel entry is false:
-							now handled is false;
 	if handled is false:
 		now openadventure-framework-has-pending-travel is false;
 		decide no;

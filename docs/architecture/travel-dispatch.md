@@ -48,24 +48,31 @@ The dispatcher consumes generated rows, evaluates conditions, supports forced/ra
   - allow the row by default for player movement.
   - allow future dwarf-mode exclusion by toggling `openadventure-nodwarves-mode` and inverting row handling in the calling subsystem.
 
-## Unresolved Gameplay Dependencies (Milestone 3C scope)
+## Unresolved Gameplay Dependencies
+
+## Milestone 3C baseline
 
 The dispatcher is wired, but the following rows are intentionally stubbed in 3C and remain unresolved gameplay behavior:
 
-- `110`: `LOC_Y2` — `special_conditional` → special `2` (plover/emerald follow-up chain)
-- `190`: `LOC_ALCOVE` — `special` → special `1` (plover tunnel fit check)
-- `193`: `LOC_PLOVER` — `special` → special `1` (plover tunnel fit check)
-- `194`: `LOC_PLOVER` — `special_conditional` → special `2` (plover/emerald behavior)
+- `138`: `LOC_LONGWEST` condition `nodwarves` (dwarf routing filter)
 - `216`: `LOC_SWCHASM` — `special` → special `3` (troll bridge/chasm)
 - `226`: `LOC_NECHASM` — `special` → special `3` (troll bridge/chasm)
-- `138`: `LOC_LONGWEST` condition `nodwarves` (dwarf-route filtering semantics)
 
-All seven are currently represented as explicit runtime dispatch points and are expected to be delegated to a future movement-behavior subsystem.
+## Milestone 4A follow-up
+
+Plover rows were implemented in `OpenAdventure_Plover.ni`:
+
+- `110`: `LOC_Y2` → `special 2` (carry emerald)
+- `190`: `LOC_ALCOVE` → `special 1`
+- `193`: `LOC_PLOVER` → `special 1`
+- `194`: `LOC_PLOVER` → `special 2`
+
+Unresolved gameplay dependencies after 4A: rules `138`, `216`, and `226`.
 
 ## Extension Points
 
 1. **Special travel handlers**
-   - Add concrete handlers for special IDs `1`, `2`, and `3` in the appropriate movement system layer.
+   - Add a concrete handler for special ID `3` (troll/bridge/chasm logic) in the movement system layer.
    - Keep the dispatch API stable so generated IDs map to runtime behavior.
 
 2. **Subsystem routing gates**
@@ -81,7 +88,7 @@ All seven are currently represented as explicit runtime dispatch points and are 
 
 ## Remaining Blockers and Next-Step Recommendations
 
-- Implement special handlers for IDs `1`, `2`, `3` before gameplay behavior milestones (`troll/pirate/dragon/dwarf` systems are not implemented in 3C).
+- Implement special handler for ID `3` before the troll/pirate/dragon/dwarf gameplay milestones.
 - Implement dwarf-aware travel filtering (currently modeled only as a condition flag).
 - Add message ID resolution so `speak`/`speak_conditional` rows display canonical Adventure text.
 - Add integration tests across unresolved rows once baseline parser + command routing is stable.

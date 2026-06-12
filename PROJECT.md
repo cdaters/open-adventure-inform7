@@ -1,356 +1,89 @@
-# Open Adventure Inform 7
-
-## Overview
-
-This project aims to create a modern Inform 7 10.1.2 implementation of Eric S. Raymond's Open Adventure.
-
-The resulting game should preserve Open Adventure gameplay and content while producing a maintainable Inform 7 codebase capable of compiling to Z-Machine version 8 for distribution through TerpVault and other interactive fiction archives.
-
----
-
-## Canonical Sources
-
-### Primary
-
-These jointly define the authoritative behavior and world model.
-
-- Open Adventure C is authoritative for gameplay behavior.
-- adventure.yaml is authoritative for world data.
-
-### Historical and Reference Sources
-
-1. Original Crowther and Woods Adventure sources
-2. Graham Nelson's Advent.inf
-3. Chris Conley's Inform 7 Adventure port
-
----
-
-## Source Hierarchy and Conflict Resolution
-
-This project uses multiple historical and modern sources. These sources are not considered equal.
-
-When behavior, data, parser vocabulary, scoring, travel rules, object behavior, or implementation details differ, the following precedence applies:
-
-### Canonical Sources
-
-1. Open Adventure C implementation
-2. adventure.yaml
-
-These define the authoritative behavior and world model for this project.
-
-### Historical Sources
-
-3. Original Crowther/Woods Adventure behavior
-
-Historical Adventure behavior may be consulted to clarify intent where Open Adventure documentation is ambiguous.
-
-### Reference Implementations
-
-4. Graham Nelson's Advent.inf
-5. Chris Conley's Inform 7 Adventure port
-
-Reference implementations are valuable for:
-
-* parser design
-* Inform implementation techniques
-* world-model organization
-* historical comparison
-
-However, they do not override Open Adventure when behavior differs.
-
-### Conflict Resolution
-
-When multiple sources disagree:
-
-* Open Adventure C wins over all other sources.
-* adventure.yaml wins over generated Inform source.
-* Historical Adventure behavior may inform interpretation but does not override Open Adventure.
-* Reference implementations are advisory only.
-
-Examples:
-
-* If Open Adventure C and Conley's Inform 7 port differ, Open Adventure C wins.
-* If Advent.inf and adventure.yaml differ, adventure.yaml wins.
-* If a generated file disagrees with adventure.yaml, the YAML is authoritative and the generator should be corrected.
-
-### Repository Organization
-
-The repository distinguishes between:
-
-#### Canonical Inputs
-
-```text
-source/
-    adventure.yaml
-```
-
-#### Reference Materials
-
-```text
-references/
-    open-adventure-c/
-    conley-inform7/
-    nelson-inform6/
-```
-
-Reference materials exist to assist development and verification. They are not the authoritative source of game behavior.
-
----
-
-## Design Philosophy
-
-Open Adventure C is authoritative for gameplay behavior.
-
-adventure.yaml is authoritative for world-model data.
-
-Generated code should be regenerated rather than edited manually.
-
-Gameplay systems should remain hand-maintained Inform 7 source.
-
----
-
-## Parser Philosophy
-
-The goal is to preserve Open Adventure gameplay and vocabulary while taking advantage of modern Inform 7 parser capabilities.
-
-### Preserve
-
-The following should remain valid wherever they are valid in Open Adventure:
-
-* motion words
-* object vocabulary
-* magic words
-* directional abbreviations
-* classic Adventure shorthand
-
-Examples:
-
-ROAD
-BUILDING
-FOREST
-STREAM
-XYZZY
-PLUGH
-
-### Extend
-
-Modern natural-language equivalents should be supported when practical.
-
-Examples:
-
-GO WEST
-FOLLOW THE STREAM
-TAKE THE LAMP
-LOOK AT THE BIRD
-OPEN THE GRATE WITH THE KEYS
-
-### Do Not Change
-
-Parser improvements must not alter:
-
-* puzzle solutions
-* scoring
-* game progression
-* object behavior
-* travel logic
-* endgame behavior
-
-Parser modernization should improve usability without changing gameplay.
-
----
-
-## Generated Files
-
-generated/Rooms.ni
-generated/Travel.ni
-generated/Objects.ni
-generated/Vocabulary.ni
-generated/Messages.ni
-generated/Hints.ni
-
-These files are automatically generated from adventure.yaml.
-
-DO NOT EDIT THESE FILES MANUALLY.
-
----
-
-## Hand-Maintained Files
-
-OpenAdventure.ni
-
-Contains:
-
-* Dwarf logic
-* Pirate logic
-* Dragon logic
-* Troll logic
-* Cave closing sequence
-* Lamp and battery system
-* Scoring
-* Repository and endgame
-* Special parser behavior
-
----
-
-## AI-Assisted Development
-
-Codex and other AI tools may assist development.
-
-AI-generated code, documentation, and analysis must:
-
-- follow the Source Hierarchy and Conflict Resolution rules
-- preserve Open Adventure gameplay
-- respect the Parser Philosophy
-- treat generated files as disposable artifacts
-- update documentation alongside implementation changes when practical
-
-Documentation and analysis are considered first-class project outputs.
-
----
-
-## Current Status
+# Open Adventure Inform 7 Reconstruction
+
+This repository is implementing Open Adventure in Inform 7 from a generated world model plus a hand-written runtime framework. The primary objective is compatibility with the original Open Adventure behavior while keeping generated content and gameplay systems clearly separated.
+
+## Milestone progress (current)
+
+| Milestone | Scope | Status | Result |
+|---|---|---|---|
+| 2A | Data source extraction | ✅ Complete | `source/adventure.yaml` stabilized and analyzed |
+| 2B | Language and command analysis | ✅ Complete | Vocabulary and parser tokens mapped |
+| 2C | Baseline architecture modeling | ✅ Complete | Core architecture docs and current-state baseline written |
+| 2D | Unresolved travel investigation | ✅ Complete | seven unresolved travel rules identified and classified |
+| 3A | Gameplay systems analysis | ✅ Complete | gameplay-system catalog and object/runtime classification |
+| 3B | Runtime framework | ✅ Complete | state/condition/events foundations in runtime files |
+| 3C | Travel dispatch integration | ✅ Complete | generated travel rows now flow through runtime dispatch |
+| 3D | Plover system implementation | ✅ Complete | plover-specific travel handlers and integration implemented |
+| 3E | Build/test infrastructure baseline | ✅ Complete | first compile works; smoke pipeline added |
+| 3F | Documentation refresh | ✅ Complete | README/PROJECT/current-state refreshed; roadmap added |
+| 4A | Gameplay systems implementation | 🚧 Planned | dwarf/troll/pirate/dragon/scoring cave/endgame remain |
+
+## Current reality (after Milestone 3F)
 
 ### Completed
 
-- Milestone 1A: Travel Analysis
-- Milestone 1B: Object Analysis
-- Milestone 1C: Vocabulary Analysis
-- Milestone 2A: Travel Translation Architecture
-- Milestone 2B: Direct Movement Generation
-- Milestone 2C: Source Hierarchy and Evidence Documentation
-- Milestone 2C: Non-Direct Travel Translation
-- Milestone 3B: Runtime Framework scaffolding for generated world data + behavior hooks.
-- Milestone 3C: Runtime travel dispatch implementation for generated non-direct rows (forced/random/magic dispatch + special-row stubs).
+- Compilation pipeline can produce a working Inform 7 binary.
+- Runtime travel dispatch supports generated travel rows, including random/forced/magic-word handling.
+- Plover subsystem is implemented and wired to the framework.
+- Unresolved travel blockers are documented and stubbed.
 
-### In Progress
+### In progress / Remaining
 
-- Milestone 3D: Runtime wiring + gameplay system implementation.
+- Implement remaining gameplay systems without disturbing generated travel/world data.
+- Replace explicit stubs for unresolved gameplay-only rules with deterministic rule handlers.
+- Add robust behavioral regression via transcript testing (currently environment readiness and smoke checks only).
 
-### Planned
+## Build status summary
 
-- Object Placement Generation
-- Parser Generation
-- Puzzle Systems and special travel handoff
-- Runtime framework validation pass
-- Subsystem hand-off integration for dwarf/pirate/dragon/troll/bear/scoring/cave-closing/endgame
-- Dwarves
-- Pirate
-- Cave Closing
-- Scoring
-- Endgame
+Current build status is described in:
+- `docs/build-status.md`
 
----
+Current pipeline command is:
+- `./build.sh --compile`
 
-## Milestone 1
+Current build artifact:
+- `OpenAdventure.inform/Build/OpenAdventure.z8`
 
-Generate:
+## Gameplay completion status
 
-* Rooms
-* Travel
-* Objects
-* Vocabulary
+| Area | Status |
+|---|---|
+| Runtime/state scaffolding | Complete |
+| Plover | Implemented |
+| Dwarves | Not implemented |
+| Troll / bridge / chasm travel | Not implemented |
+| Bear | Not implemented |
+| Pirate | Not implemented |
+| Dragon | Not implemented |
+| Cave closing | Not implemented |
+| Scoring | Not implemented |
+| Endgame | Not implemented |
 
-Result:
+## Current testing status
 
-World model compiles in Inform 7.
+- Build smoke tests: available.
+- Inform compilation: automated.
+- Transcript/regression suite: still to be added.
 
-Milestone-1 travel status:
+See:
+- `docs/testing-environment.md`
+- `docs/build-and-test.md`
 
-* Travel extraction and generation are implemented with action-type classification
-  (`goto`, `speak`, `special`) and metadata tags (`conditional`, `random`,
-  `forced`) in `generated/Travel.ni`.
-* Gameplay behavior wiring for these travel rules is still not implemented.
-* Object analysis and generation are implemented with role taxonomy in
-  `tools/generators/objects.py` and `generated/Objects.ni`.
-* `docs/object-analysis.md` tracks per-object role, location, state, inventory,
-  and vocabulary data for Milestone 1B review.
-* Vocabulary analysis is implemented in
-  `tools/generators/vocabulary.py` with generated output in
-  `generated/Vocabulary.ni`.
-* `docs/vocabulary-analysis.md` tracks motion/action/object counts, magic words,
-  abbreviations, overlaps, parser irregularities, and parser-handling strategy.
+## Implementation approach
 
----
+1. Keep `source/adventure.yaml` as data authority.
+2. Continue classifying and stubbing unresolved rules until behavior is safe to implement.
+3. Add systems as isolated runtime modules behind documented extension points.
+4. Reconcile each system’s state and parser/travel dependencies before integration.
+5. Run compile smoke test after each behavior milestone.
 
-## Milestone 2
+## Risk register
 
-Implement movement system.
+- Parser behavior divergence in generated command patterns.
+- Incorrect sequencing between travel dispatch and unresolved action stubs.
+- Incomplete understanding of game-state side effects for caves/scoring/endgame.
 
-Progress:
+## Roadmap alignment
 
-- Direct movement map connections are now generated from direct `goto` rules in
-  `tools/generators/travel.py`.
-- `generated/Travel.ni` now contains both direct `Room is direction of Room`
-  statements and a generated non-direct dispatch table for all remaining travel
-  categories (`goto`, `speak`, `special`).
-- Milestone 2C adds structured travel categories (`goto_direct`, `goto_forced`,
-  `goto_random`, `goto_conditional`, `goto_magic_word`, `speak`, `special`) and
-  a dispatch-ready schema in source order.
-- Remaining unresolved travel rules are now narrowed to special-case destination
-  resolution and one `nodwarves`-guarded transition that still requires hand-written
-  gameplay systems not in scope for this milestone.
-
----
-
-## Milestone 3
-
-Implement objects and puzzles.
-
-Result:
-
-Major treasures and puzzle chains function.
-Runtime travel dispatch is now connected to generated non-direct travel rows, with unresolved travel specials deferred as explicit stubs.
-
----
-
-## Milestone 4
-
-Implement game systems.
-
-* Dwarves
-* Pirate
-* Dragon
-* Troll
-* Cave closing
-
-Result:
-
-Game becomes completable.
-
----
-
-## Milestone 5
-
-Scoring and endgame.
-
-Result:
-
-Open Adventure fully playable.
-
----
-
-## Milestone 6
-
-TerpVault packaging.
-
-Result:
-
-Release-quality .z8 build.
-
-## Milestone 3A Progress
-
-- [x] Completed gameplay runtime architecture analysis (objects + systems).
-- Added `docs/architecture/object-runtime.md` (object class-to-runtime integration).
-- Added `docs/architecture/gameplay-systems.md` (system boundaries, dependencies, roadmap, risk, effort estimates).
-- No gameplay logic changed and no edits made to `OpenAdventure.ni`.
-
-## Milestone 3B Progress
-
-- [x] Added runtime scaffolding source files:
-  - `OpenAdventure_State.ni`
-  - `OpenAdventure_Conditions.ni`
-  - `OpenAdventure_Runtime.ni`
-- [x] Added runtime architecture documentation:
-  - `docs/architecture/runtime-framework.md`
-- [x] Wired hand-maintained runtime scaffolding includes in `OpenAdventure.ni`.
-- [x] No gameplay behavior implemented yet (dwarf/pirate/dragon/troll/scoring/cave-closing/endgame remain unimplemented).
+The active roadmap is now in
+`docs/architecture/project-roadmap.md`.
