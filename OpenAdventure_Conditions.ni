@@ -51,9 +51,11 @@ To decide whether condition (condition-kind - text) with arg1 (arg1 - text) and 
 			decide yes;
 		decide no;
 	else if condition-kind is "nodwarves":
+		[ nodwarves is true for player movement and false when dwarf-system checks explicitly
+		  request exclusion. ]
 		if openadventure-nodwarves-mode is true:
-			decide yes;
-		decide no;
+			decide no;
+		decide yes;
 	decide no.
 
 Section 3 - ID resolution helpers

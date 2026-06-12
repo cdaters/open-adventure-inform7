@@ -220,10 +220,11 @@ Documentation and analysis are considered first-class project outputs.
 - Milestone 2C: Source Hierarchy and Evidence Documentation
 - Milestone 2C: Non-Direct Travel Translation
 - Milestone 3B: Runtime Framework scaffolding for generated world data + behavior hooks.
+- Milestone 3C: Runtime travel dispatch implementation for generated non-direct rows (forced/random/magic dispatch + special-row stubs).
 
 ### In Progress
 
-- Milestone 3C: Runtime wiring + system implementation phase.
+- Milestone 3D: Runtime wiring + gameplay system implementation.
 
 ### Planned
 
@@ -298,6 +299,7 @@ Implement objects and puzzles.
 Result:
 
 Major treasures and puzzle chains function.
+Runtime travel dispatch is now connected to generated non-direct travel rows, with unresolved travel specials deferred as explicit stubs.
 
 ---
 
