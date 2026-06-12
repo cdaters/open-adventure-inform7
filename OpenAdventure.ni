@@ -35,3 +35,9 @@ Project goals:
 Release along with the source text.
 
 Include "generated/Rooms.ni".
+Include "generated/Objects.ni".
+Include "generated/Travel.ni".
+Include "generated/Vocabulary.ni".
+Include "OpenAdventure_State.ni".
+Include "OpenAdventure_Conditions.ni".
+Include "OpenAdventure_Runtime.ni".

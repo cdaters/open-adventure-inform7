@@ -219,16 +219,19 @@ Documentation and analysis are considered first-class project outputs.
 - Milestone 2B: Direct Movement Generation
 - Milestone 2C: Source Hierarchy and Evidence Documentation
 - Milestone 2C: Non-Direct Travel Translation
+- Milestone 3B: Runtime Framework scaffolding for generated world data + behavior hooks.
 
 ### In Progress
 
-- Remaining work: hand-written support for special travel and dwarf-guarded rules.
+- Milestone 3C: Runtime wiring + system implementation phase.
 
 ### Planned
 
 - Object Placement Generation
 - Parser Generation
-- Puzzle Systems
+- Puzzle Systems and special travel handoff
+- Runtime framework validation pass
+- Subsystem hand-off integration for dwarf/pirate/dragon/troll/bear/scoring/cave-closing/endgame
 - Dwarves
 - Pirate
 - Cave Closing
@@ -331,3 +334,21 @@ TerpVault packaging.
 Result:
 
 Release-quality .z8 build.
+
+## Milestone 3A Progress
+
+- [x] Completed gameplay runtime architecture analysis (objects + systems).
+- Added `docs/architecture/object-runtime.md` (object class-to-runtime integration).
+- Added `docs/architecture/gameplay-systems.md` (system boundaries, dependencies, roadmap, risk, effort estimates).
+- No gameplay logic changed and no edits made to `OpenAdventure.ni`.
+
+## Milestone 3B Progress
+
+- [x] Added runtime scaffolding source files:
+  - `OpenAdventure_State.ni`
+  - `OpenAdventure_Conditions.ni`
+  - `OpenAdventure_Runtime.ni`
+- [x] Added runtime architecture documentation:
+  - `docs/architecture/runtime-framework.md`
+- [x] Wired hand-maintained runtime scaffolding includes in `OpenAdventure.ni`.
+- [x] No gameplay behavior implemented yet (dwarf/pirate/dragon/troll/scoring/cave-closing/endgame remain unimplemented).
