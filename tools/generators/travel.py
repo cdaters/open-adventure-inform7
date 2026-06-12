@@ -36,39 +36,109 @@ IGNORED_DIRECTION_VERBS = {"OUTDO"}
 MAGIC_TRAVEL_VERBS = {"XYZZY", "PLUGH"}
 
 
+def _to_i7_text(value):
+    if value is None:
+        return "<none>"
+    text = str(value)
+    return text.replace('"', '""')
+
+
 def _format_verbs(verbs):
     if not verbs:
         return "<forced>"
     return " ".join(str(v) for v in verbs)
 
 
-def _format_condition(condition):
-    if condition is None:
-        return "<none>"
+def _condition_meta(cond):
+    if cond is None:
+        return {
+            "kind": "none",
+            "arg1": "<none>",
+            "arg2": "<none>",
+            "pct": 0,
+            "needs_handwritten_predicate": False,
+            "handwritten_note": "<none>",
+        }
 
-    if isinstance(condition, list):
-        return ", ".join(str(v) for v in condition)
+    if not isinstance(cond, list) or not cond:
+        return {
+            "kind": "unsupported",
+            "arg1": _to_i7_text(cond),
+            "arg2": "<none>",
+            "pct": 0,
+            "needs_handwritten_predicate": True,
+            "handwritten_note": "unsupported condition payload",
+        }
 
-    return str(condition)
+    cond_type = cond[0]
+    args = cond[1:]
+    cond_arg1 = str(args[0]) if len(args) >= 1 else "<none>"
+    cond_arg2 = str(args[1]) if len(args) >= 2 else "<none>"
+    if cond_type == "pct":
+        pct = int(args[0]) if len(args) >= 1 and isinstance(args[0], int) else 0
+    else:
+        pct = 0
 
+    if cond_type == "nodwarves":
+        return {
+            "kind": "nodwarves",
+            "arg1": "<none>",
+            "arg2": "<none>",
+            "pct": 0,
+            "needs_handwritten_predicate": True,
+            "handwritten_note": "dwarf-avoidance predicate is implemented in hand-written dwarf logic",
+        }
 
-def _is_random(cond):
-    return isinstance(cond, list) and len(cond) >= 1 and cond[0] == "pct"
-
-
-def _collect_goto_rule_metadata(rule):
-    verbs = rule.get("verbs")
-    cond = rule.get("cond")
-    cond_text = _format_condition(cond)
-    random_text = "yes" if _is_random(cond) else "no"
-    forced = "yes" if verbs == [] else "no"
     return {
-        "forced": forced,
-        "conditional": "no" if cond is None else "yes",
-        "random": random_text,
-        "condition": cond_text,
-        "status": "placeholder",
+        "kind": cond_type,
+        "arg1": cond_arg1,
+        "arg2": cond_arg2,
+        "pct": pct,
+        "needs_handwritten_predicate": False,
+        "handwritten_note": "<none>",
     }
+
+
+def _classify_goto_kind(rule):
+    verbs = rule.get("verbs") or []
+    cond = rule.get("cond")
+
+    if not verbs:
+        return "goto_forced"
+
+    if _is_magic_word(rule):
+        return "goto_magic_word"
+
+    if isinstance(cond, list) and cond and cond[0] == "pct":
+        return "goto_random"
+
+    if cond is not None:
+        return "goto_conditional"
+
+    if _extract_direct_direction(verbs):
+        return "goto_direct"
+
+    return "goto_non_direct"
+
+
+def _is_magic_word(rule):
+    return any(verb in MAGIC_TRAVEL_VERBS for verb in rule.get("verbs") or [])
+
+
+def _needs_handwritten(rule):
+    action = (rule.get("action") or [])
+    action_kind = action[0] if isinstance(action, list) and action else "<unknown>"
+
+    condition = _condition_meta(rule.get("cond"))
+    handwritten_reason = []
+
+    if action_kind == "special":
+        handwritten_reason.append("special travel token requires hand-authored special-case movement logic")
+
+    if condition["needs_handwritten_predicate"]:
+        handwritten_reason.append(condition["handwritten_note"])
+
+    return (bool(handwritten_reason), "; ".join(handwritten_reason) if handwritten_reason else "<none>")
 
 
 def _collect_rules_by_action_type(travel_rules):
@@ -78,51 +148,6 @@ def _collect_rules_by_action_type(travel_rules):
         action_type = action[0] if isinstance(action, list) and action else "<unknown>"
         by_type.setdefault(action_type, []).append(rule)
     return by_type
-
-
-def _emit_rule_line(rule, kind, status="placeholder", reason="unsupported for direct room map"):
-    verbs = rule.get("verbs")
-    meta = _collect_goto_rule_metadata(rule)
-    if status:
-        meta["status"] = status
-    if reason:
-        meta["reason"] = reason
-
-    action = rule.get("action") or []
-    destination = action[1] if isinstance(action, list) and len(action) > 1 else "<missing>"
-
-    if kind == "goto":
-        return (
-            f"[ goto -> {destination} | verbs={_format_verbs(verbs)} | "
-            f"forced={meta['forced']} | conditional={meta['conditional']} | "
-            f"random={meta['random']} | condition={meta['condition']} | "
-            f"status={meta['status']} | reason={meta['reason']} ]"
-        )
-
-    if kind == "speak":
-        message = destination
-        return (
-            f"[ speak -> {message} | verbs={_format_verbs(verbs)} | "
-            f"forced={meta['forced']} | conditional={meta['conditional']} | "
-            f"condition={meta['condition']} | status={meta['status']} | "
-            f"reason={meta['reason']} ]"
-        )
-
-    if kind == "special":
-        special_code = destination
-        return (
-            f"[ special -> {special_code} | verbs={_format_verbs(verbs)} | "
-            f"forced={meta['forced']} | conditional={meta['conditional']} | "
-            f"condition={meta['condition']} | status={meta['status']} | "
-            f"reason={meta['reason']} ]"
-        )
-
-    return (
-        f"[ unknown action={action} | verbs={_format_verbs(verbs)} | "
-        f"forced={meta['forced']} | conditional={meta['conditional']} | "
-        f"condition={meta['condition']} | status={meta['status']} | "
-        f"reason={meta['reason']} ]"
-    )
 
 
 def _extract_direct_direction(verbs):
@@ -163,33 +188,77 @@ def _emit_direct_map_line(source, destination, direction):
     return f"{direction} of {source} is {destination}."
 
 
+def _emit_dispatch_table_row(rule_id, rule):
+    return (
+        f"{rule_id} "
+        f'"{_to_i7_text(rule["source"])}" '
+        f'"{_to_i7_text(rule["action"])}" '
+        f'"{_to_i7_text(rule["travel_category"])}" '
+        f'"{_to_i7_text(rule["destination"])}" '
+        f'"{_to_i7_text(rule["verbs"])}" '
+        f'{rule["forced"]} '
+        f'"{_to_i7_text(rule["condition_kind"])}" '
+        f'"{_to_i7_text(rule["condition_arg1"])}" '
+        f'"{_to_i7_text(rule["condition_arg2"])}" '
+        f'{rule["random_chance"]} '
+        f'{rule["is_magic_word"]} '
+        f'{rule["requires_handwritten"]} '
+        f'"{_to_i7_text(rule["handwritten_reason"])}"'
+    )
+
+
+def _emit_non_direct_table(rows):
+    lines = []
+    lines.append("")
+    lines.append("[ Non-direct dispatch metadata table ]")
+    lines.append("Table of Generated Travel Non-Direct Rules")
+    lines.append(
+        "rule-id (number) source-loc (text) action-kind (text) travel-category (text) "
+        "target (text) verbs (text) forced (truth state) condition-kind (text) "
+        "condition-arg-1 (text) condition-arg-2 (text) "
+        "random-chance (number) is-magic-word (truth state) "
+        "requires-handwritten (truth state) handwritten-reason (text)"
+    )
+    if not rows:
+        lines.append("[ no non-direct rules ]")
+        return lines
+
+    for row in rows:
+        lines.append(_emit_dispatch_table_row(row["rule_id"], row))
+    lines.append("")
+    return lines
+
+
 def generate_travel(data):
-    # Milestone 2B direction-first generation:
-    # 1) Emit real Inform 7 room adjacency when the rule is a deterministic,
-    #    unambiguous goto transition.
-    # 2) Emit all non-direct rules as generated placeholders to keep behavior
-    #    parity with the YAML model until travel logic is implemented.
     out = []
 
     out.append("[ Generated Travel ]")
-    out.append("")
+    out.append("[ Milestone 2C: generated travel dispatch for non-direct rules ]")
     out.append("[ action taxonomy ]")
     out.append("[ goto: direct destination transition ]")
+    out.append("[ goto_direct: unconditional single mapped direction ]")
+    out.append("[ goto_non_direct: deterministic non-mappable / ambiguous verb forms ]")
+    out.append("[ goto_forced: verbs=[] (automatic transition) ]")
+    out.append("[ goto_magic_word: includes XYZZY / PLUGH ]")
+    out.append("[ goto_random: cond [pct, N] ]")
+    out.append("[ goto_conditional: cond types carry/with/not/.. ]")
     out.append("[ speak: terminal message label ]")
-    out.append("[ special: special movement case token ]")
-    out.append("[ conditional: travel rule includes a cond field ]")
-    out.append("[ random: conditional is [pct, N] ]")
-    out.append("[ forced: verbs list is empty ]")
-    out.append("[ unknown: any non-standard action type ]")
-    out.append("[ direct map rule: goto+no cond+no forced+single mapped direction ]")
-    out.append("[ non-direct travel rules are intentionally left as placeholders ]")
+    out.append("[ special: special movement code ]")
+    out.append("[ generated table fields: source-loc, action-kind, travel-category, verbs, "
+               "condition-kind, condition args, random-chance, magic-word marker, "
+               "and handwritten requirement ]")
+    out.append("[ special and nodwarves conditions remain unresolved (hand-written dependencies). ]")
     out.append("")
 
     action_order = ("goto", "speak", "special", "<unknown>")
     total_direct_map_rules = 0
     total_travel_rules = 0
-    total_travel_rules_placeholder = 0
+    total_non_direct_rules = 0
     direct_locations = set()
+    travel_categories = {}
+    non_direct_rows = []
+    unresolved_rules = []
+    rule_id = 1
 
     for loc_id, loc in data["locations"]:
 
@@ -211,7 +280,7 @@ def generate_travel(data):
         out.append(f"[ action summary: {action_summary} ]")
 
         direct_rules = []
-        non_direct_by_type = {}
+        local_non_direct_count = 0
 
         for kind in action_order:
             rules = by_type.get(kind, [])
@@ -227,62 +296,145 @@ def generate_travel(data):
                         else "<missing>"
                     )
                     verbs = rule.get("verbs") or []
-                    reason = "unknown"
+                    category = _classify_goto_kind(rule)
 
-                    if not verbs:
-                        reason = "forced move"
-                    elif any(verb in MAGIC_TRAVEL_VERBS for verb in verbs):
-                        reason = "magic-word travel"
-                    elif rule.get("cond") is not None:
-                        reason = "conditional travel"
-                    else:
+                    if category == "goto_direct":
                         direction = _extract_direct_direction(verbs)
                         if direction:
                             total_direct_map_rules += 1
                             direct_rules.append((direction, destination, rule))
                             continue
-                        reason = "non-mappable or ambiguous direction"
 
-                    total_travel_rules_placeholder += 1
-                    non_direct_by_type.setdefault(kind, []).append((rule, reason))
+                    requires_handwritten, handwritten_reason = _needs_handwritten(rule)
+                    condition = _condition_meta(rule.get("cond"))
+                    travel_categories.setdefault(category, 0)
+                    travel_categories[category] += 1
+                    non_direct_rows.append(
+                        {
+                            "rule_id": rule_id,
+                            "source": loc_id,
+                            "action": "goto",
+                            "travel_category": category,
+                            "destination": str(destination),
+                            "verbs": _format_verbs(verbs),
+                            "forced": "true" if not verbs else "false",
+                            "condition_kind": condition["kind"],
+                            "condition_arg1": condition["arg1"],
+                            "condition_arg2": condition["arg2"],
+                            "random_chance": condition["pct"] if category == "goto_random" else 0,
+                            "is_magic_word": "true" if _is_magic_word(rule) else "false",
+                            "requires_handwritten": "true" if requires_handwritten else "false",
+                            "handwritten_reason": handwritten_reason,
+                        }
+                    )
+                    if requires_handwritten:
+                        unresolved_rules.append(rule_id)
+                    rule_id += 1
+                    local_non_direct_count += 1
+
             else:
                 for rule in rules:
-                    total_travel_rules_placeholder += 1
-                    non_direct_by_type.setdefault(kind, []).append((rule, "non-direct"))
+                    action = rule.get("action") or []
+                    destination = (
+                        action[1]
+                        if isinstance(action, list) and len(action) > 1
+                        else "<missing>"
+                    )
+                    if kind == "speak":
+                        category = "speak_conditional" if rule.get("cond") is not None else "speak"
+                    elif kind == "special":
+                        category = "special_conditional" if rule.get("cond") is not None else "special"
+                    else:
+                        category = "unknown"
+
+                    travel_categories.setdefault(category, 0)
+                    travel_categories[category] += 1
+                    requires_handwritten, handwritten_reason = _needs_handwritten(rule)
+                    condition = _condition_meta(rule.get("cond"))
+                    verbs = rule.get("verbs")
+                    non_direct_rows.append(
+                        {
+                            "rule_id": rule_id,
+                            "source": loc_id,
+                            "action": kind,
+                            "travel_category": category,
+                            "destination": str(destination),
+                            "verbs": _format_verbs(verbs),
+                            "forced": "true" if not verbs else "false",
+                            "condition_kind": condition["kind"],
+                            "condition_arg1": condition["arg1"],
+                            "condition_arg2": condition["arg2"],
+                            "random_chance": condition["pct"] if category == "goto_random" else 0,
+                            "is_magic_word": "true" if _is_magic_word(rule) else "false",
+                            "requires_handwritten": "true" if requires_handwritten else "false",
+                            "handwritten_reason": handwritten_reason,
+                        }
+                    )
+                    if requires_handwritten:
+                        unresolved_rules.append(rule_id)
+                    rule_id += 1
+                    local_non_direct_count += 1
 
         if direct_rules:
             direct_locations.add(loc_id)
             out.append("[ direct map (goto) rules ]")
-            for direction, destination, rule in direct_rules:
+            for direction, destination, _ in direct_rules:
                 out.append(_emit_direct_map_line(loc_id, destination, direction))
-                out.append(
-                    _emit_rule_line(
-                        rule, "goto", status="direct_map", reason="direct adjacency"
-                    )
-                )
-
-        for kind in action_order:
-            entries = non_direct_by_type.get(kind, [])
-            if not entries:
-                continue
-
-            out.append(f"[ {kind} rules ]")
-            for rule, reason in entries:
-                out.append(_emit_rule_line(rule, kind, status="placeholder", reason=reason))
 
         for kind, rules in by_type.items():
             if kind not in action_order:
-                out.append(f"[ {kind} rules ]")
+                travel_category = "unknown"
+                travel_categories.setdefault(travel_category, 0)
                 for rule in rules:
-                    total_travel_rules_placeholder += 1
-                    out.append(_emit_rule_line(rule, kind))
+                    travel_categories[travel_category] += 1
+                    requires_handwritten, handwritten_reason = _needs_handwritten(rule)
+                    condition = _condition_meta(rule.get("cond"))
+                    destination = "<missing>"
+                    action = rule.get("action") or []
+                    if isinstance(action, list) and len(action) > 1:
+                        destination = action[1]
+                    verbs = rule.get("verbs")
+                    non_direct_rows.append(
+                        {
+                            "rule_id": rule_id,
+                            "source": loc_id,
+                            "action": str(action[0]) if action else "<unknown>",
+                            "travel_category": travel_category,
+                            "destination": str(destination),
+                            "verbs": _format_verbs(verbs),
+                            "forced": "true" if not verbs else "false",
+                            "condition_kind": condition["kind"],
+                            "condition_arg1": condition["arg1"],
+                            "condition_arg2": condition["arg2"],
+                            "random_chance": 0,
+                            "is_magic_word": "true" if _is_magic_word(rule) else "false",
+                            "requires_handwritten": "true" if requires_handwritten else "false",
+                            "handwritten_reason": handwritten_reason,
+                        }
+                    )
+                    if requires_handwritten:
+                        unresolved_rules.append(rule_id)
+                    rule_id += 1
+                    local_non_direct_count += 1
 
-            out.append("")
+        out.append("")
+        if local_non_direct_count:
+            out.append(f"[ non-direct travel rules emitted to dispatch table: {local_non_direct_count} ]")
+
+    total_non_direct_rules = len(non_direct_rows)
+    out.extend(_emit_non_direct_table(non_direct_rows))
 
     out.append("[ generation summary ]")
     out.append(f"[ direct_map_rules={total_direct_map_rules} ]")
     out.append(f"[ direct_map_locations={len(direct_locations)} ]")
     out.append(f"[ total_travel_rules={total_travel_rules} ]")
-    out.append(f"[ placeholder_rules={total_travel_rules_placeholder} ]")
+    out.append(f"[ non_direct_rules={total_non_direct_rules} ]")
+    resolved_by_generation = total_travel_rules - len(unresolved_rules)
+    out.append(f"[ resolved_by_generation={resolved_by_generation} ]")
+    out.append(f"[ unresolved_rules={len(unresolved_rules)} ]")
+    out.append(f"[ unresolved_rule_ids={unresolved_rules or ['<none>']} ]")
+    out.append("[ travel category counts ]")
+    for category in sorted(travel_categories):
+        out.append(f"[ {category}={travel_categories[category]} ]")
 
     return "\n".join(out)

@@ -218,10 +218,11 @@ Documentation and analysis are considered first-class project outputs.
 - Milestone 2A: Travel Translation Architecture
 - Milestone 2B: Direct Movement Generation
 - Milestone 2C: Source Hierarchy and Evidence Documentation
+- Milestone 2C: Non-Direct Travel Translation
 
 ### In Progress
 
-- Milestone 2C: Conditional / Random / Forced Travel
+- Remaining work: hand-written support for special travel and dwarf-guarded rules.
 
 ### Planned
 
@@ -275,10 +276,15 @@ Progress:
 
 - Direct movement map connections are now generated from direct `goto` rules in
   `tools/generators/travel.py`.
-- `generated/Travel.ni` now contains `Room is direction of Room` statements for
-  deterministic exits and metadata placeholders for all non-direct transitions.
-- Conditional/forced/random/special/magic-word travel is still represented as
-  generated placeholder comments pending Milestone 2C dispatch logic.
+- `generated/Travel.ni` now contains both direct `Room is direction of Room`
+  statements and a generated non-direct dispatch table for all remaining travel
+  categories (`goto`, `speak`, `special`).
+- Milestone 2C adds structured travel categories (`goto_direct`, `goto_forced`,
+  `goto_random`, `goto_conditional`, `goto_magic_word`, `speak`, `special`) and
+  a dispatch-ready schema in source order.
+- Remaining unresolved travel rules are now narrowed to special-case destination
+  resolution and one `nodwarves`-guarded transition that still requires hand-written
+  gameplay systems not in scope for this milestone.
 
 ---
 
