@@ -1,0 +1,27 @@
+# macOS
+
+.DS_Store
+
+# Python
+
+__pycache__/
+*.pyc
+*.pyo
+
+# Inform build products
+
+Build/
+Index/
+
+# VS Code
+
+.vscode/
+
+# JetBrains
+
+.idea/
+
+# Temporary files
+
+*.swp
+*.tmp
