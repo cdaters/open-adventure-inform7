@@ -217,6 +217,7 @@ Documentation and analysis are considered first-class project outputs.
 - Milestone 1C: Vocabulary Analysis
 - Milestone 2A: Travel Translation Architecture
 - Milestone 2B: Direct Movement Generation
+- Milestone 2C: Source Hierarchy and Evidence Documentation
 
 ### In Progress
 
