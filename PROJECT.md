@@ -151,9 +151,14 @@ Milestone-1 travel status:
 
 Implement movement system.
 
-Result:
+Progress:
 
-Player can traverse the entire cave.
+- Direct movement map connections are now generated from direct `goto` rules in
+  `tools/generators/travel.py`.
+- `generated/Travel.ni` now contains `Room is direction of Room` statements for
+  deterministic exits and metadata placeholders for all non-direct transitions.
+- Conditional/forced/random/special/magic-word travel is still represented as
+  generated placeholder comments pending Milestone 2C dispatch logic.
 
 ---
 
