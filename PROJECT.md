@@ -33,6 +33,56 @@ Gameplay systems should remain hand-maintained Inform 7 source.
 
 ---
 
+## Parser Philosophy
+
+The goal is to preserve Open Adventure gameplay and vocabulary while taking advantage of modern Inform 7 parser capabilities.
+
+### Preserve
+
+The following should remain valid wherever they are valid in Open Adventure:
+
+* motion words
+* object vocabulary
+* magic words
+* directional abbreviations
+* classic Adventure shorthand
+
+Examples:
+
+ROAD
+BUILDING
+FOREST
+STREAM
+XYZZY
+PLUGH
+
+### Extend
+
+Modern natural-language equivalents should be supported when practical.
+
+Examples:
+
+GO WEST
+FOLLOW THE STREAM
+TAKE THE LAMP
+LOOK AT THE BIRD
+OPEN THE GRATE WITH THE KEYS
+
+### Do Not Change
+
+Parser improvements must not alter:
+
+* puzzle solutions
+* scoring
+* game progression
+* object behavior
+* travel logic
+* endgame behavior
+
+Parser modernization should improve usability without changing gameplay.
+
+---
+
 ## Generated Files
 
 generated/Rooms.ni
@@ -78,6 +128,22 @@ Generate:
 Result:
 
 World model compiles in Inform 7.
+
+Milestone-1 travel status:
+
+* Travel extraction and generation are implemented with action-type classification
+  (`goto`, `speak`, `special`) and metadata tags (`conditional`, `random`,
+  `forced`) in `generated/Travel.ni`.
+* Gameplay behavior wiring for these travel rules is still not implemented.
+* Object analysis and generation are implemented with role taxonomy in
+  `tools/generators/objects.py` and `generated/Objects.ni`.
+* `docs/object-analysis.md` tracks per-object role, location, state, inventory,
+  and vocabulary data for Milestone 1B review.
+* Vocabulary analysis is implemented in
+  `tools/generators/vocabulary.py` with generated output in
+  `generated/Vocabulary.ni`.
+* `docs/vocabulary-analysis.md` tracks motion/action/object counts, magic words,
+  abbreviations, overlaps, parser irregularities, and parser-handling strategy.
 
 ---
 
@@ -134,4 +200,3 @@ TerpVault packaging.
 Result:
 
 Release-quality .z8 build.
-
