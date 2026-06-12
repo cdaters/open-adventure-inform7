@@ -12,20 +12,96 @@ The resulting game should preserve Open Adventure gameplay and content while pro
 
 ### Primary
 
-1. Open Adventure C source
+These jointly define the authoritative behavior and world model.
+
+- Open Adventure C is authoritative for gameplay behavior.
+- adventure.yaml is authoritative for world data.
+
+### Historical and Reference Sources
+
+1. Original Crowther and Woods Adventure sources
+2. Graham Nelson's Advent.inf
+3. Chris Conley's Inform 7 Adventure port
+
+---
+
+## Source Hierarchy and Conflict Resolution
+
+This project uses multiple historical and modern sources. These sources are not considered equal.
+
+When behavior, data, parser vocabulary, scoring, travel rules, object behavior, or implementation details differ, the following precedence applies:
+
+### Canonical Sources
+
+1. Open Adventure C implementation
 2. adventure.yaml
 
-### Reference
+These define the authoritative behavior and world model for this project.
 
-1. Chris Conley's Inform 7 Adventure port
-2. Graham Nelson's Advent.inf
-3. Original Crowther and Woods Adventure sources
+### Historical Sources
+
+3. Original Crowther/Woods Adventure behavior
+
+Historical Adventure behavior may be consulted to clarify intent where Open Adventure documentation is ambiguous.
+
+### Reference Implementations
+
+4. Graham Nelson's Advent.inf
+5. Chris Conley's Inform 7 Adventure port
+
+Reference implementations are valuable for:
+
+* parser design
+* Inform implementation techniques
+* world-model organization
+* historical comparison
+
+However, they do not override Open Adventure when behavior differs.
+
+### Conflict Resolution
+
+When multiple sources disagree:
+
+* Open Adventure C wins over all other sources.
+* adventure.yaml wins over generated Inform source.
+* Historical Adventure behavior may inform interpretation but does not override Open Adventure.
+* Reference implementations are advisory only.
+
+Examples:
+
+* If Open Adventure C and Conley's Inform 7 port differ, Open Adventure C wins.
+* If Advent.inf and adventure.yaml differ, adventure.yaml wins.
+* If a generated file disagrees with adventure.yaml, the YAML is authoritative and the generator should be corrected.
+
+### Repository Organization
+
+The repository distinguishes between:
+
+#### Canonical Inputs
+
+```text
+source/
+    adventure.yaml
+```
+
+#### Reference Materials
+
+```text
+references/
+    open-adventure-c/
+    conley-inform7/
+    nelson-inform6/
+```
+
+Reference materials exist to assist development and verification. They are not the authoritative source of game behavior.
 
 ---
 
 ## Design Philosophy
 
-The YAML file is the authoritative world model.
+Open Adventure C is authoritative for gameplay behavior.
+
+adventure.yaml is authoritative for world-model data.
 
 Generated code should be regenerated rather than edited manually.
 
@@ -113,6 +189,49 @@ Contains:
 * Scoring
 * Repository and endgame
 * Special parser behavior
+
+---
+
+## AI-Assisted Development
+
+Codex and other AI tools may assist development.
+
+AI-generated code, documentation, and analysis must:
+
+- follow the Source Hierarchy and Conflict Resolution rules
+- preserve Open Adventure gameplay
+- respect the Parser Philosophy
+- treat generated files as disposable artifacts
+- update documentation alongside implementation changes when practical
+
+Documentation and analysis are considered first-class project outputs.
+
+---
+
+## Current Status
+
+### Completed
+
+- Milestone 1A: Travel Analysis
+- Milestone 1B: Object Analysis
+- Milestone 1C: Vocabulary Analysis
+- Milestone 2A: Travel Translation Architecture
+- Milestone 2B: Direct Movement Generation
+
+### In Progress
+
+- Milestone 2C: Conditional / Random / Forced Travel
+
+### Planned
+
+- Object Placement Generation
+- Parser Generation
+- Puzzle Systems
+- Dwarves
+- Pirate
+- Cave Closing
+- Scoring
+- Endgame
 
 ---
 

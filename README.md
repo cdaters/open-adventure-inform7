@@ -36,6 +36,21 @@ The resulting game is intended to compile under Inform 7 10.1.2 and target the Z
 
 ---
 
+## Source Hierarchy
+
+When multiple implementations disagree, the following precedence applies:
+
+1. Open Adventure C implementation
+2. adventure.yaml
+3. Original Crowther/Woods Adventure behavior
+4. Graham Nelson's Advent.inf
+5. Chris Conley's Inform 7 Adventure port
+
+Reference implementations may be consulted for implementation techniques and historical behavior but do not override Open Adventure.
+
+
+---
+
 ## Repository Structure
 
 ```text
@@ -45,6 +60,19 @@ open-adventure-inform7/
 │
 ├── source/
 │   └── adventure.yaml
+│
+├── references/
+│   ├── open-adventure-c/
+│   │   ├── adventure.c
+│   │   ├── adv440.c
+│   │   ├── travel.c
+│   │   └── ...
+│   │
+│   ├── conley-inform7/
+│   │   └── Adventure.ni
+│   │
+│   └── nelson-inform6/
+│       └── Advent.inf
 │
 ├── generated/
 │   ├── Rooms.ni
