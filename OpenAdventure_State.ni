@@ -108,6 +108,52 @@ dwarf-index	dwarf-location	dwarf-prior-location	dwarf-seen	dwarf-alive
 5	LOC_NOWHERE	LOC_NOWHERE	false	true
 6	LOC_NOWHERE	LOC_NOWHERE	false	true
 
+Section 9 - Pirate runtime state
+
+The openadventure-pirate-chest-location is a room that varies.
+The openadventure-pirate-chest-location is LOC_MAZEEND12.
+
+The openadventure-pirate-message-location is a room that varies.
+The openadventure-pirate-message-location is LOC_DEADEND13.
+
+The openadventure-pirate-chest-placed is a truth state that varies.
+The openadventure-pirate-chest-placed is false.
+
+The openadventure-pirate-chest-found is a truth state that varies.
+The openadventure-pirate-chest-found is false.
+
+The openadventure-pirate-has-stolen is a truth state that varies.
+The openadventure-pirate-has-stolen is false.
+
+The openadventure-pirate-force-chest-ready is a truth state that varies.
+The openadventure-pirate-force-chest-ready is false.
+
+The openadventure-pirate-last-theft-count is a number that varies.
+The openadventure-pirate-last-theft-count is 0.
+
+Table of Open Adventure Pirate Treasures
+pirate-treasure
+NUGGET
+OBJ_51
+OBJ_52
+OBJ_53
+COINS
+CHEST
+EGGS
+TRIDENT
+VASE
+EMERALD
+PYRAMID
+PEARL
+RUG
+OBJ_63
+CHAIN
+RUBY
+JADE
+AMBER
+SAPPH
+OBJ_69
+
 Section 6 - Utility
 
 This section contains ID normalization helpers and project bootstrapping.

@@ -11,6 +11,7 @@ Current snapshot after work completed up through:
 - Milestone 3F (repository documentation refresh)
 - Milestone 4C (Dwarf travel-gating integration)
 - Milestone 4D (Dwarf baseline behavior and verification)
+- Milestone 4E (Pirate baseline behavior and dwarf integration)
 
 ## What is working today
 
@@ -33,9 +34,9 @@ Current snapshot after work completed up through:
 ## Remaining work (behavioral parity)
 
 - Dwarf route restriction, activation, first encounter, blocking, and attacks (implemented baseline)
-- Full generated-edge dwarf movement parity and pirate interaction (pending implementation)
+- Pirate chest placement, treasure theft, and dwarf/pirate ordering (implemented baseline)
+- Full generated-edge dwarf/pirate movement parity (pending hardening)
 - Bear system
-- Pirate system
 - Dragon system
 - Cave-closing system
 - Endgame and full scoring flow
@@ -59,6 +60,7 @@ Current snapshot after work completed up through:
 | 4B | ✅ | Troll/bridge/chasm travel subsystem |
 | 4C | ✅ | Dwarf subsystem travel restriction and runtime condition support |
 | 4D | ✅ | Dwarf baseline behavior + compile/smoke verification |
+| 4E | ✅ | Pirate baseline behavior + dwarf integration + compile/smoke verification |
 
 ## Build and validation entry points
 
@@ -79,6 +81,8 @@ See:
 - `docs/architecture/runtime-framework.md` — runtime architecture contract
 - `docs/architecture/travel-dispatch.md` — travel dispatch and condition flow
 - `docs/architecture/plover-system.md` — plover behavior and dependencies
+- `docs/architecture/dwarf-system.md` — dwarf behavior and dependencies
+- `docs/architecture/pirate-system.md` — pirate behavior and dependencies
 
 ## References
 

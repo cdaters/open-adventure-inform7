@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -25,11 +25,13 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, a
 - Troll/bridge/chasm subsystem implemented and connected to special travel ID `3`.
 - Dwarf subsystem now includes route exclusion, actor-slot state, deep-cave activation, first encounter, visible dwarf pressure, travel blocking, knife attacks, and attack handling.
 - Milestone 4D covers rule `138`/`cond_nodwarves` as a dwarf-movement exclusion while keeping normal player travel available.
+- Pirate subsystem now includes slot-6 dwarf integration, chest placement, treasure theft, pirate-forbidden room checks, and chest-found disabling.
+- Milestone 4E wires dwarf/pirate ordering through the dwarf post-travel round.
 
 ### Ongoing / incomplete
 
-- Full generated-edge dwarf movement parity and pirate interaction remain beyond the Milestone 4D baseline.
-- No full systems yet for pirate, dragon, bear, cave-closing, scoring, or endgame.
+- Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4E baseline.
+- No full systems yet for dragon, bear, cave-closing, scoring, or endgame.
 - Scoring hooks and end-state flow are not yet wired to complete game endings.
 
 ## Gameplay status by subsystem
@@ -39,9 +41,9 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, a
 | Plover | Implemented (runtime + handlers) |
 | Travel dispatch | Implemented |
 | Dwarf | Implemented baseline (route exclusion, activation, encounter, blocking, attacks); full generated-edge movement parity pending |
+| Pirate | Implemented baseline (chest placement, treasure theft, dwarf ordering); final-treasure scoring integration pending |
 | Troll/Bridge/Chasm | Implemented |
 | Bear | Not implemented |
-| Pirate | Not implemented |
 | Dragon | Not implemented |
 | Cave closing | Not implemented |
 | Scoring | Not implemented |
@@ -61,7 +63,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, a
 
 ## Unresolved blockers and risks
 
-- Completing full generated-edge dwarf movement parity and pirate interaction.
+- Completing full generated-edge dwarf/pirate movement parity and final-treasure scoring integration.
 - Coordinating system side effects and parser interactions for unresolved special rules.
 - Introducing scoring and endgame without regressing earlier travel/parser infrastructure.
 

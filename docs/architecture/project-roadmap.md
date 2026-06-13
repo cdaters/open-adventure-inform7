@@ -16,6 +16,7 @@
 - 4B: troll/bridge/chasm subsystem implementation
 - 4C: dwarf subsystem travel-gating integration
 - 4D: dwarf subsystem baseline completion and verification
+- 4E: pirate subsystem baseline completion and verification
 
 ## Current build status
 
@@ -26,15 +27,15 @@
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, and dwarf baseline behavior.
+- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, and pirate baseline behavior.
 - Not yet implemented:
   - bear system
-  - pirate system
   - dragon system
   - cave-closing logic
   - full scoring flow
   - endgame flow
-  - full generated-edge dwarf movement parity
+  - full generated-edge dwarf/pirate movement parity
+  - final-treasure pirate/scoring integration
 
 ## Testing status
 
@@ -43,12 +44,11 @@
 
 ## Remaining systems and priority
 
-1. `dwarf parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
-2. `pirate` — treasure theft and dwarf/pirate ordering.
+1. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
+2. `scoring / treasure` — scoring side effects, found-treasure tracking, and final-treasure pirate chest branch.
 3. `bear` — resolve movement/encounter behaviors and state transitions.
 4. `cave-closing` — introduce global closure state transitions and constraints.
-5. `scoring / treasure` — scoring side effects and inventory checks.
-6. `dragon` and `endgame` — encounter flow, victory/lose states, terminal sequences.
+5. `dragon` and `endgame` — encounter flow, victory/lose states, terminal sequences.
 
 ## Recommended implementation order
 

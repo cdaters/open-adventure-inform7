@@ -242,6 +242,7 @@ To openadventure-run-dwarf-round in (current-room - room):
 			now dwarf-location entry is current-room;
 			now dwarf-seen entry is true;
 			increase visible-dwarves by 1;
+	run openadventure pirate post-dwarf-round in current-room with dwarf-count visible-dwarves;
 	if visible-dwarves is 0:
 		move DWARF to LOC_NOWHERE;
 		now openadventure-dwarves-travel-in-progress is false;

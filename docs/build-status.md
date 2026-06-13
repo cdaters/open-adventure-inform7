@@ -1,4 +1,4 @@
-# Build Status - Verification Pass (Milestone 4D)
+# Build Status - Verification Pass (Milestone 4E)
 
 ## Compile Attempt
 - Command: `./build.sh --compile`
@@ -6,7 +6,7 @@
 - Result: **success**
 - Output artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
 - Verification rerun date: `2026-06-13`
-  - Result: **success** after dwarf subsystem baseline integration and deep-cave predicate parser cleanup
+  - Result: **success** after pirate subsystem baseline integration
 - Output artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
 
 ## Prior Blocking Issues (Resolved)
@@ -24,6 +24,7 @@
     - `OpenAdventure_Plover.ni`
     - `OpenAdventure_Troll.ni`
     - `OpenAdventure_Dwarves.ni`
+    - `OpenAdventure_Pirate.ni`
     - `OpenAdventure_Runtime.ni`
 - Output target: `OpenAdventure.inform/Build/OpenAdventure.z8`
 - Project layout used for Inform compilation:
@@ -33,8 +34,9 @@
 
 ## Missing Source Components
 - No required source components are currently missing for baseline compilation.
-- Gameplay systems still intentionally stubbed for later milestones (pirate, bear, dragon, cave-closing, scoring/endgame behaviors).
+- Gameplay systems still intentionally stubbed for later milestones (bear, dragon, cave-closing, scoring/endgame behaviors).
 - Dwarf baseline behavior is implemented; full generated-edge movement parity remains a hardening task.
+- Pirate baseline behavior is implemented; final-treasure scoring integration remains a hardening task.
 - `frotz/dfrotz` and transcript-driven regression runner remain unavailable in the current environment.
 
 ## Recommended Next Actions
@@ -42,9 +44,9 @@
 2. Wire non-direct travel condition evaluation and special-handler behavior in later milestones.
 3. Add transcript-driven test targets once gameplay behavior reaches a stable baseline.
 
-## Latest Verification (Milestone 4D)
+## Latest Verification (Milestone 4E)
 - Command results:
   - `./build.sh --compile` ✅
   - `./test.sh` ✅
-  - all executable smoke tests in `tests/smoke/` ✅ (`01-build-artifacts.sh`, `03-troll-system.sh`, `04-dwarf-system.sh`)
+  - all executable smoke tests in `tests/smoke/` ✅ (`01-build-artifacts.sh`, `03-troll-system.sh`, `04-dwarf-system.sh`, `05-pirate-system.sh`)
   - No generated-file integrity warnings after this pass.

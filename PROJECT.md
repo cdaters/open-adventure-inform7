@@ -20,8 +20,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 4B | Troll / bridge / chasm implementation | ✅ Complete | travel rules `216` and `226` wired through special-ID 3 |
 | 4C | Dwarf system | ✅ Complete | rule 138 nodwarves condition and dwarf subsystem integration |
 | 4D | Dwarf system baseline | ✅ Complete | activation, first encounter, blocking, attacks, compile/test verification |
+| 4E | Pirate system baseline | ✅ Complete | chest placement, treasure theft, dwarf/pirate ordering, compile/test verification |
 
-## Current reality (after Milestone 4D)
+## Current reality (after Milestone 4E)
 
 ### Completed
 
@@ -29,7 +30,8 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Runtime travel dispatch supports generated travel rows, including random/forced/magic-word handling.
 - Plover and troll/bridge/chasm subsystems are implemented and wired to the framework.
 - Dwarf baseline behavior is implemented and verified by smoke tests.
-- Full generated-edge dwarf movement parity and pirate interaction remain for upcoming work.
+- Pirate baseline behavior is implemented and verified by smoke tests.
+- Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
 
@@ -56,8 +58,8 @@ Current build artifact:
 | Plover | Implemented |
 | Troll / bridge / chasm | Implemented |
 | Dwarves | Baseline implemented; full generated-edge movement parity pending |
+| Pirate | Baseline implemented; final-treasure scoring integration pending |
 | Bear | Not implemented |
-| Pirate | Not implemented |
 | Dragon | Not implemented |
 | Cave closing | Not implemented |
 | Scoring | Not implemented |
