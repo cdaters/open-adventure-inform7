@@ -2,7 +2,7 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 6A refresh)
+## Current status (Milestone 6B refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
@@ -18,6 +18,7 @@ Current snapshot after work completed up through:
 - Milestone 5C (Dragon confrontation and room transformation baseline)
 - Milestone 5D (Cave-closing warning and repository transition baseline)
 - Milestone 6A (Endgame repository, blast outcomes, final scoring, and ranking baseline)
+- Milestone 6B (Introduction, help, credits, about, news, info, and version information)
 
 ## What is working today
 
@@ -38,6 +39,7 @@ Current snapshot after work completed up through:
   - `OpenAdventure_Dragon.ni`
   - `OpenAdventure_CaveClosing.ni`
   - `OpenAdventure_Endgame.ni`
+  - `OpenAdventure_Information.ni`
 - Travel dispatch runtime exists with generated row integration:
   - direct travel dispatch
   - forced travel dispatch
@@ -55,6 +57,7 @@ Current snapshot after work completed up through:
 - Dragon confrontation, yes/no confirmation, room transformation, rug release, and blood handling (implemented baseline)
 - Cave-closing warning clocks, exit restrictions, repository transition, and reincarnation/scoring integration (implemented baseline)
 - Endgame repository, blast outcomes, dwarf disturbance ending, final scoring, and ranking output (implemented baseline)
+- Startup presentation, HELP menu, ABOUT, INFO, NEWS, credits, and version information (implemented baseline)
 - Full generated-edge dwarf/pirate movement parity (pending hardening)
 - Final parser/UX alignment and transcript regression harness
 
@@ -83,6 +86,7 @@ Current snapshot after work completed up through:
 | 5C | ✅ | Dragon confrontation baseline + room transformation + compile/smoke verification |
 | 5D | ✅ | Cave-closing baseline + repository transition + compile/smoke verification |
 | 6A | ✅ | Endgame baseline + blast outcomes + final scoring/ranking + compile/smoke verification |
+| 6B | ✅ | Information system baseline + startup/help/about/info/news/version + compile/smoke verification |
 
 ## Build and validation entry points
 
@@ -111,6 +115,7 @@ See:
 - `docs/architecture/dragon-system.md` — dragon confrontation and room transformation behavior
 - `docs/architecture/cave-closing-system.md` — cave-closing clocks and repository transition behavior
 - `docs/architecture/endgame-system.md` — repository endgame, blast outcomes, final scoring, and ranking behavior
+- `docs/architecture/information-system.md` — startup, help, credits, about, info, news, and version behavior
 
 ## References
 

@@ -27,8 +27,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 5C | Dragon system | ✅ Complete | confrontation, yes/no confirmation, room transformation, rug release, compile/test verification |
 | 5D | Cave closing system | ✅ Complete | warning clocks, exit restrictions, repository transition, reincarnation/scoring integration, compile/test verification |
 | 6A | Endgame completion | ✅ Complete | repository puzzle, blast outcomes, final scoring, ranking, compile/test verification |
+| 6B | Introduction and information system | ✅ Complete | startup, help menu, about/info/news, credits, version, compile/test verification |
 
-## Current reality (after Milestone 6A)
+## Current reality (after Milestone 6B)
 
 ### Completed
 
@@ -43,6 +44,7 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Dragon baseline behavior is implemented and verified by smoke tests.
 - Cave-closing baseline behavior is implemented and verified by smoke tests.
 - Endgame baseline behavior is implemented and verified by smoke tests.
+- Information system baseline behavior is implemented and verified by smoke tests.
 - Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
@@ -77,6 +79,7 @@ Current build artifact:
 | Cave closing | Baseline implemented; repository transition integrated with endgame |
 | Scoring | Baseline implemented; terminal endgame scoring and ranking integrated |
 | Endgame | Baseline implemented; transcript parity pending |
+| Information | Baseline implemented; startup/help/about/info/news/version smoke coverage present |
 
 ## Current testing status
 

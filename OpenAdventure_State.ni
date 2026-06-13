@@ -66,6 +66,9 @@ The openadventure-subsystem-endgame is false.
 The openadventure-subsystem-reincarnation is a truth state that varies.
 The openadventure-subsystem-reincarnation is false.
 
+The openadventure-subsystem-information is a truth state that varies.
+The openadventure-subsystem-information is false.
+
 Section 4 - Data binding for IDs and per-object state
 
 A thing has a text called adventure-id.
@@ -294,6 +297,14 @@ The openadventure-endgame-final-bonus is 0.
 
 The openadventure-repository-ready is a truth state that varies.
 The openadventure-repository-ready is false.
+
+Section 13 - Information runtime state
+
+The openadventure-information-startup-presented is a truth state that varies.
+The openadventure-information-startup-presented is false.
+
+The openadventure-information-last-section is a text that varies.
+The openadventure-information-last-section is "".
 
 Section 6 - Utility
 

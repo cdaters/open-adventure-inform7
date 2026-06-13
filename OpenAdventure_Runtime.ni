@@ -87,6 +87,9 @@ To enable subsystem endgame:
 To enable subsystem reincarnation:
 	now openadventure-subsystem-reincarnation is true.
 
+To enable subsystem information:
+	now openadventure-subsystem-information is true.
+
 To decide whether subsystem dwarves currently handles this travel from (source - room) to (destination - room) with verb (verb-token - text):
 	decide no.
 

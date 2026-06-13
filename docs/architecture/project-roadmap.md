@@ -23,6 +23,7 @@
 - 5C: dragon subsystem baseline completion and verification
 - 5D: cave-closing subsystem baseline completion and verification
 - 6A: endgame subsystem baseline completion and verification
+- 6B: introduction and information subsystem baseline completion and verification
 
 ## Current build status
 
@@ -33,7 +34,7 @@
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, death/reincarnation baseline behavior, bear baseline behavior, dragon baseline behavior, cave-closing baseline behavior, and endgame baseline behavior.
+- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, death/reincarnation baseline behavior, bear baseline behavior, dragon baseline behavior, cave-closing baseline behavior, endgame baseline behavior, and information-system baseline behavior.
 - Not yet implemented:
   - dark-pit death hazard integration
   - full generated-edge dwarf/pirate movement parity
@@ -47,6 +48,7 @@
 - Dragon smoke coverage is present in `tests/smoke/09-dragon-system.sh`.
 - Cave-closing smoke coverage is present in `tests/smoke/10-cave-closing-system.sh`.
 - Endgame smoke coverage is present in `tests/smoke/11-endgame-system.sh`.
+- Information-system smoke coverage is present in `tests/smoke/12-information-system.sh`.
 - Transcript-based behavioral regression framework is still pending.
 
 ## Remaining systems and priority
@@ -54,7 +56,8 @@
 1. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
 2. `darkness/lamp hazards` — wire dark-pit death into the shared reincarnation handler.
 3. `terminal hardening` — add transcript coverage for final scoring/ranking and endgame branches.
-4. `transcript parity` — add command transcripts for bear, reincarnation, troll, pirate, cave-closing, endgame, and scoring branches.
+4. `information transcript parity` — add transcript coverage for startup, HELP sections, ABOUT, INFO, NEWS, and VERSION.
+5. `transcript parity` — add command transcripts for bear, reincarnation, troll, pirate, cave-closing, endgame, and scoring branches.
 
 ## Recommended implementation order
 
@@ -87,6 +90,7 @@ graph TD
   J --> L[Endgame]
   I --> L
   L --> K
+  K --> M[Information System]
 ```
 
 ## Risks

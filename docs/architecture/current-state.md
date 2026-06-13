@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, 6A, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, 6A, 6B, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -33,6 +33,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Milestone 5C adds dragon confrontation, yes/no confirmation, room transformation, rug release, blood handling, and rug scoring integration.
 - Milestone 5D adds cave-closing warning clocks, panic timing, exit restrictions, repository transition, reincarnation suppression, and cave-closing score integration.
 - Milestone 6A adds repository endgame behavior, blast outcomes, mirror/dwarf disturbance endings, final scoring, and ranking output.
+- Milestone 6B adds startup presentation, HELP menu, ABOUT, INFO, NEWS, credits, and version information.
 
 ### Ongoing / incomplete
 
@@ -55,6 +56,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Cave closing | Implemented baseline (warning clocks, exit restrictions, repository transition); endgame integration present |
 | Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow integrated |
 | Endgame | Implemented baseline (repository, blast outcomes, dwarf disturbance, final score/rank); transcript parity pending |
+| Information | Implemented baseline (startup, HELP menu, ABOUT, INFO, NEWS, credits, version); transcript parity pending |
 
 ## Source integration status
 
