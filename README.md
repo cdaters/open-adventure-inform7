@@ -7,6 +7,7 @@ Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure)
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
 - Milestone 4A (Plover subsystem implementation)
+- Milestone 4B (Troll/bridge/chasm travel subsystem)
 - Milestone 3F (repository documentation refresh)
 
 ## What is working today
@@ -30,7 +31,6 @@ Current snapshot after work completed up through:
 ## Remaining work (behavioral parity)
 
 - Dwarf system and encounter restrictions
-- Troll/bridge/chasm gating behavior
 - Bear system
 - Pirate system
 - Dragon system
@@ -53,7 +53,8 @@ Current snapshot after work completed up through:
 | 3E | ✅ | First real Inform 7 build succeeds |
 | 3F | ✅ | Documentation refresh and roadmap added |
 | 4A | ✅ | Plover runtime subsystem and notes |
-| 4B+ | 🚧 Planned | Remaining gameplay systems + transcript-level verification |
+| 4B | ✅ | Troll/bridge/chasm travel subsystem |
+| 4C | 🚧 Planned | Remaining gameplay systems + transcript-level verification |
 
 ## Build and validation entry points
 

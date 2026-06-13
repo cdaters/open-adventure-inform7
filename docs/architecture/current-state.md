@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E and 4A and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -22,11 +22,12 @@ This document reflects repository reality after Milestones 3E and 4A and the Mil
   - generated travel rows are evaluated through central runtime.
   - supports direct, random, forced, and magic-word travel.
 - Plover subsystem implemented as generated+runtime integration path.
+- Troll/bridge/chasm subsystem implemented and connected to special travel ID `3`.
 
 ### Ongoing / incomplete
 
-- Unresolved travel rules with gameplay requirements remain stubbed.
-- No full systems yet for dwarf, troll, pirate, dragon, bear, cave-closing, scoring, or endgame.
+- Unresolved travel rules with gameplay requirements remain stubbed (`138` currently).
+- No full systems yet for dwarf, pirate, dragon, bear, cave-closing, scoring, or endgame.
 - Scoring hooks and end-state flow are not yet wired to complete game endings.
 
 ## Gameplay status by subsystem
@@ -36,7 +37,7 @@ This document reflects repository reality after Milestones 3E and 4A and the Mil
 | Plover | Implemented (runtime + handlers) |
 | Travel dispatch | Implemented |
 | Dwarf | Not implemented |
-| Troll/Bridge/Chasm | Not implemented |
+| Troll/Bridge/Chasm | Implemented |
 | Bear | Not implemented |
 | Pirate | Not implemented |
 | Dragon | Not implemented |

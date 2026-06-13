@@ -196,8 +196,7 @@ To oa-dispatch-openadventure-special (special-id - text) from (source-id - text)
 	if special-id is "2":
 		oa-handle-plover-emerald-drop-special source-id with verb-token verb-token;
 	if special-id is "3":
-		say "Special movement case 3 is not yet implemented (troll bridge/chasm behavior).";
-		now openadventure-runtime-check-result is false;
+		oa-handle-troll-bridge-special source-id with verb-token verb-token;
 
 To decide whether openadventure non-direct travel from source-id (source-id - text) with verb token (verb-token - text):
 	let handled be false;

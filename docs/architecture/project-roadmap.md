@@ -13,6 +13,7 @@
 - 3E: first compilable build
 - 3F: repository status and architecture refresh
 - 4A: plover system implementation
+- 4B: troll/bridge/chasm subsystem implementation
 
 ## Current build status
 
@@ -23,10 +24,9 @@
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework and plover travel.
+- Implemented: baseline movement framework, plover travel, and troll/bridge/chasm travel.
 - Not yet implemented:
   - dwarf system
-  - troll/bridge/chasm behavior
   - bear system
   - pirate system
   - dragon system
@@ -41,13 +41,12 @@
 
 ## Remaining systems and priority
 
-1. `bear` — resolve movement/encounter behaviors and state transitions.
-2. `dwarf` — migrate from stubs to persistent AI/event-driven behavior.
-3. `troll / bridge / chasm` — implement blocked travel and fallback behavior.
-4. `cave-closing` — introduce global closure state transitions and constraints.
-5. `scoring / treasure` — scoring side effects and inventory checks.
-6. `dragon` and `pirate` — encounter and location-dependent control flow.
-7. `endgame` — victory/lose states, terminal sequences.
+1. `dwarf` — migrate from stubs to persistent AI/event-driven behavior.
+2. `bear` — resolve movement/encounter behaviors and state transitions.
+3. `cave-closing` — introduce global closure state transitions and constraints.
+4. `scoring / treasure` — scoring side effects and inventory checks.
+5. `pirate` and `dragon` — encounter and location-dependent control flow.
+6. `endgame` — victory/lose states, terminal sequences.
 
 ## Recommended implementation order
 

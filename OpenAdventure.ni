@@ -41,4 +41,5 @@ Include "generated/Vocabulary.ni".
 Include "OpenAdventure_State.ni".
 Include "OpenAdventure_Conditions.ni".
 Include "OpenAdventure_Plover.ni".
+Include "OpenAdventure_Troll.ni".
 Include "OpenAdventure_Runtime.ni".

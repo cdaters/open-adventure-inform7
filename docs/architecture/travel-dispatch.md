@@ -55,8 +55,8 @@ The dispatcher consumes generated rows, evaluates conditions, supports forced/ra
 The dispatcher is wired, but the following rows are intentionally stubbed in 3C and remain unresolved gameplay behavior:
 
 - `138`: `LOC_LONGWEST` condition `nodwarves` (dwarf routing filter)
-- `216`: `LOC_SWCHASM` — `special` → special `3` (troll bridge/chasm)
-- `226`: `LOC_NECHASM` — `special` → special `3` (troll bridge/chasm)
+
+Special-id `3` travel is now handled in `OpenAdventure_Troll.ni` (Milestone 4B); see `docs/architecture/troll-system.md`.
 
 ## Milestone 4A follow-up
 
@@ -67,12 +67,19 @@ Plover rows were implemented in `OpenAdventure_Plover.ni`:
 - `193`: `LOC_PLOVER` → `special 1`
 - `194`: `LOC_PLOVER` → `special 2`
 
-Unresolved gameplay dependencies after 4A: rules `138`, `216`, and `226`.
+Unresolved gameplay dependencies after 4B: rule `138` only.
+
+## Milestone 4B follow-up
+
+Milestone 4B implements `special` `3` in `OpenAdventure_Troll.ni` for rules:
+
+- `216`: `LOC_SWCHASM` — `over` bridge/chasm special
+- `226`: `LOC_NECHASM` — `over` bridge/chasm special
 
 ## Extension Points
 
 1. **Special travel handlers**
-   - Add a concrete handler for special ID `3` (troll/bridge/chasm logic) in the movement system layer.
+   - Special ID `3` is implemented in `OpenAdventure_Troll.ni`.
    - Keep the dispatch API stable so generated IDs map to runtime behavior.
 
 2. **Subsystem routing gates**
@@ -88,7 +95,7 @@ Unresolved gameplay dependencies after 4A: rules `138`, `216`, and `226`.
 
 ## Remaining Blockers and Next-Step Recommendations
 
-- Implement special handler for ID `3` before the troll/pirate/dragon/dwarf gameplay milestones.
+- Implement remaining dwarf/other unresolved travel blockers.
 - Implement dwarf-aware travel filtering (currently modeled only as a condition flag).
 - Add message ID resolution so `speak`/`speak_conditional` rows display canonical Adventure text.
 - Add integration tests across unresolved rows once baseline parser + command routing is stable.
