@@ -281,6 +281,20 @@ AMBER
 SAPPH
 OBJ_69
 
+Section 12 - Endgame runtime state
+
+The openadventure-endgame-complete is a truth state that varies.
+The openadventure-endgame-complete is false.
+
+The openadventure-endgame-last-outcome is a text that varies.
+The openadventure-endgame-last-outcome is "".
+
+The openadventure-endgame-final-bonus is a number that varies.
+The openadventure-endgame-final-bonus is 0.
+
+The openadventure-repository-ready is a truth state that varies.
+The openadventure-repository-ready is false.
+
 Section 6 - Utility
 
 This section contains ID normalization helpers and project bootstrapping.

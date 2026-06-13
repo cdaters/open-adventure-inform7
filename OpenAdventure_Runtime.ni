@@ -30,6 +30,8 @@ To run openadventure post-travel hooks for source (source - room) destination (t
 		mark openadventure last safe room target;
 	if openadventure-subsystem-cave-closing is true:
 		run openadventure cave closing post-travel hooks for destination target;
+	if openadventure-subsystem-endgame is true:
+		run openadventure endgame post-travel hooks for destination target;
 	if openadventure-subsystem-dwarves is true:
 		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
 	if openadventure-subsystem-bear is true:

@@ -50,4 +50,5 @@ Include "OpenAdventure_Troll.ni".
 Include "OpenAdventure_Bear.ni".
 Include "OpenAdventure_Dragon.ni".
 Include "OpenAdventure_CaveClosing.ni".
+Include "OpenAdventure_Endgame.ni".
 Include "OpenAdventure_Runtime.ni".

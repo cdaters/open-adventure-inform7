@@ -26,8 +26,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 5B | Bear system | ✅ Complete | feeding, chain puzzle, following, troll interaction, bridge-collapse death, compile/test verification |
 | 5C | Dragon system | ✅ Complete | confrontation, yes/no confirmation, room transformation, rug release, compile/test verification |
 | 5D | Cave closing system | ✅ Complete | warning clocks, exit restrictions, repository transition, reincarnation/scoring integration, compile/test verification |
+| 6A | Endgame completion | ✅ Complete | repository puzzle, blast outcomes, final scoring, ranking, compile/test verification |
 
-## Current reality (after Milestone 5D)
+## Current reality (after Milestone 6A)
 
 ### Completed
 
@@ -41,6 +42,7 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Bear baseline behavior is implemented and verified by smoke tests.
 - Dragon baseline behavior is implemented and verified by smoke tests.
 - Cave-closing baseline behavior is implemented and verified by smoke tests.
+- Endgame baseline behavior is implemented and verified by smoke tests.
 - Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
@@ -72,9 +74,9 @@ Current build artifact:
 | Death / Reincarnation | Baseline implemented; dark-pit callers pending; cave-closing suppression integrated |
 | Bear | Baseline implemented; transcript parity pending |
 | Dragon | Baseline implemented; transcript parity pending |
-| Cave closing | Baseline implemented; endgame/blast outcomes pending |
-| Scoring | Baseline implemented; full terminal/endgame scoring pending |
-| Endgame | Not implemented |
+| Cave closing | Baseline implemented; repository transition integrated with endgame |
+| Scoring | Baseline implemented; terminal endgame scoring and ranking integrated |
+| Endgame | Baseline implemented; transcript parity pending |
 
 ## Current testing status
 

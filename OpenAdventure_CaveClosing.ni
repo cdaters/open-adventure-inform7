@@ -135,6 +135,8 @@ To close openadventure cave completely:
 	now openadventure-cave-closed-active is true;
 	now openadventure-cave-closing-active is true;
 	now openadventure-cave-closing-last-event is "closed";
+	if openadventure-subsystem-endgame is true:
+		initialize openadventure endgame repository;
 	say "[openadventure cave closed message][paragraph break]";
 	move the player to LOC_NE;
 	if openadventure-framework-ready is true:

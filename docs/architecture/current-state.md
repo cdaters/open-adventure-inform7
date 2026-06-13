@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, 6A, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -32,12 +32,12 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Milestone 5B adds bear feeding, chain lock/unlock handling, bear following, troll-scaring, bridge-collapse death, and chain scoring integration.
 - Milestone 5C adds dragon confrontation, yes/no confirmation, room transformation, rug release, blood handling, and rug scoring integration.
 - Milestone 5D adds cave-closing warning clocks, panic timing, exit restrictions, repository transition, reincarnation suppression, and cave-closing score integration.
+- Milestone 6A adds repository endgame behavior, blast outcomes, mirror/dwarf disturbance endings, final scoring, and ranking output.
 
 ### Ongoing / incomplete
 
 - Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4F baseline.
-- No full endgame system yet.
-- Terminal scoring/ranking output is not yet wired to complete game endings.
+- Transcript parity for endgame branches is not yet automated beyond smoke checks.
 - Dark-pit death callers await their owning systems.
 
 ## Gameplay status by subsystem
@@ -52,9 +52,9 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Troll/Bridge/Chasm | Implemented |
 | Bear | Implemented baseline (feeding, chain, following, troll interaction, bridge-collapse death); transcript parity pending |
 | Dragon | Implemented baseline (confrontation, confirmation, room transformation, rug release, blood handling); transcript parity pending |
-| Cave closing | Implemented baseline (warning clocks, exit restrictions, repository transition); endgame/blast outcomes pending |
-| Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow pending |
-| Endgame | Not implemented |
+| Cave closing | Implemented baseline (warning clocks, exit restrictions, repository transition); endgame integration present |
+| Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow integrated |
+| Endgame | Implemented baseline (repository, blast outcomes, dwarf disturbance, final score/rank); transcript parity pending |
 
 ## Source integration status
 
@@ -72,7 +72,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 
 - Completing full generated-edge dwarf/pirate movement parity.
 - Coordinating system side effects and parser interactions for unresolved special rules.
-- Introducing endgame without regressing earlier travel/parser/scoring infrastructure.
+- Hardening endgame transcript parity without regressing earlier travel/parser/scoring infrastructure.
 
 ## Next milestones
 

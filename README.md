@@ -2,7 +2,7 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 5D refresh)
+## Current status (Milestone 6A refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
@@ -17,6 +17,7 @@ Current snapshot after work completed up through:
 - Milestone 5B (Bear puzzle and troll interaction baseline)
 - Milestone 5C (Dragon confrontation and room transformation baseline)
 - Milestone 5D (Cave-closing warning and repository transition baseline)
+- Milestone 6A (Endgame repository, blast outcomes, final scoring, and ranking baseline)
 
 ## What is working today
 
@@ -36,6 +37,7 @@ Current snapshot after work completed up through:
   - `OpenAdventure_Bear.ni`
   - `OpenAdventure_Dragon.ni`
   - `OpenAdventure_CaveClosing.ni`
+  - `OpenAdventure_Endgame.ni`
 - Travel dispatch runtime exists with generated row integration:
   - direct travel dispatch
   - forced travel dispatch
@@ -52,8 +54,8 @@ Current snapshot after work completed up through:
 - Bear feeding, chain, following, troll, and bridge-collapse behavior (implemented baseline)
 - Dragon confrontation, yes/no confirmation, room transformation, rug release, and blood handling (implemented baseline)
 - Cave-closing warning clocks, exit restrictions, repository transition, and reincarnation/scoring integration (implemented baseline)
+- Endgame repository, blast outcomes, dwarf disturbance ending, final scoring, and ranking output (implemented baseline)
 - Full generated-edge dwarf/pirate movement parity (pending hardening)
-- Endgame and full terminal scoring flow
 - Final parser/UX alignment and transcript regression harness
 
 ## Milestone completion matrix
@@ -80,6 +82,7 @@ Current snapshot after work completed up through:
 | 5B | ✅ | Bear puzzle baseline + troll/reincarnation integration + compile/smoke verification |
 | 5C | ✅ | Dragon confrontation baseline + room transformation + compile/smoke verification |
 | 5D | ✅ | Cave-closing baseline + repository transition + compile/smoke verification |
+| 6A | ✅ | Endgame baseline + blast outcomes + final scoring/ranking + compile/smoke verification |
 
 ## Build and validation entry points
 
@@ -107,6 +110,7 @@ See:
 - `docs/architecture/bear-system.md` — bear puzzle and troll interaction behavior
 - `docs/architecture/dragon-system.md` — dragon confrontation and room transformation behavior
 - `docs/architecture/cave-closing-system.md` — cave-closing clocks and repository transition behavior
+- `docs/architecture/endgame-system.md` — repository endgame, blast outcomes, final scoring, and ranking behavior
 
 ## References
 
