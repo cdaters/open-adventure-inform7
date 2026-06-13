@@ -110,9 +110,10 @@ Terminal ranking output is not yet wired to a full endgame termination flow.
 - `OpenAdventure_Pirate.ni` marks stolen/found treasure and chest discovery through the scoring subsystem.
 - `OpenAdventure_Reincarnation.ni` records death penalties through the scoring subsystem.
 - `OpenAdventure_Bear.ni` makes `CHAIN` portable after bear-chain unlock so existing treasure deposit scoring can apply.
+- `OpenAdventure_Dragon.ni` makes `RUG` portable after dragon death so existing treasure discovery/deposit scoring can apply.
 
 ## Parity Gaps
 
 - Transcript-level scoring validation is still pending because the repository does not yet have a command transcript harness.
-- Broken/stashed treasure edge cases will need revisiting when dragon, bear, vase, eggs, and endgame object-state systems are implemented.
+- Broken/stashed treasure edge cases will need revisiting when vase, eggs, and endgame object-state systems are implemented.
 - Hint, save, novice, turn-loss, and full termination/ranking output hooks are not yet wired to completed gameplay systems.

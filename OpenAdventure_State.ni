@@ -175,7 +175,18 @@ The openadventure-bear-guards-axe is false.
 The openadventure-bear-last-event is a text that varies.
 The openadventure-bear-last-event is "".
 
-Section 8 - Dwarf runtime state
+Section 8 - Dragon runtime state
+
+The openadventure-dragon-last-event is a text that varies.
+The openadventure-dragon-last-event is "".
+
+The openadventure-dragon-room-transformed is a truth state that varies.
+The openadventure-dragon-room-transformed is false.
+
+The openadventure-dragon-blood-drunk is a truth state that varies.
+The openadventure-dragon-blood-drunk is false.
+
+Section 9 - Dwarf runtime state
 
 The openadventure-dwarves-travel-in-progress is a truth state that varies.
 The openadventure-dwarves-travel-in-progress is false.
@@ -201,7 +212,7 @@ dwarf-index	dwarf-location	dwarf-prior-location	dwarf-seen	dwarf-alive
 5	LOC_NOWHERE	LOC_NOWHERE	false	true
 6	LOC_NOWHERE	LOC_NOWHERE	false	true
 
-Section 9 - Pirate runtime state
+Section 10 - Pirate runtime state
 
 The openadventure-pirate-chest-location is a room that varies.
 The openadventure-pirate-chest-location is LOC_MAZEEND12.

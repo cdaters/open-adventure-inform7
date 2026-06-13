@@ -233,7 +233,7 @@ compose_source() {
     prepare_travel_file
 
     local runtime_file
-    for runtime_file in "$ROOT_DIR/OpenAdventure_State.ni" "$ROOT_DIR/OpenAdventure_Conditions.ni" "$ROOT_DIR/OpenAdventure_Plover.ni" "$ROOT_DIR/OpenAdventure_Troll.ni" "$ROOT_DIR/OpenAdventure_Bear.ni" "$ROOT_DIR/OpenAdventure_Dwarves.ni" "$ROOT_DIR/OpenAdventure_Pirate.ni" "$ROOT_DIR/OpenAdventure_Scoring.ni" "$ROOT_DIR/OpenAdventure_Reincarnation.ni" "$ROOT_DIR/OpenAdventure_Runtime.ni"; do
+    for runtime_file in "$ROOT_DIR/OpenAdventure_State.ni" "$ROOT_DIR/OpenAdventure_Conditions.ni" "$ROOT_DIR/OpenAdventure_Plover.ni" "$ROOT_DIR/OpenAdventure_Troll.ni" "$ROOT_DIR/OpenAdventure_Bear.ni" "$ROOT_DIR/OpenAdventure_Dwarves.ni" "$ROOT_DIR/OpenAdventure_Pirate.ni" "$ROOT_DIR/OpenAdventure_Scoring.ni" "$ROOT_DIR/OpenAdventure_Reincarnation.ni" "$ROOT_DIR/OpenAdventure_Dragon.ni" "$ROOT_DIR/OpenAdventure_Runtime.ni"; do
       echo ""
       cat "$runtime_file"
     done

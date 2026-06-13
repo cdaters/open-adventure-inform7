@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -30,11 +30,12 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Milestone 4F adds treasure discovery/deposit tracking, Open Adventure C point classes, score recomputation, score command reporting, death-penalty bookkeeping, and pirate chest scoring integration.
 - Milestone 5A adds shared death handling, obituary/consent flow, reincarnation limits, inventory disposition, lamp recovery, and dwarf death integration.
 - Milestone 5B adds bear feeding, chain lock/unlock handling, bear following, troll-scaring, bridge-collapse death, and chain scoring integration.
+- Milestone 5C adds dragon confrontation, yes/no confirmation, room transformation, rug release, blood handling, and rug scoring integration.
 
 ### Ongoing / incomplete
 
 - Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4F baseline.
-- No full systems yet for dragon, cave-closing, or endgame.
+- No full systems yet for cave-closing or endgame.
 - Terminal scoring/ranking output is not yet wired to complete game endings.
 - Dark-pit and cave-closing death callers await their owning systems.
 
@@ -49,7 +50,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Death/Reincarnation | Implemented baseline (dwarf death, consent flow, item/lamp disposition, score penalty); dark-pit/cave-closing callers pending |
 | Troll/Bridge/Chasm | Implemented |
 | Bear | Implemented baseline (feeding, chain, following, troll interaction, bridge-collapse death); transcript parity pending |
-| Dragon | Not implemented |
+| Dragon | Implemented baseline (confrontation, confirmation, room transformation, rug release, blood handling); transcript parity pending |
 | Cave closing | Not implemented |
 | Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow pending |
 | Endgame | Not implemented |

@@ -48,4 +48,5 @@ Include "OpenAdventure_Conditions.ni".
 Include "OpenAdventure_Plover.ni".
 Include "OpenAdventure_Troll.ni".
 Include "OpenAdventure_Bear.ni".
+Include "OpenAdventure_Dragon.ni".
 Include "OpenAdventure_Runtime.ni".

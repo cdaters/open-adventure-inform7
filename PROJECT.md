@@ -24,8 +24,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 4F | Treasure and scoring system | ✅ Complete | treasure tracking, deposit scoring, pirate chest scoring integration, compile/test verification |
 | 5A | Death and reincarnation system | ✅ Complete | death handling, reincarnation, inventory disposition, score penalty, compile/test verification |
 | 5B | Bear system | ✅ Complete | feeding, chain puzzle, following, troll interaction, bridge-collapse death, compile/test verification |
+| 5C | Dragon system | ✅ Complete | confrontation, yes/no confirmation, room transformation, rug release, compile/test verification |
 
-## Current reality (after Milestone 5B)
+## Current reality (after Milestone 5C)
 
 ### Completed
 
@@ -37,6 +38,7 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Treasure/scoring baseline is implemented and verified by smoke tests.
 - Death/reincarnation baseline is implemented and verified by smoke tests.
 - Bear baseline behavior is implemented and verified by smoke tests.
+- Dragon baseline behavior is implemented and verified by smoke tests.
 - Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
@@ -67,7 +69,7 @@ Current build artifact:
 | Pirate | Baseline implemented; final-treasure scoring integration implemented |
 | Death / Reincarnation | Baseline implemented; dark-pit/cave-closing callers pending |
 | Bear | Baseline implemented; transcript parity pending |
-| Dragon | Not implemented |
+| Dragon | Baseline implemented; transcript parity pending |
 | Cave closing | Not implemented |
 | Scoring | Baseline implemented; full terminal/endgame scoring pending |
 | Endgame | Not implemented |

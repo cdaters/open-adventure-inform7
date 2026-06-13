@@ -29,6 +29,8 @@ To run openadventure post-travel hooks for source (source - room) destination (t
 		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
 	if openadventure-subsystem-bear is true:
 		run openadventure bear post-travel hooks for destination target;
+	if openadventure-subsystem-dragon is true:
+		run openadventure dragon post-travel hooks for destination target;
 	if openadventure-subsystem-treasure-scoring is true:
 		run openadventure scoring post-travel hooks for destination target;
 	do nothing.
