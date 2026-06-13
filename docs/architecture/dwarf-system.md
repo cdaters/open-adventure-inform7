@@ -60,7 +60,7 @@ All state is declared in `OpenAdventure_State.ni`.
 
 - Random dwarf movement is intentionally simplified relative to the C `travel[]` candidate scan; it preserves visible pressure, previous-location blocking, and the `nodwarves` route exclusion but does not yet enumerate every generated travel edge as a dwarf candidate.
 - Pirate behavior is now implemented as slot `6` by `OpenAdventure_Pirate.ni`; full generated-edge movement parity remains future work.
-- Death currently ends the story directly instead of using Open Adventure's reincarnation flow.
+- Death now routes through `OpenAdventure_Reincarnation.ni`; full transcript validation remains pending.
 - Transcript-level tests are still smoke/static checks because no command transcript runner is available in the repository yet.
 
 ## File map
@@ -77,8 +77,7 @@ All state is declared in `OpenAdventure_State.ni`.
 ## Required next milestone actions
 
 1. Replace simplified pressure movement with full generated-travel candidate selection.
-2. Add reincarnation/death recovery instead of direct story termination.
-3. Add transcript-level validations for first encounter, blocking, missed attacks, successful attacks, pirate theft, and death.
+2. Add transcript-level validations for first encounter, blocking, missed attacks, successful attacks, pirate theft, death, and reincarnation.
 
 ## Estimated effort
 

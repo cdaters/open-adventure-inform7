@@ -18,6 +18,7 @@
 - 4D: dwarf subsystem baseline completion and verification
 - 4E: pirate subsystem baseline completion and verification
 - 4F: treasure/scoring subsystem baseline completion and verification
+- 5A: death/reincarnation subsystem baseline completion and verification
 
 ## Current build status
 
@@ -28,11 +29,12 @@
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, and treasure/scoring baseline behavior.
+- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, and death/reincarnation baseline behavior.
 - Not yet implemented:
   - bear system
   - dragon system
   - cave-closing logic
+  - dark-pit death hazard integration
   - terminal/endgame scoring flow
   - endgame flow
   - full generated-edge dwarf/pirate movement parity
@@ -41,15 +43,17 @@
 
 - Automated compile smoke exists via build script + test entrypoint.
 - Scoring smoke coverage is present in `tests/smoke/06-scoring-system.sh`.
+- Reincarnation smoke coverage is present in `tests/smoke/07-reincarnation-system.sh`.
 - Transcript-based behavioral regression framework is still pending.
 
 ## Remaining systems and priority
 
 1. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
-2. `bear` — resolve movement/encounter behaviors and state transitions.
-3. `cave-closing` — introduce global closure state transitions and constraints.
-4. `dragon` and `endgame` — encounter flow, victory/lose states, terminal sequences.
-5. `terminal scoring` — connect final termination/ranking output to completed cave-closing/endgame flow.
+2. `darkness/lamp hazards` — wire dark-pit death into the shared reincarnation handler.
+3. `bear` — resolve movement/encounter behaviors and state transitions.
+4. `cave-closing` — introduce global closure state transitions and constraints.
+5. `dragon` and `endgame` — encounter flow, victory/lose states, terminal sequences.
+6. `terminal scoring` — connect final termination/ranking output to completed cave-closing/endgame flow.
 
 ## Recommended implementation order
 

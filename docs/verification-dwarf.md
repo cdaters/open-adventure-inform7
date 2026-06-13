@@ -37,14 +37,14 @@
 
 - Dwarf movement pressure is simplified and does not yet enumerate the full generated `travel[]` candidate list.
 - Pirate interaction points are not fully implemented.
-- Knife-hit death ends the story directly; reincarnation is not implemented yet.
+- Knife-hit death now routes through the Milestone 5A reincarnation subsystem; transcript validation is still pending.
 
 ## Remaining blockers after 4D
 
 1. Add transcript-level command tests.
 2. Replace simplified movement pressure with full generated-edge candidate selection.
 3. Resolve pirate-dwarf ordering and precedence when both systems target travel/room updates.
-4. Add reincarnation/death recovery.
+4. Add transcript-level reincarnation/death recovery coverage.
 
 ## Recommendation for next milestone
 

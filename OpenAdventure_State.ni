@@ -63,6 +63,9 @@ The openadventure-subsystem-cave-closing is false.
 The openadventure-subsystem-endgame is a truth state that varies.
 The openadventure-subsystem-endgame is false.
 
+The openadventure-subsystem-reincarnation is a truth state that varies.
+The openadventure-subsystem-reincarnation is false.
+
 Section 4 - Data binding for IDs and per-object state
 
 A thing has a text called adventure-id.
@@ -137,6 +140,29 @@ JADE	2	14	false	false
 AMBER	2	14	false	false
 SAPPH	2	14	false	false
 OBJ_69	2	14	false	false
+
+Section 6 - Reincarnation runtime state
+
+The openadventure-reincarnation-limit is a number that varies.
+The openadventure-reincarnation-limit is 3.
+
+The openadventure-last-safe-room is a room that varies.
+The openadventure-last-safe-room is LOC_START.
+
+The openadventure-death-location is a room that varies.
+The openadventure-death-location is LOC_NOWHERE.
+
+The openadventure-last-death-cause is a text that varies.
+The openadventure-last-death-cause is "".
+
+The openadventure-reincarnation-in-progress is a truth state that varies.
+The openadventure-reincarnation-in-progress is false.
+
+The openadventure-reincarnation-last-result is a text that varies.
+The openadventure-reincarnation-last-result is "".
+
+The openadventure-cave-closing-active is a truth state that varies.
+The openadventure-cave-closing-active is false.
 
 Section 8 - Dwarf runtime state
 

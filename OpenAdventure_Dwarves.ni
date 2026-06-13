@@ -277,8 +277,7 @@ To openadventure-run-dwarf-round in (current-room - room):
 			say "[openadventure single-hit-message]";
 	if hitters > 0:
 		now openadventure-dwarves-travel-in-progress is false;
-		record openadventure death penalty;
-		end the story saying "You are dead.";
+		handle openadventure death caused by "dwarf_knife";
 	now openadventure-dwarves-travel-in-progress is false.
 
 To run openadventure dwarves post-travel hooks for source (source-room - room) destination (destination-room - room) verb (verb-token - text):

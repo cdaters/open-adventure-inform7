@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -28,12 +28,14 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Pirate subsystem now includes slot-6 dwarf integration, chest placement, treasure theft, pirate-forbidden room checks, and chest-found disabling.
 - Milestone 4E wires dwarf/pirate ordering through the dwarf post-travel round.
 - Milestone 4F adds treasure discovery/deposit tracking, Open Adventure C point classes, score recomputation, score command reporting, death-penalty bookkeeping, and pirate chest scoring integration.
+- Milestone 5A adds shared death handling, obituary/consent flow, reincarnation limits, inventory disposition, lamp recovery, and dwarf death integration.
 
 ### Ongoing / incomplete
 
 - Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4F baseline.
 - No full systems yet for dragon, bear, cave-closing, or endgame.
 - Terminal scoring/ranking output is not yet wired to complete game endings.
+- Dark-pit and cave-closing death callers await their owning systems.
 
 ## Gameplay status by subsystem
 
@@ -43,6 +45,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Travel dispatch | Implemented |
 | Dwarf | Implemented baseline (route exclusion, activation, encounter, blocking, attacks); full generated-edge movement parity pending |
 | Pirate | Implemented baseline (chest placement, treasure theft, dwarf ordering); final-treasure scoring integration implemented |
+| Death/Reincarnation | Implemented baseline (dwarf death, consent flow, item/lamp disposition, score penalty); dark-pit/cave-closing callers pending |
 | Troll/Bridge/Chasm | Implemented |
 | Bear | Not implemented |
 | Dragon | Not implemented |

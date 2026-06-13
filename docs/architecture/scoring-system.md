@@ -80,9 +80,7 @@ The scoring subsystem also updates `openadventure-pirate-force-chest-ready` when
 
 ### Death Penalties
 
-`record openadventure death penalty` increments `openadventure-death-count` up to the C limit of three deaths and recomputes the survival component. The dwarf subsystem calls this hook before its current direct death ending.
-
-Full reincarnation behavior remains a separate future milestone.
+`record openadventure death penalty` increments `openadventure-death-count` up to the C limit of three deaths and recomputes the survival component. Milestone 5A routes active death handling through `OpenAdventure_Reincarnation.ni`, which calls this scoring hook.
 
 ### Endgame Hooks
 

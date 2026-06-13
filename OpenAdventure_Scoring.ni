@@ -146,7 +146,7 @@ To update openadventure score total:
 To record openadventure death penalty:
 	if openadventure-death-count < 3:
 		increase openadventure-death-count by 1;
-	note openadventure score event delta -10 reason "death_penalty" source "openadventure_scoring";
+		note openadventure score event delta -10 reason "death_penalty" source "openadventure_scoring";
 	update openadventure score total.
 
 To mark openadventure deep cave score reached:

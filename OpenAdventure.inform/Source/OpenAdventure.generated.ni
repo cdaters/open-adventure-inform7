@@ -3506,6 +3506,9 @@ The openadventure-subsystem-cave-closing is false.
 The openadventure-subsystem-endgame is a truth state that varies.
 The openadventure-subsystem-endgame is false.
 
+The openadventure-subsystem-reincarnation is a truth state that varies.
+The openadventure-subsystem-reincarnation is false.
+
 Section 4 - Data binding for IDs and per-object state
 
 A thing has a text called adventure-id.
@@ -3580,6 +3583,29 @@ JADE	2	14	false	false
 AMBER	2	14	false	false
 SAPPH	2	14	false	false
 OBJ_69	2	14	false	false
+
+Section 6 - Reincarnation runtime state
+
+The openadventure-reincarnation-limit is a number that varies.
+The openadventure-reincarnation-limit is 3.
+
+The openadventure-last-safe-room is a room that varies.
+The openadventure-last-safe-room is LOC_START.
+
+The openadventure-death-location is a room that varies.
+The openadventure-death-location is LOC_NOWHERE.
+
+The openadventure-last-death-cause is a text that varies.
+The openadventure-last-death-cause is "".
+
+The openadventure-reincarnation-in-progress is a truth state that varies.
+The openadventure-reincarnation-in-progress is false.
+
+The openadventure-reincarnation-last-result is a text that varies.
+The openadventure-reincarnation-last-result is "".
+
+The openadventure-cave-closing-active is a truth state that varies.
+The openadventure-cave-closing-active is false.
 
 Section 8 - Dwarf runtime state
 
@@ -4190,8 +4216,7 @@ To openadventure-run-dwarf-round in (current-room - room):
 			say "[openadventure single-hit-message]";
 	if hitters > 0:
 		now openadventure-dwarves-travel-in-progress is false;
-		record openadventure death penalty;
-		end the story saying "You are dead.";
+		handle openadventure death caused by "dwarf_knife";
 	now openadventure-dwarves-travel-in-progress is false.
 
 To run openadventure dwarves post-travel hooks for source (source-room - room) destination (destination-room - room) verb (verb-token - text):
@@ -4596,7 +4621,7 @@ To update openadventure score total:
 To record openadventure death penalty:
 	if openadventure-death-count < 3:
 		increase openadventure-death-count by 1;
-	note openadventure score event delta -10 reason "death_penalty" source "openadventure_scoring";
+		note openadventure score event delta -10 reason "death_penalty" source "openadventure_scoring";
 	update openadventure score total.
 
 To mark openadventure deep cave score reached:
@@ -4671,6 +4696,112 @@ To say openadventure ranking for score (points - number):
 When play begins:
 	initialize openadventure scoring subsystem.
 
+[ Open Adventure Death and Reincarnation Subsystem ]
+
+Section 1 - Messages
+
+To say openadventure death closing message:
+	say "It looks as though you're dead.  Well, seeing as how it's so close to closing time anyway, I think we'll just call it a day."
+
+To say openadventure obituary query for death number (death-number - number):
+	if death-number is 1:
+		say "Oh dear, you seem to have gotten yourself killed.  I might be able to[line break]help you out, but I've never really done this before.  Do you want me[line break]to try to reincarnate you?";
+	else if death-number is 2:
+		say "You clumsy oaf, you've done it again!  I don't know how long I can[line break]keep this up.  Do you want me to try reincarnating you again?";
+	otherwise:
+		say "Now you've really done it!  I'm out of orange smoke!  You don't expect[line break]me to do a decent reincarnation without any orange smoke, do you?"
+
+To say openadventure obituary yes response for death number (death-number - number):
+	if death-number is 1:
+		say "All right.  But don't blame me if something goes wr......[line break]                    --- POOF!! ---[line break]You are engulfed in a cloud of orange smoke.  Coughing and gasping,[line break]you emerge from the smoke and find....";
+	else if death-number is 2:
+		say "Okay, now where did I put my orange smoke?....  >POOF!<[line break]Everything disappears in a dense cloud of orange smoke.";
+	otherwise:
+		say "Okay, if you're so smart, do it yourself!  I'm leaving!"
+
+Section 2 - Lifecycle
+
+To initialize openadventure reincarnation subsystem:
+	enable subsystem reincarnation;
+	now openadventure-reincarnation-limit is 3;
+	now openadventure-last-safe-room is LOC_START;
+	now openadventure-death-location is LOC_NOWHERE;
+	now openadventure-last-death-cause is "";
+	now openadventure-reincarnation-in-progress is false;
+	now openadventure-reincarnation-last-result is "";
+	now openadventure-cave-closing-active is false.
+
+To mark openadventure last safe room (candidate-room - room):
+	if candidate-room is not LOC_NOWHERE:
+		now openadventure-last-safe-room is candidate-room.
+
+Section 3 - Inventory Disposition
+
+To decide what room is openadventure reincarnation drop room:
+	if openadventure-death-location is not LOC_NOWHERE:
+		decide on openadventure-death-location;
+	if openadventure-last-safe-room is not LOC_NOWHERE:
+		decide on openadventure-last-safe-room;
+	decide on LOC_BUILDING.
+
+To dispose of openadventure carried items after death:
+	let drop-room be openadventure reincarnation drop room;
+	move WATER to LOC_NOWHERE;
+	move OIL to LOC_NOWHERE;
+	repeat with item running through things:
+		if item is carried by the player:
+			if item is LAMP:
+				move item to LOC_START;
+				now adventure-state of LAMP is "LAMP_DARK";
+			otherwise:
+				move item to drop-room.
+
+Section 4 - Death Flow
+
+To resurrect openadventure player:
+	dispose of openadventure carried items after death;
+	move DWARF to LOC_NOWHERE;
+	now openadventure-dwarves-travel-in-progress is false;
+	now openadventure-reincarnation-last-result is "reincarnated";
+	now openadventure-reincarnation-in-progress is false;
+	mark openadventure last safe room LOC_BUILDING;
+	move the player to LOC_BUILDING;
+	update openadventure treasure status.
+
+To end openadventure game after death:
+	now openadventure-reincarnation-last-result is "ended";
+	now openadventure-reincarnation-in-progress is false;
+	update openadventure score total;
+	end the story saying "You are dead."
+
+To handle openadventure death caused by (cause - text):
+	if openadventure-reincarnation-in-progress is true:
+		stop;
+	now openadventure-reincarnation-in-progress is true;
+	now openadventure-last-death-cause is cause;
+	now openadventure-death-location is the location of the player;
+	if openadventure-death-location is LOC_NOWHERE:
+		now openadventure-death-location is openadventure-last-safe-room;
+	let death-number be openadventure-death-count + 1;
+	record openadventure death penalty;
+	if openadventure-cave-closing-active is true:
+		say "[openadventure death closing message]";
+		end openadventure game after death;
+		stop;
+	say "[openadventure obituary query for death number death-number][paragraph break]";
+	if the player consents:
+		say "[openadventure obituary yes response for death number death-number][paragraph break]";
+		if death-number >= openadventure-reincarnation-limit:
+			end openadventure game after death;
+		otherwise:
+			resurrect openadventure player;
+	otherwise:
+		say "OK[paragraph break]";
+		end openadventure game after death.
+
+When play begins:
+	initialize openadventure reincarnation subsystem.
+
 [ Open Adventure Runtime Framework ]
 
 Section 1 - Framework lifecycle
@@ -4696,6 +4827,8 @@ To decide whether openadventure pre-travel hooks allow source (source - room) de
 	decide yes.
 
 To run openadventure post-travel hooks for source (source - room) destination (target - room) verb (verb-token - text):
+	if openadventure-subsystem-reincarnation is true:
+		mark openadventure last safe room target;
 	if openadventure-subsystem-dwarves is true:
 		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
 	if openadventure-subsystem-treasure-scoring is true:
@@ -4743,6 +4876,9 @@ To enable subsystem cave-closing:
 
 To enable subsystem endgame:
 	now openadventure-subsystem-endgame is true.
+
+To enable subsystem reincarnation:
+	now openadventure-subsystem-reincarnation is true.
 
 To decide whether subsystem dwarves currently handles this travel from (source - room) to (destination - room) with verb (verb-token - text):
 	decide no.

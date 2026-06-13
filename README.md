@@ -2,7 +2,7 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 4F refresh)
+## Current status (Milestone 5A refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
@@ -13,6 +13,7 @@ Current snapshot after work completed up through:
 - Milestone 4D (Dwarf baseline behavior and verification)
 - Milestone 4E (Pirate baseline behavior and dwarf integration)
 - Milestone 4F (Treasure tracking and scoring baseline)
+- Milestone 5A (Death and reincarnation baseline)
 
 ## What is working today
 
@@ -28,6 +29,7 @@ Current snapshot after work completed up through:
   - `OpenAdventure_Dwarves.ni`
   - `OpenAdventure_Pirate.ni`
   - `OpenAdventure_Scoring.ni`
+  - `OpenAdventure_Reincarnation.ni`
 - Travel dispatch runtime exists with generated row integration:
   - direct travel dispatch
   - forced travel dispatch
@@ -40,6 +42,7 @@ Current snapshot after work completed up through:
 - Dwarf route restriction, activation, first encounter, blocking, and attacks (implemented baseline)
 - Pirate chest placement, treasure theft, and dwarf/pirate ordering (implemented baseline)
 - Treasure discovery/deposit scoring, pirate chest scoring integration, and score reporting hooks (implemented baseline)
+- Death/reincarnation flow, inventory disposition, lamp recovery, and death scoring penalty (implemented baseline)
 - Full generated-edge dwarf/pirate movement parity (pending hardening)
 - Bear system
 - Dragon system
@@ -67,6 +70,7 @@ Current snapshot after work completed up through:
 | 4D | ✅ | Dwarf baseline behavior + compile/smoke verification |
 | 4E | ✅ | Pirate baseline behavior + dwarf integration + compile/smoke verification |
 | 4F | ✅ | Treasure/scoring baseline + pirate chest integration + compile/smoke verification |
+| 5A | ✅ | Death/reincarnation baseline + scoring integration + compile/smoke verification |
 
 ## Build and validation entry points
 
@@ -90,6 +94,7 @@ See:
 - `docs/architecture/dwarf-system.md` — dwarf behavior and dependencies
 - `docs/architecture/pirate-system.md` — pirate behavior and dependencies
 - `docs/architecture/scoring-system.md` — treasure and scoring behavior
+- `docs/architecture/reincarnation-system.md` — death and reincarnation behavior
 
 ## References
 

@@ -38,6 +38,6 @@ require_line 'To say openadventure ranking for score' "$ROOT_DIR/OpenAdventure_S
 require_line 'run openadventure scoring post-travel hooks for destination target' "$ROOT_DIR/OpenAdventure_Runtime.ni"
 require_line 'record openadventure score delta delta for reason reason from source "openadventure_runtime"' "$ROOT_DIR/OpenAdventure_Runtime.ni"
 require_line 'mark openadventure treasure CHEST as found for reason "pirate_chest_found"' "$ROOT_DIR/OpenAdventure_Pirate.ni"
-require_line 'record openadventure death penalty' "$ROOT_DIR/OpenAdventure_Dwarves.ni"
+require_line 'record openadventure death penalty' "$ROOT_DIR/OpenAdventure_Reincarnation.ni"
 
 log "scoring subsystem smoke checks passed"

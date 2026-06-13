@@ -23,6 +23,8 @@ To decide whether openadventure pre-travel hooks allow source (source - room) de
 	decide yes.
 
 To run openadventure post-travel hooks for source (source - room) destination (target - room) verb (verb-token - text):
+	if openadventure-subsystem-reincarnation is true:
+		mark openadventure last safe room target;
 	if openadventure-subsystem-dwarves is true:
 		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
 	if openadventure-subsystem-treasure-scoring is true:
@@ -70,6 +72,9 @@ To enable subsystem cave-closing:
 
 To enable subsystem endgame:
 	now openadventure-subsystem-endgame is true.
+
+To enable subsystem reincarnation:
+	now openadventure-subsystem-reincarnation is true.
 
 To decide whether subsystem dwarves currently handles this travel from (source - room) to (destination - room) with verb (verb-token - text):
 	decide no.
