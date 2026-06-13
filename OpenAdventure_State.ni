@@ -164,6 +164,17 @@ The openadventure-reincarnation-last-result is "".
 The openadventure-cave-closing-active is a truth state that varies.
 The openadventure-cave-closing-active is false.
 
+Section 7 - Bear runtime state
+
+The openadventure-bear-is-following is a truth state that varies.
+The openadventure-bear-is-following is false.
+
+The openadventure-bear-guards-axe is a truth state that varies.
+The openadventure-bear-guards-axe is false.
+
+The openadventure-bear-last-event is a text that varies.
+The openadventure-bear-last-event is "".
+
 Section 8 - Dwarf runtime state
 
 The openadventure-dwarves-travel-in-progress is a truth state that varies.

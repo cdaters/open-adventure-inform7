@@ -57,5 +57,6 @@ To openadventure-handle-troll-bridge-bear-collapse (destination-room - room):
 	now BEAR is fixed in place;
 	now adventure-state of BEAR is "BEAR_DEAD";
 	say "[openadventure troll bridge bear-collapse message]";
+	handle openadventure death caused by "bear_bridge";
 	now openadventure-runtime-check-result is true;
 	stop.

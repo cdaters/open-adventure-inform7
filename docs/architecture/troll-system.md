@@ -20,7 +20,7 @@ special-travel pipeline while leaving larger endgame or scoring systems for late
   - `TROLL_PAIDONCE` means the troll has just allowed a crossing and now blocks re-crossing
     until state resets to `TROLL_UNPAID`.
   - `TROLL_UNPAID` transitions to `TROLL_PAIDONCE` after a successful bridge crossing.
-  - If player carries `BEAR`, the bridge collapses; state changes are propagated to `CHASM`.
+  - If player carries `BEAR`, the bridge collapses; state changes are propagated to `CHASM`, `BEAR`, and the shared reincarnation death handler.
 - **Inform 6** (`references/nelson-inform6/Advent.inf`) models the bridge and troll as
   room/thing objects (`On_Sw_Side_Of_Chasm`, `On_Ne_Side_Of_Chasm`, `Troll`, `RicketyBridge`,
   `Wreckage`) and uses function `CrossRicketyBridge` for entry gating and collapse text.
@@ -75,14 +75,14 @@ Implemented in `OpenAdventure_Troll.ni`:
    - Bear collapse path:
      - sets `CHASM` to `BRIDGE_WRECKED`
      - moves `BEAR` with player into destination
-     - sets `BEAR` fixed and `BEAR_DEAD`
-     - emits collapse message
+    - sets `BEAR` fixed and `BEAR_DEAD`
+    - invokes `handle openadventure death caused by "bear_bridge"`
+    - emits collapse message
 
 ## Open items / blockers (resolved status)
 
 - `216`/`226` are now implemented as concrete hand-authored runtime handlers.
-- The legacy one-way death/reincarnation semantics from C (`croak()`) are **not yet modeled**
-  in this repository's current scaffold; this remains a later integration point.
+- Bear bridge collapse now routes through the Milestone 5A reincarnation handler.
 - Troll and bridge object/room narration details (`TROLL` noun behavior, wreckage propagation,
   special room descriptions) are implemented only to the extent required for travel resolution.
 
