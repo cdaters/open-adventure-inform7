@@ -25,8 +25,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 5A | Death and reincarnation system | ✅ Complete | death handling, reincarnation, inventory disposition, score penalty, compile/test verification |
 | 5B | Bear system | ✅ Complete | feeding, chain puzzle, following, troll interaction, bridge-collapse death, compile/test verification |
 | 5C | Dragon system | ✅ Complete | confrontation, yes/no confirmation, room transformation, rug release, compile/test verification |
+| 5D | Cave closing system | ✅ Complete | warning clocks, exit restrictions, repository transition, reincarnation/scoring integration, compile/test verification |
 
-## Current reality (after Milestone 5C)
+## Current reality (after Milestone 5D)
 
 ### Completed
 
@@ -39,6 +40,7 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Death/reincarnation baseline is implemented and verified by smoke tests.
 - Bear baseline behavior is implemented and verified by smoke tests.
 - Dragon baseline behavior is implemented and verified by smoke tests.
+- Cave-closing baseline behavior is implemented and verified by smoke tests.
 - Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
@@ -67,10 +69,10 @@ Current build artifact:
 | Troll / bridge / chasm | Implemented |
 | Dwarves | Baseline implemented; full generated-edge movement parity pending |
 | Pirate | Baseline implemented; final-treasure scoring integration implemented |
-| Death / Reincarnation | Baseline implemented; dark-pit/cave-closing callers pending |
+| Death / Reincarnation | Baseline implemented; dark-pit callers pending; cave-closing suppression integrated |
 | Bear | Baseline implemented; transcript parity pending |
 | Dragon | Baseline implemented; transcript parity pending |
-| Cave closing | Not implemented |
+| Cave closing | Baseline implemented; endgame/blast outcomes pending |
 | Scoring | Baseline implemented; full terminal/endgame scoring pending |
 | Endgame | Not implemented |
 

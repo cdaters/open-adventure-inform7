@@ -21,6 +21,7 @@
 - 5A: death/reincarnation subsystem baseline completion and verification
 - 5B: bear subsystem baseline completion and verification
 - 5C: dragon subsystem baseline completion and verification
+- 5D: cave-closing subsystem baseline completion and verification
 
 ## Current build status
 
@@ -31,9 +32,8 @@
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, death/reincarnation baseline behavior, bear baseline behavior, and dragon baseline behavior.
+- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, death/reincarnation baseline behavior, bear baseline behavior, dragon baseline behavior, and cave-closing baseline behavior.
 - Not yet implemented:
-  - cave-closing logic
   - dark-pit death hazard integration
   - terminal/endgame scoring flow
   - endgame flow
@@ -46,16 +46,16 @@
 - Reincarnation smoke coverage is present in `tests/smoke/07-reincarnation-system.sh`.
 - Bear smoke coverage is present in `tests/smoke/08-bear-system.sh`.
 - Dragon smoke coverage is present in `tests/smoke/09-dragon-system.sh`.
+- Cave-closing smoke coverage is present in `tests/smoke/10-cave-closing-system.sh`.
 - Transcript-based behavioral regression framework is still pending.
 
 ## Remaining systems and priority
 
 1. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
 2. `darkness/lamp hazards` — wire dark-pit death into the shared reincarnation handler.
-3. `cave-closing` — introduce global closure state transitions and constraints.
-4. `endgame` — victory/lose states and terminal sequences.
-5. `terminal scoring` — connect final termination/ranking output to completed cave-closing/endgame flow.
-6. `transcript parity` — add command transcripts for bear, reincarnation, troll, pirate, and scoring branches.
+3. `endgame` — victory/lose states, blast outcomes, and terminal sequences.
+4. `terminal scoring` — connect final termination/ranking output to completed cave-closing/endgame flow.
+5. `transcript parity` — add command transcripts for bear, reincarnation, troll, pirate, cave-closing, and scoring branches.
 
 ## Recommended implementation order
 

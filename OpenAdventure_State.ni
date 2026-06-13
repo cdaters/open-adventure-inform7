@@ -164,7 +164,30 @@ The openadventure-reincarnation-last-result is "".
 The openadventure-cave-closing-active is a truth state that varies.
 The openadventure-cave-closing-active is false.
 
-Section 7 - Bear runtime state
+Section 7 - Cave closing runtime state
+
+The openadventure-cave-clock1 is a number that varies.
+The openadventure-cave-clock1 is 30.
+
+The openadventure-cave-clock2 is a number that varies.
+The openadventure-cave-clock2 is 50.
+
+The openadventure-cave-panic-clock is a number that varies.
+The openadventure-cave-panic-clock is 15.
+
+The openadventure-cave-closed-active is a truth state that varies.
+The openadventure-cave-closed-active is false.
+
+The openadventure-cave-panic-active is a truth state that varies.
+The openadventure-cave-panic-active is false.
+
+The openadventure-cave-closing-last-event is a text that varies.
+The openadventure-cave-closing-last-event is "".
+
+The openadventure-cave-last-clock-turn is a number that varies.
+The openadventure-cave-last-clock-turn is -1.
+
+Section 8 - Bear runtime state
 
 The openadventure-bear-is-following is a truth state that varies.
 The openadventure-bear-is-following is false.
@@ -175,7 +198,7 @@ The openadventure-bear-guards-axe is false.
 The openadventure-bear-last-event is a text that varies.
 The openadventure-bear-last-event is "".
 
-Section 8 - Dragon runtime state
+Section 9 - Dragon runtime state
 
 The openadventure-dragon-last-event is a text that varies.
 The openadventure-dragon-last-event is "".
@@ -186,7 +209,7 @@ The openadventure-dragon-room-transformed is false.
 The openadventure-dragon-blood-drunk is a truth state that varies.
 The openadventure-dragon-blood-drunk is false.
 
-Section 9 - Dwarf runtime state
+Section 10 - Dwarf runtime state
 
 The openadventure-dwarves-travel-in-progress is a truth state that varies.
 The openadventure-dwarves-travel-in-progress is false.
@@ -212,7 +235,7 @@ dwarf-index	dwarf-location	dwarf-prior-location	dwarf-seen	dwarf-alive
 5	LOC_NOWHERE	LOC_NOWHERE	false	true
 6	LOC_NOWHERE	LOC_NOWHERE	false	true
 
-Section 10 - Pirate runtime state
+Section 11 - Pirate runtime state
 
 The openadventure-pirate-chest-location is a room that varies.
 The openadventure-pirate-chest-location is LOC_MAZEEND12.

@@ -124,9 +124,9 @@ This matches the C `score.c` death component.
 
 Dwarf knife hits no longer end the story directly. They now invoke the shared death handler, which decides whether to resurrect or terminate.
 
-### Future Cave-Closing Integration
+### Cave-Closing Integration
 
-`openadventure-cave-closing-active` is present for the future cave-closing subsystem. When true, death handling prints the C closing-death message and terminates without offering reincarnation.
+Milestone 5D sets `openadventure-cave-closing-active` when the cave-closing warning phase begins. When true, death handling prints the C closing-death message and terminates without offering reincarnation.
 
 ## Runtime Integration
 
@@ -134,12 +134,12 @@ Dwarf knife hits no longer end the story directly. They now invoke the shared de
 - `build.sh` composes `OpenAdventure_Reincarnation.ni`.
 - `OpenAdventure_Runtime.ni` registers the reincarnation subsystem and updates `openadventure-last-safe-room` after successful travel.
 - `OpenAdventure_Dwarves.ni` calls the shared death handler on knife-hit death.
+- `OpenAdventure_CaveClosing.ni` sets the closing-active flag that suppresses reincarnation during late-game closure.
 - `OpenAdventure_Scoring.ni` remains the score penalty authority.
 
 ## Parity Gaps
 
 - Transcript-level death/reincarnation validation is pending.
 - Dark-pit death is not yet wired because the full darkness/lamp hazard flow is not implemented.
-- Cave-closing death is supported by state and handler logic but awaits the cave-closing subsystem.
 - Reverse object-order dropping remains future parity work.
 - Terminal score/ranking output remains part of the later endgame/termination milestone.

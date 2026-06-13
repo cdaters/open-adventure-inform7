@@ -2,7 +2,7 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 5C refresh)
+## Current status (Milestone 5D refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
@@ -16,6 +16,7 @@ Current snapshot after work completed up through:
 - Milestone 5A (Death and reincarnation baseline)
 - Milestone 5B (Bear puzzle and troll interaction baseline)
 - Milestone 5C (Dragon confrontation and room transformation baseline)
+- Milestone 5D (Cave-closing warning and repository transition baseline)
 
 ## What is working today
 
@@ -34,6 +35,7 @@ Current snapshot after work completed up through:
   - `OpenAdventure_Reincarnation.ni`
   - `OpenAdventure_Bear.ni`
   - `OpenAdventure_Dragon.ni`
+  - `OpenAdventure_CaveClosing.ni`
 - Travel dispatch runtime exists with generated row integration:
   - direct travel dispatch
   - forced travel dispatch
@@ -49,8 +51,8 @@ Current snapshot after work completed up through:
 - Death/reincarnation flow, inventory disposition, lamp recovery, and death scoring penalty (implemented baseline)
 - Bear feeding, chain, following, troll, and bridge-collapse behavior (implemented baseline)
 - Dragon confrontation, yes/no confirmation, room transformation, rug release, and blood handling (implemented baseline)
+- Cave-closing warning clocks, exit restrictions, repository transition, and reincarnation/scoring integration (implemented baseline)
 - Full generated-edge dwarf/pirate movement parity (pending hardening)
-- Cave-closing system
 - Endgame and full terminal scoring flow
 - Final parser/UX alignment and transcript regression harness
 
@@ -77,6 +79,7 @@ Current snapshot after work completed up through:
 | 5A | ✅ | Death/reincarnation baseline + scoring integration + compile/smoke verification |
 | 5B | ✅ | Bear puzzle baseline + troll/reincarnation integration + compile/smoke verification |
 | 5C | ✅ | Dragon confrontation baseline + room transformation + compile/smoke verification |
+| 5D | ✅ | Cave-closing baseline + repository transition + compile/smoke verification |
 
 ## Build and validation entry points
 
@@ -103,6 +106,7 @@ See:
 - `docs/architecture/reincarnation-system.md` — death and reincarnation behavior
 - `docs/architecture/bear-system.md` — bear puzzle and troll interaction behavior
 - `docs/architecture/dragon-system.md` — dragon confrontation and room transformation behavior
+- `docs/architecture/cave-closing-system.md` — cave-closing clocks and repository transition behavior
 
 ## References
 

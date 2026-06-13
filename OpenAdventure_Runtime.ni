@@ -17,6 +17,9 @@ When play begins:
 Section 2 - Event hooks
 
 To decide whether openadventure pre-travel hooks allow source (source - room) destination (target - room) verb (verb-token - text):
+	if openadventure-subsystem-cave-closing is true:
+		if openadventure cave closing blocks travel from source to target:
+			decide no;
 	if openadventure-subsystem-dwarves is true:
 		if openadventure-dwarf-blocks-travel from source to target:
 			decide no;
@@ -25,6 +28,8 @@ To decide whether openadventure pre-travel hooks allow source (source - room) de
 To run openadventure post-travel hooks for source (source - room) destination (target - room) verb (verb-token - text):
 	if openadventure-subsystem-reincarnation is true:
 		mark openadventure last safe room target;
+	if openadventure-subsystem-cave-closing is true:
+		run openadventure cave closing post-travel hooks for destination target;
 	if openadventure-subsystem-dwarves is true:
 		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
 	if openadventure-subsystem-bear is true:

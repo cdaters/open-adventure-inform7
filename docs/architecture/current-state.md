@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -31,13 +31,14 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Milestone 5A adds shared death handling, obituary/consent flow, reincarnation limits, inventory disposition, lamp recovery, and dwarf death integration.
 - Milestone 5B adds bear feeding, chain lock/unlock handling, bear following, troll-scaring, bridge-collapse death, and chain scoring integration.
 - Milestone 5C adds dragon confrontation, yes/no confirmation, room transformation, rug release, blood handling, and rug scoring integration.
+- Milestone 5D adds cave-closing warning clocks, panic timing, exit restrictions, repository transition, reincarnation suppression, and cave-closing score integration.
 
 ### Ongoing / incomplete
 
 - Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4F baseline.
-- No full systems yet for cave-closing or endgame.
+- No full endgame system yet.
 - Terminal scoring/ranking output is not yet wired to complete game endings.
-- Dark-pit and cave-closing death callers await their owning systems.
+- Dark-pit death callers await their owning systems.
 
 ## Gameplay status by subsystem
 
@@ -47,11 +48,11 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Travel dispatch | Implemented |
 | Dwarf | Implemented baseline (route exclusion, activation, encounter, blocking, attacks); full generated-edge movement parity pending |
 | Pirate | Implemented baseline (chest placement, treasure theft, dwarf ordering); final-treasure scoring integration implemented |
-| Death/Reincarnation | Implemented baseline (dwarf death, consent flow, item/lamp disposition, score penalty); dark-pit/cave-closing callers pending |
+| Death/Reincarnation | Implemented baseline (dwarf death, consent flow, item/lamp disposition, score penalty, cave-closing suppression); dark-pit callers pending |
 | Troll/Bridge/Chasm | Implemented |
 | Bear | Implemented baseline (feeding, chain, following, troll interaction, bridge-collapse death); transcript parity pending |
 | Dragon | Implemented baseline (confrontation, confirmation, room transformation, rug release, blood handling); transcript parity pending |
-| Cave closing | Not implemented |
+| Cave closing | Implemented baseline (warning clocks, exit restrictions, repository transition); endgame/blast outcomes pending |
 | Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow pending |
 | Endgame | Not implemented |
 
@@ -71,7 +72,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 
 - Completing full generated-edge dwarf/pirate movement parity.
 - Coordinating system side effects and parser interactions for unresolved special rules.
-- Introducing cave-closing/endgame without regressing earlier travel/parser/scoring infrastructure.
+- Introducing endgame without regressing earlier travel/parser/scoring infrastructure.
 
 ## Next milestones
 
