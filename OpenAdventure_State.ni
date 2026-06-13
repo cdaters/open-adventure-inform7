@@ -34,9 +34,6 @@ The openadventure-framework-in-lookup is false.
 The openadventure-dwarves-movement-guard-enabled is a truth state that varies.
 The openadventure-dwarves-movement-guard-enabled is false.
 
-The openadventure-nodwarves-mode is a truth state that varies.
-The openadventure-nodwarves-mode is false.
-
 The openadventure-subsystem-loading is a truth state that varies.
 The openadventure-subsystem-loading is false.
 
@@ -84,6 +81,32 @@ The openadventure-score-event-reason is "".
 
 The openadventure-score-event-source is a text that varies.
 The openadventure-score-event-source is "".
+
+Section 8 - Dwarf runtime state
+
+The openadventure-dwarves-travel-in-progress is a truth state that varies.
+The openadventure-dwarves-travel-in-progress is false.
+
+The openadventure-dwarf-activity-level is a number that varies.
+The openadventure-dwarf-activity-level is 0.
+
+The openadventure-dwarf-movement-pass is a truth state that varies.
+The openadventure-dwarf-movement-pass is false.
+
+The openadventure-nodwarves-mode is a truth state that varies.
+The openadventure-nodwarves-mode is false.
+
+The openadventure-dwarf-kill-count is a number that varies.
+The openadventure-dwarf-kill-count is 0.
+
+Table of Open Adventure Dwarf Actors
+dwarf-index	dwarf-location	dwarf-prior-location	dwarf-seen	dwarf-alive
+1	LOC_NOWHERE	LOC_NOWHERE	false	true
+2	LOC_NOWHERE	LOC_NOWHERE	false	true
+3	LOC_NOWHERE	LOC_NOWHERE	false	true
+4	LOC_NOWHERE	LOC_NOWHERE	false	true
+5	LOC_NOWHERE	LOC_NOWHERE	false	true
+6	LOC_NOWHERE	LOC_NOWHERE	false	true
 
 Section 6 - Utility
 

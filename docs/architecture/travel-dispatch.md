@@ -46,13 +46,13 @@ The dispatcher consumes generated rows, evaluates conditions, supports forced/ra
 - `cond_nodwarves` is represented by `condition-kind "nodwarves"`.
 - In 3C, non-dwarf context semantics are:
   - allow the row by default for player movement.
-  - allow future dwarf-mode exclusion by toggling `openadventure-nodwarves-mode` and inverting row handling in the calling subsystem.
+  - allow future dwarf-mode exclusion by toggling `openadventure-nodwarves-mode` and using dwarf-owned helper checks in the calling subsystem.
 
 ## Unresolved Gameplay Dependencies
 
 ## Milestone 3C baseline
 
-The dispatcher is wired, but the following rows are intentionally stubbed in 3C and remain unresolved gameplay behavior:
+The dispatcher is wired, but the following rows were intentionally unresolved in 3C and reserved for gameplay system ownership:
 
 - `138`: `LOC_LONGWEST` condition `nodwarves` (dwarf routing filter)
 
@@ -67,7 +67,15 @@ Plover rows were implemented in `OpenAdventure_Plover.ni`:
 - `193`: `LOC_PLOVER` → `special 1`
 - `194`: `LOC_PLOVER` → `special 2`
 
-Unresolved gameplay dependencies after 4B: rule `138` only.
+Unresolved gameplay dependencies after 4B (historically): rule `138` only.
+
+## Milestone 4C follow-up
+
+Milestone 4C wires the dwarf subsystem route-gating surface for `138`:
+
+- `openadventure-nodwarves-mode` and `openadventure nodwarves traversal` in `OpenAdventure_Conditions.ni` and `OpenAdventure_Dwarves.ni` now own the condition.
+- The generated row still carries the `nodwarves` condition metadata in `generated/Travel.ni:1283`.
+- No travel dependencies remain unresolved.
 
 ## Milestone 4B follow-up
 
@@ -95,7 +103,6 @@ Milestone 4B implements `special` `3` in `OpenAdventure_Troll.ni` for rules:
 
 ## Remaining Blockers and Next-Step Recommendations
 
-- Implement remaining dwarf/other unresolved travel blockers.
-- Implement dwarf-aware travel filtering (currently modeled only as a condition flag).
+- `138` is now resolved to the dwarf subsystem surface (implemented as non-player movement routing predicate ownership).
 - Add message ID resolution so `speak`/`speak_conditional` rows display canonical Adventure text.
 - Add integration tests across unresolved rows once baseline parser + command routing is stable.

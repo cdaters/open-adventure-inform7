@@ -1,12 +1,12 @@
-# Build Status - Verification Pass (Milestone 4B)
+# Build Status - Verification Pass (Milestone 4D)
 
 ## Compile Attempt
 - Command: `./build.sh --compile`
-- Date: `2026-06-12`
+- Date: `2026-06-13`
 - Result: **success**
 - Output artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
-- Verification rerun date: `2026-06-12`
-- Result: **success** after Troll subsystem parser cleanup
+- Verification rerun date: `2026-06-13`
+  - Result: **success** after dwarf subsystem baseline integration and deep-cave predicate parser cleanup
 - Output artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
 
 ## Prior Blocking Issues (Resolved)
@@ -23,6 +23,7 @@
     - `OpenAdventure_Conditions.ni`
     - `OpenAdventure_Plover.ni`
     - `OpenAdventure_Troll.ni`
+    - `OpenAdventure_Dwarves.ni`
     - `OpenAdventure_Runtime.ni`
 - Output target: `OpenAdventure.inform/Build/OpenAdventure.z8`
 - Project layout used for Inform compilation:
@@ -32,7 +33,8 @@
 
 ## Missing Source Components
 - No required source components are currently missing for baseline compilation.
-- Gameplay systems still intentionally stubbed for later milestones (dwarf, cave-closing, scoring/endgame behaviors).
+- Gameplay systems still intentionally stubbed for later milestones (pirate, bear, dragon, cave-closing, scoring/endgame behaviors).
+- Dwarf baseline behavior is implemented; full generated-edge movement parity remains a hardening task.
 - `frotz/dfrotz` and transcript-driven regression runner remain unavailable in the current environment.
 
 ## Recommended Next Actions
@@ -40,9 +42,9 @@
 2. Wire non-direct travel condition evaluation and special-handler behavior in later milestones.
 3. Add transcript-driven test targets once gameplay behavior reaches a stable baseline.
 
-## Latest Verification (Post-4B)
+## Latest Verification (Milestone 4D)
 - Command results:
   - `./build.sh --compile` ✅
   - `./test.sh` ✅
-  - all executable smoke tests in `tests/smoke/` ✅ (`01-build-artifacts.sh`, `03-troll-system.sh`)
-- No generated-file integrity warnings after this pass.
+  - all executable smoke tests in `tests/smoke/` ✅ (`01-build-artifacts.sh`, `03-troll-system.sh`, `04-dwarf-system.sh`)
+  - No generated-file integrity warnings after this pass.

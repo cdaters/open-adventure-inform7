@@ -2,13 +2,15 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 3F refresh)
+## Current status (Milestone 4D refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
 - Milestone 4A (Plover subsystem implementation)
 - Milestone 4B (Troll/bridge/chasm travel subsystem)
 - Milestone 3F (repository documentation refresh)
+- Milestone 4C (Dwarf travel-gating integration)
+- Milestone 4D (Dwarf baseline behavior and verification)
 
 ## What is working today
 
@@ -30,7 +32,8 @@ Current snapshot after work completed up through:
 
 ## Remaining work (behavioral parity)
 
-- Dwarf system and encounter restrictions
+- Dwarf route restriction, activation, first encounter, blocking, and attacks (implemented baseline)
+- Full generated-edge dwarf movement parity and pirate interaction (pending implementation)
 - Bear system
 - Pirate system
 - Dragon system
@@ -54,11 +57,12 @@ Current snapshot after work completed up through:
 | 3F | ✅ | Documentation refresh and roadmap added |
 | 4A | ✅ | Plover runtime subsystem and notes |
 | 4B | ✅ | Troll/bridge/chasm travel subsystem |
-| 4C | 🚧 Planned | Remaining gameplay systems + transcript-level verification |
+| 4C | ✅ | Dwarf subsystem travel restriction and runtime condition support |
+| 4D | ✅ | Dwarf baseline behavior + compile/smoke verification |
 
 ## Build and validation entry points
 
-- `./build.sh --generate` — regenerate source files from `source/adventure.yaml`.
+- `./build.sh --generate-only` — regenerate source files from `source/adventure.yaml`.
 - `./build.sh --compile` — assemble and compile an Inform 7 build.
 - `./test.sh` — smoke-style build test entrypoint.
 

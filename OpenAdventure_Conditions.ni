@@ -85,9 +85,11 @@ To decide whether condition (condition-kind - text) with arg1 (arg1 - text) and 
 			decide yes;
 		decide no;
 	else if condition-kind is "nodwarves":
-		[ nodwarves is true for player movement and false when dwarf-system checks explicitly
-		  request exclusion. ]
+		[ nodwarves is a route-exclusion marker for dwarf movement. Player travel
+		  normally treats the condition as satisfied. ]
 		if openadventure-nodwarves-mode is true:
+			if openadventure nodwarves traversal from source-location openadventure-active-source-loc to destination-location openadventure-active-travel-result:
+				decide yes;
 			decide no;
 		decide yes;
 	decide no.

@@ -17,9 +17,14 @@ When play begins:
 Section 2 - Event hooks
 
 To decide whether openadventure pre-travel hooks allow source (source - room) destination (target - room) verb (verb-token - text):
+	if openadventure-subsystem-dwarves is true:
+		if openadventure-dwarf-blocks-travel from source to target:
+			decide no;
 	decide yes.
 
 To run openadventure post-travel hooks for source (source - room) destination (target - room) verb (verb-token - text):
+	if openadventure-subsystem-dwarves is true:
+		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
 	do nothing.
 
 To run openadventure inventory hooks for carried object (item - thing):
@@ -145,9 +150,15 @@ To process openadventure forced travel from source-room (source-room - room):
 			if source-loc entry is adventure-id of source-room and forced entry is true:
 				oa-init-and-test-openadventure-travel-row source-loc entry with verb-token "";
 				if openadventure-runtime-check-result is true:
-					oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
-					if openadventure-runtime-check-result is true:
-						now handled is true;
+					now openadventure-active-travel-result is target entry;
+					if condition condition-kind entry with arg1 condition-arg-1 entry and arg2 condition-arg-2 entry chance random-chance entry holds in source location source-room:
+						if travel-category entry is "goto_random":
+							if random-travel chance random-chance entry allows dispatch:
+								oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
+							else:
+								oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
+						if openadventure-runtime-check-result is true:
+							now handled is true;
 	if handled is false:
 		now openadventure-framework-has-pending-travel is false;
 		now openadventure-runtime-check-result is false;
@@ -176,6 +187,9 @@ To oa-dispatch-openadventure-goto (source-id - text) to (destination-id - text) 
 	now openadventure-runtime-check-result is false;
 	if destination-room is LOC_NOWHERE:
 		now openadventure-runtime-check-result is true;
+		stop;
+	if not openadventure pre-travel hooks allow source source-room destination destination-room verb verb-token:
+		now openadventure-runtime-check-result is false;
 		stop;
 	move the player to destination-room;
 	run openadventure post-travel hooks for source source-room destination destination-room verb verb-token;
@@ -211,9 +225,16 @@ To decide whether openadventure non-direct travel from source-id (source-id - te
 			if source-loc entry is source-id and forced entry is false:
 				oa-init-and-test-openadventure-travel-row source-loc entry with verb-token verb-token;
 				if openadventure-runtime-check-result is true:
-					oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
-					if openadventure-runtime-check-result is true:
-						now handled is true;
+					now openadventure-active-travel-result is target entry;
+					if movement token verb-token is in token list verbs entry:
+						if condition condition-kind entry with arg1 condition-arg-1 entry and arg2 condition-arg-2 entry chance random-chance entry holds in source location source-room:
+							if travel-category entry is "goto_random":
+								if random-travel chance random-chance entry allows dispatch:
+									oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
+							else:
+								oa-dispatch-openadventure-travel-entry source-loc entry with rule-id rule-id entry and category travel-category entry target target entry;
+							if openadventure-runtime-check-result is true:
+								now handled is true;
 	if handled is false:
 		now openadventure-framework-has-pending-travel is false;
 		decide no;

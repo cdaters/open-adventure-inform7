@@ -107,7 +107,7 @@ Implemented in:
 ## Remaining blockers
 
 - `216` and `226` (`special 3` troll/bridge/chasm travel) remain unresolved.
-- `138` (`cond_nodwarves`) remains unresolved; dwarf-route gating remains in `OpenAdventure_Conditions.ni` and must be consumed by dwarves system in later milestones.
+- `138` (`cond_nodwarves`) is now owned by `OpenAdventure_Dwarves.ni`; dwarf movement excludes that route while player travel remains available.
 
 ## Effort
 

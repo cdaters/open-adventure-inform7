@@ -18,15 +18,18 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 3F | Documentation refresh | ✅ Complete | README/PROJECT/current-state refreshed; roadmap added |
 | 4A | Plover-related gameplay implementation | ✅ Complete | plover travel handler and dispatch integration implemented |
 | 4B | Troll / bridge / chasm implementation | ✅ Complete | travel rules `216` and `226` wired through special-ID 3 |
+| 4C | Dwarf system | ✅ Complete | rule 138 nodwarves condition and dwarf subsystem integration |
+| 4D | Dwarf system baseline | ✅ Complete | activation, first encounter, blocking, attacks, compile/test verification |
 
-## Current reality (after Milestone 4B)
+## Current reality (after Milestone 4D)
 
 ### Completed
 
 - Compilation pipeline can produce a working Inform 7 binary.
 - Runtime travel dispatch supports generated travel rows, including random/forced/magic-word handling.
 - Plover and troll/bridge/chasm subsystems are implemented and wired to the framework.
-- Remaining unresolved gameplay blockers are documented and mostly stubbed.
+- Dwarf baseline behavior is implemented and verified by smoke tests.
+- Full generated-edge dwarf movement parity and pirate interaction remain for upcoming work.
 
 ### In progress / Remaining
 
@@ -52,7 +55,7 @@ Current build artifact:
 | Runtime/state scaffolding | Complete |
 | Plover | Implemented |
 | Troll / bridge / chasm | Implemented |
-| Dwarves | Not implemented |
+| Dwarves | Baseline implemented; full generated-edge movement parity pending |
 | Bear | Not implemented |
 | Pirate | Not implemented |
 | Dragon | Not implemented |
