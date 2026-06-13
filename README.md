@@ -2,7 +2,7 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 4D refresh)
+## Current status (Milestone 4F refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
@@ -12,6 +12,7 @@ Current snapshot after work completed up through:
 - Milestone 4C (Dwarf travel-gating integration)
 - Milestone 4D (Dwarf baseline behavior and verification)
 - Milestone 4E (Pirate baseline behavior and dwarf integration)
+- Milestone 4F (Treasure tracking and scoring baseline)
 
 ## What is working today
 
@@ -24,6 +25,9 @@ Current snapshot after work completed up through:
   - `OpenAdventure_Conditions.ni`
   - `OpenAdventure_Runtime.ni`
   - `OpenAdventure_Plover.ni`
+  - `OpenAdventure_Dwarves.ni`
+  - `OpenAdventure_Pirate.ni`
+  - `OpenAdventure_Scoring.ni`
 - Travel dispatch runtime exists with generated row integration:
   - direct travel dispatch
   - forced travel dispatch
@@ -35,11 +39,12 @@ Current snapshot after work completed up through:
 
 - Dwarf route restriction, activation, first encounter, blocking, and attacks (implemented baseline)
 - Pirate chest placement, treasure theft, and dwarf/pirate ordering (implemented baseline)
+- Treasure discovery/deposit scoring, pirate chest scoring integration, and score reporting hooks (implemented baseline)
 - Full generated-edge dwarf/pirate movement parity (pending hardening)
 - Bear system
 - Dragon system
 - Cave-closing system
-- Endgame and full scoring flow
+- Endgame and full terminal scoring flow
 - Final parser/UX alignment and transcript regression harness
 
 ## Milestone completion matrix
@@ -61,6 +66,7 @@ Current snapshot after work completed up through:
 | 4C | ✅ | Dwarf subsystem travel restriction and runtime condition support |
 | 4D | ✅ | Dwarf baseline behavior + compile/smoke verification |
 | 4E | ✅ | Pirate baseline behavior + dwarf integration + compile/smoke verification |
+| 4F | ✅ | Treasure/scoring baseline + pirate chest integration + compile/smoke verification |
 
 ## Build and validation entry points
 
@@ -83,6 +89,7 @@ See:
 - `docs/architecture/plover-system.md` — plover behavior and dependencies
 - `docs/architecture/dwarf-system.md` — dwarf behavior and dependencies
 - `docs/architecture/pirate-system.md` — pirate behavior and dependencies
+- `docs/architecture/scoring-system.md` — treasure and scoring behavior
 
 ## References
 

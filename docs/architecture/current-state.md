@@ -2,7 +2,7 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, and the Milestone 3F documentation refresh.
 
 ## Build status
 
@@ -27,12 +27,13 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Milestone 4D covers rule `138`/`cond_nodwarves` as a dwarf-movement exclusion while keeping normal player travel available.
 - Pirate subsystem now includes slot-6 dwarf integration, chest placement, treasure theft, pirate-forbidden room checks, and chest-found disabling.
 - Milestone 4E wires dwarf/pirate ordering through the dwarf post-travel round.
+- Milestone 4F adds treasure discovery/deposit tracking, Open Adventure C point classes, score recomputation, score command reporting, death-penalty bookkeeping, and pirate chest scoring integration.
 
 ### Ongoing / incomplete
 
-- Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4E baseline.
-- No full systems yet for dragon, bear, cave-closing, scoring, or endgame.
-- Scoring hooks and end-state flow are not yet wired to complete game endings.
+- Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4F baseline.
+- No full systems yet for dragon, bear, cave-closing, or endgame.
+- Terminal scoring/ranking output is not yet wired to complete game endings.
 
 ## Gameplay status by subsystem
 
@@ -41,12 +42,12 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Plover | Implemented (runtime + handlers) |
 | Travel dispatch | Implemented |
 | Dwarf | Implemented baseline (route exclusion, activation, encounter, blocking, attacks); full generated-edge movement parity pending |
-| Pirate | Implemented baseline (chest placement, treasure theft, dwarf ordering); final-treasure scoring integration pending |
+| Pirate | Implemented baseline (chest placement, treasure theft, dwarf ordering); final-treasure scoring integration implemented |
 | Troll/Bridge/Chasm | Implemented |
 | Bear | Not implemented |
 | Dragon | Not implemented |
 | Cave closing | Not implemented |
-| Scoring | Not implemented |
+| Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow pending |
 | Endgame | Not implemented |
 
 ## Source integration status
@@ -63,9 +64,9 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 
 ## Unresolved blockers and risks
 
-- Completing full generated-edge dwarf/pirate movement parity and final-treasure scoring integration.
+- Completing full generated-edge dwarf/pirate movement parity.
 - Coordinating system side effects and parser interactions for unresolved special rules.
-- Introducing scoring and endgame without regressing earlier travel/parser infrastructure.
+- Introducing cave-closing/endgame without regressing earlier travel/parser/scoring infrastructure.
 
 ## Next milestones
 

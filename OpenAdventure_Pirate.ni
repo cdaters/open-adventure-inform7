@@ -117,7 +117,8 @@ To place openadventure pirate chest:
 To mark openadventure pirate chest found if appropriate in (current-room - room):
 	if current-room is openadventure-pirate-chest-location and CHEST is in openadventure-pirate-chest-location:
 		now openadventure-pirate-chest-found is true;
-		now adventure-state of CHEST is "PIRATE_CHEST_FOUND".
+		now adventure-state of CHEST is "PIRATE_CHEST_FOUND";
+		mark openadventure treasure CHEST as found for reason "pirate_chest_found".
 
 To steal openadventure pirate booty in (current-room - room):
 	now openadventure-pirate-last-theft-count is 0;
@@ -128,9 +129,11 @@ To steal openadventure pirate booty in (current-room - room):
 		if openadventure-pirate treasure loot is protected in current-room:
 			next;
 		if loot is carried by the player:
+			mark openadventure treasure loot as found for reason "pirate_theft";
 			move loot to openadventure-pirate-chest-location;
 			increase openadventure-pirate-last-theft-count by 1;
 		else if loot is in current-room:
+			mark openadventure treasure loot as found for reason "pirate_theft";
 			move loot to openadventure-pirate-chest-location;
 			increase openadventure-pirate-last-theft-count by 1;
 	if openadventure-pirate-last-theft-count > 0:

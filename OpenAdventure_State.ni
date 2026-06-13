@@ -73,6 +73,12 @@ A thing has a text called adventure-state.
 
 Section 5 - Scoring scaffolding
 
+The openadventure-score-total is a number that varies.
+The openadventure-score-total is 0.
+
+The openadventure-score-maximum is a number that varies.
+The openadventure-score-maximum is 430.
+
 The openadventure-score-delta is a number that varies.
 The openadventure-score-delta is 0.
 
@@ -81,6 +87,56 @@ The openadventure-score-event-reason is "".
 
 The openadventure-score-event-source is a text that varies.
 The openadventure-score-event-source is "".
+
+The openadventure-score-manual-adjustment is a number that varies.
+The openadventure-score-manual-adjustment is 0.
+
+The openadventure-death-count is a number that varies.
+The openadventure-death-count is 0.
+
+The openadventure-treasures-found-count is a number that varies.
+The openadventure-treasures-found-count is 0.
+
+The openadventure-treasures-deposited-count is a number that varies.
+The openadventure-treasures-deposited-count is 0.
+
+The openadventure-deep-cave-score-earned is a truth state that varies.
+The openadventure-deep-cave-score-earned is false.
+
+The openadventure-cave-closing-score-earned is a truth state that varies.
+The openadventure-cave-closing-score-earned is false.
+
+The openadventure-cave-closed-score-earned is a truth state that varies.
+The openadventure-cave-closed-score-earned is false.
+
+The openadventure-endgame-bonus-score is a number that varies.
+The openadventure-endgame-bonus-score is 0.
+
+The openadventure-quit-bonus-earned is a truth state that varies.
+The openadventure-quit-bonus-earned is false.
+
+Table of Open Adventure Treasure Scores
+scoring-treasure	discovery-points	deposit-points	treasure-found	treasure-deposited
+NUGGET	2	10	false	false
+OBJ_51	2	10	false	false
+OBJ_52	2	10	false	false
+OBJ_53	2	10	false	false
+COINS	2	10	false	false
+CHEST	2	12	false	false
+EGGS	2	14	false	false
+TRIDENT	2	14	false	false
+VASE	2	14	false	false
+EMERALD	2	14	false	false
+PYRAMID	2	14	false	false
+PEARL	2	14	false	false
+RUG	2	14	false	false
+OBJ_63	2	14	false	false
+CHAIN	2	14	false	false
+RUBY	2	14	false	false
+JADE	2	14	false	false
+AMBER	2	14	false	false
+SAPPH	2	14	false	false
+OBJ_69	2	14	false	false
 
 Section 8 - Dwarf runtime state
 

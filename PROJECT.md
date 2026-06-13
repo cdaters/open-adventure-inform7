@@ -21,8 +21,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 4C | Dwarf system | ✅ Complete | rule 138 nodwarves condition and dwarf subsystem integration |
 | 4D | Dwarf system baseline | ✅ Complete | activation, first encounter, blocking, attacks, compile/test verification |
 | 4E | Pirate system baseline | ✅ Complete | chest placement, treasure theft, dwarf/pirate ordering, compile/test verification |
+| 4F | Treasure and scoring system | ✅ Complete | treasure tracking, deposit scoring, pirate chest scoring integration, compile/test verification |
 
-## Current reality (after Milestone 4E)
+## Current reality (after Milestone 4F)
 
 ### Completed
 
@@ -31,6 +32,7 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Plover and troll/bridge/chasm subsystems are implemented and wired to the framework.
 - Dwarf baseline behavior is implemented and verified by smoke tests.
 - Pirate baseline behavior is implemented and verified by smoke tests.
+- Treasure/scoring baseline is implemented and verified by smoke tests.
 - Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
@@ -58,11 +60,11 @@ Current build artifact:
 | Plover | Implemented |
 | Troll / bridge / chasm | Implemented |
 | Dwarves | Baseline implemented; full generated-edge movement parity pending |
-| Pirate | Baseline implemented; final-treasure scoring integration pending |
+| Pirate | Baseline implemented; final-treasure scoring integration implemented |
 | Bear | Not implemented |
 | Dragon | Not implemented |
 | Cave closing | Not implemented |
-| Scoring | Not implemented |
+| Scoring | Baseline implemented; full terminal/endgame scoring pending |
 | Endgame | Not implemented |
 
 ## Current testing status
@@ -87,7 +89,7 @@ See:
 
 - Parser behavior divergence in generated command patterns.
 - Incorrect sequencing between travel dispatch and unresolved action stubs.
-- Incomplete understanding of game-state side effects for caves/scoring/endgame.
+- Incomplete understanding of game-state side effects for cave closing/endgame.
 
 ## Roadmap alignment
 

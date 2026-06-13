@@ -277,6 +277,7 @@ To openadventure-run-dwarf-round in (current-room - room):
 			say "[openadventure single-hit-message]";
 	if hitters > 0:
 		now openadventure-dwarves-travel-in-progress is false;
+		record openadventure death penalty;
 		end the story saying "You are dead.";
 	now openadventure-dwarves-travel-in-progress is false.
 

@@ -25,6 +25,8 @@ To decide whether openadventure pre-travel hooks allow source (source - room) de
 To run openadventure post-travel hooks for source (source - room) destination (target - room) verb (verb-token - text):
 	if openadventure-subsystem-dwarves is true:
 		run openadventure dwarves post-travel hooks for source source destination target verb verb-token;
+	if openadventure-subsystem-treasure-scoring is true:
+		run openadventure scoring post-travel hooks for destination target;
 	do nothing.
 
 To run openadventure inventory hooks for carried object (item - thing):
@@ -36,7 +38,9 @@ To run openadventure inventory hooks for dropped object (item - thing):
 To run openadventure scoring hooks for delta (delta - number) reason (reason - text):
 	now openadventure-score-delta is delta;
 	now openadventure-score-event-reason is reason;
-	now openadventure-score-event-source is "openadventure_runtime".
+	now openadventure-score-event-source is "openadventure_runtime";
+	if openadventure-subsystem-treasure-scoring is true:
+		record openadventure score delta delta for reason reason from source "openadventure_runtime".
 
 To run openadventure command hooks for action-verb (action-verb - text):
 	do nothing.

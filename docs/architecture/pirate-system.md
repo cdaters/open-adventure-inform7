@@ -89,5 +89,5 @@ Declared in `OpenAdventure_State.ni`:
 ## Parity Gaps
 
 - Full C-style generated-edge movement for dwarf slot `6` depends on the future dwarf movement hardening task.
-- The final-treasure `tally == 1` chest-placement branch is represented by `openadventure-pirate-force-chest-ready`; scoring/found-treasure integration will set it in a later milestone.
+- The final-treasure `tally == 1` chest-placement branch is represented by `openadventure-pirate-force-chest-ready`; Milestone 4F scoring/found-treasure integration now sets it when all non-chest treasures have been found.
 - Transcript-level behavioral validation is still pending.

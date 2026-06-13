@@ -38,5 +38,5 @@
 ## Remaining gaps
 
 - Full generated-edge movement parity for dwarf/pirate slot movement remains pending.
-- Final unseen treasure branch requires future scoring/found-treasure integration.
+- Final unseen treasure branch is now integrated with Milestone 4F scoring/found-treasure state.
 - Transcript-level pirate tests are not yet available.

@@ -17,6 +17,7 @@
 - 4C: dwarf subsystem travel-gating integration
 - 4D: dwarf subsystem baseline completion and verification
 - 4E: pirate subsystem baseline completion and verification
+- 4F: treasure/scoring subsystem baseline completion and verification
 
 ## Current build status
 
@@ -27,35 +28,35 @@
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, and pirate baseline behavior.
+- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, and treasure/scoring baseline behavior.
 - Not yet implemented:
   - bear system
   - dragon system
   - cave-closing logic
-  - full scoring flow
+  - terminal/endgame scoring flow
   - endgame flow
   - full generated-edge dwarf/pirate movement parity
-  - final-treasure pirate/scoring integration
 
 ## Testing status
 
 - Automated compile smoke exists via build script + test entrypoint.
+- Scoring smoke coverage is present in `tests/smoke/06-scoring-system.sh`.
 - Transcript-based behavioral regression framework is still pending.
 
 ## Remaining systems and priority
 
 1. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
-2. `scoring / treasure` — scoring side effects, found-treasure tracking, and final-treasure pirate chest branch.
-3. `bear` — resolve movement/encounter behaviors and state transitions.
-4. `cave-closing` — introduce global closure state transitions and constraints.
-5. `dragon` and `endgame` — encounter flow, victory/lose states, terminal sequences.
+2. `bear` — resolve movement/encounter behaviors and state transitions.
+3. `cave-closing` — introduce global closure state transitions and constraints.
+4. `dragon` and `endgame` — encounter flow, victory/lose states, terminal sequences.
+5. `terminal scoring` — connect final termination/ranking output to completed cave-closing/endgame flow.
 
 ## Recommended implementation order
 
 - Foundation hardening (already in place): runtime hooks, condition predicates, travel dispatch context.
 - Resolve unresolved travel gates in isolation, one system at a time, with stub fallback and regression command lists.
 - Add persistent system state and parser support for each module before integration.
-- Implement scoring and cave-closing in dependency order after travel and object constraints are stable.
+- Implement cave-closing/endgame integrations against the existing scoring hooks after object constraints are stable.
 - Finish endgame and parser UX polish once remaining core systems are stable.
 
 ## Dependency graph

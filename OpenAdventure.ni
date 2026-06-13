@@ -33,6 +33,7 @@ Project goals:
 ]
 
 Release along with the source text.
+Use scoring.
 
 Include "generated/Rooms.ni".
 Include "generated/Objects.ni".
@@ -41,6 +42,7 @@ Include "generated/Vocabulary.ni".
 Include "OpenAdventure_State.ni".
 Include "OpenAdventure_Dwarves.ni".
 Include "OpenAdventure_Pirate.ni".
+Include "OpenAdventure_Scoring.ni".
 Include "OpenAdventure_Conditions.ni".
 Include "OpenAdventure_Plover.ni".
 Include "OpenAdventure_Troll.ni".
