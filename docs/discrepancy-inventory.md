@@ -1,4 +1,4 @@
-# Transcript Discrepancy Inventory - Milestone 8D
+# Transcript Discrepancy Inventory - Milestone 8E
 
 Date: 2026-06-13
 
@@ -39,9 +39,17 @@ Result:
 | `BUG-8D-006` | implementation bug | Bear chain no-tool parser forms pass. |
 | `BUG-8D-007` | implementation bug | Seeded pit-top fatal descent reaches reincarnation. |
 | `BUG-8D-008` | implementation bug | Direct-direction fallback allows valid map routes after failed non-direct conditionals. |
-| `TFRAME-7F-001` | transcript issue | C log comments are skipped. |
-| `TFRAME-8A-001` | transcript issue | Full transcript execution no longer times out by default. |
-| `TEXP-8D-001` | expectation issue | Focused troll, bear, dragon, and cave-closing routes/fragments now match reachable behavior. |
+| `BUG-8E-001` | implementation bug | C-style delayed dwarf activation implemented. |
+| `BUG-8E-002` | replay parity issue | Upstream replay suppresses random dwarf/pirate movement to keep C logs on route. |
+| `BUG-8E-003` | transcript issue | Transcript execution now sends commands interactively. |
+| `BUG-8E-004` | implementation bug | Bird release/drop and snake removal implemented. |
+| `BUG-8E-005` | implementation bug | Rod waving and jade necklace retrieval implemented. |
+| `BUG-8E-006` | replay parity issue | Upstream replay no longer uses the focused pit-top fatal descent shim. |
+| `BUG-8E-007` | replay parity issue | Hall King `SW` reaches the C-log secret canyon route after snake removal. |
+| `BUG-8E-008` | implementation bug | Dragon/rug two-sided canyon visibility implemented. |
+| `BUG-8E-009` | implementation bug | Direct fallback travel now runs post-travel subsystem hooks. |
+| `BUG-8E-010` | implementation bug | Bridged fissure crossings work from both banks. |
+| `BUG-8E-011` | replay parity issue | Ogre/dwarf-knife resolution opens storeroom/ruby route during upstream replay. |
 
 ## Current Per-Case Inventory
 
@@ -51,61 +59,56 @@ Result:
 | `travel` | pass | resolved | Motion and magic-word dispatch work for focused travel. | resolved |
 | `plover` | pass | resolved | Plover passage and emerald behavior pass focused replay. | resolved |
 | `troll` | pass | resolved | Payment treasure throw and bridge crossing pass focused replay. | resolved |
-| `dwarves` | pass | resolved | Seeded dwarf encounter and attack pass focused replay. | resolved |
-| `pirate` | pass | resolved | Pirate pounce/theft route passes focused replay. | resolved |
-| `scoring` | pass | resolved | Focused score command output is visible. | resolved |
+| `dwarves` | pass | resolved | Seeded first dwarf axe encounter passes focused replay. | resolved |
+| `pirate` | pass | resolved focused | Focused pirate theft route passes, but full chest route remains open. | medium |
+| `scoring` | pass | resolved focused | Focused score command output is visible. | resolved |
 | `reincarnation` | pass | resolved | Seeded fatal pit descent reaches reincarnation. | resolved |
 | `bear` | pass | resolved | Food, chain unlock, and bear following pass focused replay. | resolved |
-| `dragon` | pass | resolved | Slab/secret-canyon confrontation route passes focused replay. | resolved |
+| `dragon` | pass | resolved | Dragon confrontation route passes focused replay and upstream route advances. | resolved |
 | `cave-closing` | pass | transcript scope issue | Local smoke route passes, but it does not prove full closure. | medium |
 | `endgame` | pass | resolved smoke | Endgame command-surface smoke remains stable. | resolved |
-| `solve-path` | fail | release blocker | Upstream C solve log diverges and does not reach final 430-point rank. | critical |
-| `treasure-collection` | fail | release blocker | Upstream C solve log diverges and does not reach all treasure fragments. | critical |
-| `complete-endgame` | fail | release blocker | Upstream C endgame log diverges and does not reach repository/blast fragments. | critical |
+| `solve-path` | fail | release blocker | Upstream C solve log progresses deeper but still does not reach final 430-point rank. | critical |
+| `treasure-collection` | fail | release blocker | Upstream C solve log still misses all treasure fragments. | critical |
+| `complete-endgame` | fail | release blocker | Upstream C endgame log still misses repository/blast fragments. | critical |
 
 ## Remaining Fix Categories
 
 Implementation bugs or incomplete systems:
 
-- Full bird/snake puzzle coverage.
-- Full rod/fissure behavior.
-- Full clam/oyster/pearl behavior.
-- Full urn/rug/amber/rabbit-foot route behavior.
-- Full vending/ogre behavior beyond the vending-machine attack toggle.
+- Pirate chest route under full upstream replay.
+- Late treasure acquisition/deposit synchronization after ruby/diamonds.
+- Clam/oyster/pearl and other late object-specific behavior still need full-log
+  proof.
 - Full cave-closing clocks and repository transition under upstream routes.
 - Final scoring/ranking once complete routes reach game end.
 
 Parity issues:
 
-- C seed values do not reproduce exact Open Adventure C hazard order in Inform.
-- Full upstream command logs currently diverge into death/restart recovery,
-  causing later commands to be interpreted at the recovery prompt.
-- Focused seeded replay is intentionally stabilized for local validation, but
-  it is not full C RNG parity.
+- Upstream replay uses deterministic shims for C RNG-dependent events; exact C
+  RNG parity remains unresolved.
+- Full upstream command logs still desynchronize before final fragments.
 
 Transcript issues:
 
-- The local `cave-closing` case should eventually be replaced or supplemented
-  by a true focused closure-clock/repository transcript.
-- Upstream logs may need checkpointed segmentation to isolate the first
-  divergent command faster.
+- Glulxe capture still contains status-window and character-echo noise.
+- Upstream logs may need checkpointed segmentation to isolate late divergences
+  faster.
 
 ## Priorities
 
 Critical:
 
-1. Identify the first upstream full-log divergence that causes death/restart
-   prompt entry.
-2. Drive `solve-path` to final score/rank.
-3. Drive `treasure-collection` to all treasure fragments.
+1. Fix the next late full-log divergence after ogre/ruby.
+2. Stabilize pirate chest behavior in full walkthrough replay.
+3. Drive `solve-path` to final score/rank.
 4. Drive `complete-endgame` to repository/blast/final fragments.
 
 High:
 
-1. Implement missing puzzle object/action coverage used by upstream logs.
+1. Finish remaining treasure/object action coverage used by upstream logs.
 2. Add a focused full cave-closing transcript.
-3. Decide whether C-compatible RNG is necessary for release parity or whether
-   deterministic focused routes plus documented differences are sufficient.
+3. Decide whether C-compatible RNG is required for release parity or whether
+   replay shims plus documented differences are sufficient.
 
 Medium:
 

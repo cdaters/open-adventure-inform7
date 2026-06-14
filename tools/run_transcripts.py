@@ -14,9 +14,11 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import select
 import shutil
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -133,7 +135,7 @@ def normalize_output(output: str) -> str:
     return output
 
 
-def sanitized_commands(path: Path) -> bytes:
+def sanitized_command_lines(path: Path) -> list[str]:
     lines: list[str] = []
     skipped_startup_answer = False
     saw_command = False
@@ -149,8 +151,100 @@ def sanitized_commands(path: Path) -> bytes:
             continue
         saw_command = True
         lines.append(raw)
+    return lines
+
+
+def sanitized_commands(path: Path) -> bytes:
     recovery = ["yes", "quit", "yes"]
-    return ("\n".join(lines + recovery) + "\n\n").encode("utf-8")
+    return ("\n".join(sanitized_command_lines(path) + recovery) + "\n\n").encode("utf-8")
+
+
+def read_available_output(process: subprocess.Popen[bytes]) -> bytes:
+    if process.stdout is None:
+        return b""
+    chunks: list[bytes] = []
+    while True:
+        ready, _, _ = select.select([process.stdout], [], [], 0)
+        if not ready:
+            break
+        try:
+            chunk = os.read(process.stdout.fileno(), 4096)
+        except BlockingIOError:
+            break
+        if not chunk:
+            break
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+def drain_output_until_quiet(
+    process: subprocess.Popen[bytes],
+    timeout_at: float,
+    quiet_seconds: float = 0.05,
+    max_wait_seconds: float = 2.0,
+) -> bytes:
+    if process.stdout is None:
+        return b""
+    output = bytearray()
+    last_output_at = time.monotonic()
+    wait_until = min(timeout_at, time.monotonic() + max_wait_seconds)
+    while time.monotonic() < wait_until:
+        if process.poll() is not None:
+            output.extend(read_available_output(process))
+            break
+        remaining = max(0.0, min(0.05, wait_until - time.monotonic()))
+        ready, _, _ = select.select([process.stdout], [], [], remaining)
+        if ready:
+            chunk = os.read(process.stdout.fileno(), 4096)
+            if chunk:
+                output.extend(chunk)
+                last_output_at = time.monotonic()
+                continue
+            break
+        if time.monotonic() - last_output_at >= quiet_seconds:
+            break
+    return bytes(output)
+
+
+def run_interpreter_interactive(command: list[str], command_lines: list[str], timeout: int) -> subprocess.CompletedProcess[bytes]:
+    process = subprocess.Popen(
+        command,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        cwd=ROOT,
+    )
+    if process.stdout is not None:
+        os.set_blocking(process.stdout.fileno(), False)
+    timeout_at = time.monotonic() + timeout
+    output = bytearray()
+    output.extend(drain_output_until_quiet(process, timeout_at))
+    for line in command_lines + ["yes", "quit", "yes", ""]:
+        if time.monotonic() >= timeout_at:
+            process.kill()
+            raise subprocess.TimeoutExpired(command, timeout, output=bytes(output))
+        if process.poll() is not None:
+            break
+        if process.stdin is not None:
+            try:
+                process.stdin.write((line + "\n").encode("utf-8"))
+                process.stdin.flush()
+            except BrokenPipeError:
+                break
+        output.extend(drain_output_until_quiet(process, timeout_at))
+    if process.stdin is not None:
+        try:
+            process.stdin.close()
+        except BrokenPipeError:
+            pass
+    while process.poll() is None:
+        if time.monotonic() >= timeout_at:
+            process.kill()
+            output.extend(read_available_output(process))
+            raise subprocess.TimeoutExpired(command, timeout, output=bytes(output))
+        output.extend(drain_output_until_quiet(process, timeout_at, max_wait_seconds=0.25))
+    output.extend(read_available_output(process))
+    return subprocess.CompletedProcess(command, process.returncode, bytes(output), None)
 
 
 def runtime_failure(output: str) -> str | None:
@@ -176,17 +270,11 @@ def run_case(case: TranscriptCase, interpreter: str, kind: str, story: Path, res
     results_dir.mkdir(parents=True, exist_ok=True)
     output_path = results_dir / f"{case.case_id}.out"
     command = interpreter_command(interpreter, kind, story)
-    stdin_payload = sanitized_commands(case.commands)
+    command_lines = sanitized_command_lines(case.commands)
+    if case.mode == "upstream":
+        command_lines.insert(0, "replay upstream")
     try:
-        completed = subprocess.run(
-            command,
-            input=stdin_payload,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            cwd=ROOT,
-            check=False,
-            timeout=timeout,
-        )
+        completed = run_interpreter_interactive(command, command_lines, timeout)
     except subprocess.TimeoutExpired as exc:
         output = normalize_output((exc.stdout or b"").decode("utf-8", errors="replace"))
         output_path.write_text(output, encoding="utf-8")

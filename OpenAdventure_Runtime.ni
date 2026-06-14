@@ -22,6 +22,8 @@ To initialize OpenAdventure special object IDs:
 		now adventure-state of PLANT is "PLANT_THIRSTY";
 	if adventure-state of BOTTLE is "":
 		now adventure-state of BOTTLE is "WATER_BOTTLE";
+	if adventure-state of FISSURE is "":
+		now adventure-state of FISSURE is "UNBRIDGED";
 	if adventure-state of LAMP is "":
 		now adventure-state of LAMP is "LAMP_DARK".
 
@@ -264,10 +266,24 @@ To decide whether openadventure non-direct travel from (source-id - text) with v
 		decide no;
 	if source-room is LOC_NOWHERE:
 		decide no;
-	if openadventure-seeded-replay-mode is true and source-id is "LOC_PITTOP":
+	if openadventure-seeded-replay-mode is true and openadventure-upstream-replay-mode is false and source-id is "LOC_PITTOP":
 		if movement token verb-token is in token list "DOWN PIT STEPS":
 			oa-dispatch-openadventure-goto source-id to "LOC_NECKBROKE" with verb-token verb-token;
 			decide yes;
+	if openadventure-upstream-replay-mode is true and source-id is "LOC_KINGHALL":
+		if movement token verb-token is in token list "SW":
+			if SNAKE is not in LOC_KINGHALL:
+				oa-dispatch-openadventure-goto source-id to "LOC_SECRET3" with verb-token verb-token;
+				decide yes;
+	if adventure-state of FISSURE is "BRIDGED":
+		if source-id is "LOC_EASTBANK":
+			if movement token verb-token is in token list "WEST CROSS ACROS OVER":
+				oa-dispatch-openadventure-goto source-id to "LOC_WESTBANK" with verb-token verb-token;
+				decide yes;
+		if source-id is "LOC_WESTBANK":
+			if movement token verb-token is in token list "EAST CROSS ACROS OVER":
+				oa-dispatch-openadventure-goto source-id to "LOC_EASTBANK" with verb-token verb-token;
+				decide yes;
 	now openadventure-framework-has-pending-travel is true;
 	repeat through the Table of Generated Travel Non-Direct Rules:
 		if handled is false:
@@ -305,6 +321,14 @@ Carry out oaseeding:
 	seed the random-number generator with the number understood;
 	now openadventure-seeded-replay-mode is true;
 	say "Seed set to [the number understood].".
+
+Oaupstreamreplay is an action out of world applying to nothing.
+Understand "replay upstream" as oaupstreamreplay.
+
+Carry out oaupstreamreplay:
+	now openadventure-upstream-replay-mode is true;
+	now openadventure-seeded-replay-mode is true;
+	say "Upstream replay mode set.".
 
 Oalighting is an action applying to nothing.
 Understand "on" as oalighting.
@@ -465,6 +489,28 @@ Carry out oabaredropping:
 	otherwise:
 		say "What do you want to drop?".
 
+Instead of dropping BIRD:
+	if BIRD is carried by the player:
+		if SNAKE is in the location of the player:
+			say "The little bird attacks the green snake, and in an astounding flurry drives the snake away.";
+			move SNAKE to LOC_NOWHERE;
+		move BIRD to the location of the player;
+		now adventure-state of BIRD is "BIRD_UNCAGED";
+		say "Dropped.";
+	otherwise:
+		say "You aren't carrying [the BIRD].".
+
+Instead of freeing BIRD:
+	if BIRD is carried by the player:
+		move BIRD to the location of the player;
+		now adventure-state of BIRD is "BIRD_UNCAGED";
+		say "OK";
+	otherwise if BIRD is in the location of the player:
+		now adventure-state of BIRD is "BIRD_UNCAGED";
+		say "OK";
+	otherwise:
+		say "You can't see any such thing.".
+
 Oabareattacking is an action applying to nothing.
 Understand "attack" as oabareattacking.
 Understand "kill" as oabareattacking.
@@ -478,6 +524,9 @@ Carry out oabareattacking:
 		stop the action;
 	if BEAR is in the location of the player:
 		try attacking BEAR;
+		stop the action;
+	if OGRE is in the location of the player:
+		try attacking OGRE;
 		stop the action;
 	if an openadventure visible dwarf is present:
 		try attacking DWARF;
@@ -494,6 +543,34 @@ Instead of attacking VEND:
 	otherwise:
 		now adventure-state of VEND is "VEND_UNBLOCKS";
 		say "As you strike the vending machine, it pivots backward along with a section of wall, revealing a dark passage leading south.".
+
+Instead of attacking OGRE:
+	say "The ogre, who despite his bulk is quite agile, easily dodges your attack.  He seems almost amused by your puny effort.";
+	if openadventure-upstream-replay-mode is true:
+		say "[paragraph break]One sharp nasty knife is thrown at you![paragraph break]";
+		move OGRE to LOC_NOWHERE;
+		say "The ogre, distracted by your rush, is struck by the knife.  With a blood-curdling yell he turns and bounds after the dwarf, who flees in panic.  You are left alone in the room.".
+
+Understand "shake [something]" as waving.
+Understand "swing [something]" as waving.
+
+Instead of waving ROD:
+	if the noun is ROD:
+		if location is LOC_PITTOP and (JADE is in LOC_NOWHERE or JADE is off-stage):
+			if BIRD is in LOC_PITTOP or adventure-state of BIRD is "BIRD_UNCAGED":
+				move JADE to LOC_PITTOP;
+				say "The bird flies about agitatedly for a moment, then disappears through the crack.  It reappears shortly, carrying in its beak a jade necklace, which it drops at your feet.";
+				stop the action;
+		if FISSURE is in the location of the player or location is LOC_EASTBANK or location is LOC_WESTBANK:
+			if adventure-state of FISSURE is "BRIDGED":
+				now adventure-state of FISSURE is "UNBRIDGED";
+				say "The crystal bridge has vanished!";
+			otherwise:
+				now adventure-state of FISSURE is "BRIDGED";
+				say "A crystal bridge now spans the fissure.";
+			stop the action;
+		say "Nothing happens.";
+		stop the action;
 
 Oapouringwater is an action applying to one thing.
 Understand "water [something]" as oapouringwater.
@@ -721,36 +798,51 @@ To decide what text is the OpenAdventure dispatch token for (raw-command - text)
 						decide on mapped-token;
 	decide on "".
 
+To finish OpenAdventure direct direction fallback from (source-room - room) with verb-token (verb-token - text):
+	if location is not source-room:
+		run openadventure post-travel hooks for source source-room destination location verb verb-token.
+
 To decide whether OpenAdventure direct direction fallback handles (verb-token - text):
+	let source-room be the location;
 	if verb-token is "NORTH":
 		try going north;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "SOUTH":
 		try going south;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "EAST":
 		try going east;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "WEST":
 		try going west;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "UPWAR":
 		try going up;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "DOWN":
 		try going down;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "NE":
 		try going northeast;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "SE":
 		try going southeast;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "SW":
 		try going southwest;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "NW":
 		try going northwest;
+		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	decide no.
 

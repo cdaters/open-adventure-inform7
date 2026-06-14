@@ -1,31 +1,34 @@
-# Parity Report - Milestone 8D
+# Parity Report - Milestone 8E
 
 Date: 2026-06-13
 
 ## Summary
 
-Milestone 8D moved transcript execution from 7/15 passing cases to 12/15.
-All focused local subsystem transcripts now pass. The remaining failures are the
-three upstream full-route transcripts: complete solve path, complete treasure
-collection, and complete endgame.
+Milestone 8E kept transcript execution at 12/15 passing cases, but moved the
+three failing upstream walkthroughs substantially farther through the Open
+Adventure C command logs. The full logs now progress past the earlier Hall King
+random route, jade necklace, pit-top descent, snake removal, dragon, fissure,
+diamonds, vending-machine, ogre, and ruby gates.
 
-The project remains **Not Ready** for Release Candidate status because no full
-walkthrough transcript reaches final score/rank parity yet.
+The project remains **Not Ready** for Release Candidate status because the
+complete solve, treasure-collection, and endgame transcripts still do not reach
+their final expected fragments.
 
-## Corrected Since 8C
+## Corrected Since 8D
 
 | ID | Status | Notes |
 |---|---|---|
-| `BUG-8D-001` | resolved | Classic object vocabulary aliases are now available for major generated objects and treasures, including `gold`, `silver`, `diamonds`, `jewelry`, `coins`, `necklace`, `spices`, `statuette`, and `machine`. |
-| `BUG-8D-002` | resolved | Bare `take` and `drop` now infer a single obvious local/carried object, matching common Open Adventure C transcript usage. |
-| `BUG-8D-003` | resolved | Bare `attack`/`kill` targets local dragon, bear, visible dwarf, or vending machine where unambiguous. |
-| `BUG-8D-004` | resolved | `throw`/`toss` command routing now reaches the Open Adventure throw shim instead of Inform's stock drop behavior. |
-| `BUG-8D-005` | resolved | Troll payment checks now use explicit treasure and troll-state predicates; focused troll payment/crossing passes. |
-| `BUG-8D-006` | resolved | Bear chain accepts exact `unlock chain` / `lock chain` parser forms. |
-| `BUG-8D-007` | resolved for seeded replay | Seeded pit-top `down` reaches fatal travel/reincarnation, so the focused reincarnation transcript passes. |
-| `BUG-8D-008` | resolved for focused replay | Seeded replay suppresses dwarf travel blocking so C RNG divergence no longer blocks focused routes. |
-| `BUG-8D-009` | resolved | Failed conditional non-direct travel can fall back to Inform direct direction maps, fixing routes such as slab-to-secret-canyon dragon access. |
-| `TEXP-8D-001` | resolved | Focused troll, bear, dragon, and cave-closing fixtures/fragments now match the behavior each short route actually exercises. |
+| `BUG-8E-001` | resolved | Dwarf activation now follows Open Adventure C's first-entry ratchet: first deep-cave entry enables dwarf activity and returns without immediately rolling movement/combat. |
+| `BUG-8E-002` | resolved for upstream replay | Upstream replay mode suppresses stochastic dwarf/pirate movement so C command logs are not derailed by Inform RNG ordering. |
+| `BUG-8E-003` | resolved | Transcript execution now writes commands interactively instead of bulk-feeding stdin, reducing replay desynchronization and broken-pipe handling issues. |
+| `BUG-8E-004` | resolved | `free bird` and `drop bird` support the bird/snake puzzle and mark the bird uncaged. |
+| `BUG-8E-005` | resolved | Built-in `waving` is hooked for the rod; the bird can fetch the jade necklace at the pit top. |
+| `BUG-8E-006` | resolved | The seeded pit-top fatal-descent shim no longer applies to upstream replay, allowing the C log's safe Hall of Mists descent. |
+| `BUG-8E-007` | resolved for upstream replay | Hall King `SW` follows the upstream C route to `LOC_SECRET3` after the snake is removed. |
+| `BUG-8E-008` | resolved | The dragon/rug are projected into either living-dragon canyon flank, matching C two-location object behavior. |
+| `BUG-8E-009` | resolved | Direct-direction fallback now runs Open Adventure post-travel hooks after successful movement. |
+| `BUG-8E-010` | resolved | Bridged fissure crossing accepts west/east/cross/across/over from the appropriate bank. |
+| `BUG-8E-011` | resolved for upstream replay | Ogre attack applies the C log's dwarf-knife resolution so the storeroom and ruby route are reachable. |
 
 ## Verification
 
@@ -36,12 +39,12 @@ walkthrough transcript reaches final score/rank parity yet.
 
 ## Transcript Metrics
 
-| Metric | 8C | 8D |
+| Metric | 8D | 8E |
 |---|---:|---:|
 | Manifest cases | 15 | 15 |
 | Cases launched | 15 | 15 |
-| Passing cases | 7 | 12 |
-| Failing cases | 8 | 3 |
+| Passing cases | 12 | 12 |
+| Failing cases | 3 | 3 |
 | Timeouts | 0 | 0 |
 | VM/runtime crashes | 0 | 0 |
 
@@ -70,26 +73,19 @@ Failing:
 
 Release blockers:
 
-- Full solve path does not reach final score/rank.
-- Treasure collection does not reach all treasure discovery/deposit expectations.
-- Complete endgame does not reach repository/blast/final scoring expectations.
+- Full solve path still does not reach final 430-point rank output.
+- Treasure collection still does not reach all treasure discovery/deposit
+  expectations.
+- Complete endgame still does not reach repository/blast/final fragments.
 
 Parity issues:
 
-- Upstream C logs diverge early enough to enter death/restart recovery prompts;
-  once there, later commands are consumed by the recovery menu rather than game
-  state.
-- Full object/action coverage is still incomplete for C logs, especially
-  bird/snake, rod/fissure, clam/oyster, urn/rug, vending/ogre, and late
-  endgame interactions.
-- Exact C-compatible random hazard ordering remains open. Focused seeded replay
-  is stable, but not equivalent to Open Adventure C RNG.
-
-Transcript/expectation issues:
-
-- The focused `cave-closing` local route is now a smoke check, not full closure
-  proof. Full closure remains covered by the upstream endgame logs and still
-  fails.
+- Upstream full logs now progress into later treasure routing, but still
+  desynchronize before the final objective paths.
+- Pirate chest acquisition/deposit and later treasure replay remain unstable in
+  the full command logs.
+- Later cave-closing/repository/endgame flow remains unproven by a passing
+  complete upstream transcript.
 
 Intentional deviations:
 
@@ -100,7 +96,7 @@ Intentional deviations:
 
 **Not Ready** for Release Candidate.
 
-The focused gameplay suite is now clean, which is a major validation milestone.
-Release readiness now depends on upstream walkthrough parity: eliminate the
-early full-log divergence, then drive solve-path, treasure-collection, and
-complete-endgame transcripts to their final fragments.
+The focused gameplay suite remains clean, and 8E removed several early full-log
+blockers. The next parity milestone should target the remaining treasure-route
+desynchronization, especially pirate chest handling and late route replay, then
+continue to cave-closing and repository parity.

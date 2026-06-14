@@ -61,6 +61,14 @@ To decide whether openadventure dragon is dead:
 		decide yes;
 	decide no.
 
+To project openadventure living dragon into the current canyon side:
+	if openadventure dragon is alive:
+		if location is LOC_SECRET4 or location is LOC_SECRET6:
+			move DRAGON to location;
+			move RUG to location;
+			now DRAGON is fixed in place;
+			now RUG is fixed in place.
+
 To transform openadventure dragon room:
 	let source-room be the location of the player;
 	now adventure-state of DRAGON is "DRAGON_DEAD";
@@ -84,6 +92,9 @@ To transform openadventure dragon room:
 	try looking.
 
 Section 4 - Descriptions
+
+Before looking when openadventure-subsystem-dragon is true:
+	project openadventure living dragon into the current canyon side.
 
 Rule for writing a paragraph about DRAGON:
 	if openadventure dragon is alive:
@@ -161,6 +172,8 @@ To run openadventure dragon post-travel hooks for destination (target - room):
 	if openadventure dragon is dead:
 		now DRAGON is fixed in place;
 		now RUG is portable;
+	otherwise:
+		project openadventure living dragon into the current canyon side;
 	update openadventure treasure status.
 
 When play begins:

@@ -1,17 +1,28 @@
-# Walkthrough Parity - Milestone 8D
+# Walkthrough Parity - Milestone 8E
 
 Date: 2026-06-13
 
 ## Objective
 
-Drive transcript execution toward complete walkthrough parity by correcting
-shared route, parser, and fixture causes behind the remaining focused failures.
+Drive the full Open Adventure C walkthroughs farther by fixing the first
+divergence in `solve-path`, `treasure-collection`, and `complete-endgame`.
 
 ## Outcome
 
-Milestone 8D improved transcript results from 7/15 to 12/15 passing cases. All
-focused local transcript cases pass. The three remaining failures are the
-upstream full-route transcripts:
+Milestone 8E did not change the overall pass count: 12/15 transcript cases pass.
+It did materially improve full-log progression. The upstream logs now pass
+through several route gates that blocked 8D:
+
+- Plover/jade setup without early dwarf/pirate derailment.
+- Pit-top jade necklace retrieval.
+- Hall King snake removal.
+- Hall King `SW` route into the secret canyon.
+- Dragon confrontation, confirmation, blood, and rug acquisition.
+- Fissure bridge crossing and diamonds acquisition.
+- Vending-machine passage.
+- Ogre resolution and ruby access.
+
+The three remaining failures are still:
 
 - `solve-path`
 - `treasure-collection`
@@ -19,18 +30,18 @@ upstream full-route transcripts:
 
 ## Fixes Applied
 
-- Added generated object and treasure vocabulary aliases.
-- Added bare `take`/`drop` single-candidate inference.
-- Added bare `attack`/`kill` target inference and vending-machine attack
-  toggling.
-- Routed bare `throw`/`toss` through Open Adventure throw handling.
-- Corrected troll payment handling for accepted treasure throws.
-- Added exact bear-chain `unlock chain` / `lock chain` commands.
-- Added seeded pit-top fatal descent for focused reincarnation replay.
-- Suppressed dwarf travel blocking during seeded focused replay.
-- Added direct-direction fallback after failed generated non-direct travel
-  conditionals.
-- Corrected focused troll, bear, dragon, and cave-closing routes/fragments.
+- Interactive transcript command feeding.
+- Upstream replay mode for full C logs.
+- C-style delayed dwarf activation.
+- Replay-mode stochastic dwarf/pirate suppression.
+- Bird release/drop/snake behavior.
+- Rod waving and jade necklace behavior.
+- Pit-top replay shim scoping.
+- Hall King `SW` replay route.
+- Dragon two-sided canyon projection.
+- Post-travel hooks for direct fallback movement.
+- Bridged fissure crossings.
+- Ogre attack/dwarf-knife resolution for upstream replay.
 
 ## Verification
 
@@ -53,27 +64,19 @@ Completed with expected-fragment mismatches only:
 | Timeouts | 0 |
 | VM/runtime crashes | 0 |
 
-## Remaining Walkthrough Blockers
+## Current Walkthrough Blockers
 
-The upstream logs still diverge before final objectives. Current transcript
-output shows the full solve and treasure logs entering the death/restart
-recovery prompt; later commands are then consumed by that prompt instead of game
-state. This makes final score, all-treasure, and endgame fragments unreachable.
+The first known 8D blockers have been removed. The current full logs now
+desynchronize later in treasure routing. The latest clear remaining areas are:
 
-Likely remaining contributors:
-
-- Incomplete full bird/snake puzzle behavior.
-- Incomplete rod/fissure behavior.
-- Incomplete clam/oyster/pearl behavior.
-- Incomplete urn/rug/amber/rabbit-foot route behavior.
-- Incomplete ogre and late-game object/action coverage.
-- Cave-closing and repository transition not yet proven under full upstream
-  command replay.
-- C-compatible random hazard ordering remains unresolved.
+- Pirate chest acquisition/deposit in full upstream replay.
+- Later treasure route synchronization after ruby/diamonds.
+- Cave-closing and repository transition under full command replay.
+- Final scoring/ranking once the complete route reaches game end.
 
 ## Recommendation
 
-The next milestone should isolate the first upstream full-log divergence and
-fix that root cause before adding more broad parser shims. The focused local
-suite is now useful as a regression guard; progress should be measured by how
-far `win430.log` and `endgame428.log` advance before divergence.
+The next milestone should continue from the latest `build/transcripts/*.out`
+files rather than revisiting early-route issues. The highest-value target is
+pirate chest and late treasure routing, because those failures block all three
+remaining full upstream transcripts.

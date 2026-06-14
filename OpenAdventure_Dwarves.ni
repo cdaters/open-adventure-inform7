@@ -294,6 +294,14 @@ To run openadventure dwarves post-travel hooks for source (source-room - room) d
 	enable openadventure dwarf movement pass;
 	if openadventure-dwarf-activity-level is 0 and openadventure deep cave membership of destination-room:
 		now openadventure-dwarf-activity-level is 1;
+		disable openadventure dwarf movement pass;
+		stop;
+	if openadventure-upstream-replay-mode is true:
+		disable openadventure dwarf movement pass;
+		stop;
+	if openadventure-seeded-replay-mode is true and adventure-state of LAMP is not "LAMP_BRIGHT":
+		disable openadventure dwarf movement pass;
+		stop;
 	if openadventure-dwarf-activity-level is 1:
 		begin openadventure dwarf first encounter in destination-room;
 	else:

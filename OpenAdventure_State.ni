@@ -42,6 +42,9 @@ The openadventure-subsystem-loading is false.
 The openadventure-seeded-replay-mode is a truth state that varies.
 The openadventure-seeded-replay-mode is false.
 
+The openadventure-upstream-replay-mode is a truth state that varies.
+The openadventure-upstream-replay-mode is false.
+
 Section 3 - Gameplay-subsystem feature flags
 
 The openadventure-subsystem-dwarves is a truth state that varies.
