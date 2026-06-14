@@ -28,7 +28,7 @@ require_line 'The openadventure-repository-ready is a truth state that varies.' 
 require_line 'To initialize openadventure endgame subsystem' "$ROOT_DIR/OpenAdventure_Endgame.ni"
 require_line 'To initialize openadventure endgame repository' "$ROOT_DIR/OpenAdventure_Endgame.ni"
 require_line 'To decide whether openadventure repository-room is' "$ROOT_DIR/OpenAdventure_Endgame.ni"
-require_line 'To decide whether openadventure rusty-mark rod exists' "$ROOT_DIR/OpenAdventure_Endgame.ni"
+require_line 'To decide whether openadventure rusty-mark rod is available' "$ROOT_DIR/OpenAdventure_Endgame.ni"
 require_line 'To decide whether openadventure rusty-mark rod is here' "$ROOT_DIR/OpenAdventure_Endgame.ni"
 require_line 'To complete openadventure endgame with outcome' "$ROOT_DIR/OpenAdventure_Endgame.ni"
 require_line 'To awaken openadventure endgame dwarves' "$ROOT_DIR/OpenAdventure_Endgame.ni"

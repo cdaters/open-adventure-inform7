@@ -18,11 +18,41 @@ for f in "${required[@]}"; do
 done
 
 if [ -d "$ROOT_DIR/OpenAdventure.inform" ]; then
-  if find "$ROOT_DIR/OpenAdventure.inform/Build" -type f \( -name '*.z8' -o -name '*.z5' -o -name '*.ulx' \) | grep -q .; then
-    echo "build artifact exists"
-    exit 0
+  if [ -n "${OPENADVENTURE_BUILD_ARTIFACT:-}" ]; then
+    artifact="$OPENADVENTURE_BUILD_ARTIFACT"
+  else
+    case "${OPENADVENTURE_INFORM_FORMAT:-Inform6/16}" in
+      Inform6/32|Glulx|glulx)
+        artifact="$ROOT_DIR/OpenAdventure.inform/Build/OpenAdventure.ulx"
+        ;;
+      *)
+        artifact="$ROOT_DIR/OpenAdventure.inform/Build/OpenAdventure.z8"
+        ;;
+    esac
+  fi
+  if [ -f "$artifact" ]; then
+    case "$artifact" in
+      *.z[1-8]|*.Z[1-8])
+        version="$(od -An -tu1 -N1 "$artifact" | tr -d '[:space:]')"
+        if [ -n "$version" ] && [ "$version" -ge 1 ] && [ "$version" -le 8 ]; then
+          echo "build artifact is valid Z-machine story data"
+          exit 0
+        fi
+        echo "invalid Z-machine artifact header: $artifact" >&2
+        exit 1
+        ;;
+      *.ulx|*.ULX)
+        magic="$(head -c 4 "$artifact")"
+        if [ "$magic" = "Glul" ]; then
+          echo "build artifact is valid Glulx story data"
+          exit 0
+        fi
+        echo "invalid Glulx artifact header: $artifact" >&2
+        exit 1
+        ;;
+    esac
   fi
 fi
 
-echo "compile not wired yet; artifact check skipped"
+echo "configured story artifact not present; artifact check skipped"
 exit 0

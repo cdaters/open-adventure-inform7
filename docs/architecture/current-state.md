@@ -2,13 +2,15 @@
 
 ## Milestone snapshot
 
-This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, 6A, 6B, and the Milestone 3F documentation refresh.
+This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4E, 4F, 5A, 5B, 5C, 5D, 6A, 6B, 7A, 7B, and the Milestone 3F documentation refresh.
 
 ## Build status
 
-- `./build.sh --compile` succeeds.
-- Story artifact currently produced: `OpenAdventure.inform/Build/OpenAdventure.z8`.
-- Build script creates required output directories and assembles generated + runtime sources in one stage.
+- Inform 7 translation succeeds.
+- `./build.sh --compile` now runs the complete `ni` -> `inform6` chain and fails honestly at the default Z-machine emission stage.
+- No default `OpenAdventure.inform/Build/OpenAdventure.z8` is currently produced because `inform6` reports `110160` bytes of readable memory against the Z-machine maximum of `65536`.
+- Diagnostic Glulx builds can produce `OpenAdventure.inform/Build/OpenAdventure.ulx`.
+- Build script creates required output directories, assembles generated + runtime sources, writes `OpenAdventure.inform/Build/OpenAdventure.i6`, and validates final VM artifact headers.
 
 ## Runtime architecture status
 
@@ -34,11 +36,12 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 - Milestone 5D adds cave-closing warning clocks, panic timing, exit restrictions, repository transition, reincarnation suppression, and cave-closing score integration.
 - Milestone 6A adds repository endgame behavior, blast outcomes, mirror/dwarf disturbance endings, final scoring, and ranking output.
 - Milestone 6B adds startup presentation, HELP menu, ABOUT, INFO, NEWS, credits, and version information.
+- Milestone 7A adds the transcript regression framework, suite manifest, walkthrough inventory, parity report, and known-differences inventory.
 
 ### Ongoing / incomplete
 
 - Full generated-edge dwarf/pirate movement parity remains beyond the Milestone 4F baseline.
-- Transcript parity for endgame branches is not yet automated beyond smoke checks.
+- Transcript execution is blocked because the default Z-machine artifact cannot yet be emitted.
 - Dark-pit death callers await their owning systems.
 
 ## Gameplay status by subsystem
@@ -57,6 +60,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 | Scoring | Implemented baseline (treasure discovery/deposit, score recompute, pirate chest, death hook); terminal/endgame flow integrated |
 | Endgame | Implemented baseline (repository, blast outcomes, dwarf disturbance, final score/rank); transcript parity pending |
 | Information | Implemented baseline (startup, HELP menu, ABOUT, INFO, NEWS, credits, version); transcript parity pending |
+| Transcript framework | Implemented manifest and dry-run validation; executable replay blocked pending runnable story artifact |
 
 ## Source integration status
 
@@ -68,7 +72,7 @@ This document reflects repository reality after Milestones 3E, 4A, 4B, 4C, 4D, 4
 
 - Compilation smoke path is working and repeatable.
 - Build/test scripts are present and documented.
-- Transcript/integration behavioral tests are not yet complete for gameplay scenarios; compile/smoke coverage is complete.
+- Transcript/integration behavioral fixtures are present; executable replay is blocked pending runnable story output.
 
 ## Unresolved blockers and risks
 

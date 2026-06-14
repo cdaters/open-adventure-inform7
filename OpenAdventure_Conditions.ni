@@ -3,7 +3,7 @@
 Section 1 - Inventory predicates
 
 To decide whether (item - thing) is carried by the player:
-	if item is carried by the player:
+	if the holder of item is the player:
 		decide yes;
 	decide no.
 

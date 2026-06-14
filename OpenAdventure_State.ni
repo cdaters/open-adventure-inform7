@@ -2,6 +2,8 @@
 
 Section 1 - Core runtime state
 
+The player is in LOC_START.
+
 The openadventure-framework-ready is a truth state that varies.
 The openadventure-framework-ready is false.
 

@@ -1,0 +1,6 @@
+# Focused local endgame command surface; complete endgame uses upstream endgame428/win430 logs.
+no
+version
+help version
+quit
+yes

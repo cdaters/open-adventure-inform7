@@ -1,0 +1,17 @@
+no
+seed 1318612053
+east
+take lamp
+take keys
+take bottle
+plugh
+on
+south
+down
+take nugget
+north
+north
+south
+south
+quit
+yes

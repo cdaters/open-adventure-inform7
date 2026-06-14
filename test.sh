@@ -23,6 +23,37 @@ fail() {
   status=1
 }
 
+validate_story_artifact() {
+  local artifact="$1"
+  if [ ! -s "$artifact" ]; then
+    fail "build artifact is empty or missing: $artifact"
+    return 1
+  fi
+
+  case "$artifact" in
+    *.z[1-8]|*.Z[1-8])
+      local version
+      version="$(od -An -tu1 -N1 "$artifact" | tr -d '[:space:]')"
+      if [ -z "$version" ] || [ "$version" -lt 1 ] || [ "$version" -gt 8 ]; then
+        fail "invalid Z-machine story header: $artifact"
+        return 1
+      fi
+      ;;
+    *.ulx|*.ULX)
+      local magic
+      magic="$(head -c 4 "$artifact")"
+      if [ "$magic" != "Glul" ]; then
+        fail "invalid Glulx story header: $artifact"
+        return 1
+      fi
+      ;;
+    *)
+      fail "unknown story artifact extension: $artifact"
+      return 1
+      ;;
+  esac
+}
+
 # 1) Build path with source generation
 if ! bash "$ROOT_DIR/build.sh" --generate-only; then
   fail "source generation failed"
@@ -44,22 +75,26 @@ if command -v inform7 >/dev/null 2>&1 || command -v inform >/dev/null 2>&1 || [ 
 fi
 
 if [ -d "$PROJECT_DIR" ] && [ "$inform_available" -eq 1 ]; then
+  compile_ok=0
   if bash "$ROOT_DIR/build.sh" --compile --project "$PROJECT_DIR"; then
+    compile_ok=1
     log "compile step passed"
   else
     fail "compile step failed"
   fi
 
-  artifact=""
-  artifact="$(find "$PROJECT_DIR/Build" -type f \( -name '*.z8' -o -name '*.z5' -o -name '*.ulx' \) 2>/dev/null | head -n 1 || true)"
-  if [ -z "$artifact" ] && [ -n "${OPENADVENTURE_BUILD_ARTIFACT:-}" ] && [ -f "${OPENADVENTURE_BUILD_ARTIFACT}" ]; then
-    artifact="${OPENADVENTURE_BUILD_ARTIFACT}"
-  fi
+  if [ "$compile_ok" -eq 1 ]; then
+    artifact=""
+    artifact="$(find "$PROJECT_DIR/Build" -type f \( -name '*.z8' -o -name '*.z5' -o -name '*.ulx' \) 2>/dev/null | head -n 1 || true)"
+    if [ -z "$artifact" ] && [ -n "${OPENADVENTURE_BUILD_ARTIFACT:-}" ] && [ -f "${OPENADVENTURE_BUILD_ARTIFACT}" ]; then
+      artifact="${OPENADVENTURE_BUILD_ARTIFACT}"
+    fi
 
-  if [ -z "$artifact" ]; then
-    fail "build artifact not found after compile"
-  else
-    log "artifact produced: $artifact"
+    if [ -z "$artifact" ]; then
+      fail "build artifact not found after compile"
+    elif validate_story_artifact "$artifact"; then
+      log "artifact produced: $artifact"
+    fi
   fi
 else
   if [ "$STRICT_COMPILE" -eq 1 ]; then

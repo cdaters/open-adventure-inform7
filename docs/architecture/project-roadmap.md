@@ -24,18 +24,22 @@
 - 5D: cave-closing subsystem baseline completion and verification
 - 6A: endgame subsystem baseline completion and verification
 - 6B: introduction and information subsystem baseline completion and verification
+- 7A: transcript framework, parity report, walkthrough, and known-differences inventory
+- 7B: build-chain correction through `inform6`, VM artifact-header validation, and Z-machine blocker documentation
 
 ## Current build status
 
-- Compile pipeline: ✅ working.
+- Compile pipeline: ⚠️ corrected but Z-machine output blocked.
 - Command: `./build.sh --compile`
-- Artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
-- Generator + runtime integration verified in build composition.
+- Default artifact: no `.z8` emitted because `inform6` exceeds the Z-machine readable-memory limit.
+- Diagnostic artifact: `OpenAdventure.inform/Build/OpenAdventure.ulx` with `OPENADVENTURE_INFORM_FORMAT=Inform6/32`.
+- Generator + runtime integration verified in build composition; final VM header validation added.
 
 ## Current gameplay status
 
-- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, death/reincarnation baseline behavior, bear baseline behavior, dragon baseline behavior, cave-closing baseline behavior, endgame baseline behavior, and information-system baseline behavior.
+- Implemented: baseline movement framework, plover travel, troll/bridge/chasm travel, dwarf baseline behavior, pirate baseline behavior, treasure/scoring baseline behavior, death/reincarnation baseline behavior, bear baseline behavior, dragon baseline behavior, cave-closing baseline behavior, endgame baseline behavior, information-system baseline behavior, and transcript framework dry-run validation.
 - Not yet implemented:
+  - runnable story artifact for transcript execution
   - dark-pit death hazard integration
   - full generated-edge dwarf/pirate movement parity
 
@@ -49,15 +53,16 @@
 - Cave-closing smoke coverage is present in `tests/smoke/10-cave-closing-system.sh`.
 - Endgame smoke coverage is present in `tests/smoke/11-endgame-system.sh`.
 - Information-system smoke coverage is present in `tests/smoke/12-information-system.sh`.
-- Transcript-based behavioral regression framework is still pending.
+- Transcript framework smoke coverage is present in `tests/smoke/13-transcript-framework.sh`.
+- Executable transcript replay is blocked pending a real story artifact.
 
 ## Remaining systems and priority
 
-1. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
-2. `darkness/lamp hazards` — wire dark-pit death into the shared reincarnation handler.
-3. `terminal hardening` — add transcript coverage for final scoring/ranking and endgame branches.
-4. `information transcript parity` — add transcript coverage for startup, HELP sections, ABOUT, INFO, NEWS, and VERSION.
-5. `transcript parity` — add command transcripts for bear, reincarnation, troll, pirate, cave-closing, endgame, and scoring branches.
+1. `runnable story artifact` — fix the build target so transcript execution can run against real Z-code or an equivalent supported story format.
+2. `dwarf/pirate parity hardening` — replace simplified pressure movement with generated-edge movement candidates and add transcript tests.
+3. `darkness/lamp hazards` — wire dark-pit death into the shared reincarnation handler.
+4. `terminal hardening` — execute transcript coverage for final scoring/ranking and endgame branches.
+5. `full transcript parity` — expand manifest pass/fail expectations across the Open Adventure C corpus.
 
 ## Recommended implementation order
 

@@ -1,0 +1,9 @@
+help
+help instructions
+help history
+about
+info
+news
+version
+quit
+yes

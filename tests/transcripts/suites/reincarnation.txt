@@ -1,0 +1,11 @@
+no
+east
+take lamp
+plugh
+on
+south
+down
+jump
+yes
+quit
+yes

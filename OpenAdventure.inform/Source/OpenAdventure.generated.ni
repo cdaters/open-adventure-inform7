@@ -3445,6 +3445,8 @@ rule-id	source-loc	action-kind	travel-category	target	verbs	forced	condition-kin
 
 Section 1 - Core runtime state
 
+The player is in LOC_START.
+
 The openadventure-framework-ready is a truth state that varies.
 The openadventure-framework-ready is false.
 
@@ -3776,7 +3778,7 @@ To initialize framework IDs:
 Section 1 - Inventory predicates
 
 To decide whether (item - thing) is carried by the player:
-	if item is carried by the player:
+	if the holder of item is the player:
 		decide yes;
 	decide no.
 
@@ -5528,7 +5530,7 @@ To decide whether openadventure repository-room is (candidate-room - room):
 		decide yes;
 	decide no.
 
-To decide whether openadventure rusty-mark rod exists:
+To decide whether openadventure rusty-mark rod is available:
 	if ROD2 is carried by the player:
 		decide yes;
 	if ROD2 is in LOC_NE:
@@ -5597,7 +5599,7 @@ Carry out blasting:
 	if openadventure-cave-closed-active is false:
 		say "[openadventure requires dynamite message]";
 		stop;
-	if not openadventure rusty-mark rod exists:
+	unless openadventure rusty-mark rod is available:
 		say "[openadventure requires dynamite message]";
 		stop;
 	if openadventure rusty-mark rod is here:

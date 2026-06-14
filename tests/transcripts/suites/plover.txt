@@ -1,0 +1,15 @@
+no
+seed 1318612053
+east
+take lamp
+plugh
+on
+plover
+take emerald
+west
+drop emerald
+east
+plover
+plugh
+quit
+yes

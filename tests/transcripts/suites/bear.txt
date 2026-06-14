@@ -1,0 +1,25 @@
+no
+seed 1318612053
+east
+take lamp
+take keys
+take food
+plugh
+on
+south
+down
+bedquilt
+west
+oriental
+west
+southwest
+up
+throw eggs
+northeast
+barren
+east
+throw food
+unlock chain
+take bear
+quit
+yes

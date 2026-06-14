@@ -1,0 +1,16 @@
+# id	area	commands	expected	reference	mode
+startup	startup	tests/transcripts/suites/startup.txt	tests/transcripts/expected/startup.fragments	references/open-adventure-c/tests/specials.log	local
+travel	travel	tests/transcripts/suites/travel.txt	tests/transcripts/expected/travel.fragments	references/open-adventure-c/tests/tall.log	local
+plover	plover	tests/transcripts/suites/plover.txt	tests/transcripts/expected/plover.fragments	references/open-adventure-c/tests/plover.log	local
+troll	troll	tests/transcripts/suites/troll.txt	tests/transcripts/expected/troll.fragments	references/open-adventure-c/tests/troll_returns.log	local
+dwarves	dwarves	tests/transcripts/suites/dwarves.txt	tests/transcripts/expected/dwarves.fragments	references/open-adventure-c/tests/dwarf.log	local
+pirate	pirate	tests/transcripts/suites/pirate.txt	tests/transcripts/expected/pirate.fragments	references/open-adventure-c/tests/pirate_carry.log	local
+scoring	scoring	tests/transcripts/suites/scoring.txt	tests/transcripts/expected/scoring.fragments	references/open-adventure-c/tests/turnpenalties.log	local
+reincarnation	reincarnation	tests/transcripts/suites/reincarnation.txt	tests/transcripts/expected/reincarnation.fragments	references/open-adventure-c/tests/reincarnate.log	local
+bear	bear	tests/transcripts/suites/bear.txt	tests/transcripts/expected/bear.fragments	references/open-adventure-c/tests/axebear.log	local
+dragon	dragon	tests/transcripts/suites/dragon.txt	tests/transcripts/expected/dragon.fragments	references/open-adventure-c/tests/dragon_secret5.log	local
+cave-closing	cave-closing	tests/transcripts/suites/cave-closing.txt	tests/transcripts/expected/cave-closing.fragments	references/open-adventure-c/tests/panic.log	local
+endgame	endgame	tests/transcripts/suites/endgame.txt	tests/transcripts/expected/endgame.fragments	references/open-adventure-c/tests/endgame428.log	local
+solve-path	full-walkthrough	references/open-adventure-c/tests/win430.log	tests/transcripts/expected/solve-path.fragments	references/open-adventure-c/tests/win430.chk	upstream
+treasure-collection	treasure-collection	references/open-adventure-c/tests/win430.log	tests/transcripts/expected/treasure-collection.fragments	references/open-adventure-c/tests/win430.chk	upstream
+complete-endgame	complete-endgame	references/open-adventure-c/tests/endgame428.log	tests/transcripts/expected/complete-endgame.fragments	references/open-adventure-c/tests/endgame428.chk	upstream

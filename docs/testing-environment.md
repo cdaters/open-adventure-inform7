@@ -1,11 +1,11 @@
 # Testing Environment Report
 
-## Environment probe summary (as of 2026-06-12)
+## Environment probe summary (as of 2026-06-13)
 
 - Inform 7 authoring toolchain exists locally inside the macOS `Inform.app` bundle.
 - CLI binaries are **present but not on PATH** by default.
-- No `frotz` / `dfrotz` binaries are currently available in `PATH`.
-- No dedicated project test harness or `.inform` project folder exists in this repository.
+- `dfrotz` is available in `PATH` at `/opt/homebrew/bin/dfrotz`.
+- A local `.inform` project folder exists at `OpenAdventure.inform`.
 
 ## Detected toolchain binaries
 
@@ -33,7 +33,7 @@
 - `command -v inform6` -> not found
 - `command -v cBlorb` -> not found
 - `command -v frotz` -> not found
-- `command -v dfrotz` -> not found
+- `command -v dfrotz` -> `/opt/homebrew/bin/dfrotz`
 - `command -v intest` -> not found
 
 ## Build commands
@@ -54,10 +54,15 @@ Because bundle binaries are not exported to PATH, use either direct paths or add
 
 3) Compile from Inform source:
 
-- The repository currently has loose `.ni` files (no `.inform` project), so the exact compile command depends on creating a project wrapper expected by Inform 7.
-- Practical interim command patterns in this environment are:
-  - `inform7 <PROJECT_DIR>` (using Inform 7 GUI-style project invocation)
-  - `ni <PROJECT_DIR>/Build/ ...` (backend compiler entrypoint)
+- `./build.sh --compile`
+- This now runs the full command-line chain: `ni` -> `inform6`.
+- The default Z-machine target is currently blocked by Inform 6 readable-memory overflow.
+- A diagnostic Glulx artifact can be built with:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 \
+./build.sh --compile
+```
 
 4) Package into blorb/game output (when release files are generated):
 
@@ -77,23 +82,25 @@ Because bundle binaries are not exported to PATH, use either direct paths or add
 
 ## Frotz/dfrotz availability
 
-- `frotz` and `dfrotz` are not available on `PATH`.
-- No confirmed standalone `dfrotz`/`frotz` binary in current environment.
+- `dfrotz` is available at `/opt/homebrew/bin/dfrotz`.
+- `frotz` is not currently required because `dfrotz` is sufficient for plain transcript execution once a runnable story file exists.
 - For automated transcript-style testing, add one of these interpreters or use a CI-compatible IF interpreter already in pipeline.
 
 ## Automated transcript testing feasibility
 
 Current status: partially blocked.
 
-- Blocked by missing `frotz/dfrotz` executables for direct transcript replay automation.
-- Blocked by lack of a local `.inform` project + test recipe (`*.intest`) in this repository.
+- Transcript manifest and dry-run validation now exist in `tools/run_transcripts.py` and `tests/transcripts/`.
+- Direct transcript replay is blocked because no runnable `OpenAdventure.inform/Build/OpenAdventure.z8` can currently be emitted.
+- The command-line build no longer stops after Inform 7 translation; it writes `OpenAdventure.inform/Build/OpenAdventure.i6`, invokes `inform6`, and validates final artifacts.
+- Attempting to compile the current I6 source to Z-machine v8 currently exceeds the Z-machine readable-memory limit (`110160` bytes used, `65536` maximum).
 - `intest` is present, so once a project scaffold and recipes are added, automated test harnessing becomes straightforward.
 
 ## Recommended next steps for testability
 
-1) Create an Inform project wrapper for `OpenAdventure.ni` and generated files in a `.inform` directory.
-2) Add symlinks for Inform CLI tools or wrapper scripts.
-3) Export a `.z8` build target in the project and verify deterministic build output.
+1) Reduce generated/runtime readable-memory usage enough for Z-machine v8, or formally adopt Glulx as the executable target.
+2) Add symlinks for Inform CLI tools or wrapper scripts if building outside the current local path assumptions.
+3) Export a runnable story target and verify deterministic build output.
 4) Add `intest` recipes for key travel and command regressions (e.g. plover / dwarf / scoring checkpoints).
 5) Install `dfrotz` (or another Z-machine interpreter with transcript mode) and hook a scripted transcript diff check.
 

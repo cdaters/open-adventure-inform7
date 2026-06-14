@@ -1,0 +1,21 @@
+no
+seed 1318612053
+east
+take lamp
+take keys
+plugh
+on
+south
+down
+bedquilt
+west
+oriental
+west
+southwest
+up
+throw eggs
+northeast
+barren
+east
+quit
+yes

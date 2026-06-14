@@ -1,0 +1,20 @@
+no
+seed 1318612053
+east
+take lamp
+plugh
+on
+south
+down
+bedquilt
+west
+oriental
+west
+southwest
+up
+southwest
+attack dragon
+yes
+look
+quit
+yes

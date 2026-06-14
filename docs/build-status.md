@@ -1,52 +1,69 @@
-# Build Status - Verification Pass (Milestone 4E)
+# Build Status - Milestone 7B
 
-## Compile Attempt
-- Command: `./build.sh --compile`
-- Date: `2026-06-13`
-- Result: **success**
-- Output artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
-- Verification rerun date: `2026-06-13`
-  - Result: **success** after pirate subsystem baseline integration
-- Output artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`
+Date: 2026-06-13
 
-## Prior Blocking Issues (Resolved)
-1. Inform 7 parser errors from generated travel phrases using `openadventure ...` phrase naming and table row-context access.
-2. Phrase dispatch helpers were rewritten to parser-safe internal names and explicit table field passing.
-3. Build output directory `OpenAdventure.inform/Build` was missing, causing an Inform pipeline file-open failure during stage 15.
-4. Troll handler parser/type issues in `OpenAdventure_Troll.ni` (`openadventure-runtime-check-result` assignment ambiguity and `thing has state` checks) were corrected in Milestone 4B verification.
+## Current Result
 
-## Current Build Configuration
-- Source assembly: `build.sh` now composes:
-  - generated room/object/travel/vocabulary files
-  - runtime files:
-    - `OpenAdventure_State.ni`
-    - `OpenAdventure_Conditions.ni`
-    - `OpenAdventure_Plover.ni`
-    - `OpenAdventure_Troll.ni`
-    - `OpenAdventure_Dwarves.ni`
-    - `OpenAdventure_Pirate.ni`
-    - `OpenAdventure_Runtime.ni`
-- Output target: `OpenAdventure.inform/Build/OpenAdventure.z8`
-- Project layout used for Inform compilation:
-  - `OpenAdventure.inform/Source/OpenAdventure.generated.ni`
-  - `OpenAdventure.inform/Materials/` (exists for Inform project scaffolding)
-  - `OpenAdventure.inform/Build/` (created for artifacts)
+- Default command: `./build.sh --compile`
+- Default target: `Inform6/16` -> `OpenAdventure.inform/Build/OpenAdventure.z8`
+- Result: **blocked**
+- Blocking stage: Inform 6 story-file emission
+- Error: current generated I6 exceeds the Z-machine readable-memory limit:
+  - readable memory used: `110160` bytes
+  - Z-machine maximum: `65536` bytes
 
-## Missing Source Components
-- No required source components are currently missing for baseline compilation.
-- Gameplay systems still intentionally stubbed for later milestones (bear, dragon, cave-closing, scoring/endgame behaviors).
-- Dwarf baseline behavior is implemented; full generated-edge movement parity remains a hardening task.
-- Pirate baseline behavior is implemented; final-treasure scoring integration remains a hardening task.
-- `frotz/dfrotz` and transcript-driven regression runner remain unavailable in the current environment.
+The previous false-positive artifact has been corrected. `ni` output is now written to:
 
-## Recommended Next Actions
-1. Keep compilation baseline stable and add regression checks in `test.sh`/`tests/smoke/` for successful generation + compilation.
-2. Wire non-direct travel condition evaluation and special-handler behavior in later milestones.
-3. Add transcript-driven test targets once gameplay behavior reaches a stable baseline.
+- `OpenAdventure.inform/Build/OpenAdventure.i6`
 
-## Latest Verification (Milestone 4E)
-- Command results:
-  - `./build.sh --compile` ✅
-  - `./test.sh` ✅
-  - all executable smoke tests in `tests/smoke/` ✅ (`01-build-artifacts.sh`, `03-troll-system.sh`, `04-dwarf-system.sh`, `05-pirate-system.sh`)
-  - No generated-file integrity warnings after this pass.
+`OpenAdventure.inform/Build/OpenAdventure.z8` is only written after `inform6` successfully creates and validates a Z-machine story header. On the current source, no `.z8` file is produced.
+
+## Build Chain
+
+1. `tools/yaml2inform.py` regenerates `generated/*.ni` from `source/adventure.yaml`.
+2. `build.sh` composes `OpenAdventure.inform/Source/OpenAdventure.generated.ni`.
+3. `ni` translates Inform 7 to Inform 6 source:
+   - `OpenAdventure.inform/Build/OpenAdventure.i6`
+4. `inform6` attempts to compile the I6 intermediate:
+   - Z-machine default: `-v8`
+   - Glulx diagnostic path: `-G`
+5. `build.sh` validates the final artifact header before reporting success.
+6. `cBlorb`/inblorb packaging remains optional and is not reached by the current default compile.
+
+## Verification Commands
+
+Default Z-machine target:
+
+```bash
+./build.sh --compile
+```
+
+Result: fails at `inform6` with readable-memory overflow and produces no `.z8`.
+
+Diagnostic Glulx target:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 \
+./build.sh --compile
+```
+
+Result: succeeds and produces:
+
+- `OpenAdventure.inform/Build/OpenAdventure.ulx`
+- `file`: `Glulx game data (Version 3.1.0) Compiled by Inform`
+
+## Test Status
+
+- `./test.sh`: **fails**, because the default Z-machine compile fails.
+- Glulx diagnostic command:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 \
+./test.sh
+```
+
+Result: **passes** generation, compile, artifact-header validation, and smoke tests.
+
+## Remaining Artifact Blocker
+
+Milestone 7B corrected BUG-7A-001's mislabeled artifact behavior, but did not produce a runnable Z-machine story file. The remaining blocker is BUG-7A-002: the current Inform 7 output uses too much Z-machine readable memory. Resolving that requires source/runtime size reduction, a different Z-machine generation strategy, or accepting Glulx as the runnable artifact target.

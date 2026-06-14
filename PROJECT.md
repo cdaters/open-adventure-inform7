@@ -28,8 +28,9 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 | 5D | Cave closing system | ✅ Complete | warning clocks, exit restrictions, repository transition, reincarnation/scoring integration, compile/test verification |
 | 6A | Endgame completion | ✅ Complete | repository puzzle, blast outcomes, final scoring, ranking, compile/test verification |
 | 6B | Introduction and information system | ✅ Complete | startup, help menu, about/info/news, credits, version, compile/test verification |
+| 7A | Full parity and walkthrough verification | ✅ Complete | transcript framework, suite manifest, walkthrough docs, known differences, compile/test verification |
 
-## Current reality (after Milestone 6B)
+## Current reality (after Milestone 7A)
 
 ### Completed
 
@@ -45,6 +46,7 @@ This repository is implementing Open Adventure in Inform 7 from a generated worl
 - Cave-closing baseline behavior is implemented and verified by smoke tests.
 - Endgame baseline behavior is implemented and verified by smoke tests.
 - Information system baseline behavior is implemented and verified by smoke tests.
+- Transcript framework and parity inventory are implemented and verified by smoke tests.
 - Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
 
 ### In progress / Remaining
@@ -62,7 +64,8 @@ Current pipeline command is:
 - `./build.sh --compile`
 
 Current build artifact:
-- `OpenAdventure.inform/Build/OpenAdventure.z8`
+- No default `.z8` artifact is currently emitted; `inform6` blocks on Z-machine readable-memory overflow.
+- Diagnostic artifact: `OpenAdventure.inform/Build/OpenAdventure.ulx` when built with `OPENADVENTURE_INFORM_FORMAT=Inform6/32`.
 
 ## Gameplay completion status
 
@@ -80,12 +83,13 @@ Current build artifact:
 | Scoring | Baseline implemented; terminal endgame scoring and ranking integrated |
 | Endgame | Baseline implemented; transcript parity pending |
 | Information | Baseline implemented; startup/help/about/info/news/version smoke coverage present |
+| Transcript parity | Framework and manifest implemented; execution blocked by non-runnable default artifact |
 
 ## Current testing status
 
 - Build smoke tests: available.
 - Inform compilation: automated.
-- Transcript/regression suite: still to be added.
+- Transcript/regression suite: manifest and dry-run validation available; executable replay blocked until a real story artifact is produced.
 
 See:
 - `docs/testing-environment.md`

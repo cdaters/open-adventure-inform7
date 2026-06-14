@@ -1,0 +1,11 @@
+look
+east
+west
+south
+north
+east
+plugh
+look
+plugh
+quit
+yes

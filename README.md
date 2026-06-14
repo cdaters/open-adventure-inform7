@@ -2,7 +2,7 @@
 
 Inform 7 reconstruction of the original Colossal Cave Adventure (Open Adventure), built from generated world data (`source/adventure.yaml`) with a lightweight runtime architecture for parser, state, and travel dispatch.
 
-## Current status (Milestone 6B refresh)
+## Current status (Milestone 7B refresh)
 
 Current snapshot after work completed up through:
 - Milestone 3E (first compilable Inform 7 build)
@@ -19,12 +19,14 @@ Current snapshot after work completed up through:
 - Milestone 5D (Cave-closing warning and repository transition baseline)
 - Milestone 6A (Endgame repository, blast outcomes, final scoring, and ranking baseline)
 - Milestone 6B (Introduction, help, credits, about, news, info, and version information)
+- Milestone 7A (Transcript regression framework, walkthrough inventory, parity report, and known-differences inventory)
+- Milestone 7B (Build-chain correction through `inform6`, artifact-header validation, and Z-machine blocker documentation)
 
 ## What is working today
 
-- Inform 7 compilation is functional:
-  - `./build.sh --compile` completes.
-  - Build artifact: `OpenAdventure.inform/Build/OpenAdventure.z8`.
+- Inform 7 translation is functional, and the build pipeline now invokes `inform6` instead of writing I6 source as `.z8`.
+  - Default `./build.sh --compile` is blocked at the Z-machine `inform6` stage by readable-memory overflow.
+  - Diagnostic Glulx builds can produce `OpenAdventure.inform/Build/OpenAdventure.ulx`.
 - Generated core world generation still drives rooms, objects, travel rows, vocabulary, and base gameplay constants.
 - Runtime scaffolding is present:
   - `OpenAdventure_State.ni`
@@ -58,6 +60,8 @@ Current snapshot after work completed up through:
 - Cave-closing warning clocks, exit restrictions, repository transition, and reincarnation/scoring integration (implemented baseline)
 - Endgame repository, blast outcomes, dwarf disturbance ending, final scoring, and ranking output (implemented baseline)
 - Startup presentation, HELP menu, ABOUT, INFO, NEWS, credits, and version information (implemented baseline)
+- Transcript manifest and dry-run validation framework for startup, travel, plover, troll, dwarves, pirate, scoring, reincarnation, bear, dragon, cave closing, endgame, full solve, treasure collection, and complete endgame.
+- Corrected build-chain validation prevents Inform 6 source from being reported as a runnable `.z8`.
 - Full generated-edge dwarf/pirate movement parity (pending hardening)
 - Final parser/UX alignment and transcript regression harness
 
@@ -87,6 +91,7 @@ Current snapshot after work completed up through:
 | 5D | ✅ | Cave-closing baseline + repository transition + compile/smoke verification |
 | 6A | ✅ | Endgame baseline + blast outcomes + final scoring/ranking + compile/smoke verification |
 | 6B | ✅ | Information system baseline + startup/help/about/info/news/version + compile/smoke verification |
+| 7A | ✅ | Transcript framework + parity/walkthrough/known-differences docs; execution blocked by non-runnable default artifact |
 
 ## Build and validation entry points
 
@@ -116,6 +121,9 @@ See:
 - `docs/architecture/cave-closing-system.md` — cave-closing clocks and repository transition behavior
 - `docs/architecture/endgame-system.md` — repository endgame, blast outcomes, final scoring, and ranking behavior
 - `docs/architecture/information-system.md` — startup, help, credits, about, info, news, and version behavior
+- `docs/parity-report.md` — Milestone 7A parity status and transcript framework report
+- `docs/walkthrough.md` — canonical solve, treasure-collection, and endgame transcript references
+- `docs/known-differences.md` — categorized discrepancy inventory
 
 ## References
 

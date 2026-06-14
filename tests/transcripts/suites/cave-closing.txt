@@ -1,0 +1,12 @@
+# Focused local cave-closing smoke sequence; complete closure uses upstream panic/endgame logs.
+no
+seed 1318612053
+east
+take lamp
+plugh
+on
+south
+down
+look
+quit
+yes

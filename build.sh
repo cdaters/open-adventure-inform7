@@ -12,8 +12,9 @@ INFORM_BIN_ARG="${OPENADVENTURE_INFORM_BIN:-}"
 INFORM_RESOURCES_HINT="${OPENADVENTURE_INFORM_RESOURCES:-/Applications/Inform.app/Contents/Resources}"
 INFORM_FORMAT="${OPENADVENTURE_INFORM_FORMAT:-$PROJECT_DEFAULT_FORMAT}"
 NI_BIN_ARG="${OPENADVENTURE_NI_BIN:-}"
+INFORM6_BIN_ARG="${OPENADVENTURE_INFORM6_BIN:-}"
 CBLORB_BIN_ARG="${OPENADVENTURE_CBLORB_BIN:-}"
-BUILD_ARTIFACT="${OPENADVENTURE_BUILD_ARTIFACT:-$PROJECT_DEFAULT_ARTIFACT}"
+BUILD_ARTIFACT="${OPENADVENTURE_BUILD_ARTIFACT:-}"
 
 GENERATE=1
 COMPILE=0
@@ -39,6 +40,7 @@ Environment overrides:
   OPENADVENTURE_INFORM_RESOURCES  Inform Resources directory
   OPENADVENTURE_INFORM_FORMAT    Format passed to Inform compiler (default: Inform6/16)
   OPENADVENTURE_NI_BIN           ni compiler binary
+  OPENADVENTURE_INFORM6_BIN      Inform 6 compiler binary
   OPENADVENTURE_CBLORB_BIN       cBlorb binary
   OPENADVENTURE_INFORM_PROJECT    Inform project directory
   OPENADVENTURE_BUILD_ARTIFACT    Expected output artifact path
@@ -56,9 +58,14 @@ resolve_binary() {
   local candidates=(
     "$name"
     "/Applications/Inform.app/Contents/MacOS/$name"
-    "/Applications/Inform.app/Contents/MacOS/ni"
-    "/Applications/Inform.app/Contents/MacOS/Inform"
   )
+
+  if [ "$name" != "inform6" ] && [ "$name" != "cBlorb" ]; then
+    candidates+=(
+      "/Applications/Inform.app/Contents/MacOS/ni"
+      "/Applications/Inform.app/Contents/MacOS/Inform"
+    )
+  fi
 
   for candidate in "${candidates[@]}"; do
     if command -v "$candidate" >/dev/null 2>&1; then
@@ -94,6 +101,17 @@ resolve_inform_resources() {
   fi
 
   return 1
+}
+
+default_artifact_for_format() {
+  case "$INFORM_FORMAT" in
+    Inform6/32|Glulx|glulx)
+      echo "$PROJECT_DIR/Build/OpenAdventure.ulx"
+      ;;
+    *)
+      echo "$PROJECT_DEFAULT_ARTIFACT"
+      ;;
+  esac
 }
 
 run_generator() {
@@ -243,6 +261,7 @@ compose_source() {
 run_compile() {
   local inform_bin="$1"
   local inform_resources="$2"
+  local inform6_bin="$3"
 
   if [ ! -d "$PROJECT_DIR" ]; then
     echo "[build] error: Inform project missing: $PROJECT_DIR" >&2
@@ -251,8 +270,83 @@ run_compile() {
 
   compose_source
   mkdir -p "$(dirname "$BUILD_ARTIFACT")"
-  echo "[build] compiling Inform source from: $PROJECT_SOURCE_FILE"
-  "$inform_bin" -at "$inform_resources" -source "$PROJECT_SOURCE_FILE" -release -format="$INFORM_FORMAT" -o "$BUILD_ARTIFACT"
+  local i6_source="$PROJECT_DIR/Build/OpenAdventure.i6"
+  local tmp_artifact="$BUILD_ARTIFACT.tmp"
+  local i6_library_path
+  i6_library_path="$(resolve_inform6_library "$inform_resources")"
+  if [ -z "$i6_library_path" ]; then
+    echo "[build] error: Inform 6 library path not found below $inform_resources" >&2
+    return 1
+  fi
+
+  echo "[build] translating Inform 7 source from: $PROJECT_SOURCE_FILE"
+  "$inform_bin" -at "$inform_resources" -source "$PROJECT_SOURCE_FILE" -release -format="$INFORM_FORMAT" -o "$i6_source"
+
+  rm -f "$tmp_artifact" "$BUILD_ARTIFACT"
+  echo "[build] compiling Inform 6 intermediate: $i6_source"
+  local inform6_status=0
+  case "$INFORM_FORMAT" in
+    Inform6/32|Glulx|glulx)
+      "$inform6_bin" -E2w~S~DG "+$i6_library_path" "$i6_source" "$tmp_artifact" || inform6_status=$?
+      ;;
+    *)
+      "$inform6_bin" -E2w~S~Dv8 "+$i6_library_path" "$i6_source" "$tmp_artifact" || inform6_status=$?
+      ;;
+  esac
+
+  if [ "$inform6_status" -ne 0 ]; then
+    return "$inform6_status"
+  fi
+
+  mv "$tmp_artifact" "$BUILD_ARTIFACT"
+  validate_story_artifact "$BUILD_ARTIFACT"
+}
+
+resolve_inform6_library() {
+  local inform_resources="$1"
+  if [ -d "$inform_resources/Library/6.11" ]; then
+    echo "$inform_resources/Library/6.11"
+    return 0
+  fi
+  if [ -d "$inform_resources/Library" ]; then
+    local candidate
+    candidate="$(find "$inform_resources/Library" -maxdepth 1 -mindepth 1 -type d | sort | tail -n 1)"
+    if [ -n "$candidate" ]; then
+      echo "$candidate"
+      return 0
+    fi
+  fi
+  return 1
+}
+
+validate_story_artifact() {
+  local artifact="$1"
+  if [ ! -s "$artifact" ]; then
+    echo "[build] error: story artifact was not created: $artifact" >&2
+    return 1
+  fi
+
+  case "$artifact" in
+    *.z[1-8]|*.Z[1-8])
+      local version
+      version="$(od -An -tu1 -N1 "$artifact" | tr -d '[:space:]')"
+      if [ -z "$version" ] || [ "$version" -lt 1 ] || [ "$version" -gt 8 ]; then
+        echo "[build] error: invalid Z-machine story header in $artifact" >&2
+        return 1
+      fi
+      ;;
+    *.ulx|*.ULX)
+      local magic
+      magic="$(head -c 4 "$artifact")"
+      if [ "$magic" != "Glul" ]; then
+        echo "[build] error: invalid Glulx story header in $artifact" >&2
+        return 1
+      fi
+      ;;
+    *)
+      echo "[build] warning: unknown story artifact extension: $artifact" >&2
+      ;;
+  esac
 }
 
 run_package() {
@@ -319,9 +413,6 @@ while (($# > 0)); do
       PROJECT_DIR="$2"
       PROJECT_SOURCE_FILE="$PROJECT_DIR/Source/OpenAdventure.generated.ni"
       PROJECT_DEFAULT_ARTIFACT="$PROJECT_DIR/Build/OpenAdventure.z8"
-      if [ -z "${OPENADVENTURE_BUILD_ARTIFACT:-}" ]; then
-        BUILD_ARTIFACT="$PROJECT_DEFAULT_ARTIFACT"
-      fi
       shift
       ;;
     --artifact)
@@ -348,6 +439,10 @@ while (($# > 0)); do
   esac
   shift
 done
+
+if [ -z "$BUILD_ARTIFACT" ]; then
+  BUILD_ARTIFACT="$(default_artifact_for_format)"
+fi
 
 if [ "$CLEAN" -eq 1 ]; then
   rm -rf "$ARTIFACT_DIR"
@@ -379,8 +474,14 @@ if [ "$COMPILE" -eq 1 ] || [ "$PACKAGE" -eq 1 ]; then
     exit 1
   fi
 
+  INFORM6_BIN="$(resolve_binary inform6 "$INFORM6_BIN_ARG")"
+  if [ -z "$INFORM6_BIN" ]; then
+    echo "[build] error: Inform 6 compiler not found; install or set OPENADVENTURE_INFORM6_BIN." >&2
+    exit 1
+  fi
+
   if [ "$COMPILE" -eq 1 ]; then
-    if ! run_compile "$INFORM_BIN" "$INFORM_RESOURCES"; then
+    if ! run_compile "$INFORM_BIN" "$INFORM_RESOURCES" "$INFORM6_BIN"; then
       echo "[build] compile step failed." | tee -a "$LOG_FILE"
       exit 1
     fi
