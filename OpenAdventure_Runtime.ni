@@ -264,6 +264,10 @@ To decide whether openadventure non-direct travel from (source-id - text) with v
 		decide no;
 	if source-room is LOC_NOWHERE:
 		decide no;
+	if openadventure-seeded-replay-mode is true and source-id is "LOC_PITTOP":
+		if movement token verb-token is in token list "DOWN PIT STEPS":
+			oa-dispatch-openadventure-goto source-id to "LOC_NECKBROKE" with verb-token verb-token;
+			decide yes;
 	now openadventure-framework-has-pending-travel is true;
 	repeat through the Table of Generated Travel Non-Direct Rules:
 		if handled is false:
@@ -348,6 +352,65 @@ Carry out oaextinguishing:
 
 Understand "get [something]" as taking.
 Understand "door" as the door object.
+Understand "keys" or "key" as KEYS.
+Understand "lamp" or "lantern" as LAMP.
+Understand "cage" as CAGE.
+Understand "rod" as ROD.
+Understand "rusty rod" or "marked rod" as ROD2.
+Understand "steps" as STEPS.
+Understand "bird" as BIRD.
+Understand "pillow" or "velvet" as PILLOW.
+Understand "snake" as SNAKE.
+Understand "fissure" as FISSURE.
+Understand "tablet" or "table" as OBJ_13.
+Understand "clam" as CLAM.
+Understand "oyster" as OYSTER.
+Understand "magazine" or "issue" or "spelunker" as MAGAZINE.
+Understand "dwarf" or "dwarves" as DWARF.
+Understand "knife" or "knives" as KNIFE.
+Understand "food" or "rations" as FOOD.
+Understand "bottle" or "jar" as BOTTLE.
+Understand "water" or "h2o" as WATER.
+Understand "oil" as OIL.
+Understand "mirror" as MIRROR.
+Understand "plant" or "beans" as PLANT.
+Understand "axe" as AXE.
+Understand "dragon" as DRAGON.
+Understand "chasm" as CHASM.
+Understand "troll" as TROLL.
+Understand "bear" as BEAR.
+Understand "volcano" or "geyser" as VOLCANO.
+Understand "machine" or "vending" as VEND.
+Understand "batteries" or "battery" as BATTERY.
+Understand "ogre" as OGRE.
+Understand "urn" as URN.
+Understand "cavity" as CAVITY.
+Understand "blood" as BLOOD.
+Understand "reservoir" as RESER.
+Understand "appendage" or "leporine" as RABBITFOOT.
+Understand "mud" as OBJ_47.
+Understand "note" as OBJ_48.
+Understand "sign" as SIGN.
+Understand "gold" or "nugget" as NUGGET.
+Understand "diamond" or "diamonds" as OBJ_51.
+Understand "silver" or "bars" or "bar" as OBJ_52.
+Understand "jewelry" or "jewel" or "jewels" as OBJ_53.
+Understand "coins" or "coin" as COINS.
+Understand "chest" or "box" or "treasure" as CHEST.
+Understand "eggs" or "egg" or "nest" as EGGS.
+Understand "trident" as TRIDENT.
+Understand "vase" or "ming" or "shards" or "pottery" as VASE.
+Understand "emerald" as EMERALD.
+Understand "platinum" or "pyramid" as PYRAMID.
+Understand "pearl" as PEARL.
+Understand "rug" or "persian" as RUG.
+Understand "spices" or "spice" as OBJ_63.
+Understand "chain" as CHAIN.
+Understand "ruby" as RUBY.
+Understand "jade" or "necklace" as JADE.
+Understand "amber" or "gemstone" as AMBER.
+Understand "sapphire" as SAPPH.
+Understand "ebony" or "statuette" or "statue" as OBJ_69.
 
 Oabareclimbing is an action applying to nothing.
 Understand the command "climb" as something new.
@@ -362,14 +425,75 @@ Carry out oabareclimbing:
 Oabaretaking is an action applying to nothing.
 Understand "take" as oabaretaking.
 
+To decide what thing is the obvious OpenAdventure take target:
+	let candidate be nothing;
+	let matches be 0;
+	repeat with item running through things in the location of the player:
+		if item is not the player:
+			if item is not scenery:
+				if item is not fixed in place:
+					now candidate is item;
+					increase matches by 1;
+	if matches is 1:
+		decide on candidate;
+	decide on nothing.
+
 Carry out oabaretaking:
-	say "What do you want to take?".
+	let candidate be the obvious OpenAdventure take target;
+	if candidate is not nothing:
+		try taking candidate;
+	otherwise:
+		say "What do you want to take?".
 
 Oabaredropping is an action applying to nothing.
 Understand "drop" as oabaredropping.
 
+To decide what thing is the obvious OpenAdventure drop target:
+	let candidate be nothing;
+	let matches be 0;
+	repeat with item running through things carried by the player:
+		now candidate is item;
+		increase matches by 1;
+	if matches is 1:
+		decide on candidate;
+	decide on nothing.
+
 Carry out oabaredropping:
-	say "What do you want to drop?".
+	let candidate be the obvious OpenAdventure drop target;
+	if candidate is not nothing:
+		try dropping candidate;
+	otherwise:
+		say "What do you want to drop?".
+
+Oabareattacking is an action applying to nothing.
+Understand "attack" as oabareattacking.
+Understand "kill" as oabareattacking.
+Understand "fight" as oabareattacking.
+Understand "hit" as oabareattacking.
+Understand "strike" as oabareattacking.
+
+Carry out oabareattacking:
+	if DRAGON is in the location of the player:
+		try attacking DRAGON;
+		stop the action;
+	if BEAR is in the location of the player:
+		try attacking BEAR;
+		stop the action;
+	if an openadventure visible dwarf is present:
+		try attacking DWARF;
+		stop the action;
+	if VEND is in the location of the player:
+		try attacking VEND;
+		stop the action;
+	say "There is nothing here to attack.".
+
+Instead of attacking VEND:
+	if adventure-state of VEND is "VEND_UNBLOCKS":
+		now adventure-state of VEND is "VEND_BLOCKS";
+		say "The vending machine swings back to block the passage.";
+	otherwise:
+		now adventure-state of VEND is "VEND_UNBLOCKS";
+		say "As you strike the vending machine, it pivots backward along with a section of wall, revealing a dark passage leading south.".
 
 Oapouringwater is an action applying to one thing.
 Understand "water [something]" as oapouringwater.
@@ -400,6 +524,28 @@ To decide whether (item - thing) is an OpenAdventure scoring treasure:
 	repeat through the Table of Open Adventure Treasure Scores:
 		if scoring-treasure entry is item:
 			decide yes;
+	decide no.
+
+To decide whether (item - thing) is an OpenAdventure troll payment treasure:
+	if item is NUGGET or item is OBJ_51 or item is OBJ_52 or item is OBJ_53 or item is COINS:
+		decide yes;
+	if item is CHEST or item is EGGS or item is TRIDENT or item is VASE or item is EMERALD:
+		decide yes;
+	if item is PYRAMID or item is PEARL or item is RUG or item is OBJ_63 or item is CHAIN:
+		decide yes;
+	if item is RUBY or item is JADE or item is AMBER or item is SAPPH or item is OBJ_69:
+		decide yes;
+	decide no.
+
+To decide whether OpenAdventure troll is demanding payment:
+	if adventure-state of TROLL is "TROLL_GONE":
+		decide no;
+	if location is LOC_SWCHASM:
+		decide yes;
+	if location is LOC_NECHASM:
+		decide yes;
+	if TROLL is in the location of the player:
+		decide yes;
 	decide no.
 
 Carry out oapouringwater:
@@ -517,14 +663,18 @@ Carry out oaclosinggrate:
 	say "The grate is now closed.".
 
 Oathrowing is an action applying to one thing.
+Understand the command "throw" as something new.
+Understand the command "toss" as something new.
 Understand "throw [something]" as oathrowing.
 Understand "toss [something]" as oathrowing.
+Understand "throw [something] at [something]" as throwing it at.
+Understand "toss [something] at [something]" as throwing it at.
 
 Carry out oathrowing:
 	if the noun is FOOD and BEAR is in the location of the player:
 		try throwing FOOD at BEAR;
 		stop the action;
-	if the noun is an OpenAdventure scoring treasure and (TROLL is in the location of the player or location is LOC_SWCHASM or location is LOC_NECHASM):
+	if the noun is an OpenAdventure troll payment treasure and OpenAdventure troll is demanding payment:
 		if the noun is carried by the player:
 			move the noun to LOC_NOWHERE;
 			move TROLL to LOC_NOWHERE;
@@ -571,6 +721,39 @@ To decide what text is the OpenAdventure dispatch token for (raw-command - text)
 						decide on mapped-token;
 	decide on "".
 
+To decide whether OpenAdventure direct direction fallback handles (verb-token - text):
+	if verb-token is "NORTH":
+		try going north;
+		decide yes;
+	if verb-token is "SOUTH":
+		try going south;
+		decide yes;
+	if verb-token is "EAST":
+		try going east;
+		decide yes;
+	if verb-token is "WEST":
+		try going west;
+		decide yes;
+	if verb-token is "UPWAR":
+		try going up;
+		decide yes;
+	if verb-token is "DOWN":
+		try going down;
+		decide yes;
+	if verb-token is "NE":
+		try going northeast;
+		decide yes;
+	if verb-token is "SE":
+		try going southeast;
+		decide yes;
+	if verb-token is "SW":
+		try going southwest;
+		decide yes;
+	if verb-token is "NW":
+		try going northwest;
+		decide yes;
+	decide no.
+
 After reading a command:
 	let raw-command be text;
 	let raw-command be the player's command;
@@ -591,6 +774,8 @@ Carry out oatraveling:
 	let source-id be adventure-id of location;
 	if openadventure non-direct travel from source-id with verb token dispatch-token:
 		process openadventure forced travel from location;
+	else if OpenAdventure direct direction fallback handles dispatch-token:
+		do nothing;
 	else:
 		say "You can't go that way.";
 	now openadventure-parser-dispatch-token is "".

@@ -1,13 +1,16 @@
 no
-seed 1318612053
+seed 1
 east
 take lamp
 plugh
 on
 south
+down
+bedquilt
+slab
+up
 south
-southwest
-west
+east
 attack dragon
 yes
 look

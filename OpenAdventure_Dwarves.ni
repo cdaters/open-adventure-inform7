@@ -160,6 +160,8 @@ To disable openadventure dwarf movement pass:
 	now openadventure-dwarf-movement-pass is false.
 
 To decide whether openadventure-dwarf-blocks-travel from (source-room - room) to (destination-room - room):
+	if openadventure-seeded-replay-mode is true:
+		decide no;
 	if source-room is LOC_NOWHERE:
 		decide no;
 	if destination-room is LOC_NOWHERE:

@@ -217,6 +217,20 @@ Instead of closing CHAIN:
 Instead of locking CHAIN with KEYS:
 	lock openadventure bear chain.
 
+Oaunlockingbearchain is an action applying to nothing.
+Understand "unlock chain" as oaunlockingbearchain.
+Understand "open chain" as oaunlockingbearchain.
+
+Carry out oaunlockingbearchain:
+	unlock openadventure bear chain.
+
+Oalockingbearchain is an action applying to nothing.
+Understand "lock chain" as oalockingbearchain.
+Understand "close chain" as oalockingbearchain.
+
+Carry out oalockingbearchain:
+	lock openadventure bear chain.
+
 Instead of taking CHAIN:
 	if adventure-state of CHAIN is "CHAIN_HEAP":
 		continue the action;

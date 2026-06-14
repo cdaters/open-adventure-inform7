@@ -1,5 +1,5 @@
 no
-seed 1318612053
+seed 1
 east
 take lamp
 take keys
