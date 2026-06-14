@@ -6420,6 +6420,12 @@ To oa-dispatch-openadventure-goto (source-id - text) to (destination-id - text) 
 		now openadventure-runtime-check-result is false;
 		stop;
 	move the player to destination-room;
+	if destination-room is LOC_NECKBROKE or destination-room is LOC_NOMAKE or destination-room is LOC_FOOTSLIP or destination-room is LOC_GRUESOME:
+		now openadventure-framework-has-pending-travel is false;
+		now openadventure-runtime-check-result is true;
+		if openadventure-subsystem-reincarnation is true:
+			handle openadventure death caused by "fatal_travel";
+		stop;
 	run openadventure post-travel hooks for source source-room destination destination-room verb verb-token;
 	now openadventure-framework-has-pending-travel is false;
 	now openadventure-runtime-check-result is true;
@@ -6483,6 +6489,50 @@ Understand "seed [number]" as oaseeding.
 Carry out oaseeding:
 	seed the random-number generator with the number understood;
 	say "Seed set to [the number understood].".
+
+Oalighting is an action applying to nothing.
+Understand "on" as oalighting.
+Understand "lamp on" as oalighting.
+Understand "lantern on" as oalighting.
+Understand "light" as oalighting.
+Understand "light lamp" as oalighting.
+Understand "light lantern" as oalighting.
+Understand "turn on lamp" as oalighting.
+Understand "turn lamp on" as oalighting.
+Understand "turn on lantern" as oalighting.
+Understand "turn lantern on" as oalighting.
+
+Carry out oalighting:
+	if LAMP is not carried by the player and LAMP is not in the location of the player:
+		say "You have no source of light.";
+		stop the action;
+	if adventure-state of LAMP is "LAMP_BRIGHT":
+		say "Your lamp is now on.";
+		stop the action;
+	now adventure-state of LAMP is "LAMP_BRIGHT";
+	say "Your lamp is now on.".
+
+Oaextinguishing is an action applying to nothing.
+Understand "off" as oaextinguishing.
+Understand "lamp off" as oaextinguishing.
+Understand "lantern off" as oaextinguishing.
+Understand "extinguish" as oaextinguishing.
+Understand "extinguish lamp" as oaextinguishing.
+Understand "extinguish lantern" as oaextinguishing.
+Understand "turn off lamp" as oaextinguishing.
+Understand "turn lamp off" as oaextinguishing.
+Understand "turn off lantern" as oaextinguishing.
+Understand "turn lantern off" as oaextinguishing.
+
+Carry out oaextinguishing:
+	if LAMP is not carried by the player and LAMP is not in the location of the player:
+		say "You have no source of light.";
+		stop the action;
+	if adventure-state of LAMP is "LAMP_DARK":
+		say "Your lamp is now off.";
+		stop the action;
+	now adventure-state of LAMP is "LAMP_DARK";
+	say "Your lamp is now off.".
 
 To decide what text is the OpenAdventure dispatch token for (raw-command - text):
 	let command-token be raw-command;

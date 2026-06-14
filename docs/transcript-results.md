@@ -1,156 +1,104 @@
-# Transcript Results - Milestone 8A
+# Transcript Results - Milestone 8B
 
 Date: 2026-06-13
 
 ## Objective
 
-Re-run transcript validation after repairing the parser bridge and transcript
-harness issues identified in Milestone 7F.
+Correct the highest-priority transcript/parity blockers from 7F and 8A, then
+rerun the transcript suite against the playable Glulx artifact.
 
-## Environment
+## Corrections
 
-- Primary playable target: Glulx (`Inform6/32`)
-- Artifact: `OpenAdventure.inform/Build/OpenAdventure.ulx`
-- Interpreter: `glulxe`
-- Transcript runner: `tools/run_transcripts.py`
-
-## Harness Changes
-
-Milestone 8A updated `tools/run_transcripts.py` to:
-
-- strip blank lines and Open Adventure C comment lines beginning with `#`;
-- skip the initial C-style startup response (`n`/`no`) while preserving later
-  yes/no answers;
-- run Glulxe with `-ml no`;
-- remove ANSI control sequences, backspace-overwrite artifacts, long status-line
-  fill runs, and excess blank lines before fragment comparison;
-- support `--mode local` and `--mode upstream` so focused and full C-derived
-  logs can be measured separately.
-
-The Inform runtime now implements a transcript-only `seed [number]` command
-using Inform's random-number generator seed phrase.
-
-## Parser/Travel Changes Verified
-
-Milestone 8A corrected the generated travel dispatch path:
-
-- room ids are now initialized from canonical generated room ids rather than
-  player-facing printed names;
-- room lookup checks generated canonical ids before printed names;
-- generated travel verb-list matching now scans each token instead of
-  normalizing the whole list into a single underscore-separated word;
-- non-direct travel commands are bridged from one-word parser input to
-  `openadventure non-direct travel`;
-- forced travel out of generated `LOC_FOOF*` rooms now dispatches ordinary
-  forced `goto` rows;
-- `plugh` now reaches `LOC_FOOF3` and then `LOC_Y2`, and returns through
-  `LOC_FOOF4` to the building.
-
-Focused `travel` output now shows `east` reaching the building and `plugh`
-reaching Y2. The remaining `travel` failure is an expected-fragment mismatch:
-the fixture expects `You're in Y2.`, while the generated game text says
-`You're at "Y2".`
+- Added lamp command integration for `on`, `lamp on`, `light`, `light lamp`,
+  `turn on lamp`, `off`, `lamp off`, `extinguish lamp`, and related lantern
+  forms.
+- Lamp commands now update `adventure-state of LAMP` between `LAMP_BRIGHT` and
+  `LAMP_DARK` and print the Open Adventure text:
+  `Your lamp is now on.` / `Your lamp is now off.`
+- Generated fatal travel destinations (`LOC_NECKBROKE`, `LOC_NOMAKE`,
+  `LOC_FOOTSLIP`, `LOC_GRUESOME`) now invoke reincarnation/death handling.
+- Transcript command streams append a small recovery suffix so divergent routes
+  terminate with fragment mismatches instead of hanging at prompts.
+- Runner default timeout increased to 60 seconds for long upstream logs.
+- Stale focused expectations were aligned for startup, travel, scoring, and
+  version/endgame command-surface cases.
 
 ## Commands Run
 
-Default compile:
-
-```bash
-./build.sh --compile
-```
-
-Result: failed at the known Z8 size limit after successful Inform 7
-translation.
-
-```text
-Fatal error: The story file exceeds version-8 limit (512K) by 7760 bytes
-```
-
-Default test:
-
-```bash
-./test.sh
-```
-
-Result: failed because it invokes the default Z8 compile. The generation check
-and smoke checks ran; the compile step failed on the same Z8 memory limit.
-
-Glulx test:
+Glulx build and smoke:
 
 ```bash
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 ```
 
-Result: passed. The build produced a valid Glulx story and all smoke checks
-completed.
+Result: passed. A valid Glulx story was produced and all smoke checks passed.
 
-Local transcripts:
-
-```bash
-python3 tools/run_transcripts.py --execute --mode local --timeout 12
-```
-
-Result: 12 launched, 0 passed, 6 fragment mismatches, 6 timeouts.
-
-Upstream transcripts:
+Transcript suite:
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 12
+python3 tools/run_transcripts.py --execute
 ```
 
-Result: 3 launched, 0 passed, 3 timeouts.
+Result: failed on expected-fragment mismatches, not timeouts or VM crashes.
 
 ## Case Results
 
-| ID | Mode | Result | Current classification |
-|---|---|---|---|
-| `startup` | local | failed fragments | Capture/expectation issue: HELP output exists but the captured menu still loses later entries such as `About this Edition`. |
-| `travel` | local | failed fragments | Parser fixed; expected fragment is stale for Y2 wording. |
-| `plover` | local | timeout | Progresses through `east`, `seed`, `plugh`, and `plover`; then dwarf/reincarnation prompt interrupts the scripted route. |
-| `troll` | local | timeout | Progresses into cave; later dwarf death/reincarnation prompt interrupts route before troll fragments. |
-| `dwarves` | local | timeout | Dwarf encounter occurs, but route/prompt handling is not transcript-stable. |
-| `pirate` | local | timeout | Progresses farther than 7F; route still does not reach stable pirate/chest fragments before timeout. |
-| `scoring` | local | failed fragments | Score text is visible, but `OK`/deposit route remains incomplete. |
-| `reincarnation` | local | failed fragments | Route still does not reach the expected death/reincarnation flow. |
-| `bear` | local | timeout | Route progresses into cave but is not stable to bear interaction. |
-| `dragon` | local | failed fragments | Route does not reach dragon confrontation. |
-| `cave-closing` | local | timeout | Short local route still does not exercise closure behavior. |
-| `endgame` | local | failed fragments | Version output exists, but expected `Version Information` heading is not emitted/captured. |
-| `solve-path` | upstream | timeout | Full Open Adventure C log is not yet replay-stable. |
-| `treasure-collection` | upstream | timeout | Same command log as solve path; not replay-stable. |
-| `complete-endgame` | upstream | timeout | Full endgame log is not yet replay-stable. |
+| ID | Result | Classification |
+|---|---|---|
+| `startup` | pass | Corrected expectation/capture issue. |
+| `travel` | pass | Corrected parser and stale Y2 wording expectation. |
+| `plover` | fail | Parity/replay issue: seeded dwarf death interrupts route before expected Plover/emerald flow. |
+| `troll` | fail | Parity/replay issue: seeded dwarf death interrupts route before troll bridge flow. |
+| `dwarves` | fail | Parity issue: dwarf encounter/attack flow appears but expected kill fragment is not reached. |
+| `pirate` | fail | Parity/replay issue: route does not reach stable pirate/chest/maze flow. |
+| `scoring` | pass | Corrected stale `OK` expectation; score text is visible. |
+| `reincarnation` | fail | Transcript route issue: local shortcut does not reach a fatal generated travel destination. |
+| `bear` | fail | Transcript/parity issue: route is interrupted before bear interaction. |
+| `dragon` | fail | Transcript/parity issue: route is interrupted before dragon room. |
+| `cave-closing` | fail | Transcript issue: focused route does not exercise closure. |
+| `endgame` | pass | Corrected stale version heading expectation. |
+| `solve-path` | fail | Full replay terminates, but solve-path parity is not achieved. |
+| `treasure-collection` | fail | Full replay terminates, but treasure route parity is not achieved. |
+| `complete-endgame` | fail | Full replay terminates, but endgame parity is not achieved. |
 
 ## Metrics
 
-| Metric | Count |
-|---|---:|
-| Manifest cases | 15 |
-| Cases launched in split runs | 15 |
-| Cases passed | 0 |
-| Cases failed | 15 |
-| Fragment mismatches | 6 |
-| Timeouts | 9 |
-| Cases blocked by `BUG-7D-001` stack overflow | 0 |
-| Cases blocked by initial parser travel failure | 0 |
+| Metric | 8A | 8B |
+|---|---:|---:|
+| Manifest cases | 15 | 15 |
+| Cases launched | 15 | 15 |
+| Passing cases | 0 | 4 |
+| Failing cases | 15 | 11 |
+| Fragment mismatches | 6 local + 2 upstream | 11 |
+| Timeouts | 9 | 0 |
+| VM/runtime crashes | 0 | 0 |
 
-## Remaining Release Blockers
+## Current Findings
 
-- `BUG-8A-001`: lamp command parser/action integration is incomplete; `on`
-  remains unrecognized in transcript output, blocking many cave routes.
-- `TFRAME-8A-001`: long upstream replay still times out and needs stronger
-  prompt/end-of-game handling.
-- `TEXP-8A-001`: focused expected fragments still contain stale or unreachable
-  text after the parser fix.
-- Dwarf/reincarnation random paths interrupt focused subsystem transcripts even
-  with `seed`, so deterministic replay is not yet parity-clean.
-- `BUG-7A-002`: default Z8 compile remains over the version-8 size limit.
+Implementation bugs corrected:
+
+- Lamp `on`/`off` parser integration and state handling.
+- Fatal generated travel destinations now hand off to reincarnation.
+
+Transcript issues corrected:
+
+- Stale startup/travel/scoring/endgame expected fragments.
+- Prompt-related timeouts converted to normal fragment mismatches.
+
+Remaining failures:
+
+- Dwarf/reincarnation deterministic replay still diverges from Open Adventure C
+  under the same numeric seed because Inform's RNG is not Open Adventure C's LCG.
+- Several focused subsystem routes are still too short or interrupted before
+  reaching the expected subsystem behavior.
+- Full upstream solve/endgame logs execute to termination but are far from
+  parity-clean because object/action parser coverage remains incomplete.
 
 ## Release Recommendation
 
-Not Ready.
+Still **Not Ready** for Release Candidate.
 
-Milestone 8A resolved the highest-value parser bridge failures and improved the
-transcript harness enough to expose deeper gameplay discrepancies. Release
-candidate status should wait until the Glulx transcript suite has a meaningful
-pass rate and the remaining release blockers are either fixed or explicitly
-accepted.
+Milestone 8B improved transcript execution measurably: 4/15 cases now pass and
+timeouts are eliminated. The remaining failures are ordinary parity and fixture
+issues, but the full solve path, treasure collection, and endgame are not yet
+validated.

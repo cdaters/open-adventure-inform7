@@ -149,7 +149,8 @@ def sanitized_commands(path: Path) -> bytes:
             continue
         saw_command = True
         lines.append(raw)
-    return ("\n".join(lines) + "\n\n").encode("utf-8")
+    recovery = ["yes", "quit", "yes"]
+    return ("\n".join(lines + recovery) + "\n\n").encode("utf-8")
 
 
 def runtime_failure(output: str) -> str | None:
@@ -220,7 +221,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="validate files without executing")
     parser.add_argument("--execute", action="store_true", help="execute transcripts")
     parser.add_argument("--mode", choices=("local", "upstream"), help="run only cases with this manifest mode")
-    parser.add_argument("--timeout", type=int, default=20, help="per-transcript interpreter timeout in seconds")
+    parser.add_argument("--timeout", type=int, default=60, help="per-transcript interpreter timeout in seconds")
     args = parser.parse_args()
 
     manifest = args.manifest if args.manifest.is_absolute() else ROOT / args.manifest

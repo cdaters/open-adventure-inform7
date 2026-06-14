@@ -1,85 +1,78 @@
 # Known Differences
 
-Milestone 8A updates the known-difference inventory after repairing the
-generated travel parser bridge and improving transcript replay.
+Milestone 8B updates the known-difference inventory after lamp command fixes,
+fatal-travel death integration, transcript expectation cleanup, and full-suite
+replay.
 
 ## Bugs
 
 | ID | Area | Difference | Impact | Status |
 |---|---|---|---|---|
-| `BUG-7A-001` | build artifact | Corrected in Milestone 7B: `.z8` is no longer populated with ASCII Inform 6 source. | No longer masks artifact failures. | Resolved |
-| `BUG-7A-002` | Z8 target size | Default Z8 compile still overflows the version-8 readable-memory/story-size limits. Milestone 8A measured `exceeds version-8 limit (512K) by 7760 bytes`. | Blocks Z8 release; does not block Glulx-only development. | Open |
-| `BUG-7D-001` | Glulx runtime | Corrected in Milestone 7E: recursive carried-by-player predicate caused `Stack overflow in callstub`. | Startup/transcript execution no longer crashes. | Resolved |
-| `BUG-7E-001` | initial player placement | Corrected in Milestone 7E: player now starts in `LOC_START`. | Startup/travel smoke output is stable. | Resolved |
-| `BUG-7F-001` | parser/travel | Generated one-word motion/location vocabulary was not routed to generated non-direct travel. | Previously blocked most travel transcripts at the road. | Reduced/resolved in 8A for generated one-word travel tokens. |
-| `BUG-7F-002` | parser/magic travel | `xyzzy`/`plugh` generated magic rows were not command-accessible. | Previously blocked cave shortcut and Plover/Y2 routing. | Reduced/resolved in 8A for generated magic rows. |
-| `BUG-7F-003` | scoring output | Score output still includes Inform standard score text and/or capture-overwritten custom text. | Blocks clean scoring transcript parity. | Open |
-| `BUG-8A-001` | lamp/action parser | `on` remains unrecognized in transcript output, so lamp lighting does not work through the current command surface. | Release blocker: prevents stable cave solve, plover, troll, bear, dragon, and endgame transcript routes. | Open |
+| `BUG-7A-001` | build artifact | `.z8` is no longer populated with ASCII Inform 6 source. | Artifact validation is meaningful. | Resolved |
+| `BUG-7A-002` | Z8 target size | Default Z8 compile remains over version-8 limits. | Blocks Z8 release; Glulx remains the practical target. | Open |
+| `BUG-7D-001` | Glulx runtime | Recursive carried-by-player predicate caused `Stack overflow in callstub`. | No longer blocks startup/transcripts. | Resolved |
+| `BUG-7E-001` | initial player placement | Player now starts in `LOC_START`. | Startup/travel smoke output is stable. | Resolved |
+| `BUG-7F-001` | parser/travel | Generated one-word motion/location vocabulary now routes to generated non-direct travel. | Basic travel transcript now passes. | Resolved for one-word travel |
+| `BUG-7F-002` | parser/magic travel | `plugh`/`xyzzy` generated magic rows are command-accessible. | Travel transcript reaches Y2 and returns. | Resolved for generated magic rows |
+| `BUG-7F-003` | scoring output | Score output still includes Inform standard text plus custom Open Adventure text. | Current scoring fragment smoke passes; exact score transcript parity remains open. | Open |
+| `BUG-8A-001` | lamp/action parser | Lamp `on`/`off` forms were unrecognized. | Blocked cave route replay. | Resolved in 8B |
+| `BUG-8B-001` | fatal travel | Generated fatal destinations did not invoke reincarnation/death. | Death-by-travel could be missed. | Resolved in 8B |
 
 ## Transcript Issues
 
 | ID | Area | Difference | Impact | Status |
 |---|---|---|---|---|
-| `TFRAME-7F-001` | command comments | Open Adventure C ignores `#` lines in logs; the runner previously sent them to Inform. | Imported logs diverged before gameplay. | Resolved in 8A. |
-| `TFRAME-7F-002` | startup/randomness adaptation | C logs include an initial instructions response and `seed N`. | Initial response and seed now have support; deterministic encounter parity is not yet proven. | Partially resolved |
-| `TFRAME-7F-003` | terminal capture | Glulxe output contains status-line and character-echo artifacts. | Some fragment failures remain false negatives, especially HELP/version headings. | Partially reduced |
-| `TFRAME-8A-001` | upstream replay | Full upstream command logs still time out under the Glulx runner. | Blocks full solve/treasure/endgame parity validation. | Open |
-| `TEXP-7F-001` | focused routes | Some local fixtures are short smoke routes expecting deeper C-regression fragments. | Still causes unreachable expected fragments after parser fixes. | Open |
-| `TEXP-8A-001` | stale fragments | Some fragments no longer match generated text, e.g. expected `You're in Y2.` while output is `You're at "Y2".` | Produces false failures in otherwise improved travel replay. | Open |
+| `TFRAME-7F-001` | command comments | C log comments are ignored by the runner. | Imported logs no longer diverge on `#` lines. | Resolved |
+| `TFRAME-7F-002` | startup/randomness adaptation | Initial C startup answer is skipped and `seed N` is accepted. | Deterministic C RNG parity remains unproven. | Partially resolved |
+| `TFRAME-7F-003` | terminal capture | Glulxe output still contains some status-line/echo artifacts. | Less severe now that startup/travel/scoring/endgame smoke cases pass. | Open |
+| `TFRAME-8A-001` | upstream replay timeout | Full default transcript run previously timed out. | Full run now completes with fragment mismatches. | Resolved for timeout behavior |
+| `TEXP-7F-001` | focused routes | Several focused fixtures remain shorter than their expected deep C paths. | Causes subsystem fragment failures. | Open |
+| `TEXP-8A-001` | stale fragments | Startup/travel/scoring/endgame stale fragments were updated. | Four focused cases now pass. | Partially resolved |
 
 ## Parity Issues
 
 | ID | Area | Difference | Impact | Status |
 |---|---|---|---|---|
-| `PARITY-001` | dwarf/pirate | Dwarf and pirate movement use baseline pressure logic rather than full generated-edge C movement candidate enumeration. | Random encounter ordering can diverge from Open Adventure C. | Open |
-| `PARITY-002` | darkness/lamp | Dark-pit hazard callers and full lamp depletion timing are not wired. | Death timing and dark-room behavior can diverge. | Open |
-| `PARITY-003` | parser | Full classic parser command ordering and ambiguity behavior are not transcript-clean. | Object/verb permutations can diverge. | Open |
-| `PARITY-004` | fixed-location objects | Some C dual-location/fixed-secondary-location behaviors are approximated. | Edge-case room descriptions or object reachability can diverge. | Open |
-| `PARITY-005` | hints | Full Open Adventure hint scoring and eligibility are not implemented. | Hint-related C transcripts will diverge. | Future |
-| `PARITY-006` | save/resume | Open Adventure C save/resume scoring and version-skew behavior is not modeled. | Save/resume C tests are not expected to pass. | Future |
-| `PARITY-007` | terminal text | Endgame score/rank output is not transcript-diffed cleanly against C exact transcript. | Formatting differences may remain. | Open |
-| `PARITY-008` | transcript execution | Current split transcript run launches all 15 cases but passes none. | Runtime parity remains unproven. | Open |
-| `PARITY-010` | deterministic hazards | With `seed` support, dwarf encounters now appear in focused routes, but they interrupt scripted paths with death/reincarnation prompts. | Dwarf/reincarnation ordering needs parity review and fixture adjustment. | Open |
+| `PARITY-001` | dwarf/pirate | Dwarf and pirate movement do not exactly reproduce Open Adventure C movement candidate enumeration. | Random encounter ordering can diverge. | Open |
+| `PARITY-002` | darkness/lamp | Lamp switching works; full lamp depletion and all dark-pit callers remain incomplete. | Long-route darkness timing can diverge. | Open |
+| `PARITY-003` | parser | Full classic parser command ordering and object/action coverage remain incomplete. | Full C logs still fail. | Open |
+| `PARITY-004` | fixed-location objects | Some C dual-location/fixed-secondary-location behaviors are approximated. | Edge-case reachability can diverge. | Open |
+| `PARITY-005` | hints | Full hint scoring and eligibility are not implemented. | Hint C tests will diverge. | Future |
+| `PARITY-006` | save/resume | C save/resume scoring/version behavior is not modeled. | Save/resume C tests are not expected to pass. | Future |
+| `PARITY-007` | terminal text | Exact score/rank/endgame text is not transcript-clean. | Final transcript parity remains open. | Open |
+| `PARITY-008` | transcript execution | Full suite now passes 4/15, fails 11/15, with no timeouts. | Runtime parity remains incomplete but measurable. | Open |
+| `PARITY-010` | deterministic hazards | C seed values do not reproduce the same dwarf outcomes with Inform RNG. | Focused subsystem scripts can be interrupted by unexpected death/reincarnation prompts. | Open |
 
 ## Intentional Deviations
 
 | ID | Area | Difference | Reason |
 |---|---|---|---|
-| `INTENT-001` | startup | Startup prints `Welcome to Adventure!` and a HELP prompt rather than Open Adventure C's yes/no instructions prompt. | Milestone 6B explicitly requested Nelson-style startup presentation. |
-| `INTENT-002` | help | HELP is a unified menu rather than only the C plain HELP text. | Milestone 6B requested a polished menu. |
-| `INTENT-003` | history | Nelson's long historical preface is summarized rather than copied in full. | Keeps player-facing text concise while preserving historical context. |
-| `INTENT-004` | version | VERSION identifies this Inform 7 implementation and repository in addition to Open Adventure upstream. | Required for edition identity and accurate attribution. |
-
-## Future Enhancements
-
-| ID | Area | Enhancement |
-|---|---|---|
-| `FUTURE-001` | build | Reduce generated Z-machine memory enough to emit a `.z8`, or keep Z8 explicitly experimental. |
-| `FUTURE-002` | transcript runner | Promote transcript execution into CI once cases have deterministic pass/fail behavior. |
-| `FUTURE-003` | C corpus | Import more Open Adventure C `.log`/`.chk` cases with expected pass/fail categorization. |
-| `FUTURE-004` | randomness | Validate Inform deterministic seed behavior against Open Adventure C's LCG-driven regression seeds. |
-| `FUTURE-005` | intest | Add Inform `intest` recipes for parser-level and command-level checks. |
-| `FUTURE-006` | normalization | Continue improving transcript filters for banner/version whitespace and Glulxe prompt differences. |
+| `INTENT-001` | startup | Startup prints `Welcome to Adventure!` and a HELP prompt rather than C's yes/no instructions prompt. | Milestone 6B requirement. |
+| `INTENT-002` | help | HELP is a unified menu. | Milestone 6B requirement. |
+| `INTENT-003` | history | Historical background is summarized. | Preserve spirit without copying Nelson's full preface. |
+| `INTENT-004` | version | VERSION identifies this Inform 7 edition and repository. | Edition identity and attribution. |
 
 ## Prioritized Next Work
 
 Critical:
 
-1. Fix `BUG-8A-001` so lamp `on`/`off` commands work through the player parser.
-2. Stabilize dwarf/reincarnation prompt handling in focused transcript routes.
-3. Replace stale/unreachable focused expected fragments with route-accurate
-   fragments.
-4. Make upstream replay terminate reliably under the transcript runner.
+1. Expand object/action parser coverage needed by full Open Adventure C logs
+   (`get`, `open grate`, `water plant`, `oil door`, `free bear`, and related
+   puzzle commands).
+2. Align focused subsystem routes so they reach their intended subsystem
+   behavior without depending on C-compatible random hazard order.
+3. Continue solve-path and endgame parity work until at least one complete
+   walkthrough transcript passes.
 
 High:
 
-1. Re-run subsystem transcripts after lamp/action parser fixes.
-2. Classify remaining subsystem failures as implementation bugs, parity
-   differences, or transcript expectation issues.
-3. Decide whether default project commands should target Glulx for release
-   readiness, leaving Z8 as experimental.
+1. Decide whether to implement a C-compatible deterministic RNG shim for
+   transcript parity.
+2. Rework the reincarnation focused route to travel through a generated fatal
+   destination.
+3. Recheck exact score output after deposit routes are stable.
 
 Medium:
 
-1. Improve Glulxe capture enough to preserve HELP/version headings.
-2. Recheck score output after capture and deposit-route issues are isolated.
+1. Improve Glulxe capture normalization further.
+2. Keep Z8 as an experimental optimization track unless release goals change.
