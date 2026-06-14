@@ -153,3 +153,34 @@ The project is not yet a Beta Candidate because no complete solve transcript
 has reached final score/rank. The next milestone should continue from the later
 post-amber/sapphire divergence and drive at least one complete upstream
 walkthrough to completion before reassessing readiness.
+
+## Milestone 8H Assessment
+
+Date: 2026-06-14
+
+Release classification remains **Not Ready**.
+
+8H improved release evidence but did not meet the release bar:
+
+| Area | Status |
+|---|---|
+| Glulx compile/smoke | Passing. |
+| Transcript runtime stability | Completed with no VM crashes in the 90-second runs. |
+| Default upstream timeout | The exact `python3 tools/run_transcripts.py --execute --mode upstream` command timed out at the harness default 60 seconds. |
+| Transcript pass rate | Improved from 12/15 to 13/15 with `--timeout 90`. |
+| Complete endgame | Passing; reaches 430/430 and world-champion rank. |
+| Full solve path | Still failing final 430/rank fragments; current end state is 409/430 with the bad blast outcome. |
+| Full treasure collection | Still failing treasure/all-treasure fragments. |
+
+Readiness impact:
+
+- The repository and successful blast mechanics are operational in a focused
+  upstream endgame route.
+- The full `win430.log` solve route still has late cave-closing and repository
+  rod choreography desynchronization.
+- Treasure collection still lacks complete transcript parity.
+
+The project is closer to Beta Candidate because one upstream endgame route now
+passes, but it is not yet Beta Candidate until the complete solve path reaches
+the expected final score/rank or the remaining route difference is explicitly
+classified as acceptable.

@@ -133,7 +133,16 @@ Instead of feeding FOOD:
 		say "There is nothing here to eat."
 
 Instead of freeing BEAR:
-	unlock openadventure bear chain.
+	if BEAR is carried by the player or openadventure-bear-is-following is true:
+		if openadventure troll is present for bear in the location of the player:
+			openadventure bear chases troll from the location of the player;
+		otherwise:
+			move BEAR to the location of the player;
+			now openadventure-bear-is-following is false;
+			now openadventure-bear-last-event is "dropped";
+			say "[openadventure bear wanders message]";
+	otherwise:
+		unlock openadventure bear chain.
 
 Instead of freeing CHAIN:
 	unlock openadventure bear chain.

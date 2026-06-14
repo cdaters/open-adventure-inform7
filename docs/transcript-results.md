@@ -217,3 +217,70 @@ Resolved in 8G:
 
 Remaining failures are later-route parity failures rather than the 8F bottle
 state failure.
+
+## Milestone 8H Results
+
+Date: 2026-06-14
+
+8H corrected several late-route object and subsystem gaps and improved the full
+manifest pass rate to 13/15.
+
+Commands run:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+```
+
+Result: passed. Inform 7 translated successfully, Inform 6 produced a valid
+Glulx story, and all smoke checks passed.
+
+```bash
+python3 tools/run_transcripts.py --execute --mode upstream
+```
+
+Result: failed by timeout. The default 60-second interpreter timeout is too
+short for the current upstream logs.
+
+```bash
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
+
+Result: 1 passed, 2 failed on expected-fragment mismatches, 0 VM crashes.
+
+```bash
+python3 tools/run_transcripts.py --execute --timeout 90
+```
+
+Result: 13 passed, 2 failed, 0 VM crashes.
+
+Latest measured full-suite status:
+
+| Metric | 8F | 8G | 8H |
+|---|---:|---:|---:|
+| Manifest cases | 15 | 15 | 15 |
+| Passing cases | 12 | 12 | 13 |
+| Failing cases | 3 | 3 | 2 |
+| Timeouts in completed run | 0 | 0 | 0 |
+| VM/runtime crashes | 0 | 0 | 0 |
+
+Case movement:
+
+| Case | 8G | 8H | Notes |
+|---|---|---|---|
+| `complete-endgame` | fail | pass | Reaches repository closure, successful blast, 430 score, and world-champion rank. |
+| `solve-path` | fail | fail | Reaches cave closure and end, but late closure/rod choreography still produces the bad blast and 409 score. |
+| `treasure-collection` | fail | fail | Still misses treasure description and all-treasure fragments; shares the late route synchronization problem. |
+
+Remaining missing fragments:
+
+- `solve-path`: `You scored 430 out of a possible 430`, `WORLD   C H A M P I O N`, `Congratulations!!`
+- `treasure-collection`: emerald, pyramid, spices, and all-treasures fragments.
+
+Resolved in 8H:
+
+- `H'CFL` reservoir spelling.
+- Clam/oyster/pearl behavior.
+- Direct troll-bridge crossings from both chasm sides.
+- Bear release at the troll bridge.
+- Egg restoration through `FEE`/`FIE`/`FOE`/`FOO`.
+- Complete endgame repository/victory route.

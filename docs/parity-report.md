@@ -184,3 +184,60 @@ at 12/15 passing, and the three full upstream cases remain the failing cases:
 Release recommendation remains **Not Ready**. The next parity work should
 continue from the new later divergence in late treasure/endgame synchronization
 after the amber/sapphire/rug route.
+
+## Milestone 8H Update - Endgame Completion Parity
+
+Date: 2026-06-14
+
+Milestone 8H reduced the remaining endgame divergences and moved the full
+manifest from 12/15 to 13/15 passing cases.
+
+Corrections made:
+
+- Added `H'CFL`/`HCFL` reservoir magic-word routing.
+- Added clam/oyster opening behavior and pearl relocation to the cul-de-sac.
+- Routed direct `NE`/`SW`/`OVER`/`ACROSS` troll-bridge movement through the
+  troll bridge subsystem.
+- Restored C-style troll payment state so a paid troll can reappear after the
+  first crossing sequence.
+- Corrected `release bear` so a following bear can be released at the troll
+  bridge instead of being treated as a chain-unlock request.
+- Added `FEE`/`FIE`/`FOE`/`FOO` egg restoration.
+- Added closed-cave rod vocabulary for `ROD2`.
+
+Verification:
+
+| Command | Result |
+|---|---|
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed: Glulx artifact and all smoke checks passed. |
+| `python3 tools/run_transcripts.py --execute --mode upstream` | Failed by timeout at the harness default 60-second interpreter timeout for the three upstream cases. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | Completed upstream replay: `complete-endgame` passed; `solve-path` and `treasure-collection` failed on expected-fragment mismatches only. |
+| `python3 tools/run_transcripts.py --execute --timeout 90` | Completed full manifest: 13 passed, 2 failed, 0 VM crashes. |
+
+Latest full-suite status:
+
+| Metric | 8G | 8H |
+|---|---:|---:|
+| Manifest cases | 15 | 15 |
+| Passing cases | 12 | 13 |
+| Failing cases | 3 | 2 |
+| Timeouts in completed 90-second run | 0 | 0 |
+| VM/runtime crashes | 0 | 0 |
+
+Passing upstream endgame proof:
+
+- `complete-endgame` now reaches cave closure, repository transition, `ROD2`
+  handling, successful blast, 430-point score, and world-champion rank output.
+
+Remaining release blockers:
+
+- `solve-path` now reaches cave closure and game end, but it closes after the
+  scripted rod pickup point, cannot complete the intended repository rod
+  choreography, and ends with the bad blast outcome at 409/430.
+- `treasure-collection` shares the late route desynchronization and still
+  misses several treasure description/all-treasure expectation fragments.
+
+Release recommendation remains **Not Ready**. The next parity milestone should
+focus on late cave-closing clock alignment and the `win430.log` repository rod
+route, since the isolated complete-endgame route now proves the repository and
+victory blast mechanics can succeed.

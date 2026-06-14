@@ -4526,7 +4526,16 @@ Instead of feeding FOOD:
 		say "There is nothing here to eat."
 
 Instead of freeing BEAR:
-	unlock openadventure bear chain.
+	if BEAR is carried by the player or openadventure-bear-is-following is true:
+		if openadventure troll is present for bear in the location of the player:
+			openadventure bear chases troll from the location of the player;
+		otherwise:
+			move BEAR to the location of the player;
+			now openadventure-bear-is-following is false;
+			now openadventure-bear-last-event is "dropped";
+			say "[openadventure bear wanders message]";
+	otherwise:
+		unlock openadventure bear chain.
 
 Instead of freeing CHAIN:
 	unlock openadventure bear chain.
@@ -6300,6 +6309,9 @@ Section 1 - Framework lifecycle
 The openadventure-subsystem-registration-locked is a truth state that varies.
 The openadventure-subsystem-registration-locked is false.
 
+The openadventure-foobar-stage is a number that varies.
+The openadventure-foobar-stage is 0.
+
 To set up OpenAdventure runtime framework:
 	if openadventure-subsystem-registration-locked is false:
 		initialize framework IDs;
@@ -6592,6 +6604,14 @@ To decide whether openadventure non-direct travel from (source-id - text) with v
 			if movement token verb-token is in token list "EAST CROSS ACROS OVER":
 				oa-dispatch-openadventure-goto source-id to "LOC_EASTBANK" with verb-token verb-token;
 				decide yes;
+	if source-id is "LOC_SWCHASM":
+		if movement token verb-token is in token list "NE OVER ACROS CROSS":
+			oa-handle-troll-bridge-special source-id with verb-token verb-token;
+			decide yes;
+	if source-id is "LOC_NECHASM":
+		if movement token verb-token is in token list "SW OVER ACROS CROSS":
+			oa-handle-troll-bridge-special source-id with verb-token verb-token;
+			decide yes;
 	now openadventure-framework-has-pending-travel is true;
 	repeat through the Table of Generated Travel Non-Direct Rules:
 		if handled is false:
@@ -6719,6 +6739,7 @@ Understand "lamp" or "lantern" as LAMP.
 Understand "cage" as CAGE.
 Understand "rod" as ROD.
 Understand "rusty rod" or "marked rod" as ROD2.
+Understand "rod" as ROD2 when openadventure-cave-closed-active is true.
 Understand "steps" as STEPS.
 Understand "bird" as BIRD.
 Understand "pillow" or "velvet" as PILLOW.
@@ -7205,6 +7226,8 @@ Carry out oaflyingthing:
 Oareservoirmagic is an action applying to nothing.
 Understand "n'beh" as oareservoirmagic.
 Understand "nbeh" as oareservoirmagic.
+Understand "h'cfl" as oareservoirmagic.
+Understand "hcfl" as oareservoirmagic.
 
 Carry out oareservoirmagic:
 	if location is LOC_RESERVOIR or location is LOC_RESBOTTOM:
@@ -7216,6 +7239,68 @@ Carry out oareservoirmagic:
 			say "The waters have parted to form a narrow path across the reservoir.";
 		stop the action;
 	say "Nothing happens.".
+
+Instead of opening CLAM:
+	if location is not LOC_SHELLROOM:
+		say "You can't see any such thing.";
+		stop the action;
+	if TRIDENT is not carried by the player and TRIDENT is not in the location of the player:
+		say "You don't have anything strong enough to open the clam.";
+		stop the action;
+	if adventure-state of CLAM is "CLAM_OPENED":
+		say "The oyster creaks open, revealing nothing but oyster inside.  It promptly snaps shut again.";
+		stop the action;
+	now adventure-state of CLAM is "CLAM_OPENED";
+	move CLAM to LOC_NOWHERE;
+	move OYSTER to LOC_SHELLROOM;
+	now OYSTER is fixed in place;
+	move PEARL to LOC_CULDESAC;
+	say "A glistening pearl falls out of the clam and rolls away.  Goodness,[line break]this must really be an oyster.  (I never was very good at identifying[line break]bivalves.)  Whatever it is, it has now snapped shut again.".
+
+Instead of opening OYSTER:
+	if location is not LOC_SHELLROOM and location is not LOC_NE and location is not LOC_SW:
+		say "You can't see any such thing.";
+		stop the action;
+	say "The oyster creaks open, revealing nothing but oyster inside.  It promptly snaps shut again.".
+
+To perform OpenAdventure foobar word (stage - number):
+	if stage is openadventure-foobar-stage + 1:
+		now openadventure-foobar-stage is stage;
+		if stage is 4:
+			now openadventure-foobar-stage is 0;
+			if EGGS is in LOC_GIANTROOM:
+				say "Nothing happens.";
+			otherwise if EGGS is in the location of the player:
+				move EGGS to LOC_GIANTROOM;
+				say "The nest of golden eggs has vanished!";
+			otherwise:
+				move EGGS to LOC_GIANTROOM;
+				say "Done!";
+		otherwise:
+			say "OK";
+		stop;
+	now openadventure-foobar-stage is 0;
+	say "Nothing happens.".
+
+Oafeeing is an action applying to nothing.
+Understand "fee" as oafeeing.
+Carry out oafeeing:
+	perform OpenAdventure foobar word 1.
+
+Oafieing is an action applying to nothing.
+Understand "fie" as oafieing.
+Carry out oafieing:
+	perform OpenAdventure foobar word 2.
+
+Oafoeing is an action applying to nothing.
+Understand "foe" as oafoeing.
+Carry out oafoeing:
+	perform OpenAdventure foobar word 3.
+
+Oafooing is an action applying to nothing.
+Understand "foo" as oafooing.
+Carry out oafooing:
+	perform OpenAdventure foobar word 4.
 
 Oaopeninggrate is an action applying to nothing.
 Understand "open grate" as oaopeninggrate.
@@ -7264,7 +7349,7 @@ Carry out oathrowing:
 			move the noun to LOC_NOWHERE;
 			move TROLL to LOC_NOWHERE;
 			move TROLL2 to LOC_SWCHASM;
-			now adventure-state of TROLL is "TROLL_GONE";
+			now adventure-state of TROLL is "TROLL_UNPAID";
 			say "The troll catches your treasure and scurries away out of sight.";
 		otherwise:
 			say "You aren't carrying that.";

@@ -152,3 +152,47 @@ Verification:
 | `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed. |
 | `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | Final upstream fragments still fail, but the first oil-bottle divergence is gone. |
 | `python3 tools/run_transcripts.py --execute --timeout 90` | 12 passed, 3 failed, no timeouts or VM crashes. |
+
+## Milestone 8H Update
+
+Date: 2026-06-14
+
+8H moved the walkthrough baseline forward by resolving the isolated
+`complete-endgame` route. The full manifest now passes 13/15 cases.
+
+Newly verified path:
+
+- `complete-endgame` reaches cave closure.
+- Repository transition places the player in the northeast repository room.
+- `take rod`, `drop rod`, and `blast` complete the victory route.
+- Final output reaches 430/430 and world-champion rank.
+
+Corrections that enabled the route:
+
+- `H'CFL` reservoir magic.
+- Clam/oyster/pearl mechanics.
+- Direct troll-bridge movement through the troll subsystem.
+- Bear release/following behavior at the troll bridge.
+- Egg restoration via `FEE`/`FIE`/`FOE`/`FOO`.
+
+Current first remaining walkthrough divergence:
+
+- `solve-path` and `treasure-collection` still desynchronize late in the
+  `win430.log` route. The warning phase and later commands reach the repository,
+  but closure occurs after the scripted `take rod` point. The final `blast`
+  therefore uses the wrong rod state and produces the splatter outcome instead
+  of the victory outcome.
+
+Measured status:
+
+| Command | Result |
+|---|---|
+| `python3 tools/run_transcripts.py --execute --mode upstream` | Timed out at the default 60-second interpreter timeout. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | `complete-endgame` passed; `solve-path` and `treasure-collection` still failed expected fragments. |
+| `python3 tools/run_transcripts.py --execute --timeout 90` | 13 passed, 2 failed, no VM crashes. |
+
+Next target:
+
+Align the late cave-closing clock and repository rod choreography in the full
+`win430.log` route. The repository/victory subsystem itself is now proven by
+the passing `complete-endgame` case.
