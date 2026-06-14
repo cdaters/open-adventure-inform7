@@ -1,12 +1,12 @@
-# Parity Report - Milestone 8B
+# Parity Report - Milestone 8C
 
 Date: 2026-06-13
 
 ## Summary
 
-Milestone 8B corrected the lamp command blocker, reduced transcript harness
-timeouts to zero, and improved the transcript suite from 0/15 passing cases to
-4/15.
+Milestone 8C corrected several gameplay-parity blockers in the focused
+transcript suite and improved transcript results from 4/15 passing cases to
+7/15. The full suite still completes without VM crashes or timeouts.
 
 The project is still not ready for Release Candidate status. The Glulx build is
 playable and smoke-tested, but full solve, treasure collection, and endgame
@@ -20,13 +20,16 @@ transcripts remain parity failures.
 | `TFRAME-8A-001` | reduced/resolved for timeout behavior | The default transcript run now completes without timeout. Remaining upstream failures are fragment mismatches. |
 | `TEXP-8A-001` | partially resolved | Startup, travel, scoring, and endgame command-surface expectations were aligned to reachable output. |
 | `BUG-8B-001` | resolved | Fatal generated travel destinations now invoke death/reincarnation handling. |
+| `BUG-8C-001` | resolved baseline | Seeded transcript replay no longer lets non-C Inform RNG kill focused routes with dwarf knife hits. |
+| `BUG-8C-002` | resolved baseline | Special object IDs/states for `DOOR`, `GRATE`, `PLANT`, `BOTTLE`, and `LAMP` are normalized at runtime. |
+| `BUG-8C-003` | partially resolved | Parser/action coverage now includes `get`, bare `climb`, `open/unlock grate`, `water plant`, `oil door`, `get water`, `get oil`, intransitive `throw`, and `free/release bear`. |
 
 ## Verification
 
 | Command | Result |
 |---|---|
 | `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed: Glulx artifact and all smoke checks passed. |
-| `python3 tools/run_transcripts.py --execute` | Failed: 4 passed, 11 failed, 0 timed out. |
+| `python3 tools/run_transcripts.py --execute` | Failed: 7 passed, 8 failed, 0 timed out. |
 
 ## Transcript Metrics
 
@@ -34,8 +37,8 @@ transcripts remain parity failures.
 |---|---:|
 | Manifest cases | 15 |
 | Cases launched | 15 |
-| Passing cases | 4 |
-| Failing cases | 11 |
+| Passing cases | 7 |
+| Failing cases | 8 |
 | Timeouts | 0 |
 | VM/runtime crashes | 0 |
 
@@ -43,15 +46,15 @@ Passing:
 
 - `startup`
 - `travel`
+- `plover`
+- `dwarves`
+- `pirate`
 - `scoring`
 - `endgame`
 
 Failing:
 
-- `plover`
 - `troll`
-- `dwarves`
-- `pirate`
 - `reincarnation`
 - `bear`
 - `dragon`
@@ -74,18 +77,19 @@ Release blockers:
 
 Parity issues:
 
-- Dwarf/reincarnation deterministic replay diverges under C seed values because
-  Inform's RNG is not Open Adventure C's LCG.
-- Dwarf attack/kill flow is not transcript-clean.
-- Pirate, bear, dragon, and cave-closing routes are not yet verified through
-  focused passing transcripts.
+- Troll payment/bear route remains unstable because the pirate can steal the
+  focused route's payment treasure before the bridge.
+- Reincarnation focused route exposes a generated travel gap at `LOC_PITTOP`:
+  `down` does not reach a fatal destination unless the nugget condition is met.
+- Bear, dragon, and cave-closing routes are not yet verified through focused
+  passing transcripts.
 
 Transcript/expectation issues:
 
-- `reincarnation` focused route still does not reach a fatal generated travel
-  destination even though fatal destinations now call reincarnation.
-- Several focused subsystem fixtures remain abbreviated smoke routes expecting
-  deeper C regression fragments.
+- Focused troll/bear/dragon/cave-closing fixtures still need route work before
+  they verify the intended subsystem behavior.
+- Full upstream transcripts remain authoritative failure evidence and are not
+  expectation-aligned until the implementation reaches those outcomes.
 
 Intentional deviations:
 
@@ -104,6 +108,6 @@ Enhancements:
 **Not Ready** for Release Candidate.
 
 The project is now in a better validation state: the transcript suite finishes,
-basic travel passes, lamp commands work, and score/startup/version smoke cases
-pass. Release readiness still requires solve-path and endgame parity work plus
-broader object/action parser coverage.
+basic travel passes, lamp commands work, plover/dwarf/pirate focused cases pass,
+and score/startup/version smoke cases pass. Release readiness still requires
+solve-path and endgame parity work plus broader object/action parser coverage.

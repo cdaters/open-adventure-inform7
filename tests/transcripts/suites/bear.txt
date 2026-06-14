@@ -11,14 +11,15 @@ down
 bedquilt
 west
 oriental
+take vase
 west
 southwest
 up
-throw eggs
-northeast
+throw vase
+over
 barren
 east
-throw food
+feed bear
 unlock chain
 take bear
 quit

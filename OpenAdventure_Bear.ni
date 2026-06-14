@@ -5,6 +5,10 @@ Section 1 - Parser Surface
 Feeding is an action applying to one thing.
 Understand "feed [something]" as feeding.
 
+Freeing is an action applying to one thing.
+Understand "free [something]" as freeing.
+Understand "release [something]" as freeing.
+
 Section 2 - Messages
 
 To say openadventure bear feeding message:
@@ -127,6 +131,12 @@ Instead of feeding FOOD:
 		feed openadventure bear;
 	otherwise:
 		say "There is nothing here to eat."
+
+Instead of freeing BEAR:
+	unlock openadventure bear chain.
+
+Instead of freeing CHAIN:
+	unlock openadventure bear chain.
 
 Instead of giving FOOD to BEAR:
 	feed openadventure bear.

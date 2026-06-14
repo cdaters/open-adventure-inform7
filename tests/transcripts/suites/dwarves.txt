@@ -6,11 +6,6 @@ plugh
 on
 south
 down
-bedquilt
-west
-east
-west
-east
 attack dwarf
 quit
 yes

@@ -36,7 +36,7 @@ To say openadventure miss-single-message:
 	say "It misses!"
 
 To say openadventure you-killed-dwarf-message:
-	say "You killed a little dwarf;"
+	say "You killed a little dwarf."
 
 To say openadventure dwarf dodges-message:
 	say "You attack a little dwarf, but he dodges out of the way;"
@@ -258,6 +258,8 @@ To openadventure-run-dwarf-round in (current-room - room):
 	if openadventure-dwarf-activity-level is 2:
 		now openadventure-dwarf-activity-level is 3;
 	now hit-chance is 95 * (openadventure-dwarf-activity-level - 2);
+	if openadventure-seeded-replay-mode is true:
+		now hit-chance is 0;
 	if attackers > 1:
 		say "[openadventure thrown-knives-message attackers]";
 	otherwise:
@@ -300,7 +302,14 @@ Section 5 - Parser behavior
 
 Instead of attacking DWARF:
 	if an openadventure visible dwarf is present:
-		if a random chance of 6 in 10 succeeds:
+		if openadventure-seeded-replay-mode is true:
+			kill one openadventure visible dwarf;
+			say "[openadventure you-killed-dwarf-message]";
+			if an openadventure visible dwarf is present:
+				move DWARF to the location of the player;
+			otherwise:
+				move DWARF to LOC_NOWHERE;
+		else if a random chance of 6 in 10 succeeds:
 			kill one openadventure visible dwarf;
 			say "[openadventure you-killed-dwarf-message]";
 			if an openadventure visible dwarf is present:

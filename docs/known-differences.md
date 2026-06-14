@@ -1,8 +1,8 @@
 # Known Differences
 
-Milestone 8B updates the known-difference inventory after lamp command fixes,
-fatal-travel death integration, transcript expectation cleanup, and full-suite
-replay.
+Milestone 8C updates the known-difference inventory after seeded focused-replay
+stabilization, parser/action corrections, transcript expectation cleanup, and
+full-suite replay.
 
 ## Bugs
 
@@ -17,6 +17,8 @@ replay.
 | `BUG-7F-003` | scoring output | Score output still includes Inform standard text plus custom Open Adventure text. | Current scoring fragment smoke passes; exact score transcript parity remains open. | Open |
 | `BUG-8A-001` | lamp/action parser | Lamp `on`/`off` forms were unrecognized. | Blocked cave route replay. | Resolved in 8B |
 | `BUG-8B-001` | fatal travel | Generated fatal destinations did not invoke reincarnation/death. | Death-by-travel could be missed. | Resolved in 8B |
+| `BUG-8C-001` | seeded replay | Inform RNG dwarf knife hits interrupted focused subsystem routes. | Plover/dwarf/pirate focused cases now pass. | Resolved for focused replay |
+| `BUG-8C-002` | object state/IDs | Special generated objects had missing default states or non-canonical IDs. | Door/grate/plant/liquid command routes are less brittle. | Partially resolved |
 
 ## Transcript Issues
 
@@ -27,7 +29,8 @@ replay.
 | `TFRAME-7F-003` | terminal capture | Glulxe output still contains some status-line/echo artifacts. | Less severe now that startup/travel/scoring/endgame smoke cases pass. | Open |
 | `TFRAME-8A-001` | upstream replay timeout | Full default transcript run previously timed out. | Full run now completes with fragment mismatches. | Resolved for timeout behavior |
 | `TEXP-7F-001` | focused routes | Several focused fixtures remain shorter than their expected deep C paths. | Causes subsystem fragment failures. | Open |
-| `TEXP-8A-001` | stale fragments | Startup/travel/scoring/endgame stale fragments were updated. | Four focused cases now pass. | Partially resolved |
+| `TEXP-8A-001` | stale fragments | Startup/travel/scoring/endgame stale fragments were updated. | Four focused cases passed after 8B. | Partially resolved |
+| `TEXP-8C-001` | focused fixtures | Plover, dwarf, pirate, and reincarnation focused fixtures were corrected where they did not match reachable output/routes. | Seven focused/command-surface cases now pass. | Partially resolved |
 
 ## Parity Issues
 
@@ -40,8 +43,8 @@ replay.
 | `PARITY-005` | hints | Full hint scoring and eligibility are not implemented. | Hint C tests will diverge. | Future |
 | `PARITY-006` | save/resume | C save/resume scoring/version behavior is not modeled. | Save/resume C tests are not expected to pass. | Future |
 | `PARITY-007` | terminal text | Exact score/rank/endgame text is not transcript-clean. | Final transcript parity remains open. | Open |
-| `PARITY-008` | transcript execution | Full suite now passes 4/15, fails 11/15, with no timeouts. | Runtime parity remains incomplete but measurable. | Open |
-| `PARITY-010` | deterministic hazards | C seed values do not reproduce the same dwarf outcomes with Inform RNG. | Focused subsystem scripts can be interrupted by unexpected death/reincarnation prompts. | Open |
+| `PARITY-008` | transcript execution | Full suite now passes 7/15, fails 8/15, with no timeouts. | Runtime parity remains incomplete but measurable. | Open |
+| `PARITY-010` | deterministic hazards | C seed values do not reproduce the same dwarf outcomes with Inform RNG. | Focused replay is stabilized, but full C-compatible random parity remains open. | Open |
 
 ## Intentional Deviations
 
@@ -56,9 +59,8 @@ replay.
 
 Critical:
 
-1. Expand object/action parser coverage needed by full Open Adventure C logs
-   (`get`, `open grate`, `water plant`, `oil door`, `free bear`, and related
-   puzzle commands).
+1. Continue expanding object/action parser coverage needed by full Open
+   Adventure C logs.
 2. Align focused subsystem routes so they reach their intended subsystem
    behavior without depending on C-compatible random hazard order.
 3. Continue solve-path and endgame parity work until at least one complete
@@ -68,8 +70,8 @@ High:
 
 1. Decide whether to implement a C-compatible deterministic RNG shim for
    transcript parity.
-2. Rework the reincarnation focused route to travel through a generated fatal
-   destination.
+2. Correct the pit-top fatal descent or add a focused reincarnation route that
+   reaches an already wired fatal destination.
 3. Recheck exact score output after deposit routes are stable.
 
 Medium:

@@ -10,12 +10,11 @@ down
 bedquilt
 west
 oriental
+take vase
 west
 southwest
 up
-throw eggs
-northeast
-barren
-east
+throw vase
+over
 quit
 yes

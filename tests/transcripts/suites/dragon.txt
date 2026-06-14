@@ -5,14 +5,9 @@ take lamp
 plugh
 on
 south
-down
-bedquilt
-west
-oriental
-west
+south
 southwest
-up
-southwest
+west
 attack dragon
 yes
 look

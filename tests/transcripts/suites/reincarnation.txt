@@ -1,10 +1,22 @@
 no
+seed 1495774850
 east
+take keys
 take lamp
-plugh
-on
+west
 south
+south
+south
+open grate
 down
+west
+west
+light lamp
+west
+west
+west
+down
+west
 jump
 yes
 quit

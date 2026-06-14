@@ -8,8 +8,22 @@ The openadventure-subsystem-registration-locked is false.
 To set up OpenAdventure runtime framework:
 	if openadventure-subsystem-registration-locked is false:
 		initialize framework IDs;
+		initialize OpenAdventure special object IDs;
 		now openadventure-framework-ready is true;
 		now openadventure-subsystem-registration-locked is true.
+
+To initialize OpenAdventure special object IDs:
+	now adventure-id of the door object is "DOOR";
+	if adventure-state of the door object is "":
+		now adventure-state of the door object is "DOOR_RUSTED";
+	if adventure-state of GRATE is "":
+		now adventure-state of GRATE is "GRATE_CLOSED";
+	if adventure-state of PLANT is "":
+		now adventure-state of PLANT is "PLANT_THIRSTY";
+	if adventure-state of BOTTLE is "":
+		now adventure-state of BOTTLE is "WATER_BOTTLE";
+	if adventure-state of LAMP is "":
+		now adventure-state of LAMP is "LAMP_DARK".
 
 When play begins:
 	set up OpenAdventure runtime framework.
@@ -285,6 +299,7 @@ Understand "seed [number]" as oaseeding.
 
 Carry out oaseeding:
 	seed the random-number generator with the number understood;
+	now openadventure-seeded-replay-mode is true;
 	say "Seed set to [the number understood].".
 
 Oalighting is an action applying to nothing.
@@ -330,6 +345,210 @@ Carry out oaextinguishing:
 		stop the action;
 	now adventure-state of LAMP is "LAMP_DARK";
 	say "Your lamp is now off.".
+
+Understand "get [something]" as taking.
+Understand "door" as the door object.
+
+Oabareclimbing is an action applying to nothing.
+Understand the command "climb" as something new.
+Understand "climb" as oabareclimbing.
+
+Carry out oabareclimbing:
+	if openadventure non-direct travel from adventure-id of location with verb token "CLIMB":
+		process openadventure forced travel from location;
+	else:
+		say "You can't go that way.".
+
+Oabaretaking is an action applying to nothing.
+Understand "take" as oabaretaking.
+
+Carry out oabaretaking:
+	say "What do you want to take?".
+
+Oabaredropping is an action applying to nothing.
+Understand "drop" as oabaredropping.
+
+Carry out oabaredropping:
+	say "What do you want to drop?".
+
+Oapouringwater is an action applying to one thing.
+Understand "water [something]" as oapouringwater.
+
+Oapouringoil is an action applying to one thing.
+Understand "oil [something]" as oapouringoil.
+
+To decide whether OpenAdventure bottle holds water:
+	if adventure-state of BOTTLE is "" or adventure-state of BOTTLE is "WATER_BOTTLE":
+		decide yes;
+	if WATER is carried by the player:
+		decide yes;
+	decide no.
+
+To decide whether OpenAdventure bottle holds oil:
+	if adventure-state of BOTTLE is "OIL_BOTTLE":
+		decide yes;
+	if OIL is carried by the player:
+		decide yes;
+	decide no.
+
+To empty OpenAdventure bottle:
+	now adventure-state of BOTTLE is "EMPTY_BOTTLE";
+	move WATER to LOC_NOWHERE;
+	move OIL to LOC_NOWHERE.
+
+To decide whether (item - thing) is an OpenAdventure scoring treasure:
+	repeat through the Table of Open Adventure Treasure Scores:
+		if scoring-treasure entry is item:
+			decide yes;
+	decide no.
+
+Carry out oapouringwater:
+	if the noun is PLANT:
+		if PLANT is not in the location of the player:
+			say "There is no plant here.";
+			stop the action;
+		if BOTTLE is not carried by the player and WATER is not carried by the player:
+			say "You have no water.";
+			stop the action;
+		if not OpenAdventure bottle holds water:
+			say "You have no water.";
+			stop the action;
+		empty OpenAdventure bottle;
+		if adventure-state of PLANT is "PLANT_BELLOWING":
+			now adventure-state of PLANT is "PLANT_GROWN";
+			say "The plant grows explosively, almost filling the bottom of the pit.";
+		else if adventure-state of PLANT is "PLANT_GROWN":
+			now adventure-state of PLANT is "PLANT_THIRSTY";
+			say "You've over-watered the plant!  It's shriveling up!  And now . . .";
+		otherwise:
+			now adventure-state of PLANT is "PLANT_BELLOWING";
+			say "The plant spurts into furious growth for a few seconds.";
+		stop the action;
+	if the noun is the door object:
+		if the door object is not in the location of the player:
+			say "There is no door here.";
+			stop the action;
+		empty OpenAdventure bottle;
+		now adventure-state of the door object is "DOOR_RUSTED";
+		say "The hinges are quite thoroughly rusted now and won't budge.";
+		stop the action;
+	say "The ground is wet.".
+
+Carry out oapouringoil:
+	if the noun is the door object:
+		if the door object is not in the location of the player:
+			say "There is no door here.";
+			stop the action;
+		if BOTTLE is not carried by the player and OIL is not carried by the player:
+			say "You have no oil.";
+			stop the action;
+		if not OpenAdventure bottle holds oil:
+			say "You have no oil.";
+			stop the action;
+		empty OpenAdventure bottle;
+		now adventure-state of the door object is "DOOR_UNRUSTED";
+		say "The oil has freed up the hinges so that the door will now move, although it requires some effort.";
+		stop the action;
+	if the noun is PLANT:
+		say "The plant indignantly shakes the oil off its leaves and asks, 'Water?'";
+		stop the action;
+	say "The ground is wet.".
+
+Oafillingwater is an action applying to nothing.
+Understand "get water" as oafillingwater.
+Understand "take water" as oafillingwater.
+Understand "fill bottle" as oafillingwater.
+Understand "fill bottle with water" as oafillingwater.
+
+Carry out oafillingwater:
+	if BOTTLE is not carried by the player and BOTTLE is not in the location of the player:
+		say "You have nothing in which to carry it.";
+		stop the action;
+	now adventure-state of BOTTLE is "WATER_BOTTLE";
+	move WATER to the player;
+	move OIL to LOC_NOWHERE;
+	say "Your bottle is now full of water.".
+
+Oafillingoil is an action applying to nothing.
+Understand "get oil" as oafillingoil.
+Understand "take oil" as oafillingoil.
+Understand "fill bottle with oil" as oafillingoil.
+
+Carry out oafillingoil:
+	if BOTTLE is not carried by the player and BOTTLE is not in the location of the player:
+		say "You have nothing in which to carry it.";
+		stop the action;
+	if location is not LOC_EASTPIT:
+		say "There is no oil here.";
+		stop the action;
+	now adventure-state of BOTTLE is "OIL_BOTTLE";
+	move OIL to the player;
+	move WATER to LOC_NOWHERE;
+	say "Your bottle is now full of oil.".
+
+Oaopeninggrate is an action applying to nothing.
+Understand "open grate" as oaopeninggrate.
+Understand "unlock grate" as oaopeninggrate.
+Understand "unlock grate with keys" as oaopeninggrate.
+
+Carry out oaopeninggrate:
+	if GRATE is not in the location of the player and location is not LOC_START and location is not LOC_VALLEY and location is not LOC_SLIT and location is not LOC_COBBLE and location is not LOC_DEBRIS and location is not LOC_AWKWARD and location is not LOC_BIRDCHAMBER and location is not LOC_PITTOP:
+		say "There is no grate here.";
+		stop the action;
+	if KEYS is not carried by the player and KEYS is not in the location of the player:
+		say "You have no keys!";
+		stop the action;
+	if openadventure-cave-closing-active is true:
+		say "A mysterious recorded voice groans into life and announces: 'This exit is closed. Please leave via main office.'";
+		stop the action;
+	now adventure-state of GRATE is "GRATE_OPEN";
+	say "The grate is now open.".
+
+Oaclosinggrate is an action applying to nothing.
+Understand "close grate" as oaclosinggrate.
+Understand "lock grate" as oaclosinggrate.
+Understand "lock grate with keys" as oaclosinggrate.
+
+Carry out oaclosinggrate:
+	if KEYS is not carried by the player and KEYS is not in the location of the player:
+		say "You have no keys!";
+		stop the action;
+	now adventure-state of GRATE is "GRATE_CLOSED";
+	say "The grate is now closed.".
+
+Oathrowing is an action applying to one thing.
+Understand "throw [something]" as oathrowing.
+Understand "toss [something]" as oathrowing.
+
+Carry out oathrowing:
+	if the noun is FOOD and BEAR is in the location of the player:
+		try throwing FOOD at BEAR;
+		stop the action;
+	if the noun is an OpenAdventure scoring treasure and (TROLL is in the location of the player or location is LOC_SWCHASM or location is LOC_NECHASM):
+		if the noun is carried by the player:
+			move the noun to LOC_NOWHERE;
+			move TROLL to LOC_NOWHERE;
+			move TROLL2 to LOC_SWCHASM;
+			now adventure-state of TROLL is "TROLL_GONE";
+			say "The troll catches your treasure and scurries away out of sight.";
+		otherwise:
+			say "You aren't carrying that.";
+		stop the action;
+	if the noun is AXE:
+		if DRAGON is in the location of the player:
+			try throwing AXE at DRAGON;
+			stop the action;
+		if BEAR is in the location of the player:
+			try throwing AXE at BEAR;
+			stop the action;
+		if TROLL is in the location of the player:
+			move AXE to the location of the player;
+			say "The troll deftly catches the axe, examines it carefully, and tosses it back, declaring, 'Good workmanship, but it's not valuable enough.'";
+			stop the action;
+	if the noun is carried by the player:
+		try dropping the noun;
+	otherwise:
+		say "You aren't carrying that.".
 
 To decide what text is the OpenAdventure dispatch token for (raw-command - text):
 	let command-token be raw-command;
