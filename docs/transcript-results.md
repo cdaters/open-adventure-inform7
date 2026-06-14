@@ -160,3 +160,60 @@ Failing cases:
 - Full replay still diverges at the first cliff urn sequence because the
   oil-filled bottle is not reliably present when the upstream log issues
   `fill urn`.
+
+## Milestone 8G Results
+
+Date: 2026-06-14
+
+8G corrected the bottle/liquid state mismatch that caused the first cliff urn
+failure.
+
+Commands run:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+```
+
+Result: passed. Inform 7 translated successfully, Inform 6 produced a valid
+Glulx story, and all smoke checks passed.
+
+```bash
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
+
+Result: failed on final expected-fragment mismatches only. The first
+oil-bottle divergence no longer occurs.
+
+```bash
+python3 tools/run_transcripts.py --execute --timeout 90
+```
+
+Result: 12 passed, 3 failed, 0 timed out, 0 VM crashes.
+
+Latest measured full-suite status:
+
+| Metric | 8F | 8G |
+|---|---:|---:|
+| Manifest cases | 15 | 15 |
+| Cases launched | 15 | 15 |
+| Passing cases | 12 | 12 |
+| Failing cases | 3 | 3 |
+| Timeouts | 0 | 0 |
+| VM/runtime crashes | 0 | 0 |
+
+Failing cases remain:
+
+- `solve-path`: now progresses through oil bottle, urn, amber, rug flight, and
+  sapphire acquisition, but still misses final score/rank fragments.
+- `treasure-collection`: still misses all-treasure completion fragments.
+- `complete-endgame`: still misses repository and blast fragments.
+
+Resolved in 8G:
+
+- The early `get water` route now puts the bottle in inventory.
+- The eastern pit oil fill now succeeds.
+- The cliff urn can now be filled and lit from the oil-filled bottle.
+- The amber/sapphire/rug section advances beyond the previous divergence.
+
+Remaining failures are later-route parity failures rather than the 8F bottle
+state failure.

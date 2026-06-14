@@ -113,3 +113,42 @@ Next target:
 
 Stabilize the bottle/oil state at the first cliff checkpoint, then re-run the
 upstream solve transcript until the amber/sapphire/rug section completes.
+
+## Milestone 8G Update
+
+Date: 2026-06-14
+
+8G resolved the first known 8F cliff divergence.
+
+Root cause:
+
+- `get water` updated liquid state but did not move `BOTTLE` to inventory.
+- The player therefore reached the eastern pit without the bottle.
+- The later cliff `fill urn` failure was a downstream symptom.
+
+Corrected behavior:
+
+- The initial water acquisition now carries the bottle.
+- The eastern pit `fill bottle` now creates an oil-filled bottle.
+- The bottle can be dropped and recovered in the building without exposing
+  generated oil/water proxy objects as separate route objects.
+- The cliff urn sequence now proceeds through `fill urn`, `light urn`, and
+  `rub urn`.
+- Amber pickup, gemstone/rug activation, rug flight, and sapphire pickup now
+  progress in the full solve transcript.
+
+New first remaining area:
+
+- The full upstream routes now diverge later in late treasure/endgame
+  synchronization. The remaining failures are no longer blocked by the
+  oil-filled bottle. The next work should inspect the route after the
+  amber/sapphire/rug section, especially bear/chain, magazine/spices,
+  cave-closing, repository placement, blast handling, and final scoring.
+
+Verification:
+
+| Command | Result |
+|---|---|
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | Final upstream fragments still fail, but the first oil-bottle divergence is gone. |
+| `python3 tools/run_transcripts.py --execute --timeout 90` | 12 passed, 3 failed, no timeouts or VM crashes. |

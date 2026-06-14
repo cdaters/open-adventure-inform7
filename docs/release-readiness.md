@@ -123,3 +123,33 @@ Beta Candidate would require at least one complete solve route reaching final
 score/rank and a categorized list of any remaining route differences. Release
 Candidate still requires passing or explicitly accepted complete solve,
 treasure, and endgame paths on Glulx.
+
+## Milestone 8G Assessment
+
+Date: 2026-06-14
+
+Release classification remains **Not Ready**.
+
+8G removed the first known full-walkthrough blocker from 8F:
+
+- Early `get water` now acquires the bottle.
+- Eastern-pit oil filling now succeeds.
+- Cliff `fill urn`, `light urn`, and `rub urn` now proceed.
+- The full solve route advances into amber, rug flight, and sapphire handling.
+
+Readiness impact:
+
+| Area | Status |
+|---|---|
+| Glulx compile/smoke | Passing. |
+| Transcript runtime stability | No VM crashes or timeouts observed in 8G runs. |
+| Transcript pass rate | 12/15 after the final 8G full-suite run. |
+| Oil-bottle divergence | Resolved. |
+| Full solve path | Still failing final score/rank fragments. |
+| Full treasure collection | Still failing all-treasure fragments. |
+| Complete endgame | Still failing repository/blast fragments. |
+
+The project is not yet a Beta Candidate because no complete solve transcript
+has reached final score/rank. The next milestone should continue from the later
+post-amber/sapphire divergence and drive at least one complete upstream
+walkthrough to completion before reassessing readiness.

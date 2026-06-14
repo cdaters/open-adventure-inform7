@@ -411,10 +411,10 @@ After taking BOTTLE:
 
 After dropping BOTTLE:
 	if adventure-state of BOTTLE is "WATER_BOTTLE":
-		move WATER to the location of the player;
+		move WATER to LOC_NOWHERE;
 		move OIL to LOC_NOWHERE;
 	else if adventure-state of BOTTLE is "OIL_BOTTLE":
-		move OIL to the location of the player;
+		move OIL to LOC_NOWHERE;
 		move WATER to LOC_NOWHERE.
 
 Understand "get [something]" as taking.
@@ -752,9 +752,21 @@ Carry out oafillingurn:
 		stop the action;
 	say "There is nothing here with which to fill it.".
 
+Oatakingwater is an action applying to nothing.
+Understand "get water" as oatakingwater.
+Understand "take water" as oatakingwater.
+
+Carry out oatakingwater:
+	if BOTTLE is not carried by the player and BOTTLE is not in the location of the player:
+		say "You have nothing in which to carry it.";
+		stop the action;
+	now adventure-state of BOTTLE is "WATER_BOTTLE";
+	move BOTTLE to the player;
+	move WATER to the player;
+	move OIL to LOC_NOWHERE;
+	say "Your bottle is now full of water.".
+
 Oafillingwater is an action applying to nothing.
-Understand "get water" as oafillingwater.
-Understand "take water" as oafillingwater.
 Understand "fill bottle" as oafillingwater.
 Understand "fill bottle with water" as oafillingwater.
 
@@ -774,8 +786,6 @@ Carry out oafillingwater:
 	say "Your bottle is now full of water.".
 
 Oafillingoil is an action applying to nothing.
-Understand "get oil" as oafillingoil.
-Understand "take oil" as oafillingoil.
 Understand "fill bottle with oil" as oafillingoil.
 
 Carry out oafillingoil:
@@ -786,6 +796,23 @@ Carry out oafillingoil:
 		say "There is no oil here.";
 		stop the action;
 	now adventure-state of BOTTLE is "OIL_BOTTLE";
+	move OIL to the player;
+	move WATER to LOC_NOWHERE;
+	say "Your bottle is now full of oil.".
+
+Oatakingoil is an action applying to nothing.
+Understand "get oil" as oatakingoil.
+Understand "take oil" as oatakingoil.
+
+Carry out oatakingoil:
+	if BOTTLE is not carried by the player and BOTTLE is not in the location of the player:
+		say "You have nothing in which to carry it.";
+		stop the action;
+	if location is not LOC_EASTPIT:
+		say "There is no oil here.";
+		stop the action;
+	now adventure-state of BOTTLE is "OIL_BOTTLE";
+	move BOTTLE to the player;
 	move OIL to the player;
 	move WATER to LOC_NOWHERE;
 	say "Your bottle is now full of oil.".

@@ -141,3 +141,46 @@ Remaining release blockers:
   coverage, cave-closing transition proof, and repository completion proof.
 
 Release recommendation remains **Not Ready**.
+
+## Milestone 8G Update - Walkthrough Divergence Elimination
+
+Date: 2026-06-14
+
+Milestone 8G eliminated the first known full-walkthrough divergence from 8F.
+The visible failure was `fill urn` at the cliff, but comparison against
+`win430.log` showed that the first actual state mismatch occurred much earlier:
+`get water` filled liquid state without moving `BOTTLE` into inventory.
+
+Correction summary:
+
+- `get water` / `take water` now acquire and fill the bottle.
+- `get oil` / `take oil` now acquire and fill the bottle at the eastern pit.
+- `fill bottle` remains a fill action rather than owning the `get water` route.
+- Dropping the bottle keeps generated water/oil proxy objects hidden while
+  preserving bottle contents through bottle state.
+
+Verification:
+
+| Command | Result |
+|---|---|
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed: Glulx artifact and all smoke checks passed. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | Upstream final fragments still fail, but the oil-bottle/urn divergence is eliminated. |
+| `python3 tools/run_transcripts.py --execute --timeout 90` | Failed on expected-fragment mismatches: 12 passed, 3 failed, 0 timed out, 0 VM crashes. |
+
+Observed progression after the fix:
+
+- East-pit `fill bottle` now produces an oil-filled bottle.
+- Cliff `fill urn`, `light urn`, and `rub urn` now execute.
+- Amber creation, rug gemstone behavior, rug flight, and sapphire acquisition
+  now progress in the full solve transcript.
+
+The overall release-blocking status remains unchanged. The full suite remains
+at 12/15 passing, and the three full upstream cases remain the failing cases:
+
+- `solve-path`
+- `treasure-collection`
+- `complete-endgame`
+
+Release recommendation remains **Not Ready**. The next parity work should
+continue from the new later divergence in late treasure/endgame synchronization
+after the amber/sapphire/rug route.
