@@ -115,3 +115,34 @@ Medium:
 1. Improve Glulxe capture normalization.
 2. Recheck exact score formatting after full routes are stable.
 3. Keep Z8 as an experimental optimization track unless release goals change.
+
+## Milestone 8F Addendum
+
+Date: 2026-06-14
+
+Resolved or improved:
+
+| ID | Category | Resolution |
+|---|---|---|
+| `BUG-8F-001` | replay parity issue | Upstream replay now triggers the expected pirate pounce/chest placement during direct all-alike maze movement. |
+| `BUG-8F-002` | implementation bug | Urn, cavity, gemstone, rug-hover, and rug-flight action coverage was added from Open Adventure C. |
+| `BUG-8F-003` | implementation bug | Bottle take/drop/fill now synchronizes the water/oil proxy objects with bottle state. |
+| `BUG-8F-004` | implementation bug | Reservoir magic word `N'BEH` toggles parted waters and allows the upstream route to continue north. |
+| `BUG-8F-005` | transcript issue | Focused cave-closing expectation was updated after direct post-travel hooks made the first dwarf encounter visible. |
+
+Remaining active discrepancies:
+
+| ID | Case | Category | Current root cause | Severity |
+|---|---|---|---|---|
+| `BUG-8F-006` | `solve-path`, `treasure-collection` | release blocker | Full replay still loses the oil-filled bottle before the first cliff `fill urn`; amber/sapphire/rug synchronization therefore does not complete in the first treasure route. | critical |
+| `BUG-8F-007` | `solve-path`, `treasure-collection` | release blocker | Late treasure collection remains unstable after the first urn/rug divergence; spices, sapphire, amber, and final all-treasure accounting remain unproven. | critical |
+| `BUG-8F-008` | `complete-endgame` | release blocker | Repository transition and blast route still do not execute in the complete endgame transcript. | critical |
+| `BUG-8F-009` | upstream full logs | transcript/framework issue | Glulxe output remains noisy and command echoes are coalesced, making late divergence localization slower despite no timeouts or crashes. | medium |
+
+Priority for the next milestone:
+
+1. Stabilize full replay bottle/liquid state before the first cliff urn command.
+2. Re-run the upstream solve log and confirm amber/sapphire/rug route completion.
+3. Continue to the next treasure divergence, especially spices and remaining
+   late treasure deposits.
+4. Drive `complete-endgame` into cave closing/repository/blast execution.

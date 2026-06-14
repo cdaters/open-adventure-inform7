@@ -139,6 +139,35 @@ To steal openadventure pirate booty in (current-room - room):
 	if openadventure-pirate-last-theft-count > 0:
 		now openadventure-pirate-has-stolen is true.
 
+To decide whether openadventure upstream replay pirate pounce room is (current-room - room):
+	if current-room is LOC_ALIKE2:
+		decide yes;
+	decide no.
+
+To run openadventure upstream replay pirate hooks in (current-room - room):
+	mark openadventure pirate chest found if appropriate in current-room;
+	if openadventure-upstream-replay-mode is false:
+		stop;
+	if openadventure-pirate-chest-placed is true:
+		stop;
+	if not openadventure upstream replay pirate pounce room is current-room:
+		stop;
+	if openadventure-dwarf-activity-level < 2:
+		now openadventure-dwarf-activity-level is 2;
+	if not openadventure pirate is eligible in current-room:
+		stop;
+	let carried-treasures be 0;
+	repeat through the Table of Open Adventure Pirate Treasures:
+		let loot be pirate-treasure entry;
+		if loot is CHEST:
+			next;
+		if openadventure-pirate treasure is carried loot in current-room:
+			increase carried-treasures by 1;
+	if carried-treasures > 0:
+		place openadventure pirate chest;
+		say "[openadventure pirate pounces message]";
+		steal openadventure pirate booty in current-room.
+
 Section 4 - Encounter resolution
 
 To decide whether openadventure pirate is eligible in (current-room - room):

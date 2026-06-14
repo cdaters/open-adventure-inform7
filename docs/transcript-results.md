@@ -101,3 +101,62 @@ Still **Not Ready** for Release Candidate.
 Milestone 8E improved walkthrough depth but not the case pass count. The next
 milestone should continue from the current full-log divergence, focusing on
 pirate chest and late treasure/endgame route parity.
+
+## Milestone 8F Results
+
+Date: 2026-06-14
+
+Commands run:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+```
+
+Result: passed. Inform 7 translated successfully, Inform 6 produced a valid
+Glulx story, and all smoke checks passed.
+
+```bash
+python3 tools/run_transcripts.py --execute
+```
+
+Result: failed on expected-fragment mismatches only.
+
+| Metric | 8E | 8F |
+|---|---:|---:|
+| Manifest cases | 15 | 15 |
+| Cases launched | 15 | 15 |
+| Passing cases | 12 | 12 |
+| Failing cases | 3 | 3 |
+| Timeouts | 0 | 0 |
+| VM/runtime crashes | 0 | 0 |
+
+Passing cases:
+
+- `startup`
+- `travel`
+- `plover`
+- `troll`
+- `dwarves`
+- `pirate`
+- `scoring`
+- `reincarnation`
+- `bear`
+- `dragon`
+- `cave-closing`
+- `endgame`
+
+Failing cases:
+
+- `solve-path`: still misses final 430-point score/rank fragments.
+- `treasure-collection`: still misses early and final all-treasure fragments.
+- `complete-endgame`: still misses repository and blast fragments.
+
+8F movement:
+
+- The focused suite remains stable at 12 passing cases.
+- The direct-hook `cave-closing` expectation was updated to match the now-active
+  first dwarf encounter.
+- `N'BEH` now parts the reservoir during full replay.
+- Full replay still diverges at the first cliff urn sequence because the
+  oil-filled bottle is not reliably present when the upstream log issues
+  `fill urn`.

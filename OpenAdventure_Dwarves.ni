@@ -297,6 +297,7 @@ To run openadventure dwarves post-travel hooks for source (source-room - room) d
 		disable openadventure dwarf movement pass;
 		stop;
 	if openadventure-upstream-replay-mode is true:
+		run openadventure upstream replay pirate hooks in destination-room;
 		disable openadventure dwarf movement pass;
 		stop;
 	if openadventure-seeded-replay-mode is true and adventure-state of LAMP is not "LAMP_BRIGHT":

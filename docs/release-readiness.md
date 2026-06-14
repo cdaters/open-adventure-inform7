@@ -88,3 +88,38 @@ Continue **full walkthrough parity** from the latest 8E output:
 3. Re-run full upstream logs after each correction.
 4. Drive at least one complete solve transcript to final score/rank before
    reassessing Beta status.
+
+## Milestone 8F Assessment
+
+Date: 2026-06-14
+
+Recommendation remains **Not Ready** for Release Candidate.
+
+8F preserved the stable baseline but did not improve the transcript pass count:
+
+| Area | Status |
+|---|---|
+| Glulx artifact | Passing compile/smoke target. |
+| Smoke tests | Passing. |
+| Transcript framework | Completes all cases with no timeouts or VM crashes. |
+| Transcript pass rate | 12/15. |
+| Full solve path | Failing. |
+| Full treasure collection | Failing. |
+| Complete endgame | Failing. |
+
+New evidence:
+
+- Pirate pounce/chest routing is integrated with direct movement during
+  upstream replay.
+- Urn/rug/reservoir mechanics are now implemented at runtime.
+- `N'BEH` reservoir parting works in the full transcript output.
+- The first remaining full-route blocker is still before complete treasure
+  parity: the first cliff `fill urn` cannot reliably see the oil-filled bottle
+  in the upstream replay state.
+
+Release classification: **Not Ready**.
+
+Beta Candidate would require at least one complete solve route reaching final
+score/rank and a categorized list of any remaining route differences. Release
+Candidate still requires passing or explicitly accepted complete solve,
+treasure, and endgame paths on Glulx.

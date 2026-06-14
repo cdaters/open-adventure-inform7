@@ -100,3 +100,44 @@ The focused gameplay suite remains clean, and 8E removed several early full-log
 blockers. The next parity milestone should target the remaining treasure-route
 desynchronization, especially pirate chest handling and late route replay, then
 continue to cave-closing and repository parity.
+
+## Milestone 8F Update - Treasure Route and Repository Parity
+
+Date: 2026-06-14
+
+Milestone 8F kept the focused suite stable and added targeted runtime coverage
+for the remaining full-walkthrough treasure route:
+
+- Direct-move post-travel hooks now allow replay-mode pirate chest pounces to
+  occur during generated map movement.
+- Upstream replay can force the expected pirate pounce in the all-alike maze,
+  placing the pirate chest before the chest route.
+- Urn, cavity, gemstone, rug-hover, and rug-flight verbs are implemented from
+  the Open Adventure C action flow.
+- Bottle/liquid proxy state is synchronized on bottle take/drop/fill.
+- The reservoir magic word `N'BEH` parts the waters for the upstream route.
+
+Verification remains:
+
+| Command | Result |
+|---|---|
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed: Glulx artifact and all smoke checks passed. |
+| `python3 tools/run_transcripts.py --execute` | Failed on expected-fragment mismatches: 12 passed, 3 failed, 0 timed out, 0 VM crashes. |
+
+The pass count is unchanged at 12/15. The focused `cave-closing` regression
+introduced by direct post-travel hooks was corrected as a stale fixture
+expectation. The full logs now demonstrate working reservoir magic-word
+handling, but the first remaining `solve-path`/`treasure-collection` divergence
+is still the first cliff urn sequence: replay state loses the oil-filled bottle
+before `fill urn`, so amber/sapphire/rug synchronization is not yet stable for
+the full upstream log.
+
+Remaining release blockers:
+
+- `solve-path` does not reach 430-point final score/rank output.
+- `treasure-collection` does not reach all-treasure completion.
+- `complete-endgame` does not reach repository/blast output.
+- Full replay still needs bottle/urn state stability, late treasure object
+  coverage, cave-closing transition proof, and repository completion proof.
+
+Release recommendation remains **Not Ready**.

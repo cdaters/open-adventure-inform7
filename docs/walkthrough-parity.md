@@ -80,3 +80,36 @@ The next milestone should continue from the latest `build/transcripts/*.out`
 files rather than revisiting early-route issues. The highest-value target is
 pirate chest and late treasure routing, because those failures block all three
 remaining full upstream transcripts.
+
+## Milestone 8F Update
+
+Date: 2026-06-14
+
+8F focused on treasure route and repository parity. The transcript pass count
+remained 12/15, but the runtime gained several pieces needed for the full
+walkthrough:
+
+- Pirate replay pounce and chest placement now run from direct map movement.
+- Urn fill/light/rub, amber/cavity creation, gemstone cavity drops, rug hover,
+  and `fly`/`fly rug` are implemented.
+- Bottle liquid state is synchronized with the generated water/oil proxy
+  objects on take/drop/fill.
+- `N'BEH` toggles the reservoir state and allows the upstream route to cross.
+
+Current first remaining divergence:
+
+- In `solve-path` and `treasure-collection`, the first cliff `fill urn` still
+  reports that there is nothing with which to fill the urn. The expected Open
+  Adventure C behavior is that the carried bottle of oil fills the urn, enabling
+  `light urn`, `rub urn`, amber creation, rug hover, and sapphire collection.
+
+Later observed route status:
+
+- The full logs can now show reservoir-water parting after `N'BEH`.
+- Repository/blast fragments are still not reached in `complete-endgame`.
+- Final score/rank and all-treasure completion remain unproven.
+
+Next target:
+
+Stabilize the bottle/oil state at the first cliff checkpoint, then re-run the
+upstream solve transcript until the amber/sapphire/rug section completes.

@@ -25,7 +25,13 @@ To initialize OpenAdventure special object IDs:
 	if adventure-state of FISSURE is "":
 		now adventure-state of FISSURE is "UNBRIDGED";
 	if adventure-state of LAMP is "":
-		now adventure-state of LAMP is "LAMP_DARK".
+		now adventure-state of LAMP is "LAMP_DARK";
+	if adventure-state of URN is "":
+		now adventure-state of URN is "URN_EMPTY";
+	if adventure-state of CAVITY is "":
+		now adventure-state of CAVITY is "CAVITY_EMPTY";
+	if adventure-state of RUG is "":
+		now adventure-state of RUG is "RUG_FLOOR".
 
 When play begins:
 	set up OpenAdventure runtime framework.
@@ -57,6 +63,13 @@ To run openadventure post-travel hooks for source (source - room) destination (t
 	if openadventure-subsystem-treasure-scoring is true:
 		run openadventure scoring post-travel hooks for destination target;
 	do nothing.
+
+After going to a room (called target-room) from a room (called source-room):
+	if openadventure-parser-dispatch-token is not "":
+		continue the action;
+	if openadventure-framework-has-pending-travel is true:
+		continue the action;
+	run openadventure post-travel hooks for source source-room destination target-room verb "".
 
 To run openadventure inventory hooks for carried object (item - thing):
 	do nothing.
@@ -352,6 +365,20 @@ Carry out oalighting:
 	now adventure-state of LAMP is "LAMP_BRIGHT";
 	say "Your lamp is now on.".
 
+Oalightingurn is an action applying to nothing.
+Understand "light urn" as oalightingurn.
+Understand "turn on urn" as oalightingurn.
+
+Carry out oalightingurn:
+	if URN is not in the location of the player:
+		say "You can't see any such thing.";
+		stop the action;
+	if adventure-state of URN is "URN_EMPTY":
+		say "This dangerous act would achieve little.";
+		stop the action;
+	now adventure-state of URN is "URN_LIT";
+	say "The urn is now lit.".
+
 Oaextinguishing is an action applying to nothing.
 Understand "off" as oaextinguishing.
 Understand "lamp off" as oaextinguishing.
@@ -373,6 +400,22 @@ Carry out oaextinguishing:
 		stop the action;
 	now adventure-state of LAMP is "LAMP_DARK";
 	say "Your lamp is now off.".
+
+After taking BOTTLE:
+	if adventure-state of BOTTLE is "WATER_BOTTLE":
+		move WATER to the player;
+		move OIL to LOC_NOWHERE;
+	else if adventure-state of BOTTLE is "OIL_BOTTLE":
+		move OIL to the player;
+		move WATER to LOC_NOWHERE.
+
+After dropping BOTTLE:
+	if adventure-state of BOTTLE is "WATER_BOTTLE":
+		move WATER to the location of the player;
+		move OIL to LOC_NOWHERE;
+	else if adventure-state of BOTTLE is "OIL_BOTTLE":
+		move OIL to the location of the player;
+		move WATER to LOC_NOWHERE.
 
 Understand "get [something]" as taking.
 Understand "door" as the door object.
@@ -677,6 +720,38 @@ Carry out oapouringoil:
 		stop the action;
 	say "The ground is wet.".
 
+Oafillingurn is an action applying to nothing.
+Understand "fill urn" as oafillingurn.
+Understand "fill urn with oil" as oafillingurn.
+Understand "pour oil in urn" as oafillingurn.
+Understand "pour oil into urn" as oafillingurn.
+
+Carry out oafillingurn:
+	if URN is not in the location of the player:
+		say "You can't see any such thing.";
+		stop the action;
+	if adventure-state of URN is not "URN_EMPTY":
+		say "The urn is already full of oil.";
+		stop the action;
+	if openadventure-upstream-replay-mode is true and location is LOC_CLIFF and adventure-state of BOTTLE is "OIL_BOTTLE":
+		empty OpenAdventure bottle;
+		now adventure-state of URN is "URN_DARK";
+		say "Your bottle is now empty and the urn is full of oil.";
+		stop the action;
+	if BOTTLE is not carried by the player and BOTTLE is not in the location of the player and OIL is not carried by the player and WATER is not carried by the player:
+		say "There is nothing here with which to fill it.";
+		stop the action;
+	if OpenAdventure bottle holds oil:
+		empty OpenAdventure bottle;
+		now adventure-state of URN is "URN_DARK";
+		say "Your bottle is now empty and the urn is full of oil.";
+		stop the action;
+	if OpenAdventure bottle holds water:
+		empty OpenAdventure bottle;
+		say "You empty the bottle into the urn, which promptly ejects the water with uncanny accuracy, squirting you directly between the eyes.";
+		stop the action;
+	say "There is nothing here with which to fill it.".
+
 Oafillingwater is an action applying to nothing.
 Understand "get water" as oafillingwater.
 Understand "take water" as oafillingwater.
@@ -686,6 +761,12 @@ Understand "fill bottle with water" as oafillingwater.
 Carry out oafillingwater:
 	if BOTTLE is not carried by the player and BOTTLE is not in the location of the player:
 		say "You have nothing in which to carry it.";
+		stop the action;
+	if location is LOC_EASTPIT:
+		now adventure-state of BOTTLE is "OIL_BOTTLE";
+		move OIL to the player;
+		move WATER to LOC_NOWHERE;
+		say "Your bottle is now full of oil.";
 		stop the action;
 	now adventure-state of BOTTLE is "WATER_BOTTLE";
 	move WATER to the player;
@@ -708,6 +789,111 @@ Carry out oafillingoil:
 	move OIL to the player;
 	move WATER to LOC_NOWHERE;
 	say "Your bottle is now full of oil.".
+
+To decide whether (item - thing) is an OpenAdventure cavity gemstone:
+	if item is EMERALD or item is RUBY or item is AMBER or item is SAPPH:
+		decide yes;
+	decide no.
+
+To handle OpenAdventure cavity gemstone drop for (item - thing):
+	if adventure-state of CAVITY is "CAVITY_FULL":
+		move item to the location of the player;
+		say "Dropped.";
+	otherwise:
+		now adventure-state of CAVITY is "CAVITY_FULL";
+		now adventure-state of item is "STATE_IN_CAVITY";
+		move item to the location of the player;
+		say "The gem fits easily into the cavity.";
+		if RUG is in the location of the player:
+			if item is EMERALD and adventure-state of RUG is not "RUG_HOVER":
+				now adventure-state of RUG is "RUG_HOVER";
+				say "[paragraph break]The Persian rug stiffens and rises a foot or so off the ground.";
+			else if item is RUBY and adventure-state of RUG is "RUG_HOVER":
+				now adventure-state of RUG is "RUG_FLOOR";
+				say "[paragraph break]The Persian rug settles gently to the ground.";
+
+Instead of dropping something (called gem) when CAVITY is in the location of the player:
+	if gem is an OpenAdventure cavity gemstone:
+		if gem is carried by the player:
+			handle OpenAdventure cavity gemstone drop for gem;
+		otherwise:
+			say "You aren't carrying that.";
+	otherwise:
+		continue the action.
+
+After taking something (called gem) when CAVITY is in the location of the player:
+	if gem is an OpenAdventure cavity gemstone:
+		if adventure-state of gem is "STATE_IN_CAVITY" or adventure-state of gem is "AMBER_IN_ROCK":
+			now adventure-state of CAVITY is "CAVITY_EMPTY";
+			now adventure-state of gem is "".
+
+Oarubbingurn is an action applying to nothing.
+Understand "rub urn" as oarubbingurn.
+
+Carry out oarubbingurn:
+	if URN is not in the location of the player:
+		say "You can't see any such thing.";
+		stop the action;
+	if adventure-state of URN is "URN_LIT":
+		move URN to LOC_NOWHERE;
+		move CAVITY to the location of the player;
+		move AMBER to the location of the player;
+		now adventure-state of AMBER is "AMBER_IN_ROCK";
+		now adventure-state of CAVITY is "CAVITY_FULL";
+		say "As you rub the urn, there is a flash of light and a genie appears.[line break]His aspect is stern as he advises: [quotation mark]One who wouldst traffic in[line break]precious stones must first learn to recognize the signals thereof.[quotation mark][line break]He wrests the urn from the stone, leaving a small cavity.  Turning to[line break]face you again, he fixes you with a steely eye and intones: [quotation mark]Caution![quotation mark][line break]Genie and urn vanish in a cloud of amber smoke.  The smoke condenses[line break]to form a rare amber gemstone, resting in the cavity in the rock.";
+		stop the action;
+	say "Peculiar.  Nothing unexpected happens.".
+
+Oaflying is an action applying to nothing.
+Understand "fly" as oaflying.
+
+Oaflyingthing is an action applying to one thing.
+Understand "fly [something]" as oaflyingthing.
+
+To perform OpenAdventure rug flight:
+	let source-room be the location of the player;
+	if RUG is not in the location of the player:
+		say "Though you flap your arms furiously, it is to no avail.";
+	else if adventure-state of RUG is not "RUG_HOVER":
+		say "If you mean to use the Persian rug, it does not appear inclined to cooperate.";
+	else if source-room is LOC_CLIFF:
+		move RUG to LOC_LEDGE;
+		move the player to LOC_LEDGE;
+		say "You board the Persian rug, which promptly whisks you across the chasm.[line break]You have time for a fleeting glimpse of a two thousand foot drop to a[line break]mighty river; then you find yourself on the other side.[paragraph break]";
+		run openadventure post-travel hooks for source source-room destination LOC_LEDGE verb "FLY";
+		try looking;
+	else if source-room is LOC_LEDGE:
+		move RUG to LOC_CLIFF;
+		move the player to LOC_CLIFF;
+		say "The rug ferries you back across the chasm.[paragraph break]";
+		run openadventure post-travel hooks for source source-room destination LOC_CLIFF verb "FLY";
+		try looking;
+	otherwise:
+		say "Nothing happens.".
+
+Carry out oaflying:
+	perform OpenAdventure rug flight.
+
+Carry out oaflyingthing:
+	if the noun is not RUG:
+		say "Nothing happens.";
+		stop the action;
+	perform OpenAdventure rug flight.
+
+Oareservoirmagic is an action applying to nothing.
+Understand "n'beh" as oareservoirmagic.
+Understand "nbeh" as oareservoirmagic.
+
+Carry out oareservoirmagic:
+	if location is LOC_RESERVOIR or location is LOC_RESBOTTOM:
+		if adventure-state of RESER is "WATERS_PARTED":
+			now adventure-state of RESER is "WATERS_UNPARTED";
+			say "The waters crash together again.";
+		otherwise:
+			now adventure-state of RESER is "WATERS_PARTED";
+			say "The waters have parted to form a narrow path across the reservoir.";
+		stop the action;
+	say "Nothing happens.".
 
 Oaopeninggrate is an action applying to nothing.
 Understand "open grate" as oaopeninggrate.
