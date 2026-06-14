@@ -264,6 +264,60 @@ To openadventure emit travel message (message-id - text):
 		stop;
 	if message-id is "<none>":
 		stop;
+	if message-id is "BAD_DIRECTION":
+		say "There is no way to go that direction.";
+		stop;
+	if message-id is "BRIDGE_GONE":
+		say "There is no longer any way across the chasm.";
+		stop;
+	if message-id is "CLAM_BLOCKER":
+		say "You can't fit this five-foot clam through that little passage!";
+		stop;
+	if message-id is "CROSS_BRIDGE":
+		say "I respectfully suggest you go across the bridge instead of jumping.";
+		stop;
+	if message-id is "DONT_FIT":
+		say "You don't fit through a two-inch slit!";
+		stop;
+	if message-id is "FUTILE_CRAWL":
+		say "You have crawled around in some little holes and wound up back in the main passage.";
+		stop;
+	if message-id is "GRATE_NOWAY":
+		say "You can't go through a locked steel grate!";
+		stop;
+	if message-id is "NASTY_DRAGON":
+		say "The dragon looks rather nasty.  You'd best not try to get by.";
+		stop;
+	if message-id is "NO_CROSS":
+		say "There is no way across the fissure.";
+		stop;
+	if message-id is "OGRE_SNARL":
+		say "The ogre snarls and shoves you back.";
+		stop;
+	if message-id is "OYSTER_BLOCKER":
+		say "You can't fit this five-foot oyster through that little passage!";
+		stop;
+	if message-id is "RIDICULOUS_ATTEMPT":
+		say "Don't be ridiculous!";
+		stop;
+	if message-id is "RUSTY_DOOR":
+		say "The door is extremely rusty and refuses to open.";
+		stop;
+	if message-id is "TOO_FAR":
+		say "It is too far up for you to reach.";
+		stop;
+	if message-id is "TROLL_BLOCKS":
+		say "The troll refuses to let you cross.";
+		stop;
+	if message-id is "UPSTREAM_DOWNSTREAM":
+		say "Upstream or downstream?";
+		stop;
+	if message-id is "WAY_BLOCKED":
+		say "You have crawled around in some little holes and found your way blocked by a recent cave-in.  You are now back in the main passage.";
+		stop;
+	if message-id is "WHICH_WAY":
+		say "Which way?";
+		stop;
 	say "[message-id]";
 
 To oa-dispatch-openadventure-special (special-id - text) from (source-id - text) with verb-token (verb-token - text):
@@ -495,6 +549,37 @@ The initial appearance of EMERALD is "There is an emerald here the size of a plo
 The initial appearance of PYRAMID is "There is a platinum pyramid here, 8 inches on a side!".
 The initial appearance of OBJ_63 is "There are rare spices here!".
 
+Oaenteringstream is an action applying to nothing.
+Understand "enter stream" as oaenteringstream.
+Understand "enter water" as oaenteringstream.
+
+Carry out oaenteringstream:
+	if location is LOC_SLIT or location is LOC_SMALLPIT:
+		openadventure emit travel message "DONT_FIT";
+		stop the action;
+	if location is LOC_START or location is LOC_VALLEY or location is LOC_ROADEND:
+		say "Your feet are now wet.";
+		stop the action;
+	say "You can't see any such thing.".
+
+Oaenteringslit is an action applying to nothing.
+Understand "enter slit" as oaenteringslit.
+
+Carry out oaenteringslit:
+	if openadventure non-direct travel from adventure-id of location with verb token "SLIT":
+		process openadventure forced travel from location;
+		stop the action;
+	say "You can't see any such thing.".
+
+Oaenteringcrack is an action applying to nothing.
+Understand "enter crack" as oaenteringcrack.
+
+Carry out oaenteringcrack:
+	if openadventure non-direct travel from adventure-id of location with verb token "CRACK":
+		process openadventure forced travel from location;
+		stop the action;
+	say "You can't see any such thing.".
+
 Oabareclimbing is an action applying to nothing.
 Understand the command "climb" as something new.
 Understand "climb" as oabareclimbing.
@@ -527,6 +612,33 @@ Carry out oabaretaking:
 		try taking candidate;
 	otherwise:
 		say "What do you want to take?".
+
+Oatakingall is an action applying to nothing.
+Understand "take all" as oatakingall.
+Understand "get all" as oatakingall.
+
+To decide whether (item - thing) is an OpenAdventure take-all candidate:
+	if item is the player:
+		decide no;
+	if item is scenery:
+		decide no;
+	if item is fixed in place:
+		decide no;
+	decide yes.
+
+Carry out oatakingall:
+	let matches be 0;
+	repeat with item running through things in the location of the player:
+		if item is an OpenAdventure take-all candidate:
+			increase matches by 1;
+			say "[item]: ";
+			silently try taking item;
+			if item is carried by the player:
+				say "Taken.";
+			otherwise:
+				say "You can't take that.";
+	if matches is 0:
+		say "There is nothing here to take.".
 
 Oabaredropping is an action applying to nothing.
 Understand "drop" as oabaredropping.
@@ -1077,19 +1189,44 @@ To decide what text is the OpenAdventure dispatch token for (raw-command - text)
 	if command-token is "":
 		decide on "";
 	if the number of words in command-token is not 1:
+		if the number of words in command-token is 2:
+			let first-word be word number 1 in command-token;
+			let second-word be word number 2 in command-token;
+			if first-word is "leave" or first-word is "exit":
+				if second-word is "building" or second-word is "build" or second-word is "house":
+					if OpenAdventure command token "out" maps to available travel:
+						decide on "OUT";
+			if first-word is "enter" or first-word is "go" or first-word is "walk":
+				if first-word is "enter" and (second-word is "stream" or second-word is "water"):
+					decide on "";
+				let second-token be the OpenAdventure mapped parser token for second-word;
+				if second-token is not "":
+					if OpenAdventure command token second-word maps to available travel:
+						decide on second-token;
 		decide on "";
 	if command-token is "l" or command-token is "look" or command-token is "x":
 		decide on "";
 	if command-token is "i" or command-token is "inven" or command-token is "inventory":
 		decide on "";
+	if OpenAdventure command token command-token maps to available travel:
+		decide on the OpenAdventure mapped parser token for command-token;
+	decide on "".
+
+To decide what text is the OpenAdventure mapped parser token for (command-token - text):
 	repeat through the Table of OpenAdventure Parser Travel Tokens:
 		if parser-token entry is command-token:
-			let mapped-token be dispatch-token entry;
-			repeat through the Table of Generated Travel Non-Direct Rules:
-				if source-loc entry is adventure-id of location and forced entry is false:
-					if movement token mapped-token is in token list verbs entry:
-						decide on mapped-token;
+			decide on dispatch-token entry;
 	decide on "".
+
+To decide whether OpenAdventure command token (command-token - text) maps to available travel:
+	let mapped-token be the OpenAdventure mapped parser token for command-token;
+	if mapped-token is "":
+		decide no;
+	repeat through the Table of Generated Travel Non-Direct Rules:
+		if source-loc entry is adventure-id of location and forced entry is false:
+			if movement token mapped-token is in token list verbs entry:
+				decide yes;
+	decide no.
 
 To finish OpenAdventure direct direction fallback from (source-room - room) with verb-token (verb-token - text):
 	if location is not source-room:
@@ -1194,6 +1331,8 @@ parser-token (text)	dispatch-token (text)
 "inside"	"INWAR"
 "inward"	"INWAR"
 "out"	"OUT"
+"exit"	"OUT"
+"leave"	"OUT"
 "outside"	"OUTDO"
 "outdoors"	"OUTDO"
 "enter"	"ENTER"

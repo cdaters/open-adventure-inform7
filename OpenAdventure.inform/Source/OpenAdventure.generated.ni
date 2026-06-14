@@ -40,6 +40,7 @@ Use scoring.
 [ Rooms ]
 
 LOC_NOWHERE is a room.
+The printed name of LOC_NOWHERE is "Nowhere.".
 
 LOC_START is a room.
 The description of LOC_START is "You are standing at the end of a road before a small brick building.
@@ -100,6 +101,7 @@ The printed name of LOC_DEBRIS is "You're in debris room.".
 
 LOC_AWKWARD is a room.
 The description of LOC_AWKWARD is "You are in an awkward sloping east/west canyon.".
+The printed name of LOC_AWKWARD is "You are in an awkward sloping east/west canyon.".
 
 LOC_BIRDCHAMBER is a room.
 The description of LOC_BIRDCHAMBER is "You are in a splendid chamber thirty feet high.  The walls are frozen
@@ -123,6 +125,7 @@ The printed name of LOC_MISTHALL is "You're in Hall of Mists.".
 LOC_CRACK is a room.
 The description of LOC_CRACK is "The crack is far too small for you to follow.  At its widest it is
 barely wide enough to admit your foot.".
+The printed name of LOC_CRACK is "The crack is far too small for you to follow.".
 
 LOC_EASTBANK is a room.
 The description of LOC_EASTBANK is "You are on the east bank of a fissure slicing clear across the hall.
@@ -141,12 +144,15 @@ The printed name of LOC_KINGHALL is "You're in Hall of Mt King.".
 
 LOC_NECKBROKE is a room.
 The description of LOC_NECKBROKE is "You are at the bottom of the pit with a broken neck.".
+The printed name of LOC_NECKBROKE is "You are at the bottom of the pit with a broken neck.".
 
 LOC_NOMAKE is a room.
 The description of LOC_NOMAKE is "You didn't make it.".
+The printed name of LOC_NOMAKE is "You didn't make it.".
 
 LOC_DOME is a room.
 The description of LOC_DOME is "The dome is unclimbable.".
+The printed name of LOC_DOME is "The dome is unclimbable.".
 
 LOC_WESTEND is a room.
 The description of LOC_WESTEND is "You are at the west end of the Twopit Room.  There is a large hole in
@@ -165,6 +171,7 @@ The printed name of LOC_WESTPIT is "You're in west pit.".
 
 LOC_CLIMBSTALK is a room.
 The description of LOC_CLIMBSTALK is "You clamber up the plant and scurry through the hole at the top.".
+The printed name of LOC_CLIMBSTALK is "You clamber up the plant and scurry through the hole at the top.".
 
 LOC_WESTBANK is a room.
 The description of LOC_WESTBANK is "You are on the west side of the fissure in the Hall of Mists.".
@@ -177,6 +184,7 @@ The printed name of LOC_FLOORHOLE is "You're in n/s passage above e/w passage.".
 
 LOC_SOUTHSIDE is a room.
 The description of LOC_SOUTHSIDE is "You are in the south side chamber.".
+The printed name of LOC_SOUTHSIDE is "You are in the south side chamber.".
 
 LOC_WESTSIDE is a room.
 The description of LOC_WESTSIDE is "You are in the west side chamber of the Hall of the Mountain King.
@@ -184,9 +192,11 @@ A passage continues west and up here.".
 The printed name of LOC_WESTSIDE is "You're in the west side chamber.".
 
 LOC_BUILDING1 is a room.
+The printed name of LOC_BUILDING1 is "Building.".
 
 LOC_SNAKEBLOCK is a room.
 The description of LOC_SNAKEBLOCK is "You can't get by the snake.".
+The printed name of LOC_SNAKEBLOCK is "You can't get by the snake.".
 
 LOC_Y2 is a room.
 The description of LOC_Y2 is "You are in a large room, with a passage to the south, a passage to the
@@ -196,6 +206,7 @@ The printed name of LOC_Y2 is "You're at 'Y2'.".
 
 LOC_JUMBLE is a room.
 The description of LOC_JUMBLE is "You are in a jumble of rock, with cracks everywhere.".
+The printed name of LOC_JUMBLE is "You are in a jumble of rock, with cracks everywhere.".
 
 LOC_WINDOW1 is a room.
 The description of LOC_WINDOW1 is "You're at a low window overlooking a huge pit, which extends up out of
@@ -230,6 +241,7 @@ The printed name of LOC_DUSTY is "You're in dusty rock room.".
 LOC_PARALLEL1 is a room.
 The description of LOC_PARALLEL1 is "You have crawled through a very low wide passage parallel to and north
 of the Hall of Mists.".
+The printed name of LOC_PARALLEL1 is "Parallel.".
 
 LOC_MISTWEST is a room.
 The description of LOC_MISTWEST is "You are at the west end of the Hall of Mists.  A low wide crawl
@@ -239,48 +251,63 @@ The printed name of LOC_MISTWEST is "You're at west end of Hall of Mists.".
 
 LOC_ALIKE1 is a room.
 The description of LOC_ALIKE1 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE1 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE2 is a room.
 The description of LOC_ALIKE2 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE2 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE3 is a room.
 The description of LOC_ALIKE3 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE3 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE4 is a room.
 The description of LOC_ALIKE4 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE4 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND1 is a room.
 The description of LOC_MAZEEND1 is "Dead end".
+The printed name of LOC_MAZEEND1 is "Dead end.".
 
 LOC_MAZEEND2 is a room.
 The description of LOC_MAZEEND2 is "Dead end".
+The printed name of LOC_MAZEEND2 is "Dead end.".
 
 LOC_MAZEEND3 is a room.
 The description of LOC_MAZEEND3 is "Dead end".
+The printed name of LOC_MAZEEND3 is "Dead end.".
 
 LOC_ALIKE5 is a room.
 The description of LOC_ALIKE5 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE5 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE6 is a room.
 The description of LOC_ALIKE6 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE6 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE7 is a room.
 The description of LOC_ALIKE7 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE7 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE8 is a room.
 The description of LOC_ALIKE8 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE8 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE9 is a room.
 The description of LOC_ALIKE9 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE9 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND4 is a room.
 The description of LOC_MAZEEND4 is "Dead end".
+The printed name of LOC_MAZEEND4 is "Dead end.".
 
 LOC_ALIKE10 is a room.
 The description of LOC_ALIKE10 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE10 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND5 is a room.
 The description of LOC_MAZEEND5 is "Dead end".
+The printed name of LOC_MAZEEND5 is "Dead end.".
 
 LOC_PITBRINK is a room.
 The description of LOC_PITBRINK is "You are on the brink of a thirty foot pit with a massive orange column
@@ -290,10 +317,12 @@ The printed name of LOC_PITBRINK is "You're at brink of pit.".
 
 LOC_MAZEEND6 is a room.
 The description of LOC_MAZEEND6 is "Dead end".
+The printed name of LOC_MAZEEND6 is "Dead end.".
 
 LOC_PARALLEL2 is a room.
 The description of LOC_PARALLEL2 is "You have crawled through a very low wide passage parallel to and north
 of the Hall of Mists.".
+The printed name of LOC_PARALLEL2 is "Parallel.".
 
 LOC_LONGEAST is a room.
 The description of LOC_LONGEAST is "You are at the east end of a very long hall apparently without side
@@ -308,9 +337,11 @@ The printed name of LOC_LONGWEST is "You're at west end of long hall.".
 
 LOC_CROSSOVER is a room.
 The description of LOC_CROSSOVER is "You are at a crossover of a high n/s passage and a low e/w one.".
+The printed name of LOC_CROSSOVER is "You are at a crossover of a high n/s passage and a low e/w one.".
 
 LOC_DEADEND7 is a room.
 The description of LOC_DEADEND7 is "Dead end".
+The printed name of LOC_DEADEND7 is "Dead end.".
 
 LOC_COMPLEX is a room.
 The description of LOC_COMPLEX is "You are at a complex junction.  A low hands and knees passage from the
@@ -347,9 +378,11 @@ The printed name of LOC_SLAB is "You're in Slab Room.".
 
 LOC_SECRET1 is a room.
 The description of LOC_SECRET1 is "You are in a secret n/s canyon above a large room.".
+The printed name of LOC_SECRET1 is "You are in a secret n/s canyon above a large room.".
 
 LOC_SECRET2 is a room.
 The description of LOC_SECRET2 is "You are in a secret n/s canyon above a sizable passage.".
+The printed name of LOC_SECRET2 is "You are in a secret n/s canyon above a sizable passage.".
 
 LOC_THREEJUNCTION is a room.
 The description of LOC_THREEJUNCTION is "You are in a secret canyon at a junction of three canyons, bearing
@@ -363,6 +396,7 @@ The printed name of LOC_LOWROOM is "You're in large low room.".
 
 LOC_DEADCRAWL is a room.
 The description of LOC_DEADCRAWL is "Dead end crawl.".
+The printed name of LOC_DEADCRAWL is "Dead end crawl.".
 
 LOC_SECRET3 is a room.
 The description of LOC_SECRET3 is "You are in a secret canyon which here runs e/w.  It crosses over a
@@ -372,44 +406,57 @@ The printed name of LOC_SECRET3 is "You're in secret e/w canyon above tight cany
 
 LOC_WIDEPLACE is a room.
 The description of LOC_WIDEPLACE is "You are at a wide place in a very tight n/s canyon.".
+The printed name of LOC_WIDEPLACE is "You are at a wide place in a very tight n/s canyon.".
 
 LOC_TIGHTPLACE is a room.
 The description of LOC_TIGHTPLACE is "The canyon here becomes too tight to go further south.".
+The printed name of LOC_TIGHTPLACE is "The canyon here becomes too tight to go further south.".
 
 LOC_TALL is a room.
 The description of LOC_TALL is "You are in a tall e/w canyon.  A low tight crawl goes 3 feet north and
 seems to open up.".
+The printed name of LOC_TALL is "You are in a tall e/w canyon.".
 
 LOC_BOULDERS1 is a room.
 The description of LOC_BOULDERS1 is "The canyon runs into a mass of boulders -- dead end.".
+The printed name of LOC_BOULDERS1 is "The canyon runs into a mass of boulders -- dead end.".
 
 LOC_SEWER is a room.
 The description of LOC_SEWER is "The stream flows out through a pair of 1 foot diameter sewer pipes.
 It would be advisable to use the exit.".
+The printed name of LOC_SEWER is "Sewer.".
 
 LOC_ALIKE11 is a room.
 The description of LOC_ALIKE11 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE11 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND8 is a room.
 The description of LOC_MAZEEND8 is "Dead end".
+The printed name of LOC_MAZEEND8 is "Dead end.".
 
 LOC_MAZEEND9 is a room.
 The description of LOC_MAZEEND9 is "Dead end".
+The printed name of LOC_MAZEEND9 is "Dead end.".
 
 LOC_ALIKE12 is a room.
 The description of LOC_ALIKE12 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE12 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE13 is a room.
 The description of LOC_ALIKE13 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE13 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND10 is a room.
 The description of LOC_MAZEEND10 is "Dead end".
+The printed name of LOC_MAZEEND10 is "Dead end.".
 
 LOC_MAZEEND11 is a room.
 The description of LOC_MAZEEND11 is "Dead end".
+The printed name of LOC_MAZEEND11 is "Dead end.".
 
 LOC_ALIKE14 is a room.
 The description of LOC_ALIKE14 is "You are in a maze of twisty little passages, all alike.".
+The printed name of LOC_ALIKE14 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_NARROW is a room.
 The description of LOC_NARROW is "You are in a long, narrow corridor stretching out of sight to the
@@ -419,9 +466,11 @@ The printed name of LOC_NARROW is "You're in narrow corridor.".
 
 LOC_NOCLIMB is a room.
 The description of LOC_NOCLIMB is "There is nothing here to climb.  Use 'up' or 'out' to leave the pit.".
+The printed name of LOC_NOCLIMB is "There is nothing here to climb.".
 
 LOC_PLANTTOP is a room.
 The description of LOC_PLANTTOP is "You have climbed up the plant and out of the pit.".
+The printed name of LOC_PLANTTOP is "You have climbed up the plant and out of the pit.".
 
 LOC_INCLINE is a room.
 The description of LOC_INCLINE is "You are at the top of a steep incline above a large room.  You could
@@ -437,9 +486,11 @@ The printed name of LOC_GIANTROOM is "You're in Giant Room.".
 
 LOC_CAVEIN is a room.
 The description of LOC_CAVEIN is "The passage here is blocked by a recent cave-in.".
+The printed name of LOC_CAVEIN is "The passage here is blocked by a recent cave-in.".
 
 LOC_IMMENSE is a room.
 The description of LOC_IMMENSE is "You are at one end of an immense north/south passage.".
+The printed name of LOC_IMMENSE is "You are at one end of an immense north/south passage.".
 
 LOC_WATERFALL is a room.
 The description of LOC_WATERFALL is "You are in a magnificent cavern with a rushing stream, which cascades
@@ -494,9 +545,11 @@ The printed name of LOC_SHELLROOM is "You're in Shell Room.".
 
 LOC_SLOPING1 is a room.
 The description of LOC_SLOPING1 is "You are in a long sloping corridor with ragged sharp walls.".
+The printed name of LOC_SLOPING1 is "You are in a long sloping corridor with ragged sharp walls.".
 
 LOC_CULDESAC is a room.
 The description of LOC_CULDESAC is "You are in a cul-de-sac about eight feet across.".
+The printed name of LOC_CULDESAC is "You are in a cul-de-sac about eight feet across.".
 
 LOC_ANTEROOM is a room.
 The description of LOC_ANTEROOM is "You are in an anteroom leading to a large passage to the east.  Small
@@ -507,6 +560,7 @@ The printed name of LOC_ANTEROOM is "You're in anteroom.".
 
 LOC_DIFFERENT1 is a room.
 The description of LOC_DIFFERENT1 is "You are in a maze of twisty little passages, all different.".
+The printed name of LOC_DIFFERENT1 is "You are in a maze of twisty little passages, all different.".
 
 LOC_WITTSEND is a room.
 The description of LOC_WITTSEND is "You are at Witt's End.  Passages lead off in *ALL* directions.".
@@ -540,6 +594,7 @@ The printed name of LOC_TOPSTALACTITE is "You're at top of stalactite.".
 
 LOC_DIFFERENT2 is a room.
 The description of LOC_DIFFERENT2 is "You are in a little maze of twisting passages, all different.".
+The printed name of LOC_DIFFERENT2 is "You are in a little maze of twisting passages, all different.".
 
 LOC_RESERVOIR is a room.
 The description of LOC_RESERVOIR is "You are at the edge of a large underground reservoir.  An opaque cloud
@@ -551,6 +606,7 @@ The printed name of LOC_RESERVOIR is "You're at reservoir.".
 
 LOC_MAZEEND12 is a room.
 The description of LOC_MAZEEND12 is "Dead end".
+The printed name of LOC_MAZEEND12 is "Dead end.".
 
 LOC_NE is a room.
 The description of LOC_NE is "You are at the northeast end of an immense room, even larger than the
@@ -590,12 +646,15 @@ The printed name of LOC_WINDING is "You're in sloping corridor.".
 
 LOC_SECRET4 is a room.
 The description of LOC_SECRET4 is "You are in a secret canyon which exits to the north and east.".
+The printed name of LOC_SECRET4 is "You are in a secret canyon which exits to the north and east.".
 
 LOC_SECRET5 is a room.
 The description of LOC_SECRET5 is "You are in a secret canyon which exits to the north and east.".
+The printed name of LOC_SECRET5 is "You are in a secret canyon which exits to the north and east.".
 
 LOC_SECRET6 is a room.
 The description of LOC_SECRET6 is "You are in a secret canyon which exits to the north and east.".
+The printed name of LOC_SECRET6 is "You are in a secret canyon which exits to the north and east.".
 
 LOC_NECHASM is a room.
 The description of LOC_NECHASM is "You are on the far side of the chasm.  A ne path leads away from the
@@ -666,111 +725,147 @@ The printed name of LOC_BARRENROOM is "You're in Barren Room.".
 
 LOC_DIFFERENT3 is a room.
 The description of LOC_DIFFERENT3 is "You are in a maze of twisting little passages, all different.".
+The printed name of LOC_DIFFERENT3 is "You are in a maze of twisting little passages, all different.".
 
 LOC_DIFFERENT4 is a room.
 The description of LOC_DIFFERENT4 is "You are in a little maze of twisty passages, all different.".
+The printed name of LOC_DIFFERENT4 is "You are in a little maze of twisty passages, all different.".
 
 LOC_DIFFERENT5 is a room.
 The description of LOC_DIFFERENT5 is "You are in a twisting maze of little passages, all different.".
+The printed name of LOC_DIFFERENT5 is "You are in a twisting maze of little passages, all different.".
 
 LOC_DIFFERENT6 is a room.
 The description of LOC_DIFFERENT6 is "You are in a twisting little maze of passages, all different.".
+The printed name of LOC_DIFFERENT6 is "You are in a twisting little maze of passages, all different.".
 
 LOC_DIFFERENT7 is a room.
 The description of LOC_DIFFERENT7 is "You are in a twisty little maze of passages, all different.".
+The printed name of LOC_DIFFERENT7 is "You are in a twisty little maze of passages, all different.".
 
 LOC_DIFFERENT8 is a room.
 The description of LOC_DIFFERENT8 is "You are in a twisty maze of little passages, all different.".
+The printed name of LOC_DIFFERENT8 is "You are in a twisty maze of little passages, all different.".
 
 LOC_DIFFERENT9 is a room.
 The description of LOC_DIFFERENT9 is "You are in a little twisty maze of passages, all different.".
+The printed name of LOC_DIFFERENT9 is "You are in a little twisty maze of passages, all different.".
 
 LOC_DIFFERENT10 is a room.
 The description of LOC_DIFFERENT10 is "You are in a maze of little twisting passages, all different.".
+The printed name of LOC_DIFFERENT10 is "You are in a maze of little twisting passages, all different.".
 
 LOC_DIFFERENT11 is a room.
 The description of LOC_DIFFERENT11 is "You are in a maze of little twisty passages, all different.".
+The printed name of LOC_DIFFERENT11 is "You are in a maze of little twisty passages, all different.".
 
 LOC_DEADEND13 is a room.
 The description of LOC_DEADEND13 is "Dead end".
+The printed name of LOC_DEADEND13 is "Dead end.".
 
 LOC_ROUGHHEWN is a room.
 The description of LOC_ROUGHHEWN is "You are in a long, rough-hewn, north/south corridor.".
+The printed name of LOC_ROUGHHEWN is "You are in a long, rough-hewn, north/south corridor.".
 
 LOC_BADDIRECTION is a room.
 The description of LOC_BADDIRECTION is "There is no way to go that direction.".
+The printed name of LOC_BADDIRECTION is "There is no way to go that direction.".
 
 LOC_LARGE is a room.
 The description of LOC_LARGE is "You are in a large chamber with passages to the west and north.".
+The printed name of LOC_LARGE is "You are in a large chamber with passages to the west and north.".
 
 LOC_STOREROOM is a room.
 The description of LOC_STOREROOM is "You are in the ogre's storeroom.  The only exit is to the south.".
+The printed name of LOC_STOREROOM is "You are in the ogre's storeroom.".
 
 LOC_FOREST1 is a room.
 The description of LOC_FOREST1 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST1 is "You're in forest.".
 
 LOC_FOREST2 is a room.
 The description of LOC_FOREST2 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST2 is "You're in forest.".
 
 LOC_FOREST3 is a room.
 The description of LOC_FOREST3 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST3 is "You're in forest.".
 
 LOC_FOREST4 is a room.
 The description of LOC_FOREST4 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST4 is "You're in forest.".
 
 LOC_FOREST5 is a room.
 The description of LOC_FOREST5 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST5 is "You're in forest.".
 
 LOC_FOREST6 is a room.
 The description of LOC_FOREST6 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST6 is "You're in forest.".
 
 LOC_FOREST7 is a room.
 The description of LOC_FOREST7 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST7 is "You're in forest.".
 
 LOC_FOREST8 is a room.
 The description of LOC_FOREST8 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST8 is "You're in forest.".
 
 LOC_FOREST9 is a room.
 The description of LOC_FOREST9 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST9 is "You're in forest.".
 
 LOC_FOREST10 is a room.
 The description of LOC_FOREST10 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST10 is "You're in forest.".
 
 LOC_FOREST11 is a room.
 The description of LOC_FOREST11 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST11 is "You're in forest.".
 
 LOC_FOREST12 is a room.
 The description of LOC_FOREST12 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST12 is "You're in forest.".
 
 LOC_FOREST13 is a room.
 The description of LOC_FOREST13 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST13 is "You're in forest.".
 
 LOC_FOREST14 is a room.
 The description of LOC_FOREST14 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST14 is "You're in forest.".
 
 LOC_FOREST15 is a room.
 The description of LOC_FOREST15 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST15 is "You're in forest.".
 
 LOC_FOREST16 is a room.
 The description of LOC_FOREST16 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST16 is "You're in forest.".
 
 LOC_FOREST17 is a room.
 The description of LOC_FOREST17 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST17 is "You're in forest.".
 
 LOC_FOREST18 is a room.
 The description of LOC_FOREST18 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST18 is "You're in forest.".
 
 LOC_FOREST19 is a room.
 The description of LOC_FOREST19 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST19 is "You're in forest.".
 
 LOC_FOREST20 is a room.
 The description of LOC_FOREST20 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST20 is "You're in forest.".
 
 LOC_FOREST21 is a room.
 The description of LOC_FOREST21 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST21 is "You're in forest.".
 
 LOC_FOREST22 is a room.
 The description of LOC_FOREST22 is "You are wandering aimlessly through the forest.".
+The printed name of LOC_FOREST22 is "You're in forest.".
 
 LOC_LEDGE is a room.
 The description of LOC_LEDGE is "You are on a small ledge on one face of a sheer cliff.  There are no
@@ -791,9 +886,11 @@ The printed name of LOC_RESNORTH is "You're north of reservoir.".
 
 LOC_TREACHEROUS is a room.
 The description of LOC_TREACHEROUS is "You are scrambling along a treacherously steep, rocky passage.".
+The printed name of LOC_TREACHEROUS is "You are scrambling along a treacherously steep, rocky passage.".
 
 LOC_STEEP is a room.
 The description of LOC_STEEP is "You are on a very steep incline, which widens at it goes upward.".
+The printed name of LOC_STEEP is "You are on a very steep incline, which widens at it goes upward.".
 
 LOC_CLIFFBASE is a room.
 The description of LOC_CLIFFBASE is "You are at the base of a nearly vertical cliff.  There are some
@@ -804,15 +901,18 @@ The printed name of LOC_CLIFFBASE is "You're at base of cliff.".
 
 LOC_CLIFFACE is a room.
 The description of LOC_CLIFFACE is "You are climbing along a nearly vertical cliff.".
+The printed name of LOC_CLIFFACE is "You are climbing along a nearly vertical cliff.".
 
 LOC_FOOTSLIP is a room.
 The description of LOC_FOOTSLIP is "Just as you reach the top, your foot slips on a loose rock and you
 tumble several hundred feet to join the other unlucky adventurers.".
+The printed name of LOC_FOOTSLIP is "Footslip.".
 
 LOC_CLIFFTOP is a room.
 The description of LOC_CLIFFTOP is "Just as you reach the top, your foot slips on a loose rock and you
 make one last desperate grab.  Your luck holds, as does your grip.
 With an enormous heave, you lift yourself to the ledge above.".
+The printed name of LOC_CLIFFTOP is "Clifftop.".
 
 LOC_CLIFFLEDGE is a room.
 The description of LOC_CLIFFLEDGE is "You are on a small ledge at the top of a nearly vertical cliff.
@@ -821,27 +921,35 @@ The printed name of LOC_CLIFFLEDGE is "You're at top of cliff.".
 
 LOC_REACHDEAD is a room.
 The description of LOC_REACHDEAD is "You have reached a dead end.".
+The printed name of LOC_REACHDEAD is "You have reached a dead end.".
 
 LOC_GRUESOME is a room.
 The description of LOC_GRUESOME is "There is now one more gruesome aspect to the spectacular vista.".
+The printed name of LOC_GRUESOME is "There is now one more gruesome aspect to the spectacular vista.".
 
 LOC_FOOF1 is a room.
 The description of LOC_FOOF1 is ">>Foof!<<".
+The printed name of LOC_FOOF1 is ">>Foof!<<.".
 
 LOC_FOOF2 is a room.
 The description of LOC_FOOF2 is ">>Foof!<<".
+The printed name of LOC_FOOF2 is ">>Foof!<<.".
 
 LOC_FOOF3 is a room.
 The description of LOC_FOOF3 is ">>Foof!<<".
+The printed name of LOC_FOOF3 is ">>Foof!<<.".
 
 LOC_FOOF4 is a room.
 The description of LOC_FOOF4 is ">>Foof!<<".
+The printed name of LOC_FOOF4 is ">>Foof!<<.".
 
 LOC_FOOF5 is a room.
 The description of LOC_FOOF5 is ">>Foof!<<".
+The printed name of LOC_FOOF5 is ">>Foof!<<.".
 
 LOC_FOOF6 is a room.
 The description of LOC_FOOF6 is ">>Foof!<<".
+The printed name of LOC_FOOF6 is ">>Foof!<<.".
 
 To decide what text is the OpenAdventure canonical room id of (candidate-room - room):
 	if candidate-room is LOC_NOWHERE:
@@ -5267,6 +5375,8 @@ When play begins:
 
 The maximum score is 430.
 
+The notify score changes rule is not listed in the turn sequence rulebook.
+
 Section 1 - Score Bookkeeping
 
 To reset openadventure treasure score table:
@@ -6575,6 +6685,60 @@ To openadventure emit travel message (message-id - text):
 		stop;
 	if message-id is "<none>":
 		stop;
+	if message-id is "BAD_DIRECTION":
+		say "There is no way to go that direction.";
+		stop;
+	if message-id is "BRIDGE_GONE":
+		say "There is no longer any way across the chasm.";
+		stop;
+	if message-id is "CLAM_BLOCKER":
+		say "You can't fit this five-foot clam through that little passage!";
+		stop;
+	if message-id is "CROSS_BRIDGE":
+		say "I respectfully suggest you go across the bridge instead of jumping.";
+		stop;
+	if message-id is "DONT_FIT":
+		say "You don't fit through a two-inch slit!";
+		stop;
+	if message-id is "FUTILE_CRAWL":
+		say "You have crawled around in some little holes and wound up back in the main passage.";
+		stop;
+	if message-id is "GRATE_NOWAY":
+		say "You can't go through a locked steel grate!";
+		stop;
+	if message-id is "NASTY_DRAGON":
+		say "The dragon looks rather nasty.  You'd best not try to get by.";
+		stop;
+	if message-id is "NO_CROSS":
+		say "There is no way across the fissure.";
+		stop;
+	if message-id is "OGRE_SNARL":
+		say "The ogre snarls and shoves you back.";
+		stop;
+	if message-id is "OYSTER_BLOCKER":
+		say "You can't fit this five-foot oyster through that little passage!";
+		stop;
+	if message-id is "RIDICULOUS_ATTEMPT":
+		say "Don't be ridiculous!";
+		stop;
+	if message-id is "RUSTY_DOOR":
+		say "The door is extremely rusty and refuses to open.";
+		stop;
+	if message-id is "TOO_FAR":
+		say "It is too far up for you to reach.";
+		stop;
+	if message-id is "TROLL_BLOCKS":
+		say "The troll refuses to let you cross.";
+		stop;
+	if message-id is "UPSTREAM_DOWNSTREAM":
+		say "Upstream or downstream?";
+		stop;
+	if message-id is "WAY_BLOCKED":
+		say "You have crawled around in some little holes and found your way blocked by a recent cave-in.  You are now back in the main passage.";
+		stop;
+	if message-id is "WHICH_WAY":
+		say "Which way?";
+		stop;
 	say "[message-id]";
 
 To oa-dispatch-openadventure-special (special-id - text) from (source-id - text) with verb-token (verb-token - text):
@@ -6806,6 +6970,37 @@ The initial appearance of EMERALD is "There is an emerald here the size of a plo
 The initial appearance of PYRAMID is "There is a platinum pyramid here, 8 inches on a side!".
 The initial appearance of OBJ_63 is "There are rare spices here!".
 
+Oaenteringstream is an action applying to nothing.
+Understand "enter stream" as oaenteringstream.
+Understand "enter water" as oaenteringstream.
+
+Carry out oaenteringstream:
+	if location is LOC_SLIT or location is LOC_SMALLPIT:
+		openadventure emit travel message "DONT_FIT";
+		stop the action;
+	if location is LOC_START or location is LOC_VALLEY or location is LOC_ROADEND:
+		say "Your feet are now wet.";
+		stop the action;
+	say "You can't see any such thing.".
+
+Oaenteringslit is an action applying to nothing.
+Understand "enter slit" as oaenteringslit.
+
+Carry out oaenteringslit:
+	if openadventure non-direct travel from adventure-id of location with verb token "SLIT":
+		process openadventure forced travel from location;
+		stop the action;
+	say "You can't see any such thing.".
+
+Oaenteringcrack is an action applying to nothing.
+Understand "enter crack" as oaenteringcrack.
+
+Carry out oaenteringcrack:
+	if openadventure non-direct travel from adventure-id of location with verb token "CRACK":
+		process openadventure forced travel from location;
+		stop the action;
+	say "You can't see any such thing.".
+
 Oabareclimbing is an action applying to nothing.
 Understand the command "climb" as something new.
 Understand "climb" as oabareclimbing.
@@ -6838,6 +7033,33 @@ Carry out oabaretaking:
 		try taking candidate;
 	otherwise:
 		say "What do you want to take?".
+
+Oatakingall is an action applying to nothing.
+Understand "take all" as oatakingall.
+Understand "get all" as oatakingall.
+
+To decide whether (item - thing) is an OpenAdventure take-all candidate:
+	if item is the player:
+		decide no;
+	if item is scenery:
+		decide no;
+	if item is fixed in place:
+		decide no;
+	decide yes.
+
+Carry out oatakingall:
+	let matches be 0;
+	repeat with item running through things in the location of the player:
+		if item is an OpenAdventure take-all candidate:
+			increase matches by 1;
+			say "[item]: ";
+			silently try taking item;
+			if item is carried by the player:
+				say "Taken.";
+			otherwise:
+				say "You can't take that.";
+	if matches is 0:
+		say "There is nothing here to take.".
 
 Oabaredropping is an action applying to nothing.
 Understand "drop" as oabaredropping.
@@ -7388,19 +7610,44 @@ To decide what text is the OpenAdventure dispatch token for (raw-command - text)
 	if command-token is "":
 		decide on "";
 	if the number of words in command-token is not 1:
+		if the number of words in command-token is 2:
+			let first-word be word number 1 in command-token;
+			let second-word be word number 2 in command-token;
+			if first-word is "leave" or first-word is "exit":
+				if second-word is "building" or second-word is "build" or second-word is "house":
+					if OpenAdventure command token "out" maps to available travel:
+						decide on "OUT";
+			if first-word is "enter" or first-word is "go" or first-word is "walk":
+				if first-word is "enter" and (second-word is "stream" or second-word is "water"):
+					decide on "";
+				let second-token be the OpenAdventure mapped parser token for second-word;
+				if second-token is not "":
+					if OpenAdventure command token second-word maps to available travel:
+						decide on second-token;
 		decide on "";
 	if command-token is "l" or command-token is "look" or command-token is "x":
 		decide on "";
 	if command-token is "i" or command-token is "inven" or command-token is "inventory":
 		decide on "";
+	if OpenAdventure command token command-token maps to available travel:
+		decide on the OpenAdventure mapped parser token for command-token;
+	decide on "".
+
+To decide what text is the OpenAdventure mapped parser token for (command-token - text):
 	repeat through the Table of OpenAdventure Parser Travel Tokens:
 		if parser-token entry is command-token:
-			let mapped-token be dispatch-token entry;
-			repeat through the Table of Generated Travel Non-Direct Rules:
-				if source-loc entry is adventure-id of location and forced entry is false:
-					if movement token mapped-token is in token list verbs entry:
-						decide on mapped-token;
+			decide on dispatch-token entry;
 	decide on "".
+
+To decide whether OpenAdventure command token (command-token - text) maps to available travel:
+	let mapped-token be the OpenAdventure mapped parser token for command-token;
+	if mapped-token is "":
+		decide no;
+	repeat through the Table of Generated Travel Non-Direct Rules:
+		if source-loc entry is adventure-id of location and forced entry is false:
+			if movement token mapped-token is in token list verbs entry:
+				decide yes;
+	decide no.
 
 To finish OpenAdventure direct direction fallback from (source-room - room) with verb-token (verb-token - text):
 	if location is not source-room:
@@ -7505,6 +7752,8 @@ parser-token (text)	dispatch-token (text)
 "inside"	"INWAR"
 "inward"	"INWAR"
 "out"	"OUT"
+"exit"	"OUT"
+"leave"	"OUT"
 "outside"	"OUTDO"
 "outdoors"	"OUTDO"
 "enter"	"ENTER"

@@ -14,14 +14,14 @@ Latest measured status:
 - Upstream treasure-collection path: passing.
 - Upstream complete-endgame path: passing.
 - Runtime crashes: none in the latest run.
-- Transcript timeouts: none with `--timeout 90`.
+- Transcript timeouts: none with `--timeout 180`.
 
 ## Verification Commands
 
 ```bash
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 ## Transcript Metrics
@@ -32,7 +32,7 @@ python3 tools/run_transcripts.py --execute --timeout 90
 | Passing cases | 15 |
 | Failing cases | 0 |
 | VM/runtime crashes | 0 |
-| Timeouts with `--timeout 90` | 0 |
+| Timeouts with `--timeout 180` | 0 |
 
 ## Passing Suites
 

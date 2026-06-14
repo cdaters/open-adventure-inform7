@@ -2,6 +2,7 @@
 [ Rooms ]
 
 LOC_NOWHERE is a room.
+The short description of LOC_NOWHERE is "Nowhere.".
 
 LOC_START is a room.
 The description of LOC_START is "You are standing at the end of a road before a small brick building.
@@ -62,6 +63,7 @@ The short description of LOC_DEBRIS is "You're in debris room.".
 
 LOC_AWKWARD is a room.
 The description of LOC_AWKWARD is "You are in an awkward sloping east/west canyon.".
+The short description of LOC_AWKWARD is "You are in an awkward sloping east/west canyon.".
 
 LOC_BIRDCHAMBER is a room.
 The description of LOC_BIRDCHAMBER is "You are in a splendid chamber thirty feet high.  The walls are frozen
@@ -85,6 +87,7 @@ The short description of LOC_MISTHALL is "You're in Hall of Mists.".
 LOC_CRACK is a room.
 The description of LOC_CRACK is "The crack is far too small for you to follow.  At its widest it is
 barely wide enough to admit your foot.".
+The short description of LOC_CRACK is "The crack is far too small for you to follow.".
 
 LOC_EASTBANK is a room.
 The description of LOC_EASTBANK is "You are on the east bank of a fissure slicing clear across the hall.
@@ -103,12 +106,15 @@ The short description of LOC_KINGHALL is "You're in Hall of Mt King.".
 
 LOC_NECKBROKE is a room.
 The description of LOC_NECKBROKE is "You are at the bottom of the pit with a broken neck.".
+The short description of LOC_NECKBROKE is "You are at the bottom of the pit with a broken neck.".
 
 LOC_NOMAKE is a room.
 The description of LOC_NOMAKE is "You didn't make it.".
+The short description of LOC_NOMAKE is "You didn't make it.".
 
 LOC_DOME is a room.
 The description of LOC_DOME is "The dome is unclimbable.".
+The short description of LOC_DOME is "The dome is unclimbable.".
 
 LOC_WESTEND is a room.
 The description of LOC_WESTEND is "You are at the west end of the Twopit Room.  There is a large hole in
@@ -127,6 +133,7 @@ The short description of LOC_WESTPIT is "You're in west pit.".
 
 LOC_CLIMBSTALK is a room.
 The description of LOC_CLIMBSTALK is "You clamber up the plant and scurry through the hole at the top.".
+The short description of LOC_CLIMBSTALK is "You clamber up the plant and scurry through the hole at the top.".
 
 LOC_WESTBANK is a room.
 The description of LOC_WESTBANK is "You are on the west side of the fissure in the Hall of Mists.".
@@ -139,6 +146,7 @@ The short description of LOC_FLOORHOLE is "You're in n/s passage above e/w passa
 
 LOC_SOUTHSIDE is a room.
 The description of LOC_SOUTHSIDE is "You are in the south side chamber.".
+The short description of LOC_SOUTHSIDE is "You are in the south side chamber.".
 
 LOC_WESTSIDE is a room.
 The description of LOC_WESTSIDE is "You are in the west side chamber of the Hall of the Mountain King.
@@ -146,9 +154,11 @@ A passage continues west and up here.".
 The short description of LOC_WESTSIDE is "You're in the west side chamber.".
 
 LOC_BUILDING1 is a room.
+The short description of LOC_BUILDING1 is "Building.".
 
 LOC_SNAKEBLOCK is a room.
 The description of LOC_SNAKEBLOCK is "You can't get by the snake.".
+The short description of LOC_SNAKEBLOCK is "You can't get by the snake.".
 
 LOC_Y2 is a room.
 The description of LOC_Y2 is "You are in a large room, with a passage to the south, a passage to the
@@ -158,6 +168,7 @@ The short description of LOC_Y2 is "You're at 'Y2'.".
 
 LOC_JUMBLE is a room.
 The description of LOC_JUMBLE is "You are in a jumble of rock, with cracks everywhere.".
+The short description of LOC_JUMBLE is "You are in a jumble of rock, with cracks everywhere.".
 
 LOC_WINDOW1 is a room.
 The description of LOC_WINDOW1 is "You're at a low window overlooking a huge pit, which extends up out of
@@ -192,6 +203,7 @@ The short description of LOC_DUSTY is "You're in dusty rock room.".
 LOC_PARALLEL1 is a room.
 The description of LOC_PARALLEL1 is "You have crawled through a very low wide passage parallel to and north
 of the Hall of Mists.".
+The short description of LOC_PARALLEL1 is "Parallel.".
 
 LOC_MISTWEST is a room.
 The description of LOC_MISTWEST is "You are at the west end of the Hall of Mists.  A low wide crawl
@@ -201,48 +213,63 @@ The short description of LOC_MISTWEST is "You're at west end of Hall of Mists.".
 
 LOC_ALIKE1 is a room.
 The description of LOC_ALIKE1 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE1 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE2 is a room.
 The description of LOC_ALIKE2 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE2 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE3 is a room.
 The description of LOC_ALIKE3 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE3 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE4 is a room.
 The description of LOC_ALIKE4 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE4 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND1 is a room.
 The description of LOC_MAZEEND1 is "Dead end".
+The short description of LOC_MAZEEND1 is "Dead end.".
 
 LOC_MAZEEND2 is a room.
 The description of LOC_MAZEEND2 is "Dead end".
+The short description of LOC_MAZEEND2 is "Dead end.".
 
 LOC_MAZEEND3 is a room.
 The description of LOC_MAZEEND3 is "Dead end".
+The short description of LOC_MAZEEND3 is "Dead end.".
 
 LOC_ALIKE5 is a room.
 The description of LOC_ALIKE5 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE5 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE6 is a room.
 The description of LOC_ALIKE6 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE6 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE7 is a room.
 The description of LOC_ALIKE7 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE7 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE8 is a room.
 The description of LOC_ALIKE8 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE8 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE9 is a room.
 The description of LOC_ALIKE9 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE9 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND4 is a room.
 The description of LOC_MAZEEND4 is "Dead end".
+The short description of LOC_MAZEEND4 is "Dead end.".
 
 LOC_ALIKE10 is a room.
 The description of LOC_ALIKE10 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE10 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND5 is a room.
 The description of LOC_MAZEEND5 is "Dead end".
+The short description of LOC_MAZEEND5 is "Dead end.".
 
 LOC_PITBRINK is a room.
 The description of LOC_PITBRINK is "You are on the brink of a thirty foot pit with a massive orange column
@@ -252,10 +279,12 @@ The short description of LOC_PITBRINK is "You're at brink of pit.".
 
 LOC_MAZEEND6 is a room.
 The description of LOC_MAZEEND6 is "Dead end".
+The short description of LOC_MAZEEND6 is "Dead end.".
 
 LOC_PARALLEL2 is a room.
 The description of LOC_PARALLEL2 is "You have crawled through a very low wide passage parallel to and north
 of the Hall of Mists.".
+The short description of LOC_PARALLEL2 is "Parallel.".
 
 LOC_LONGEAST is a room.
 The description of LOC_LONGEAST is "You are at the east end of a very long hall apparently without side
@@ -270,9 +299,11 @@ The short description of LOC_LONGWEST is "You're at west end of long hall.".
 
 LOC_CROSSOVER is a room.
 The description of LOC_CROSSOVER is "You are at a crossover of a high n/s passage and a low e/w one.".
+The short description of LOC_CROSSOVER is "You are at a crossover of a high n/s passage and a low e/w one.".
 
 LOC_DEADEND7 is a room.
 The description of LOC_DEADEND7 is "Dead end".
+The short description of LOC_DEADEND7 is "Dead end.".
 
 LOC_COMPLEX is a room.
 The description of LOC_COMPLEX is "You are at a complex junction.  A low hands and knees passage from the
@@ -309,9 +340,11 @@ The short description of LOC_SLAB is "You're in Slab Room.".
 
 LOC_SECRET1 is a room.
 The description of LOC_SECRET1 is "You are in a secret n/s canyon above a large room.".
+The short description of LOC_SECRET1 is "You are in a secret n/s canyon above a large room.".
 
 LOC_SECRET2 is a room.
 The description of LOC_SECRET2 is "You are in a secret n/s canyon above a sizable passage.".
+The short description of LOC_SECRET2 is "You are in a secret n/s canyon above a sizable passage.".
 
 LOC_THREEJUNCTION is a room.
 The description of LOC_THREEJUNCTION is "You are in a secret canyon at a junction of three canyons, bearing
@@ -325,6 +358,7 @@ The short description of LOC_LOWROOM is "You're in large low room.".
 
 LOC_DEADCRAWL is a room.
 The description of LOC_DEADCRAWL is "Dead end crawl.".
+The short description of LOC_DEADCRAWL is "Dead end crawl.".
 
 LOC_SECRET3 is a room.
 The description of LOC_SECRET3 is "You are in a secret canyon which here runs e/w.  It crosses over a
@@ -334,44 +368,57 @@ The short description of LOC_SECRET3 is "You're in secret e/w canyon above tight
 
 LOC_WIDEPLACE is a room.
 The description of LOC_WIDEPLACE is "You are at a wide place in a very tight n/s canyon.".
+The short description of LOC_WIDEPLACE is "You are at a wide place in a very tight n/s canyon.".
 
 LOC_TIGHTPLACE is a room.
 The description of LOC_TIGHTPLACE is "The canyon here becomes too tight to go further south.".
+The short description of LOC_TIGHTPLACE is "The canyon here becomes too tight to go further south.".
 
 LOC_TALL is a room.
 The description of LOC_TALL is "You are in a tall e/w canyon.  A low tight crawl goes 3 feet north and
 seems to open up.".
+The short description of LOC_TALL is "You are in a tall e/w canyon.".
 
 LOC_BOULDERS1 is a room.
 The description of LOC_BOULDERS1 is "The canyon runs into a mass of boulders -- dead end.".
+The short description of LOC_BOULDERS1 is "The canyon runs into a mass of boulders -- dead end.".
 
 LOC_SEWER is a room.
 The description of LOC_SEWER is "The stream flows out through a pair of 1 foot diameter sewer pipes.
 It would be advisable to use the exit.".
+The short description of LOC_SEWER is "Sewer.".
 
 LOC_ALIKE11 is a room.
 The description of LOC_ALIKE11 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE11 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND8 is a room.
 The description of LOC_MAZEEND8 is "Dead end".
+The short description of LOC_MAZEEND8 is "Dead end.".
 
 LOC_MAZEEND9 is a room.
 The description of LOC_MAZEEND9 is "Dead end".
+The short description of LOC_MAZEEND9 is "Dead end.".
 
 LOC_ALIKE12 is a room.
 The description of LOC_ALIKE12 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE12 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_ALIKE13 is a room.
 The description of LOC_ALIKE13 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE13 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_MAZEEND10 is a room.
 The description of LOC_MAZEEND10 is "Dead end".
+The short description of LOC_MAZEEND10 is "Dead end.".
 
 LOC_MAZEEND11 is a room.
 The description of LOC_MAZEEND11 is "Dead end".
+The short description of LOC_MAZEEND11 is "Dead end.".
 
 LOC_ALIKE14 is a room.
 The description of LOC_ALIKE14 is "You are in a maze of twisty little passages, all alike.".
+The short description of LOC_ALIKE14 is "You are in a maze of twisty little passages, all alike.".
 
 LOC_NARROW is a room.
 The description of LOC_NARROW is "You are in a long, narrow corridor stretching out of sight to the
@@ -381,9 +428,11 @@ The short description of LOC_NARROW is "You're in narrow corridor.".
 
 LOC_NOCLIMB is a room.
 The description of LOC_NOCLIMB is "There is nothing here to climb.  Use 'up' or 'out' to leave the pit.".
+The short description of LOC_NOCLIMB is "There is nothing here to climb.".
 
 LOC_PLANTTOP is a room.
 The description of LOC_PLANTTOP is "You have climbed up the plant and out of the pit.".
+The short description of LOC_PLANTTOP is "You have climbed up the plant and out of the pit.".
 
 LOC_INCLINE is a room.
 The description of LOC_INCLINE is "You are at the top of a steep incline above a large room.  You could
@@ -399,9 +448,11 @@ The short description of LOC_GIANTROOM is "You're in Giant Room.".
 
 LOC_CAVEIN is a room.
 The description of LOC_CAVEIN is "The passage here is blocked by a recent cave-in.".
+The short description of LOC_CAVEIN is "The passage here is blocked by a recent cave-in.".
 
 LOC_IMMENSE is a room.
 The description of LOC_IMMENSE is "You are at one end of an immense north/south passage.".
+The short description of LOC_IMMENSE is "You are at one end of an immense north/south passage.".
 
 LOC_WATERFALL is a room.
 The description of LOC_WATERFALL is "You are in a magnificent cavern with a rushing stream, which cascades
@@ -456,9 +507,11 @@ The short description of LOC_SHELLROOM is "You're in Shell Room.".
 
 LOC_SLOPING1 is a room.
 The description of LOC_SLOPING1 is "You are in a long sloping corridor with ragged sharp walls.".
+The short description of LOC_SLOPING1 is "You are in a long sloping corridor with ragged sharp walls.".
 
 LOC_CULDESAC is a room.
 The description of LOC_CULDESAC is "You are in a cul-de-sac about eight feet across.".
+The short description of LOC_CULDESAC is "You are in a cul-de-sac about eight feet across.".
 
 LOC_ANTEROOM is a room.
 The description of LOC_ANTEROOM is "You are in an anteroom leading to a large passage to the east.  Small
@@ -469,6 +522,7 @@ The short description of LOC_ANTEROOM is "You're in anteroom.".
 
 LOC_DIFFERENT1 is a room.
 The description of LOC_DIFFERENT1 is "You are in a maze of twisty little passages, all different.".
+The short description of LOC_DIFFERENT1 is "You are in a maze of twisty little passages, all different.".
 
 LOC_WITTSEND is a room.
 The description of LOC_WITTSEND is "You are at Witt's End.  Passages lead off in *ALL* directions.".
@@ -502,6 +556,7 @@ The short description of LOC_TOPSTALACTITE is "You're at top of stalactite.".
 
 LOC_DIFFERENT2 is a room.
 The description of LOC_DIFFERENT2 is "You are in a little maze of twisting passages, all different.".
+The short description of LOC_DIFFERENT2 is "You are in a little maze of twisting passages, all different.".
 
 LOC_RESERVOIR is a room.
 The description of LOC_RESERVOIR is "You are at the edge of a large underground reservoir.  An opaque cloud
@@ -513,6 +568,7 @@ The short description of LOC_RESERVOIR is "You're at reservoir.".
 
 LOC_MAZEEND12 is a room.
 The description of LOC_MAZEEND12 is "Dead end".
+The short description of LOC_MAZEEND12 is "Dead end.".
 
 LOC_NE is a room.
 The description of LOC_NE is "You are at the northeast end of an immense room, even larger than the
@@ -552,12 +608,15 @@ The short description of LOC_WINDING is "You're in sloping corridor.".
 
 LOC_SECRET4 is a room.
 The description of LOC_SECRET4 is "You are in a secret canyon which exits to the north and east.".
+The short description of LOC_SECRET4 is "You are in a secret canyon which exits to the north and east.".
 
 LOC_SECRET5 is a room.
 The description of LOC_SECRET5 is "You are in a secret canyon which exits to the north and east.".
+The short description of LOC_SECRET5 is "You are in a secret canyon which exits to the north and east.".
 
 LOC_SECRET6 is a room.
 The description of LOC_SECRET6 is "You are in a secret canyon which exits to the north and east.".
+The short description of LOC_SECRET6 is "You are in a secret canyon which exits to the north and east.".
 
 LOC_NECHASM is a room.
 The description of LOC_NECHASM is "You are on the far side of the chasm.  A ne path leads away from the
@@ -628,111 +687,147 @@ The short description of LOC_BARRENROOM is "You're in Barren Room.".
 
 LOC_DIFFERENT3 is a room.
 The description of LOC_DIFFERENT3 is "You are in a maze of twisting little passages, all different.".
+The short description of LOC_DIFFERENT3 is "You are in a maze of twisting little passages, all different.".
 
 LOC_DIFFERENT4 is a room.
 The description of LOC_DIFFERENT4 is "You are in a little maze of twisty passages, all different.".
+The short description of LOC_DIFFERENT4 is "You are in a little maze of twisty passages, all different.".
 
 LOC_DIFFERENT5 is a room.
 The description of LOC_DIFFERENT5 is "You are in a twisting maze of little passages, all different.".
+The short description of LOC_DIFFERENT5 is "You are in a twisting maze of little passages, all different.".
 
 LOC_DIFFERENT6 is a room.
 The description of LOC_DIFFERENT6 is "You are in a twisting little maze of passages, all different.".
+The short description of LOC_DIFFERENT6 is "You are in a twisting little maze of passages, all different.".
 
 LOC_DIFFERENT7 is a room.
 The description of LOC_DIFFERENT7 is "You are in a twisty little maze of passages, all different.".
+The short description of LOC_DIFFERENT7 is "You are in a twisty little maze of passages, all different.".
 
 LOC_DIFFERENT8 is a room.
 The description of LOC_DIFFERENT8 is "You are in a twisty maze of little passages, all different.".
+The short description of LOC_DIFFERENT8 is "You are in a twisty maze of little passages, all different.".
 
 LOC_DIFFERENT9 is a room.
 The description of LOC_DIFFERENT9 is "You are in a little twisty maze of passages, all different.".
+The short description of LOC_DIFFERENT9 is "You are in a little twisty maze of passages, all different.".
 
 LOC_DIFFERENT10 is a room.
 The description of LOC_DIFFERENT10 is "You are in a maze of little twisting passages, all different.".
+The short description of LOC_DIFFERENT10 is "You are in a maze of little twisting passages, all different.".
 
 LOC_DIFFERENT11 is a room.
 The description of LOC_DIFFERENT11 is "You are in a maze of little twisty passages, all different.".
+The short description of LOC_DIFFERENT11 is "You are in a maze of little twisty passages, all different.".
 
 LOC_DEADEND13 is a room.
 The description of LOC_DEADEND13 is "Dead end".
+The short description of LOC_DEADEND13 is "Dead end.".
 
 LOC_ROUGHHEWN is a room.
 The description of LOC_ROUGHHEWN is "You are in a long, rough-hewn, north/south corridor.".
+The short description of LOC_ROUGHHEWN is "You are in a long, rough-hewn, north/south corridor.".
 
 LOC_BADDIRECTION is a room.
 The description of LOC_BADDIRECTION is "There is no way to go that direction.".
+The short description of LOC_BADDIRECTION is "There is no way to go that direction.".
 
 LOC_LARGE is a room.
 The description of LOC_LARGE is "You are in a large chamber with passages to the west and north.".
+The short description of LOC_LARGE is "You are in a large chamber with passages to the west and north.".
 
 LOC_STOREROOM is a room.
 The description of LOC_STOREROOM is "You are in the ogre's storeroom.  The only exit is to the south.".
+The short description of LOC_STOREROOM is "You are in the ogre's storeroom.".
 
 LOC_FOREST1 is a room.
 The description of LOC_FOREST1 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST1 is "You're in forest.".
 
 LOC_FOREST2 is a room.
 The description of LOC_FOREST2 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST2 is "You're in forest.".
 
 LOC_FOREST3 is a room.
 The description of LOC_FOREST3 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST3 is "You're in forest.".
 
 LOC_FOREST4 is a room.
 The description of LOC_FOREST4 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST4 is "You're in forest.".
 
 LOC_FOREST5 is a room.
 The description of LOC_FOREST5 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST5 is "You're in forest.".
 
 LOC_FOREST6 is a room.
 The description of LOC_FOREST6 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST6 is "You're in forest.".
 
 LOC_FOREST7 is a room.
 The description of LOC_FOREST7 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST7 is "You're in forest.".
 
 LOC_FOREST8 is a room.
 The description of LOC_FOREST8 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST8 is "You're in forest.".
 
 LOC_FOREST9 is a room.
 The description of LOC_FOREST9 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST9 is "You're in forest.".
 
 LOC_FOREST10 is a room.
 The description of LOC_FOREST10 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST10 is "You're in forest.".
 
 LOC_FOREST11 is a room.
 The description of LOC_FOREST11 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST11 is "You're in forest.".
 
 LOC_FOREST12 is a room.
 The description of LOC_FOREST12 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST12 is "You're in forest.".
 
 LOC_FOREST13 is a room.
 The description of LOC_FOREST13 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST13 is "You're in forest.".
 
 LOC_FOREST14 is a room.
 The description of LOC_FOREST14 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST14 is "You're in forest.".
 
 LOC_FOREST15 is a room.
 The description of LOC_FOREST15 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST15 is "You're in forest.".
 
 LOC_FOREST16 is a room.
 The description of LOC_FOREST16 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST16 is "You're in forest.".
 
 LOC_FOREST17 is a room.
 The description of LOC_FOREST17 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST17 is "You're in forest.".
 
 LOC_FOREST18 is a room.
 The description of LOC_FOREST18 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST18 is "You're in forest.".
 
 LOC_FOREST19 is a room.
 The description of LOC_FOREST19 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST19 is "You're in forest.".
 
 LOC_FOREST20 is a room.
 The description of LOC_FOREST20 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST20 is "You're in forest.".
 
 LOC_FOREST21 is a room.
 The description of LOC_FOREST21 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST21 is "You're in forest.".
 
 LOC_FOREST22 is a room.
 The description of LOC_FOREST22 is "You are wandering aimlessly through the forest.".
+The short description of LOC_FOREST22 is "You're in forest.".
 
 LOC_LEDGE is a room.
 The description of LOC_LEDGE is "You are on a small ledge on one face of a sheer cliff.  There are no
@@ -753,9 +848,11 @@ The short description of LOC_RESNORTH is "You're north of reservoir.".
 
 LOC_TREACHEROUS is a room.
 The description of LOC_TREACHEROUS is "You are scrambling along a treacherously steep, rocky passage.".
+The short description of LOC_TREACHEROUS is "You are scrambling along a treacherously steep, rocky passage.".
 
 LOC_STEEP is a room.
 The description of LOC_STEEP is "You are on a very steep incline, which widens at it goes upward.".
+The short description of LOC_STEEP is "You are on a very steep incline, which widens at it goes upward.".
 
 LOC_CLIFFBASE is a room.
 The description of LOC_CLIFFBASE is "You are at the base of a nearly vertical cliff.  There are some
@@ -766,15 +863,18 @@ The short description of LOC_CLIFFBASE is "You're at base of cliff.".
 
 LOC_CLIFFACE is a room.
 The description of LOC_CLIFFACE is "You are climbing along a nearly vertical cliff.".
+The short description of LOC_CLIFFACE is "You are climbing along a nearly vertical cliff.".
 
 LOC_FOOTSLIP is a room.
 The description of LOC_FOOTSLIP is "Just as you reach the top, your foot slips on a loose rock and you
 tumble several hundred feet to join the other unlucky adventurers.".
+The short description of LOC_FOOTSLIP is "Footslip.".
 
 LOC_CLIFFTOP is a room.
 The description of LOC_CLIFFTOP is "Just as you reach the top, your foot slips on a loose rock and you
 make one last desperate grab.  Your luck holds, as does your grip.
 With an enormous heave, you lift yourself to the ledge above.".
+The short description of LOC_CLIFFTOP is "Clifftop.".
 
 LOC_CLIFFLEDGE is a room.
 The description of LOC_CLIFFLEDGE is "You are on a small ledge at the top of a nearly vertical cliff.
@@ -783,27 +883,35 @@ The short description of LOC_CLIFFLEDGE is "You're at top of cliff.".
 
 LOC_REACHDEAD is a room.
 The description of LOC_REACHDEAD is "You have reached a dead end.".
+The short description of LOC_REACHDEAD is "You have reached a dead end.".
 
 LOC_GRUESOME is a room.
 The description of LOC_GRUESOME is "There is now one more gruesome aspect to the spectacular vista.".
+The short description of LOC_GRUESOME is "There is now one more gruesome aspect to the spectacular vista.".
 
 LOC_FOOF1 is a room.
 The description of LOC_FOOF1 is ">>Foof!<<".
+The short description of LOC_FOOF1 is ">>Foof!<<.".
 
 LOC_FOOF2 is a room.
 The description of LOC_FOOF2 is ">>Foof!<<".
+The short description of LOC_FOOF2 is ">>Foof!<<.".
 
 LOC_FOOF3 is a room.
 The description of LOC_FOOF3 is ">>Foof!<<".
+The short description of LOC_FOOF3 is ">>Foof!<<.".
 
 LOC_FOOF4 is a room.
 The description of LOC_FOOF4 is ">>Foof!<<".
+The short description of LOC_FOOF4 is ">>Foof!<<.".
 
 LOC_FOOF5 is a room.
 The description of LOC_FOOF5 is ">>Foof!<<".
+The short description of LOC_FOOF5 is ">>Foof!<<.".
 
 LOC_FOOF6 is a room.
 The description of LOC_FOOF6 is ">>Foof!<<".
+The short description of LOC_FOOF6 is ">>Foof!<<.".
 
 To decide what text is the OpenAdventure canonical room id of (candidate-room - room):
 	if candidate-room is LOC_NOWHERE:

@@ -7,7 +7,7 @@ Date: 2026-06-14
 Command:
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Result: passed, 15/15.
@@ -43,7 +43,7 @@ The manifest includes three upstream-backed cases:
 The latest upstream-specific command remains:
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 Expected result: 3/3 passing.

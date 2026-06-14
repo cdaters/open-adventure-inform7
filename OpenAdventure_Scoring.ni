@@ -2,6 +2,8 @@
 
 The maximum score is 430.
 
+The notify score changes rule is not listed in the turn sequence rulebook.
+
 Section 1 - Score Bookkeeping
 
 To reset openadventure treasure score table:

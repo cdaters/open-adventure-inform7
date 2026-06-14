@@ -15,6 +15,25 @@ def quote(text) -> str:
     return str(text).replace('"', "'")
 
 
+def fallback_short_description(loc_id: str, loc: dict) -> str:
+    if loc_id.startswith("LOC_FOREST"):
+        return "You're in forest."
+
+    desc = loc.get("description", {})
+    long_desc = desc.get("long") or ""
+    if long_desc:
+        first_line = str(long_desc).strip().splitlines()[0].strip()
+        first_sentence = first_line.split(".")[0].strip()
+        if first_sentence and len(first_sentence) <= 64:
+            return first_sentence + "."
+
+    label = loc_id.removeprefix("LOC_").replace("_", " ").lower()
+    label = re.sub(r"\d+$", "", label).strip()
+    if not label:
+        label = "nowhere"
+    return label.capitalize() + "."
+
+
 def generate_rooms(data):
 
     out = []
@@ -32,7 +51,7 @@ def generate_rooms(data):
         desc = loc.get("description", {})
 
         long_desc = quote(desc.get("long") or "")
-        short_desc = quote(desc.get("short") or "")
+        short_desc = quote(desc.get("short") or fallback_short_description(loc_id, loc))
 
         out.append(f"{room_id} is a room.")
 
