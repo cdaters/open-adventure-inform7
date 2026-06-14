@@ -241,3 +241,50 @@ Release recommendation remains **Not Ready**. The next parity milestone should
 focus on late cave-closing clock alignment and the `win430.log` repository rod
 route, since the isolated complete-endgame route now proves the repository and
 victory blast mechanics can succeed.
+
+## Milestone 8I Update - Final Walkthrough Parity
+
+Date: 2026-06-14
+
+Milestone 8I resolved the remaining `solve-path` and `treasure-collection`
+walkthrough failures. The full transcript manifest now passes 15/15 cases.
+
+Root cause:
+
+- During the cave-closing warning phase, Open Adventure C blocks movement to
+  outside locations, including magic-word forced rooms that lead outside. The
+  Inform implementation did not classify `LOC_FOOF2` and `LOC_FOOF4` as outside
+  targets, so post-warning `PLUGH` could still escape to the building. That
+  derailed the late `win430.log` magazine route and repository rod timing,
+  producing the former 409/430 splatter ending.
+
+Additional parity corrections:
+
+- C-style treasure room appearances were added for emerald, pyramid, and
+  spices so the upstream treasure fragments are present.
+- The 430-point endgame now prints the C no-higher-rating message ending in
+  `Congratulations!!`.
+- Stale transcript fragments were corrected to use C-backed output substrings.
+
+Verification:
+
+| Command | Result |
+|---|---|
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | Passed: `solve-path`, `treasure-collection`, and `complete-endgame`. |
+| `python3 tools/run_transcripts.py --execute --timeout 90` | Passed: 15/15 manifest cases. |
+
+Latest full-suite status:
+
+| Metric | 8H | 8I |
+|---|---:|---:|
+| Manifest cases | 15 | 15 |
+| Passing cases | 13 | 15 |
+| Failing cases | 2 | 0 |
+| Timeouts in 90-second run | 0 | 0 |
+| VM/runtime crashes | 0 | 0 |
+
+Release recommendation: **Release Candidate for the Glulx target**. The Z8
+target remains non-release until the known memory work is addressed, but the
+Glulx artifact now has passing smoke tests and passing transcript parity
+coverage for the complete solve, treasure collection, and endgame routes.

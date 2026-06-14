@@ -196,3 +196,41 @@ Next target:
 Align the late cave-closing clock and repository rod choreography in the full
 `win430.log` route. The repository/victory subsystem itself is now proven by
 the passing `complete-endgame` case.
+
+## Milestone 8I Update
+
+Date: 2026-06-14
+
+8I resolves the remaining full walkthrough parity blockers.
+
+First remaining divergence:
+
+- Expected: after the cave-closing warning, the `win430.log` `PLUGH` command
+  should not let the player leave the cave. Open Adventure C treats the
+  magic-word destination as outside during closing, blocks the move, triggers
+  panic timing, and leaves the route in-cave for the magazine and repository
+  sequence.
+- Actual before 8I: Inform allowed the `PLUGH` forced room to continue to the
+  building, derailing the command stream and causing the final bad blast.
+
+Fix:
+
+- `LOC_FOOF2` and `LOC_FOOF4` are now outside targets for cave-closing travel
+  restrictions.
+
+Result:
+
+- `solve-path` reaches 430/430 and final victory rank output.
+- `treasure-collection` passes after C-style treasure initial appearances and
+  stale expectation cleanup.
+- `complete-endgame` remains passing.
+
+Verification:
+
+| Command | Result |
+|---|---|
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | 3/3 upstream cases passed. |
+| `python3 tools/run_transcripts.py --execute --timeout 90` | 15/15 manifest cases passed. |
+
+Remaining walkthrough blockers: none in the current transcript suite.

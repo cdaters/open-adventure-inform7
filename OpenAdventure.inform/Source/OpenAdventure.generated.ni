@@ -5821,6 +5821,10 @@ To decide whether openadventure outside-room is (candidate-room - room):
 		decide yes;
 	if candidate-room is LOC_GRATE:
 		decide yes;
+	if candidate-room is LOC_FOOF2:
+		decide yes;
+	if candidate-room is LOC_FOOF4:
+		decide yes;
 	decide no.
 
 To decide whether openadventure cave closing should tick in (current-room - room):
@@ -6038,6 +6042,8 @@ To complete openadventure endgame with outcome (outcome - text) bonus (bonus - n
 		update openadventure score total;
 		say "[paragraph break]You scored [openadventure-score-total] out of a possible [openadventure-score-maximum], using [turn count] turn[if turn count is not 1]s[end if].[paragraph break]";
 		say "[openadventure ranking for score openadventure-score-total][paragraph break]";
+		if openadventure-score-total >= openadventure-score-maximum:
+			say "To achieve the next higher rating would be a neat trick![line break]Congratulations!![paragraph break]";
 	if outcome is "victory":
 		end the story finally saying "The End.";
 	otherwise:
@@ -6794,6 +6800,10 @@ Understand "jade" or "necklace" as JADE.
 Understand "amber" or "gemstone" as AMBER.
 Understand "sapphire" as SAPPH.
 Understand "ebony" or "statuette" or "statue" as OBJ_69.
+
+The initial appearance of EMERALD is "There is an emerald here the size of a plover's egg!".
+The initial appearance of PYRAMID is "There is a platinum pyramid here, 8 inches on a side!".
+The initial appearance of OBJ_63 is "There are rare spices here!".
 
 Oabareclimbing is an action applying to nothing.
 Understand the command "climb" as something new.

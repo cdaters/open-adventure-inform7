@@ -47,6 +47,10 @@ To decide whether openadventure outside-room is (candidate-room - room):
 		decide yes;
 	if candidate-room is LOC_GRATE:
 		decide yes;
+	if candidate-room is LOC_FOOF2:
+		decide yes;
+	if candidate-room is LOC_FOOF4:
+		decide yes;
 	decide no.
 
 To decide whether openadventure cave closing should tick in (current-room - room):

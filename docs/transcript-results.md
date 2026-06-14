@@ -284,3 +284,52 @@ Resolved in 8H:
 - Bear release at the troll bridge.
 - Egg restoration through `FEE`/`FIE`/`FOE`/`FOO`.
 - Complete endgame repository/victory route.
+
+## Milestone 8I Results
+
+Date: 2026-06-14
+
+8I eliminated the final two failing full-walkthrough transcript cases.
+
+Commands run:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+```
+
+Result: passed.
+
+```bash
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
+
+Result: passed.
+
+```bash
+python3 tools/run_transcripts.py --execute --timeout 90
+```
+
+Result: passed, 15/15.
+
+Latest measured full-suite status:
+
+| Metric | 8G | 8H | 8I |
+|---|---:|---:|---:|
+| Manifest cases | 15 | 15 | 15 |
+| Passing cases | 12 | 13 | 15 |
+| Failing cases | 3 | 2 | 0 |
+| Timeouts in completed run | 0 | 0 | 0 |
+| VM/runtime crashes | 0 | 0 | 0 |
+
+Case movement:
+
+| Case | 8H | 8I | Notes |
+|---|---|---|---|
+| `solve-path` | fail | pass | Reaches victory blast, 430/430 score, and final rank messaging. |
+| `treasure-collection` | fail | pass | C-style treasure descriptions and final score fragments are present. |
+| `complete-endgame` | pass | pass | Remains passing. |
+
+Focused-suite adjustment:
+
+- `plover` expected output was updated from generated object-list wording to
+  the C-style emerald initial appearance introduced in 8I.

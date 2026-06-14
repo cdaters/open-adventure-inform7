@@ -75,6 +75,8 @@ To complete openadventure endgame with outcome (outcome - text) bonus (bonus - n
 		update openadventure score total;
 		say "[paragraph break]You scored [openadventure-score-total] out of a possible [openadventure-score-maximum], using [turn count] turn[if turn count is not 1]s[end if].[paragraph break]";
 		say "[openadventure ranking for score openadventure-score-total][paragraph break]";
+		if openadventure-score-total >= openadventure-score-maximum:
+			say "To achieve the next higher rating would be a neat trick![line break]Congratulations!![paragraph break]";
 	if outcome is "victory":
 		end the story finally saying "The End.";
 	otherwise:

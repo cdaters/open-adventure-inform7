@@ -184,3 +184,26 @@ The project is closer to Beta Candidate because one upstream endgame route now
 passes, but it is not yet Beta Candidate until the complete solve path reaches
 the expected final score/rank or the remaining route difference is explicitly
 classified as acceptable.
+
+## Milestone 8I Assessment
+
+Date: 2026-06-14
+
+Release classification: **Release Candidate for Glulx**.
+
+Readiness impact:
+
+| Area | Status |
+|---|---|
+| Glulx compile/smoke | Passing. |
+| Transcript framework | Passing with `--timeout 90`. |
+| Transcript pass rate | 15/15. |
+| Full solve path | Passing; reaches 430/430 and final rank output. |
+| Full treasure collection | Passing current C-backed fragments. |
+| Complete endgame | Passing. |
+| Z8 target | Still not the release target because of known memory limits. |
+
+8I removed the remaining transcript release blockers. The project is no longer
+blocked from a Glulx Release Candidate by the parity suite. Remaining release
+work should focus on packaging, documentation review, and any explicit
+non-transcript acceptance checks.

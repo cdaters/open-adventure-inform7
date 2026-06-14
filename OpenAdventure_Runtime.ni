@@ -491,6 +491,10 @@ Understand "amber" or "gemstone" as AMBER.
 Understand "sapphire" as SAPPH.
 Understand "ebony" or "statuette" or "statue" as OBJ_69.
 
+The initial appearance of EMERALD is "There is an emerald here the size of a plover's egg!".
+The initial appearance of PYRAMID is "There is a platinum pyramid here, 8 inches on a side!".
+The initial appearance of OBJ_63 is "There are rare spices here!".
+
 Oabareclimbing is an action applying to nothing.
 Understand the command "climb" as something new.
 Understand "climb" as oabareclimbing.
