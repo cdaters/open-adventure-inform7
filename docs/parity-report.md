@@ -1,9 +1,10 @@
-# Parity Report - Milestones 7D-7E
+# Parity Report - Milestones 7D-7F
 
 Milestone 7D moved transcript execution from the blocked Z8 artifact path to
 the Glulx artifact path recommended in Milestone 7C. Milestone 7E resolved the
 runtime stack-overflow crash that prevented startup and allowed the transcript
-suite to reach normal output comparison.
+suite to reach normal output comparison. Milestone 7F classified the resulting
+transcript failures by root cause and priority.
 
 ## Sources Reviewed
 
@@ -16,6 +17,7 @@ suite to reach normal output comparison.
 - `tests/transcripts/suites/*.txt`
 - `tests/transcripts/expected/*.fragments`
 - Open Adventure C regression references listed by the transcript manifest
+- `docs/discrepancy-inventory.md`
 
 ## Framework Status
 
@@ -134,18 +136,29 @@ that output, enforce timeouts, and report per-case results.
 
 Runtime parity is now partially observable. The story starts, prints the
 Milestone 6B startup presentation, and accepts commands. Remaining failures are
-ordinary parity/content failures rather than VM startup failures. Examples:
+ordinary parity/content/harness failures rather than VM startup failures.
 
-- `startup` reaches HELP/ABOUT/INFO/NEWS/VERSION, but the expected fragment
-  `About this Edition` is not currently printed.
-- `travel` starts at the road, but the focused travel transcript still misses
-  `You are inside a building` and `You're in Y2.`
-- Long upstream solve/endgame command logs time out and need route/parser
-  triage before they can be treated as parity checks.
+Milestone 7F found that the failures are not all implementation bugs:
+
+- Critical implementation bug: generated motion/location/magic vocabulary is
+  not routed from the Inform parser to the generated travel table, so commands
+  such as `in`, `east`, `building`, `xyzzy`, and `plugh` fail before gameplay
+  systems can be reached.
+- High-priority transcript-framework issue: Open Adventure C command logs use
+  comments, an initial yes/no startup response, and the regression-only `seed`
+  command. The current runner feeds these lines directly to Glulxe.
+- Medium-priority transcript-framework issue: Glulxe terminal capture contains
+  screen-control, status-line, character-echo, and overwrite artifacts that can
+  hide otherwise printed text.
+- Expectation issue: several focused local fixtures use abbreviated routes but
+  expect fragments from deep Open Adventure C regression paths.
 
 ## Discrepancy Inventory
 
 The current discrepancy inventory is maintained in `docs/known-differences.md`.
+The detailed case-by-case analysis for current transcript failures is in
+`docs/discrepancy-inventory.md`.
+
 Milestone 7E resolves:
 
 - `BUG-7D-001`: the Glulx artifact no longer fails immediately under `glulxe`
@@ -169,8 +182,12 @@ Existing known issues remain relevant:
 
 - `BUG-7A-002`: default Z8 target cannot emit a story file because readable
   memory exceeds the Z-machine limit.
-- `PARITY-001` through `PARITY-007`: gameplay parity issues remain unproven by
-  runtime transcript execution.
+- `BUG-7F-001`: generated non-direct travel vocabulary is not routed through
+  runtime travel dispatch.
+- `BUG-7F-002`: generated magic-word travel rows are not reachable through
+  parser commands.
+- `TFRAME-7F-001` through `TFRAME-7F-003`: transcript framework issues prevent
+  reliable replay and fragment comparison.
 - `INTENT-001` through `INTENT-004`: information-system presentation differences
   remain intentional.
 
@@ -180,11 +197,14 @@ Do not release the current artifact yet.
 
 Required before release:
 
-1. Fix the remaining startup/travel/parser parity issues surfaced by the 7E
-   transcript run.
-2. Re-run all 15 transcript cases.
-3. Reclassify resulting differences as bugs, parity issues, intentional
-   deviations, or future enhancements.
+1. Wire generated motion/location/magic vocabulary into the runtime travel
+   dispatcher.
+2. Sanitize/adapt transcript command streams for comments, C startup prompts,
+   and `seed`.
+3. Improve transcript output capture or normalization.
+4. Rebuild focused transcript routes so expected fragments are reachable.
+5. Re-run all 15 transcript cases and then classify remaining subsystem-level
+   differences.
 
 Optional before release:
 
@@ -195,6 +215,15 @@ Optional before release:
 
 Release blockers:
 
-- Remaining transcript parity failures in startup/travel/puzzle/endgame cases.
+- Parser/travel dispatch blockers identified as `BUG-7F-001` and
+  `BUG-7F-002`.
+- Transcript harness blockers identified as `TFRAME-7F-001` and
+  `TFRAME-7F-002`.
 - `BUG-7A-002`: blocks Z8 only; not a Glulx release blocker if Glulx is the
   chosen primary target.
+
+Recommended next milestone:
+
+- **Milestone 7G - Parser and Transcript Harness Correction**, covering travel
+  parser routing, magic-word command handling, command-stream sanitization,
+  deterministic seed handling, and transcript-friendly Glulx capture.
