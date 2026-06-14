@@ -85,6 +85,32 @@ Run the story:
 glulxe OpenAdventure.inform/Build/OpenAdventure.ulx
 ```
 
+## Inform 7 Author Edition
+
+The release build remains generator-driven, but the repository also provides an
+IDE-friendly prototype project:
+
+```text
+OpenAdventure-AuthorEdition.inform
+```
+
+Regenerate it with:
+
+```bash
+python3 tools/make_author_edition.py
+```
+
+The Author Edition writes a conventional Inform project entry point at
+`OpenAdventure-AuthorEdition.inform/Source/story.ni` and a project
+`Settings.plist` selecting Glulx for Inform 7 10.1.2. It is intended for
+opening in the Inform IDE and pressing Go, while preserving the RC1 source
+hierarchy and transcript-tested command-line workflow.
+
+See:
+
+- `docs/author-edition-design.md`
+- `docs/author-edition-migration.md`
+
 ## Test
 
 Run the Glulx smoke suite:
@@ -136,7 +162,9 @@ OpenAdventure_*.ni                    hand-written runtime subsystems
 source/adventure.yaml                 source world data
 generated/                            generated Inform 7 world files
 OpenAdventure.inform/                 Inform project bundle and build output
+OpenAdventure-AuthorEdition.inform/   generated IDE-friendly Inform project
 tools/yaml2inform.py                  source generator entry point
+tools/make_author_edition.py          Author Edition project assembler
 tools/run_transcripts.py              transcript replay and verification
 tests/smoke/                          smoke test scripts
 tests/transcripts/                    transcript suite manifest

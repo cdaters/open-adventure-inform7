@@ -67,7 +67,8 @@ OpenAdventure.inform/Build/OpenAdventure.ulx
 | 8G | Divergence elimination | Complete | Oil-bottle route divergence resolved |
 | 8H | Endgame completion parity | Complete | Complete endgame route passes |
 | 8I | Final walkthrough parity | Complete | Full manifest passes 15/15 |
-| 9A | Release packaging and presentation | In progress | Release docs and package plan |
+| 9A | Release packaging and presentation | Complete | Release docs and package plan |
+| 10A | Inform 7 Author Edition | In progress | IDE-friendly author project prototype |
 
 ## Build and Test Commands
 
@@ -95,6 +96,25 @@ Run upstream walkthrough verification:
 python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
 ```
 
+## Author Edition
+
+Milestone 10A adds a generated Inform IDE project:
+
+```text
+OpenAdventure-AuthorEdition.inform
+```
+
+Regenerate it with:
+
+```bash
+python3 tools/make_author_edition.py
+```
+
+The Author Edition coexists with the RC1 project. It emits
+`Source/story.ni` and a Glulx `Settings.plist` for Inform 7 10.1.2 IDE use,
+while keeping `source/adventure.yaml`, generator code, and `OpenAdventure_*.ni`
+as durable source.
+
 ## Release Packaging
 
 RC1 should ship as a Glulx release containing:
@@ -113,13 +133,15 @@ The full source repository remains the contributor package.
 
 Release-preparation work:
 
-- Finish Milestone 9A packaging docs.
-- Run final Glulx smoke and transcript verification.
+- Finish Milestone 10A GUI confirmation by manually pressing Go in Inform 7.
+- Run final Glulx smoke and transcript verification before tagging.
 - Tag RC1 with build and transcript evidence.
 
 Future work:
 
 - Decide whether to pursue Z8 memory optimization.
+- Decide whether Author Edition artifacts should be committed long term or
+  generated on demand.
 - Expand manual playtest coverage beyond transcript routes.
 - Add CI automation for Glulx build, smoke tests, and transcripts.
 - Consider packaged release assets such as screenshots, cover art, or a Blorb.

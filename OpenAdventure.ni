@@ -27,8 +27,9 @@ Project goals:
 
     * Preserve Open Adventure gameplay.
     * Remain faithful to the Open Adventure world model.
-    * Produce a modern Inform 7 implementation targeting Z-Machine
-      version 8 and TerpVault distribution.
+    * Produce a modern Inform 7 implementation targeting Glulx.
+    * Keep a reproducible generated workflow and an author-friendly
+      Inform 7 project edition.
 
 ]
 

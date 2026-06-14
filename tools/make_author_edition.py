@@ -1,0 +1,241 @@
+#!/usr/bin/env python3
+"""Assemble an Inform 7 IDE-friendly Author Edition project."""
+
+from __future__ import annotations
+
+import argparse
+import re
+import shlex
+import subprocess
+import uuid
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_PROJECT = ROOT / "OpenAdventure-AuthorEdition.inform"
+
+RUNTIME_FILES = [
+    "OpenAdventure_State.ni",
+    "OpenAdventure_Conditions.ni",
+    "OpenAdventure_Plover.ni",
+    "OpenAdventure_Troll.ni",
+    "OpenAdventure_Bear.ni",
+    "OpenAdventure_Dwarves.ni",
+    "OpenAdventure_Pirate.ni",
+    "OpenAdventure_Scoring.ni",
+    "OpenAdventure_Reincarnation.ni",
+    "OpenAdventure_Dragon.ni",
+    "OpenAdventure_CaveClosing.ni",
+    "OpenAdventure_Endgame.ni",
+    "OpenAdventure_Information.ni",
+    "OpenAdventure_Runtime.ni",
+]
+
+
+SETTINGS_PLIST = """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IFCompilerOptions</key>
+	<dict>
+		<key>IFSettingNaturalInform</key>
+		<true/>
+	</dict>
+	<key>IFLibrarySettings</key>
+	<dict>
+		<key>IFSettingLibraryToUse</key>
+		<string>Natural</string>
+	</dict>
+	<key>IFMiscSettings</key>
+	<dict>
+		<key>IFSettingInfix</key>
+		<false/>
+	</dict>
+	<key>IFOutputSettings</key>
+	<dict>
+		<key>IFSettingCreateBlorb</key>
+		<false/>
+		<key>IFSettingZCodeVersion</key>
+		<integer>256</integer>
+	</dict>
+	<key>IFRandomSettings</key>
+	<dict/>
+</dict>
+</plist>
+"""
+
+
+def read_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+
+
+def run_generator() -> None:
+    subprocess.run(["python3", str(ROOT / "tools" / "yaml2inform.py")], cwd=ROOT, check=True)
+
+
+def source_preamble() -> str:
+    lines = []
+    for line in read_text(ROOT / "OpenAdventure.ni").splitlines():
+        if not line.startswith("Include "):
+            lines.append(line)
+    return "\n".join(lines) + "\n"
+
+
+def prepared_rooms() -> str:
+    text = read_text(ROOT / "generated" / "Rooms.ni")
+    text = text.replace("The short description of ", "The printed name of ")
+    text = text.replace("[sic]", "[bracket]sic[close bracket]")
+    text = text.replace(
+        "[Witt Construction Company]",
+        "[bracket]Witt Construction Company[close bracket]",
+    )
+    return text
+
+
+def prepared_objects() -> str:
+    output = []
+    in_door_block = False
+    section_re = re.compile(r"^\[[ \t]*[A-Z0-9_]+[ \t]*\]$")
+    for line in read_text(ROOT / "generated" / "Objects.ni").splitlines():
+        if line == "[ DOOR ]":
+            in_door_block = True
+            output.append(line)
+            continue
+        if section_re.match(line) and in_door_block and line != "[ DOOR ]":
+            in_door_block = False
+        if in_door_block:
+            if line == "DOOR is a thing.":
+                output.append("The door object is a thing.")
+                continue
+            if "DOOR" in line:
+                output.append(line.replace("DOOR", "the door object"))
+                continue
+        output.append(line)
+    return "\n".join(output) + "\n"
+
+
+def split_quoted(line: str) -> list[str]:
+    return re.findall(r'"[^"]*"|[^\s]+', line)
+
+
+def emit_table_row(line: str) -> str | None:
+    line = line.strip()
+    if not line:
+        return None
+    line = re.sub(r"[.,]$", "", line)
+    fields = split_quoted(line)
+    if len(fields) < 2:
+        return None
+    return "\t".join(fields)
+
+
+def prepared_travel() -> str:
+    output = []
+    in_table = 0
+    saw_table_name = False
+    saw_header = False
+
+    for line in read_text(ROOT / "generated" / "Travel.ni").splitlines():
+        if in_table == 0:
+            if line == "[ Non-direct dispatch metadata table ]":
+                in_table = 1
+                continue
+            output.append(line)
+            continue
+
+        if in_table == 1:
+            if line == "Table of Generated Travel Non-Direct Rules":
+                output.append(line)
+                saw_table_name = True
+                in_table = 2
+            continue
+
+        if in_table == 2 and saw_table_name:
+            if re.match(r"^rule-id\s", line):
+                header = line.strip()
+                header = re.sub(r" \([^)]+\)", "", header)
+                header = re.sub(r"\s+", "\t", header)
+                output.append(header)
+                saw_header = True
+                continue
+            if saw_header and line:
+                row = emit_table_row(line)
+                if row is not None:
+                    output.append(row)
+
+    return "\n".join(output) + "\n"
+
+
+def compose_story() -> str:
+    parts = [
+        "[ Open Adventure Author Edition ]\n",
+        "[ Generated by tools/make_author_edition.py. ]\n",
+        "[ Edit repository runtime modules and source/adventure.yaml, then regenerate this project. ]\n\n",
+        source_preamble(),
+        "\n",
+        prepared_rooms(),
+        prepared_objects(),
+        read_text(ROOT / "generated" / "Vocabulary.ni"),
+        "\n",
+        prepared_travel(),
+    ]
+    for filename in RUNTIME_FILES:
+        parts.append("\n")
+        parts.append(read_text(ROOT / filename))
+    return "".join(parts)
+
+
+def write_project(project: Path, regenerate: bool) -> None:
+    if regenerate:
+        run_generator()
+
+    write_text(project / "Source" / "story.ni", compose_story())
+    write_text(project / "Settings.plist", SETTINGS_PLIST)
+    uuid_file = project / "uuid.txt"
+    if not uuid_file.exists():
+        write_text(uuid_file, str(uuid.uuid4()).upper() + "\n")
+    (project / "Materials").mkdir(parents=True, exist_ok=True)
+    (project / "Build").mkdir(parents=True, exist_ok=True)
+    (project / "Index").mkdir(parents=True, exist_ok=True)
+    gitkeep = project / "Materials" / ".gitkeep"
+    if not gitkeep.exists():
+        gitkeep.write_text("", encoding="utf-8")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Assemble OpenAdventure-AuthorEdition.inform for Inform 7 IDE use."
+    )
+    parser.add_argument(
+        "--project",
+        type=Path,
+        default=DEFAULT_PROJECT,
+        help="Author Edition .inform project path.",
+    )
+    parser.add_argument(
+        "--no-generate",
+        action="store_true",
+        help="Reuse existing generated/*.ni files instead of regenerating from adventure.yaml.",
+    )
+    return parser.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    project = args.project
+    if not project.is_absolute():
+        project = ROOT / project
+    write_project(project, regenerate=not args.no_generate)
+    rel_project = project.relative_to(ROOT) if project.is_relative_to(ROOT) else project
+    print(f"[author-edition] wrote {rel_project / 'Source' / 'story.ni'}")
+    print(f"[author-edition] wrote {rel_project / 'Settings.plist'}")
+    print("[author-edition] Inform 7 IDE target: Glulx")
+
+
+if __name__ == "__main__":
+    main()
