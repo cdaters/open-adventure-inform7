@@ -1,229 +1,107 @@
-# Parity Report - Milestones 7D-7F
+# Parity Report - Milestone 8A
 
-Milestone 7D moved transcript execution from the blocked Z8 artifact path to
-the Glulx artifact path recommended in Milestone 7C. Milestone 7E resolved the
-runtime stack-overflow crash that prevented startup and allowed the transcript
-suite to reach normal output comparison. Milestone 7F classified the resulting
-transcript failures by root cause and priority.
+Date: 2026-06-13
 
-## Sources Reviewed
+## Summary
 
-- `docs/known-differences.md`
-- `docs/memory-analysis.md`
-- `docs/vm-target-analysis.md`
-- `docs/build-status.md`
-- `tools/run_transcripts.py`
-- `tests/transcripts/manifest.tsv`
-- `tests/transcripts/suites/*.txt`
-- `tests/transcripts/expected/*.fragments`
-- Open Adventure C regression references listed by the transcript manifest
-- `docs/discrepancy-inventory.md`
+Milestone 8A reduced the parser and transcript-harness blockers identified in
+Milestone 7F, but the project is not ready for Release Candidate status.
 
-## Framework Status
+The Glulx artifact builds and the smoke pipeline passes when explicitly targeting
+`Inform6/32`. The default Z8 command still fails on the known readable-memory
+limit. Transcript execution is operational in split local/upstream modes, but
+the current pass rate is 0/15.
 
-`tools/run_transcripts.py` now supports both story formats:
+## Resolved or Reduced Issues
 
-- Z-code:
-  - detects story headers with version bytes `1` through `8`;
-  - runs `dfrotz`, `frotz`, or `bocfel` with the existing terminal transcript
-    arguments.
-- Glulx:
-  - detects the `Glul` story header;
-  - runs `glulxe` or `cheapglulxe`;
-  - defaults to `OpenAdventure.inform/Build/OpenAdventure.ulx` when present.
+| ID | Status | Notes |
+|---|---|---|
+| `BUG-7F-001` | reduced/resolved for generated one-word travel | Motion/location commands now route through generated non-direct travel when the current room has a matching generated token. `east` reaches the building; `south`, `north`, and similar generated route words dispatch through the runtime. |
+| `BUG-7F-002` | reduced/resolved for `plugh`/generated magic rows | Magic words now route through generated travel. `plugh` reaches `LOC_FOOF3`, forced-travels to Y2, and returns through `LOC_FOOF4` to the building. |
+| `TFRAME-7F-001` | resolved | Transcript command streams now skip Open Adventure C comment lines beginning with `#`. |
+| `TFRAME-7F-002` | partially resolved | The runner skips only the initial C-style startup `n`/`no`, and the Inform runtime accepts `seed [number]`. Dwarf/pirate deterministic replay still needs parity validation. |
+| `TFRAME-7F-003` | partially reduced | Output normalization now strips ANSI controls, backspaces, long status-line fill runs, and excess blank lines. Glulxe screen capture still loses some logical menu/headline text. |
 
-The runner also normalizes terminal escape sequences before matching expected
-fragments, detects fatal interpreter output even when the interpreter exits
-with status `0`, appends a final newline for interpreters that pause after quit
-confirmation, and enforces a per-case timeout so blocked transcripts are
-reported cleanly.
+## Technical Corrections
 
-Dry-run validation passes:
+- `tools/generators/rooms.py` emits `OpenAdventure canonical room id` from
+  `source/adventure.yaml`.
+- `OpenAdventure_State.ni` initializes room `adventure-id` values from canonical
+  generated ids instead of printed names.
+- `OpenAdventure_Conditions.ni` resolves rooms by canonical generated id before
+  falling back to stored ids or printed names.
+- `OpenAdventure_Runtime.ni` now bridges recognized one-word parser commands to
+  generated travel dispatch and processes forced travel out of `LOC_FOOF*`
+  rooms.
+- `tools/run_transcripts.py` sanitizes command streams, normalizes more Glulxe
+  terminal artifacts, and supports `--mode local` / `--mode upstream`.
 
-```bash
-python3 tools/run_transcripts.py --dry-run
-```
+## Verification Results
 
-Result:
+| Command | Result |
+|---|---|
+| `./build.sh --compile` | Failed: default Z8 target exceeds version-8 memory by 7760 bytes. Inform 7 translation succeeded. |
+| `./test.sh` | Failed: default Z8 compile failed; smoke checks still ran. |
+| `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed: valid Glulx artifact and all smoke checks passed. |
+| `python3 tools/run_transcripts.py --execute --mode local --timeout 12` | Failed: 12 launched, 0 passed, 6 fragment mismatches, 6 timeouts. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 12` | Failed: 3 launched, 0 passed, 3 timeouts. |
 
-```text
-validated 15 transcript cases from tests/transcripts/manifest.tsv
-```
+## Current Transcript Metrics
 
-## Transcript Suite Inventory
+| Metric | Count |
+|---|---:|
+| Manifest cases | 15 |
+| Cases launched | 15 |
+| Passing cases | 0 |
+| Failing cases | 15 |
+| Fragment mismatches | 6 |
+| Timeouts | 9 |
+| Stack-overflow crashes | 0 |
+| Immediate generated-travel parser failures | 0 |
 
-| ID | Area | Command Source | Reference |
-|---|---|---|---|
-| `startup` | startup/help/about/info/news/version | local focused transcript | `specials.log` |
-| `travel` | basic movement | local focused transcript | `tall.log` |
-| `plover` | plover room and emerald flow | local focused transcript | `plover.log` |
-| `troll` | troll bridge/eggs flow | local focused transcript | `troll_returns.log` |
-| `dwarves` | dwarf encounter/action surface | local focused transcript | `dwarf.log` |
-| `pirate` | pirate theft/chest surface | local focused transcript | `pirate_carry.log` |
-| `scoring` | score command and treasure deposit surface | local focused transcript | `turnpenalties.log` |
-| `reincarnation` | death and resurrection surface | local focused transcript | `reincarnate.log` |
-| `bear` | bear feeding/chain/following surface | local focused transcript | `axebear.log` |
-| `dragon` | dragon confrontation surface | local focused transcript | `dragon_secret5.log` |
-| `cave-closing` | cave-closing command surface | local focused transcript | `panic.log` |
-| `endgame` | endgame command surface | local focused transcript | `endgame428.log` |
-| `solve-path` | full 430-point solve | upstream command log | `win430.chk` |
-| `treasure-collection` | full treasure collection | upstream command log | `win430.chk` |
-| `complete-endgame` | full endgame route | upstream command log | `endgame428.chk` |
+Detailed results are in `docs/transcript-results.md`.
 
-## Verification Commands
-
-Glulx build:
-
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./build.sh --compile
-```
-
-Result: passed. Produced:
-
-```text
-OpenAdventure.inform/Build/OpenAdventure.ulx
-```
-
-Artifact check:
-
-```bash
-file OpenAdventure.inform/Build/OpenAdventure.ulx
-```
-
-Result:
-
-```text
-Glulx game data (Version 3.1.0) Compiled by Inform
-```
-
-Transcript execution:
-
-```bash
-python3 tools/run_transcripts.py --execute
-```
-
-Result: executed all 15 cases without the former Glulx fatal stack-overflow
-crash. The 12 focused local cases reached output comparison and failed on
-missing expected fragments; the 3 upstream long-path cases timed out after the
-runner timeout.
-
-Milestone 7E runtime smoke:
-
-```bash
-python3 -c 'import subprocess; subprocess.run(["glulxe","-ml","no","-width","120","-height","80","OpenAdventure.inform/Build/OpenAdventure.ulx"], input=b"quit\ny\n\n", timeout=10)'
-```
-
-Result: passed. Startup reached `You're in front of building.` and accepted
-`quit`.
-
-## Execution Results
-
-| Category | Count | Status |
-|---|---:|---|
-| Manifest cases | 15 | Loaded and validated |
-| Executed cases | 15 | Interpreter launched the Glulx artifact |
-| Passing cases | 0 | Expected fragments still need parity work |
-| Failing cases | 15 | 12 fragment mismatches, 3 upstream timeouts |
-| Major gameplay paths validated | 0 | Execution unblocked, parity not yet achieved |
-
-The detailed execution summary is in `docs/transcript-results.md`.
-
-## Comparison Status
-
-Transcript execution is operational at the framework level: the runner can
-select a Glulx story, launch a CLI Glulx interpreter, capture output, normalize
-that output, enforce timeouts, and report per-case results.
-
-Runtime parity is now partially observable. The story starts, prints the
-Milestone 6B startup presentation, and accepts commands. Remaining failures are
-ordinary parity/content/harness failures rather than VM startup failures.
-
-Milestone 7F found that the failures are not all implementation bugs:
-
-- Critical implementation bug: generated motion/location/magic vocabulary is
-  not routed from the Inform parser to the generated travel table, so commands
-  such as `in`, `east`, `building`, `xyzzy`, and `plugh` fail before gameplay
-  systems can be reached.
-- High-priority transcript-framework issue: Open Adventure C command logs use
-  comments, an initial yes/no startup response, and the regression-only `seed`
-  command. The current runner feeds these lines directly to Glulxe.
-- Medium-priority transcript-framework issue: Glulxe terminal capture contains
-  screen-control, status-line, character-echo, and overwrite artifacts that can
-  hide otherwise printed text.
-- Expectation issue: several focused local fixtures use abbreviated routes but
-  expect fragments from deep Open Adventure C regression paths.
-
-## Discrepancy Inventory
-
-The current discrepancy inventory is maintained in `docs/known-differences.md`.
-The detailed case-by-case analysis for current transcript failures is in
-`docs/discrepancy-inventory.md`.
-
-Milestone 7E resolves:
-
-- `BUG-7D-001`: the Glulx artifact no longer fails immediately under `glulxe`
-  with `Stack overflow in callstub`.
-
-Root cause:
-
-```text
-Main__ -> STARTUP_RB/call_U112 -> When play begins/call_U983
--> scoring startup/call_U2001 -> initialize openadventure scoring subsystem/call_U2131
--> update openadventure treasure status/call_U2140
--> openadventure treasure item is discoverable now/call_U2135
--> item is carried by the player/call_U2039 -> call_U2039 ...
-```
-
-The phrase in `OpenAdventure_Conditions.ni` recursively implemented
-`(item - thing) is carried by the player` in terms of itself. It now checks
-`the holder of item is the player`.
-
-Existing known issues remain relevant:
-
-- `BUG-7A-002`: default Z8 target cannot emit a story file because readable
-  memory exceeds the Z-machine limit.
-- `BUG-7F-001`: generated non-direct travel vocabulary is not routed through
-  runtime travel dispatch.
-- `BUG-7F-002`: generated magic-word travel rows are not reachable through
-  parser commands.
-- `TFRAME-7F-001` through `TFRAME-7F-003`: transcript framework issues prevent
-  reliable replay and fragment comparison.
-- `INTENT-001` through `INTENT-004`: information-system presentation differences
-  remain intentional.
-
-## Release Recommendation
-
-Do not release the current artifact yet.
-
-Required before release:
-
-1. Wire generated motion/location/magic vocabulary into the runtime travel
-   dispatcher.
-2. Sanitize/adapt transcript command streams for comments, C startup prompts,
-   and `seed`.
-3. Improve transcript output capture or normalization.
-4. Rebuild focused transcript routes so expected fragments are reachable.
-5. Re-run all 15 transcript cases and then classify remaining subsystem-level
-   differences.
-
-Optional before release:
-
-1. Continue Z8 size-reduction work as an experimental target.
-2. Expand transcript fixtures from fragment checks into fuller normalized
-   transcript comparisons.
-3. Add deterministic randomness controls for dwarf and pirate parity.
+## Remaining Discrepancy Categories
 
 Release blockers:
 
-- Parser/travel dispatch blockers identified as `BUG-7F-001` and
-  `BUG-7F-002`.
-- Transcript harness blockers identified as `TFRAME-7F-001` and
-  `TFRAME-7F-002`.
-- `BUG-7A-002`: blocks Z8 only; not a Glulx release blocker if Glulx is the
-  chosen primary target.
+- `BUG-8A-001`: lamp command parser/action integration is incomplete; `on`
+  remains unrecognized, preventing stable cave routes.
+- Dwarf/reincarnation prompts interrupt multiple focused subsystem transcripts
+  after travel now reaches dwarf territory.
+- Upstream full replay still times out and is not yet a reliable parity oracle.
+- Default Z8 build remains blocked by `BUG-7A-002`.
 
-Recommended next milestone:
+Parity issues:
 
-- **Milestone 7G - Parser and Transcript Harness Correction**, covering travel
-  parser routing, magic-word command handling, command-stream sanitization,
-  deterministic seed handling, and transcript-friendly Glulx capture.
+- Dwarf/pirate deterministic encounter ordering still needs comparison against
+  Open Adventure C after seed support.
+- Object/action command surfaces remain incomplete for full solve replay.
+- Score/deposit/endgame transcript parity remains unproven.
+
+Transcript issues:
+
+- Some local expected fragments are stale or unreachable after parser repair.
+- Glulxe capture still drops or overwrites portions of HELP/version output.
+- Full C logs need stronger prompt/end-of-game handling.
+
+Intentional deviations:
+
+- Milestone 6B startup/help/about/version presentation remains intentionally
+  edition-specific.
+
+Enhancements:
+
+- Z8 can remain an experimental optimization track; Glulx remains the practical
+  release target.
+
+## Release Recommendation
+
+**Not Ready** for Release Candidate.
+
+The project is closer to parity validation because generated travel and magic
+words are no longer the first blocker. However, no transcript case currently
+passes, long replays are not stable, and required gameplay command surfaces
+still block the solve path. The next milestone should focus on lamp/action
+parser integration, deterministic random replay validation, and transcript
+fixture alignment.

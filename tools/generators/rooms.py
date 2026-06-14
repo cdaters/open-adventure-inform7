@@ -48,4 +48,12 @@ def generate_rooms(data):
 
         out.append("")
 
+    out.append("To decide what text is the OpenAdventure canonical room id of (candidate-room - room):")
+    for loc_id, _loc in locations:
+        room_id = i7_identifier(loc_id)
+        out.append(f"\tif candidate-room is {room_id}:")
+        out.append(f'\t\tdecide on "{room_id}";')
+    out.append("\tdecide on the normalized adventure id from the printed name of candidate-room.")
+    out.append("")
+
     return "\n".join(out)

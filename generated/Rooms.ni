@@ -804,3 +804,376 @@ The description of LOC_FOOF5 is ">>Foof!<<".
 
 LOC_FOOF6 is a room.
 The description of LOC_FOOF6 is ">>Foof!<<".
+
+To decide what text is the OpenAdventure canonical room id of (candidate-room - room):
+	if candidate-room is LOC_NOWHERE:
+		decide on "LOC_NOWHERE";
+	if candidate-room is LOC_START:
+		decide on "LOC_START";
+	if candidate-room is LOC_HILL:
+		decide on "LOC_HILL";
+	if candidate-room is LOC_BUILDING:
+		decide on "LOC_BUILDING";
+	if candidate-room is LOC_VALLEY:
+		decide on "LOC_VALLEY";
+	if candidate-room is LOC_ROADEND:
+		decide on "LOC_ROADEND";
+	if candidate-room is LOC_CLIFF:
+		decide on "LOC_CLIFF";
+	if candidate-room is LOC_SLIT:
+		decide on "LOC_SLIT";
+	if candidate-room is LOC_GRATE:
+		decide on "LOC_GRATE";
+	if candidate-room is LOC_BELOWGRATE:
+		decide on "LOC_BELOWGRATE";
+	if candidate-room is LOC_COBBLE:
+		decide on "LOC_COBBLE";
+	if candidate-room is LOC_DEBRIS:
+		decide on "LOC_DEBRIS";
+	if candidate-room is LOC_AWKWARD:
+		decide on "LOC_AWKWARD";
+	if candidate-room is LOC_BIRDCHAMBER:
+		decide on "LOC_BIRDCHAMBER";
+	if candidate-room is LOC_PITTOP:
+		decide on "LOC_PITTOP";
+	if candidate-room is LOC_MISTHALL:
+		decide on "LOC_MISTHALL";
+	if candidate-room is LOC_CRACK:
+		decide on "LOC_CRACK";
+	if candidate-room is LOC_EASTBANK:
+		decide on "LOC_EASTBANK";
+	if candidate-room is LOC_NUGGET:
+		decide on "LOC_NUGGET";
+	if candidate-room is LOC_KINGHALL:
+		decide on "LOC_KINGHALL";
+	if candidate-room is LOC_NECKBROKE:
+		decide on "LOC_NECKBROKE";
+	if candidate-room is LOC_NOMAKE:
+		decide on "LOC_NOMAKE";
+	if candidate-room is LOC_DOME:
+		decide on "LOC_DOME";
+	if candidate-room is LOC_WESTEND:
+		decide on "LOC_WESTEND";
+	if candidate-room is LOC_EASTPIT:
+		decide on "LOC_EASTPIT";
+	if candidate-room is LOC_WESTPIT:
+		decide on "LOC_WESTPIT";
+	if candidate-room is LOC_CLIMBSTALK:
+		decide on "LOC_CLIMBSTALK";
+	if candidate-room is LOC_WESTBANK:
+		decide on "LOC_WESTBANK";
+	if candidate-room is LOC_FLOORHOLE:
+		decide on "LOC_FLOORHOLE";
+	if candidate-room is LOC_SOUTHSIDE:
+		decide on "LOC_SOUTHSIDE";
+	if candidate-room is LOC_WESTSIDE:
+		decide on "LOC_WESTSIDE";
+	if candidate-room is LOC_BUILDING1:
+		decide on "LOC_BUILDING1";
+	if candidate-room is LOC_SNAKEBLOCK:
+		decide on "LOC_SNAKEBLOCK";
+	if candidate-room is LOC_Y2:
+		decide on "LOC_Y2";
+	if candidate-room is LOC_JUMBLE:
+		decide on "LOC_JUMBLE";
+	if candidate-room is LOC_WINDOW1:
+		decide on "LOC_WINDOW1";
+	if candidate-room is LOC_BROKEN:
+		decide on "LOC_BROKEN";
+	if candidate-room is LOC_SMALLPITBRINK:
+		decide on "LOC_SMALLPITBRINK";
+	if candidate-room is LOC_SMALLPIT:
+		decide on "LOC_SMALLPIT";
+	if candidate-room is LOC_DUSTY:
+		decide on "LOC_DUSTY";
+	if candidate-room is LOC_PARALLEL1:
+		decide on "LOC_PARALLEL1";
+	if candidate-room is LOC_MISTWEST:
+		decide on "LOC_MISTWEST";
+	if candidate-room is LOC_ALIKE1:
+		decide on "LOC_ALIKE1";
+	if candidate-room is LOC_ALIKE2:
+		decide on "LOC_ALIKE2";
+	if candidate-room is LOC_ALIKE3:
+		decide on "LOC_ALIKE3";
+	if candidate-room is LOC_ALIKE4:
+		decide on "LOC_ALIKE4";
+	if candidate-room is LOC_MAZEEND1:
+		decide on "LOC_MAZEEND1";
+	if candidate-room is LOC_MAZEEND2:
+		decide on "LOC_MAZEEND2";
+	if candidate-room is LOC_MAZEEND3:
+		decide on "LOC_MAZEEND3";
+	if candidate-room is LOC_ALIKE5:
+		decide on "LOC_ALIKE5";
+	if candidate-room is LOC_ALIKE6:
+		decide on "LOC_ALIKE6";
+	if candidate-room is LOC_ALIKE7:
+		decide on "LOC_ALIKE7";
+	if candidate-room is LOC_ALIKE8:
+		decide on "LOC_ALIKE8";
+	if candidate-room is LOC_ALIKE9:
+		decide on "LOC_ALIKE9";
+	if candidate-room is LOC_MAZEEND4:
+		decide on "LOC_MAZEEND4";
+	if candidate-room is LOC_ALIKE10:
+		decide on "LOC_ALIKE10";
+	if candidate-room is LOC_MAZEEND5:
+		decide on "LOC_MAZEEND5";
+	if candidate-room is LOC_PITBRINK:
+		decide on "LOC_PITBRINK";
+	if candidate-room is LOC_MAZEEND6:
+		decide on "LOC_MAZEEND6";
+	if candidate-room is LOC_PARALLEL2:
+		decide on "LOC_PARALLEL2";
+	if candidate-room is LOC_LONGEAST:
+		decide on "LOC_LONGEAST";
+	if candidate-room is LOC_LONGWEST:
+		decide on "LOC_LONGWEST";
+	if candidate-room is LOC_CROSSOVER:
+		decide on "LOC_CROSSOVER";
+	if candidate-room is LOC_DEADEND7:
+		decide on "LOC_DEADEND7";
+	if candidate-room is LOC_COMPLEX:
+		decide on "LOC_COMPLEX";
+	if candidate-room is LOC_BEDQUILT:
+		decide on "LOC_BEDQUILT";
+	if candidate-room is LOC_SWISSCHEESE:
+		decide on "LOC_SWISSCHEESE";
+	if candidate-room is LOC_EASTEND:
+		decide on "LOC_EASTEND";
+	if candidate-room is LOC_SLAB:
+		decide on "LOC_SLAB";
+	if candidate-room is LOC_SECRET1:
+		decide on "LOC_SECRET1";
+	if candidate-room is LOC_SECRET2:
+		decide on "LOC_SECRET2";
+	if candidate-room is LOC_THREEJUNCTION:
+		decide on "LOC_THREEJUNCTION";
+	if candidate-room is LOC_LOWROOM:
+		decide on "LOC_LOWROOM";
+	if candidate-room is LOC_DEADCRAWL:
+		decide on "LOC_DEADCRAWL";
+	if candidate-room is LOC_SECRET3:
+		decide on "LOC_SECRET3";
+	if candidate-room is LOC_WIDEPLACE:
+		decide on "LOC_WIDEPLACE";
+	if candidate-room is LOC_TIGHTPLACE:
+		decide on "LOC_TIGHTPLACE";
+	if candidate-room is LOC_TALL:
+		decide on "LOC_TALL";
+	if candidate-room is LOC_BOULDERS1:
+		decide on "LOC_BOULDERS1";
+	if candidate-room is LOC_SEWER:
+		decide on "LOC_SEWER";
+	if candidate-room is LOC_ALIKE11:
+		decide on "LOC_ALIKE11";
+	if candidate-room is LOC_MAZEEND8:
+		decide on "LOC_MAZEEND8";
+	if candidate-room is LOC_MAZEEND9:
+		decide on "LOC_MAZEEND9";
+	if candidate-room is LOC_ALIKE12:
+		decide on "LOC_ALIKE12";
+	if candidate-room is LOC_ALIKE13:
+		decide on "LOC_ALIKE13";
+	if candidate-room is LOC_MAZEEND10:
+		decide on "LOC_MAZEEND10";
+	if candidate-room is LOC_MAZEEND11:
+		decide on "LOC_MAZEEND11";
+	if candidate-room is LOC_ALIKE14:
+		decide on "LOC_ALIKE14";
+	if candidate-room is LOC_NARROW:
+		decide on "LOC_NARROW";
+	if candidate-room is LOC_NOCLIMB:
+		decide on "LOC_NOCLIMB";
+	if candidate-room is LOC_PLANTTOP:
+		decide on "LOC_PLANTTOP";
+	if candidate-room is LOC_INCLINE:
+		decide on "LOC_INCLINE";
+	if candidate-room is LOC_GIANTROOM:
+		decide on "LOC_GIANTROOM";
+	if candidate-room is LOC_CAVEIN:
+		decide on "LOC_CAVEIN";
+	if candidate-room is LOC_IMMENSE:
+		decide on "LOC_IMMENSE";
+	if candidate-room is LOC_WATERFALL:
+		decide on "LOC_WATERFALL";
+	if candidate-room is LOC_SOFTROOM:
+		decide on "LOC_SOFTROOM";
+	if candidate-room is LOC_ORIENTAL:
+		decide on "LOC_ORIENTAL";
+	if candidate-room is LOC_MISTY:
+		decide on "LOC_MISTY";
+	if candidate-room is LOC_ALCOVE:
+		decide on "LOC_ALCOVE";
+	if candidate-room is LOC_PLOVER:
+		decide on "LOC_PLOVER";
+	if candidate-room is LOC_DARKROOM:
+		decide on "LOC_DARKROOM";
+	if candidate-room is LOC_ARCHED:
+		decide on "LOC_ARCHED";
+	if candidate-room is LOC_SHELLROOM:
+		decide on "LOC_SHELLROOM";
+	if candidate-room is LOC_SLOPING1:
+		decide on "LOC_SLOPING1";
+	if candidate-room is LOC_CULDESAC:
+		decide on "LOC_CULDESAC";
+	if candidate-room is LOC_ANTEROOM:
+		decide on "LOC_ANTEROOM";
+	if candidate-room is LOC_DIFFERENT1:
+		decide on "LOC_DIFFERENT1";
+	if candidate-room is LOC_WITTSEND:
+		decide on "LOC_WITTSEND";
+	if candidate-room is LOC_MIRRORCANYON:
+		decide on "LOC_MIRRORCANYON";
+	if candidate-room is LOC_WINDOW2:
+		decide on "LOC_WINDOW2";
+	if candidate-room is LOC_TOPSTALACTITE:
+		decide on "LOC_TOPSTALACTITE";
+	if candidate-room is LOC_DIFFERENT2:
+		decide on "LOC_DIFFERENT2";
+	if candidate-room is LOC_RESERVOIR:
+		decide on "LOC_RESERVOIR";
+	if candidate-room is LOC_MAZEEND12:
+		decide on "LOC_MAZEEND12";
+	if candidate-room is LOC_NE:
+		decide on "LOC_NE";
+	if candidate-room is LOC_SW:
+		decide on "LOC_SW";
+	if candidate-room is LOC_SWCHASM:
+		decide on "LOC_SWCHASM";
+	if candidate-room is LOC_WINDING:
+		decide on "LOC_WINDING";
+	if candidate-room is LOC_SECRET4:
+		decide on "LOC_SECRET4";
+	if candidate-room is LOC_SECRET5:
+		decide on "LOC_SECRET5";
+	if candidate-room is LOC_SECRET6:
+		decide on "LOC_SECRET6";
+	if candidate-room is LOC_NECHASM:
+		decide on "LOC_NECHASM";
+	if candidate-room is LOC_CORRIDOR:
+		decide on "LOC_CORRIDOR";
+	if candidate-room is LOC_FORK:
+		decide on "LOC_FORK";
+	if candidate-room is LOC_WARMWALLS:
+		decide on "LOC_WARMWALLS";
+	if candidate-room is LOC_BREATHTAKING:
+		decide on "LOC_BREATHTAKING";
+	if candidate-room is LOC_BOULDERS2:
+		decide on "LOC_BOULDERS2";
+	if candidate-room is LOC_LIMESTONE:
+		decide on "LOC_LIMESTONE";
+	if candidate-room is LOC_BARRENFRONT:
+		decide on "LOC_BARRENFRONT";
+	if candidate-room is LOC_BARRENROOM:
+		decide on "LOC_BARRENROOM";
+	if candidate-room is LOC_DIFFERENT3:
+		decide on "LOC_DIFFERENT3";
+	if candidate-room is LOC_DIFFERENT4:
+		decide on "LOC_DIFFERENT4";
+	if candidate-room is LOC_DIFFERENT5:
+		decide on "LOC_DIFFERENT5";
+	if candidate-room is LOC_DIFFERENT6:
+		decide on "LOC_DIFFERENT6";
+	if candidate-room is LOC_DIFFERENT7:
+		decide on "LOC_DIFFERENT7";
+	if candidate-room is LOC_DIFFERENT8:
+		decide on "LOC_DIFFERENT8";
+	if candidate-room is LOC_DIFFERENT9:
+		decide on "LOC_DIFFERENT9";
+	if candidate-room is LOC_DIFFERENT10:
+		decide on "LOC_DIFFERENT10";
+	if candidate-room is LOC_DIFFERENT11:
+		decide on "LOC_DIFFERENT11";
+	if candidate-room is LOC_DEADEND13:
+		decide on "LOC_DEADEND13";
+	if candidate-room is LOC_ROUGHHEWN:
+		decide on "LOC_ROUGHHEWN";
+	if candidate-room is LOC_BADDIRECTION:
+		decide on "LOC_BADDIRECTION";
+	if candidate-room is LOC_LARGE:
+		decide on "LOC_LARGE";
+	if candidate-room is LOC_STOREROOM:
+		decide on "LOC_STOREROOM";
+	if candidate-room is LOC_FOREST1:
+		decide on "LOC_FOREST1";
+	if candidate-room is LOC_FOREST2:
+		decide on "LOC_FOREST2";
+	if candidate-room is LOC_FOREST3:
+		decide on "LOC_FOREST3";
+	if candidate-room is LOC_FOREST4:
+		decide on "LOC_FOREST4";
+	if candidate-room is LOC_FOREST5:
+		decide on "LOC_FOREST5";
+	if candidate-room is LOC_FOREST6:
+		decide on "LOC_FOREST6";
+	if candidate-room is LOC_FOREST7:
+		decide on "LOC_FOREST7";
+	if candidate-room is LOC_FOREST8:
+		decide on "LOC_FOREST8";
+	if candidate-room is LOC_FOREST9:
+		decide on "LOC_FOREST9";
+	if candidate-room is LOC_FOREST10:
+		decide on "LOC_FOREST10";
+	if candidate-room is LOC_FOREST11:
+		decide on "LOC_FOREST11";
+	if candidate-room is LOC_FOREST12:
+		decide on "LOC_FOREST12";
+	if candidate-room is LOC_FOREST13:
+		decide on "LOC_FOREST13";
+	if candidate-room is LOC_FOREST14:
+		decide on "LOC_FOREST14";
+	if candidate-room is LOC_FOREST15:
+		decide on "LOC_FOREST15";
+	if candidate-room is LOC_FOREST16:
+		decide on "LOC_FOREST16";
+	if candidate-room is LOC_FOREST17:
+		decide on "LOC_FOREST17";
+	if candidate-room is LOC_FOREST18:
+		decide on "LOC_FOREST18";
+	if candidate-room is LOC_FOREST19:
+		decide on "LOC_FOREST19";
+	if candidate-room is LOC_FOREST20:
+		decide on "LOC_FOREST20";
+	if candidate-room is LOC_FOREST21:
+		decide on "LOC_FOREST21";
+	if candidate-room is LOC_FOREST22:
+		decide on "LOC_FOREST22";
+	if candidate-room is LOC_LEDGE:
+		decide on "LOC_LEDGE";
+	if candidate-room is LOC_RESBOTTOM:
+		decide on "LOC_RESBOTTOM";
+	if candidate-room is LOC_RESNORTH:
+		decide on "LOC_RESNORTH";
+	if candidate-room is LOC_TREACHEROUS:
+		decide on "LOC_TREACHEROUS";
+	if candidate-room is LOC_STEEP:
+		decide on "LOC_STEEP";
+	if candidate-room is LOC_CLIFFBASE:
+		decide on "LOC_CLIFFBASE";
+	if candidate-room is LOC_CLIFFACE:
+		decide on "LOC_CLIFFACE";
+	if candidate-room is LOC_FOOTSLIP:
+		decide on "LOC_FOOTSLIP";
+	if candidate-room is LOC_CLIFFTOP:
+		decide on "LOC_CLIFFTOP";
+	if candidate-room is LOC_CLIFFLEDGE:
+		decide on "LOC_CLIFFLEDGE";
+	if candidate-room is LOC_REACHDEAD:
+		decide on "LOC_REACHDEAD";
+	if candidate-room is LOC_GRUESOME:
+		decide on "LOC_GRUESOME";
+	if candidate-room is LOC_FOOF1:
+		decide on "LOC_FOOF1";
+	if candidate-room is LOC_FOOF2:
+		decide on "LOC_FOOF2";
+	if candidate-room is LOC_FOOF3:
+		decide on "LOC_FOOF3";
+	if candidate-room is LOC_FOOF4:
+		decide on "LOC_FOOF4";
+	if candidate-room is LOC_FOOF5:
+		decide on "LOC_FOOF5";
+	if candidate-room is LOC_FOOF6:
+		decide on "LOC_FOOF6";
+	decide on the normalized adventure id from the printed name of candidate-room.

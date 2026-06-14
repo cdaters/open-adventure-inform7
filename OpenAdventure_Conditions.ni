@@ -111,6 +111,8 @@ To decide what thing is the object for adventure-id (id - text):
 To decide what room is the room for adventure-id (id - text):
 	let normalized-id be the normalized adventure id from id;
 	repeat with candidate running through rooms:
+		if the OpenAdventure canonical room id of candidate is normalized-id:
+			decide on candidate;
 		if adventure-id of candidate is normalized-id:
 			decide on candidate;
 		if the normalized adventure id from the printed name of candidate is normalized-id:

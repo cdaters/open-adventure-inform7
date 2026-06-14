@@ -27,6 +27,7 @@ DEFAULT_RESULTS = ROOT / "build" / "transcripts"
 DEFAULT_Z_STORY = Path("OpenAdventure.inform/Build/OpenAdventure.z8")
 DEFAULT_GLULX_STORY = Path("OpenAdventure.inform/Build/OpenAdventure.ulx")
 ANSI_ESCAPE_RE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]|\x1b[()][A-Za-z0-9]|\x1b[=>]|\x1b[@-_]")
+BACKSPACE_RE = re.compile(r".\x08")
 
 
 @dataclass
@@ -125,7 +126,30 @@ def expected_fragments(path: Path) -> list[str]:
 def normalize_output(output: str) -> str:
     output = ANSI_ESCAPE_RE.sub("", output)
     output = output.replace("\r\n", "\n").replace("\r", "\n")
+    while "\b" in output:
+        output = BACKSPACE_RE.sub("", output)
+    output = re.sub(r"[q]{12,}", "", output)
+    output = re.sub(r"\n{3,}", "\n\n", output)
     return output
+
+
+def sanitized_commands(path: Path) -> bytes:
+    lines: list[str] = []
+    skipped_startup_answer = False
+    saw_command = False
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        stripped = raw.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("#"):
+            continue
+        if not saw_command and not skipped_startup_answer and stripped.lower() in {"n", "no"}:
+            skipped_startup_answer = True
+            saw_command = True
+            continue
+        saw_command = True
+        lines.append(raw)
+    return ("\n".join(lines) + "\n\n").encode("utf-8")
 
 
 def runtime_failure(output: str) -> str | None:
@@ -143,7 +167,7 @@ def interpreter_command(interpreter: str, kind: str, story: Path) -> list[str]:
     if kind == "zcode" and name in {"dfrotz", "frotz", "bocfel"}:
         return [interpreter, "-q", "-p", "-m", "-w", "120", "-h", "999", str(story)]
     if kind == "glulx" and name in {"glulxe", "cheapglulxe"}:
-        return [interpreter, "-width", "120", "-height", "999", str(story)]
+        return [interpreter, "-ml", "no", "-width", "120", "-height", "999", str(story)]
     return [interpreter, str(story)]
 
 
@@ -151,7 +175,7 @@ def run_case(case: TranscriptCase, interpreter: str, kind: str, story: Path, res
     results_dir.mkdir(parents=True, exist_ok=True)
     output_path = results_dir / f"{case.case_id}.out"
     command = interpreter_command(interpreter, kind, story)
-    stdin_payload = case.commands.read_bytes() + b"\n"
+    stdin_payload = sanitized_commands(case.commands)
     try:
         completed = subprocess.run(
             command,
@@ -195,11 +219,14 @@ def main() -> int:
     parser.add_argument("--list", action="store_true", help="list transcript cases")
     parser.add_argument("--dry-run", action="store_true", help="validate files without executing")
     parser.add_argument("--execute", action="store_true", help="execute transcripts")
+    parser.add_argument("--mode", choices=("local", "upstream"), help="run only cases with this manifest mode")
     parser.add_argument("--timeout", type=int, default=20, help="per-transcript interpreter timeout in seconds")
     args = parser.parse_args()
 
     manifest = args.manifest if args.manifest.is_absolute() else ROOT / args.manifest
     cases = load_manifest(manifest)
+    if args.mode:
+        cases = [case for case in cases if case.mode == args.mode]
     validate_cases(cases)
 
     if args.list:

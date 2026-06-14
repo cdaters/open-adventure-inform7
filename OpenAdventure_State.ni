@@ -325,7 +325,7 @@ The openadventure-runtime-check-result is false.
 To initialize framework IDs:
 	now openadventure-framework-in-lookup is true;
 	repeat with candidate-room running through the rooms:
-		now adventure-id of candidate-room is the normalized adventure id from the printed name of candidate-room;
+		now adventure-id of candidate-room is the OpenAdventure canonical room id of candidate-room;
 	repeat with candidate-thing running through the things:
 		now adventure-id of candidate-thing is the normalized adventure id from the printed name of candidate-thing;
 	now openadventure-framework-in-lookup is false.
