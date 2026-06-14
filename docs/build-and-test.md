@@ -1,154 +1,97 @@
-# Build and Test (Milestone 3D)
+# Build and Test
 
-## Purpose
+This repository builds Open Adventure in Inform 7 from generated world data plus
+hand-written runtime modules.
 
-This milestone introduces repository-level build and test scripts so the game can be
-regenerated, compiled, and smoke-tested from a clean environment.
+## Requirements
 
-## Files added
+- Inform 7 10.1.2 command-line tools
+- Inform 6 compiler from the Inform distribution
+- Python 3
+- A Glulx interpreter such as `glulxe` or `cheapglulxe`
 
-- `build.sh` — pipeline runner for source generation, compilation, and packaging.
-- `test.sh` — smoke check driver that validates generation and (when configured) compile/artifact production.
-- `tests/smoke/` — smoke test scripts.
-- `tests/transcripts/` — transcript fixtures for future automated runs.
-- `tests/expected/` — expected outputs for future transcript diffs and checks.
+The scripts can find the macOS Inform.app bundle at:
 
-## Build workflow
-
-### 1) Regenerate world data
-
-```bash
-python3 tools/yaml2inform.py
+```text
+/Applications/Inform.app/Contents
 ```
 
-This is handled automatically by `build.sh`.
+Environment variables can override tool paths:
 
-### 2) Compile Inform source
+- `OPENADVENTURE_INFORM_BIN`
+- `OPENADVENTURE_INFORM_RESOURCES`
+- `OPENADVENTURE_NI_BIN`
+- `OPENADVENTURE_INFORM6_BIN`
+- `OPENADVENTURE_CBLORB_BIN`
+- `OPENADVENTURE_INFORM_PROJECT`
+- `OPENADVENTURE_BUILD_ARTIFACT`
 
-Inform 7 compilation currently requires a project bundle/directory in this repo (defaulting to `OpenAdventure.inform`).
-
-`build.sh` invokes `ni` and `inform6` either from `PATH` or from the bundled macOS Inform app.
+## Generate
 
 ```bash
-./build.sh --compile
+./build.sh --generate-only
 ```
 
-The default target is Z-machine v8 (`Inform6/16` -> `OpenAdventure.inform/Build/OpenAdventure.z8`). The current source translates to Inform 6 but cannot yet be emitted as Z8 because the generated I6 exceeds the Z-machine readable-memory limit.
+This regenerates:
 
-Optional explicit override:
+- `generated/Rooms.ni`
+- `generated/Objects.ni`
+- `generated/Vocabulary.ni`
+- `generated/Travel.ni`
+
+## Build Glulx
 
 ```bash
-./build.sh --compile --project /path/to/OpenAdventure.inform
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./build.sh --compile
 ```
 
-### 3) Package artifacts
+Expected output:
 
-If a project is configured and `cBlorb` is available:
-
-```bash
-./build.sh --compile --package
+```text
+OpenAdventure.inform/Build/OpenAdventure.ulx
 ```
 
-### 4) Combined flow
+## Run Smoke Tests
 
 ```bash
-./build.sh
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 ```
 
-This runs generation and (if requested) downstream steps.
+`test.sh` verifies generation, compile/artifact creation when the compiler is
+available, VM artifact headers, and executable smoke scripts in `tests/smoke/`.
 
-## How the scripts work
+## Run Transcript Tests
 
-### `build.sh`
-
-1. Regenerates `generated/*.ni` from `source/adventure.yaml`.
-2. Composes `OpenAdventure.inform/Source/OpenAdventure.generated.ni`.
-3. Optionally translates Inform 7 to `OpenAdventure.inform/Build/OpenAdventure.i6` with `ni`.
-4. Optionally compiles the I6 intermediate with `inform6`.
-5. Validates the VM artifact header before reporting success.
-6. Optionally runs `cBlorb` packaging.
-7. Writes status lines to `build/build.log`.
-
-### `test.sh`
-
-`test.sh` performs an initial smoke verification:
-
-1. Generation succeeds and core generated files exist.
-2. Compile runs when a project and compiler are discoverable.
-3. A playable artifact (`.z8`, `.z5`, `.ulx`) is detected and its VM header is valid after successful compilation.
-4. Executes any executable smoke scripts in `tests/smoke/*.sh`.
-
-You can control strictness using env flags:
-
-- `OPENADVENTURE_TEST_STRICT_COMPILE=1` — fail when compile cannot run.
-- `OPENADVENTURE_TEST_INTEST=1` — run optional `intest` step if test hook exists.
-
-## Intest integration
-
-`intest` is present in the local toolchain and can be used once recipe files are added.
-
-Recommended setup:
-
-1. Add `.inform` project and game release target.
-2. Add `.intest` recipes under `tests/` (for example, `tests/smoke/` and `tests/regression/`).
-3. Invoke:
+Full manifest:
 
 ```bash
-intest <project-dir> -test
-# or
-intest <project-dir> -using tests/some.recipe -test
+python3 tools/run_transcripts.py --execute --timeout 90
 ```
 
-A lightweight smoke hook can be added and executed from `test.sh` as the toolchain
-matures.
-
-## Transcript testing (future)
-
-Milestone 7A adds a transcript manifest and runner:
-
-- `tools/run_transcripts.py`
-- `tests/transcripts/manifest.tsv`
-- `tests/transcripts/suites/`
-- `tests/transcripts/expected/`
-
-Structural transcript validation runs through `tests/smoke/13-transcript-framework.sh`.
-
-Executable transcript tests are currently blocked because the default
-Z-machine target cannot be emitted. The build pipeline no longer writes Inform 6
-source text to `OpenAdventure.inform/Build/OpenAdventure.z8`; `ni` writes
-`OpenAdventure.inform/Build/OpenAdventure.i6`, then `inform6` fails the Z8 stage
-with `110160` bytes of readable memory against the `65536` byte Z-machine limit.
-`dfrotz` is available in the current local environment, but it cannot run until a
-real `.z8` exists.
-
-The project still supports a future path using one of:
-
-- dfrotz transcript input mode
-- a CI-provided IF interpreter with transcript output
-- native Inform testing recipes (`intest`) as command-driven expected output checks
-
-Current validation commands:
+Upstream-backed walkthrough subset:
 
 ```bash
-python3 tools/run_transcripts.py --dry-run
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
+
+Useful inspection commands:
+
+```bash
 python3 tools/run_transcripts.py --list
+python3 tools/run_transcripts.py --dry-run
 ```
 
-Future execution command once a runnable story exists:
+Transcript output is written under:
 
-```bash
-OPENADVENTURE_STORY=/path/to/OpenAdventure.z8 python3 tools/run_transcripts.py --execute
+```text
+build/transcripts/
 ```
 
-Recommended next step:
+## Z8
 
-1. Reduce the Z-machine readable-memory footprint or formally select a Glulx runtime artifact.
-2. Point `OPENADVENTURE_STORY` at a runnable Z-code story file.
-3. Promote transcript execution from manual verification into CI.
+`./build.sh --compile` without a format override uses the historical
+`Inform6/16` default and attempts Z-machine output. That path remains
+experimental and is not the release target because the current game exceeds
+practical Z8 memory limits.
 
-Diagnostic Glulx build path:
-
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 \
-./build.sh --compile
-```
+Use the Glulx command above for release work.

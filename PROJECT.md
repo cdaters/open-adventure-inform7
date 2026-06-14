@@ -1,115 +1,127 @@
 # Open Adventure Inform 7 Reconstruction
 
-This repository is implementing Open Adventure in Inform 7 from a generated world model plus a hand-written runtime framework. The primary objective is compatibility with the original Open Adventure behavior while keeping generated content and gameplay systems clearly separated.
+This project reconstructs Open Adventure in Inform 7 using generated world data
+plus dedicated runtime subsystems. The goal is Open Adventure behavioral parity
+with a maintainable source hierarchy:
 
-## Milestone progress (current)
+1. Open Adventure C is authoritative for gameplay behavior.
+2. `source/adventure.yaml` is authoritative for generated world data.
+3. Generated Inform files are build artifacts.
+4. Hand-written `OpenAdventure_*.ni` files implement runtime behavior.
+
+## Current Status
+
+Release classification: **Release Candidate for Glulx**.
+
+Current measured state:
+
+- Glulx build target passes compile and smoke verification.
+- Transcript execution passes 15/15 suites with `--timeout 90`.
+- Complete solve, treasure collection, and endgame transcript routes pass.
+- Z8 remains experimental and is not a release target because of memory limits.
+
+Primary release artifact:
+
+```text
+OpenAdventure.inform/Build/OpenAdventure.ulx
+```
+
+## Milestone Progress
 
 | Milestone | Scope | Status | Result |
 |---|---|---|---|
-| 2A | Data source extraction | ✅ Complete | `source/adventure.yaml` stabilized and analyzed |
-| 2B | Language and command analysis | ✅ Complete | Vocabulary and parser tokens mapped |
-| 2C | Baseline architecture modeling | ✅ Complete | Core architecture docs and current-state baseline written |
-| 2D | Unresolved travel investigation | ✅ Complete | seven unresolved travel rules identified and classified |
-| 3A | Gameplay systems analysis | ✅ Complete | gameplay-system catalog and object/runtime classification |
-| 3B | Runtime framework | ✅ Complete | state/condition/events foundations in runtime files |
-| 3C | Travel dispatch integration | ✅ Complete | generated travel rows now flow through runtime dispatch |
-| 3D | Plover system implementation | ✅ Complete | plover-specific travel handlers and integration implemented |
-| 3E | Build/test infrastructure baseline | ✅ Complete | first compile works; smoke pipeline added |
-| 3F | Documentation refresh | ✅ Complete | README/PROJECT/current-state refreshed; roadmap added |
-| 4A | Plover-related gameplay implementation | ✅ Complete | plover travel handler and dispatch integration implemented |
-| 4B | Troll / bridge / chasm implementation | ✅ Complete | travel rules `216` and `226` wired through special-ID 3 |
-| 4C | Dwarf system | ✅ Complete | rule 138 nodwarves condition and dwarf subsystem integration |
-| 4D | Dwarf system baseline | ✅ Complete | activation, first encounter, blocking, attacks, compile/test verification |
-| 4E | Pirate system baseline | ✅ Complete | chest placement, treasure theft, dwarf/pirate ordering, compile/test verification |
-| 4F | Treasure and scoring system | ✅ Complete | treasure tracking, deposit scoring, pirate chest scoring integration, compile/test verification |
-| 5A | Death and reincarnation system | ✅ Complete | death handling, reincarnation, inventory disposition, score penalty, compile/test verification |
-| 5B | Bear system | ✅ Complete | feeding, chain puzzle, following, troll interaction, bridge-collapse death, compile/test verification |
-| 5C | Dragon system | ✅ Complete | confrontation, yes/no confirmation, room transformation, rug release, compile/test verification |
-| 5D | Cave closing system | ✅ Complete | warning clocks, exit restrictions, repository transition, reincarnation/scoring integration, compile/test verification |
-| 6A | Endgame completion | ✅ Complete | repository puzzle, blast outcomes, final scoring, ranking, compile/test verification |
-| 6B | Introduction and information system | ✅ Complete | startup, help menu, about/info/news, credits, version, compile/test verification |
-| 7A | Full parity and walkthrough verification | ✅ Complete | transcript framework, suite manifest, walkthrough docs, known differences, compile/test verification |
+| 2A | Data source extraction | Complete | `source/adventure.yaml` stabilized and analyzed |
+| 2B | Language and command analysis | Complete | Vocabulary and parser tokens mapped |
+| 2C | Baseline architecture | Complete | Core architecture docs and current-state baseline |
+| 2D | Unresolved travel investigation | Complete | Non-direct travel rules identified and classified |
+| 3A | Gameplay systems analysis | Complete | Gameplay catalog and runtime ownership boundaries |
+| 3B | Runtime framework | Complete | State, condition, and event foundations |
+| 3C | Travel dispatch integration | Complete | Generated travel rows route through runtime dispatch |
+| 3D | Plover implementation | Complete | Plover travel handlers implemented |
+| 3E | Build/test baseline | Complete | Inform build and smoke pipeline established |
+| 3F | Documentation refresh | Complete | Architecture and roadmap refreshed |
+| 4A | Plover hardening | Complete | Plover dispatch integrated |
+| 4B | Troll / bridge / chasm | Complete | Troll bridge and chasm travel behavior implemented |
+| 4C | Dwarf travel gating | Complete | Dwarf restrictions integrated with travel dispatch |
+| 4D | Dwarf subsystem | Complete | Activation, encounter, blocking, and attack behavior |
+| 4E | Pirate subsystem | Complete | Chest placement, theft, and dwarf/pirate ordering |
+| 4F | Treasure and scoring | Complete | Treasure tracking, deposits, and score hooks |
+| 5A | Death and reincarnation | Complete | Death flow, resurrection, item disposition, penalties |
+| 5B | Bear subsystem | Complete | Feeding, chain, following, troll interaction |
+| 5C | Dragon subsystem | Complete | Confrontation, confirmation, death transformation |
+| 5D | Cave closing | Complete | Clocks, warnings, closure, repository transition |
+| 6A | Endgame | Complete | Repository puzzle, blast outcomes, final score/rank |
+| 6B | Information system | Complete | Startup, HELP, ABOUT, INFO, NEWS, credits, version |
+| 7A | Transcript framework | Complete | Transcript suites, walkthrough docs, discrepancy inventory |
+| 7B | Runnable artifact correction | Complete | Build pipeline produces real story artifacts |
+| 7C | VM target analysis | Complete | Glulx selected as release target; Z8 experimental |
+| 7D | Transcript execution | Complete | Glulx transcript execution enabled |
+| 7E | Runtime crash fix | Complete | Startup/runtime recursion crash resolved |
+| 7F | Discrepancy analysis | Complete | Transcript failures classified and prioritized |
+| 8A | Release readiness baseline | Complete | Parser/transcript harness stabilized |
+| 8B | Transcript corrections | Complete | Lamp and replay corrections applied |
+| 8C | Gameplay parity corrections | Complete | Shared gameplay failures reduced |
+| 8D | Route and walkthrough parity | Complete | Route assumptions and access paths corrected |
+| 8E | Full walkthrough parity | Complete | First major walkthrough divergences isolated |
+| 8F | Treasure/endgame parity | Complete | Late treasure and repository issues reduced |
+| 8G | Divergence elimination | Complete | Oil-bottle route divergence resolved |
+| 8H | Endgame completion parity | Complete | Complete endgame route passes |
+| 8I | Final walkthrough parity | Complete | Full manifest passes 15/15 |
+| 9A | Release packaging and presentation | In progress | Release docs and package plan |
 
-## Current reality (after Milestone 7A)
+## Build and Test Commands
 
-### Completed
+Build the Glulx target:
 
-- Compilation pipeline can produce a working Inform 7 binary.
-- Runtime travel dispatch supports generated travel rows, including random/forced/magic-word handling.
-- Plover and troll/bridge/chasm subsystems are implemented and wired to the framework.
-- Dwarf baseline behavior is implemented and verified by smoke tests.
-- Pirate baseline behavior is implemented and verified by smoke tests.
-- Treasure/scoring baseline is implemented and verified by smoke tests.
-- Death/reincarnation baseline is implemented and verified by smoke tests.
-- Bear baseline behavior is implemented and verified by smoke tests.
-- Dragon baseline behavior is implemented and verified by smoke tests.
-- Cave-closing baseline behavior is implemented and verified by smoke tests.
-- Endgame baseline behavior is implemented and verified by smoke tests.
-- Information system baseline behavior is implemented and verified by smoke tests.
-- Transcript framework and parity inventory are implemented and verified by smoke tests.
-- Full generated-edge dwarf/pirate movement parity remains for upcoming hardening.
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./build.sh --compile
+```
 
-### In progress / Remaining
+Run smoke tests:
 
-- Implement remaining gameplay systems without disturbing generated travel/world data.
-- Replace explicit stubs for unresolved gameplay-only rules with deterministic rule handlers.
-- Add robust behavioral regression via transcript testing (currently environment readiness and smoke checks only).
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+```
 
-## Build status summary
+Run transcript verification:
 
-Current build status is described in:
-- `docs/build-status.md`
+```bash
+python3 tools/run_transcripts.py --execute --timeout 90
+```
 
-Current pipeline command is:
-- `./build.sh --compile`
+Run upstream walkthrough verification:
 
-Current build artifact:
-- No default `.z8` artifact is currently emitted; `inform6` blocks on Z-machine readable-memory overflow.
-- Diagnostic artifact: `OpenAdventure.inform/Build/OpenAdventure.ulx` when built with `OPENADVENTURE_INFORM_FORMAT=Inform6/32`.
+```bash
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
 
-## Gameplay completion status
+## Release Packaging
 
-| Area | Status |
-|---|---|
-| Runtime/state scaffolding | Complete |
-| Plover | Implemented |
-| Troll / bridge / chasm | Implemented |
-| Dwarves | Baseline implemented; full generated-edge movement parity pending |
-| Pirate | Baseline implemented; final-treasure scoring integration implemented |
-| Death / Reincarnation | Baseline implemented; dark-pit callers pending; cave-closing suppression integrated |
-| Bear | Baseline implemented; transcript parity pending |
-| Dragon | Baseline implemented; transcript parity pending |
-| Cave closing | Baseline implemented; repository transition integrated with endgame |
-| Scoring | Baseline implemented; terminal endgame scoring and ranking integrated |
-| Endgame | Baseline implemented; transcript parity pending |
-| Information | Baseline implemented; startup/help/about/info/news/version smoke coverage present |
-| Transcript parity | Framework and manifest implemented; execution blocked by non-runnable default artifact |
+RC1 should ship as a Glulx release containing:
 
-## Current testing status
-
-- Build smoke tests: available.
-- Inform compilation: automated.
-- Transcript/regression suite: manifest and dry-run validation available; executable replay blocked until a real story artifact is produced.
-
-See:
-- `docs/testing-environment.md`
+- `OpenAdventure.ulx`
+- `README.md`
+- `LICENSE`
+- `docs/release-notes-rc1.md`
+- `docs/known-differences.md`
 - `docs/build-and-test.md`
+- transcript verification summary from `docs/transcript-results.md`
 
-## Implementation approach
+The full source repository remains the contributor package.
 
-1. Keep `source/adventure.yaml` as data authority.
-2. Continue classifying and stubbing unresolved rules until behavior is safe to implement.
-3. Add systems as isolated runtime modules behind documented extension points.
-4. Reconcile each system’s state and parser/travel dependencies before integration.
-5. Run compile smoke test after each behavior milestone.
+## Remaining Work
 
-## Risk register
+Release-preparation work:
 
-- Parser behavior divergence in generated command patterns.
-- Incorrect sequencing between travel dispatch and unresolved action stubs.
-- Incomplete understanding of game-state side effects for cave closing/endgame.
+- Finish Milestone 9A packaging docs.
+- Run final Glulx smoke and transcript verification.
+- Tag RC1 with build and transcript evidence.
 
-## Roadmap alignment
+Future work:
 
-The active roadmap is now in
-`docs/architecture/project-roadmap.md`.
+- Decide whether to pursue Z8 memory optimization.
+- Expand manual playtest coverage beyond transcript routes.
+- Add CI automation for Glulx build, smoke tests, and transcripts.
+- Consider packaged release assets such as screenshots, cover art, or a Blorb.
+
+Roadmap details are in `docs/project-roadmap.md`.

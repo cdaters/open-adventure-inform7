@@ -113,13 +113,21 @@ List registered suites:
 python3 tools/run_transcripts.py --list
 ```
 
-Execute transcripts once a runnable story artifact exists:
+Execute the full Glulx transcript manifest:
 
 ```sh
-OPENADVENTURE_STORY=/path/to/OpenAdventure.z8 python3 tools/run_transcripts.py --execute
+python3 tools/run_transcripts.py --execute --timeout 90
 ```
 
-Current Milestone 7A limitation:
+Execute only the upstream-backed walkthrough cases:
 
-- `./build.sh --compile` now writes Inform 6 source to `OpenAdventure.inform/Build/OpenAdventure.i6` and then fails at `inform6` because the current source exceeds Z-machine readable memory; no default `.z8` is emitted.
-- That file is not runnable Z-code, so transcript execution is blocked until the build pipeline emits a valid story file.
+```sh
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
+
+Current status:
+
+- Glulx transcript execution is operational.
+- The full manifest passes 15/15.
+- The upstream solve, treasure-collection, and complete-endgame cases pass.
+- Z8 remains experimental and is not the release target.

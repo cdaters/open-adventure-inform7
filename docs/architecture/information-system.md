@@ -73,7 +73,7 @@ The credits section records:
 
 Version display includes:
 
-- `Milestone 6B development build`.
+- `Release Candidate 1 Glulx build`.
 - Inform story release number.
 - development source build status.
 - Inform 7 10.1.2 target source.

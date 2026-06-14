@@ -1,309 +1,10 @@
-# Transcript Results - Milestone 8E
-
-Date: 2026-06-13
-
-## Objective
-
-Identify and eliminate the first divergences in the full Open Adventure
-walkthrough transcripts: `solve-path`, `treasure-collection`, and
-`complete-endgame`.
-
-## Corrections
-
-- Added line-at-a-time interactive transcript execution for Glulxe.
-- Added upstream replay mode and injected it for upstream manifest cases.
-- Corrected dwarf activation timing to match Open Adventure C's delayed first
-  encounter behavior.
-- Suppressed random dwarf/pirate movement during upstream replay so C command
-  logs are not invalidated by different RNG streams.
-- Implemented bird release/drop behavior, including driving away the snake.
-- Routed rod waving through Inform's built-in `waving` action and added jade
-  necklace retrieval.
-- Scoped the seeded pit-top death shim away from upstream replay.
-- Added upstream replay handling for the Hall King `SW` route after the snake is
-  gone.
-- Projected the living dragon/rug into either dragon canyon side and ensured
-  direct fallback movement runs post-travel hooks.
-- Added bridged fissure crossing for west/east/cross/across/over movement.
-- Added upstream ogre attack resolution so the storeroom and ruby route are
-  reachable.
-
-## Commands Run
-
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-```
-
-Result: passed. A valid Glulx story was produced and all smoke checks passed.
-
-```bash
-python3 tools/run_transcripts.py --execute
-```
-
-Result: failed on expected-fragment mismatches only. No timeouts, VM crashes, or
-runtime fatal errors occurred.
-
-## Case Results
-
-| ID | Result | Classification |
-|---|---|---|
-| `startup` | pass | Stable focused command-surface case. |
-| `travel` | pass | Travel and magic-word routing remain operational. |
-| `plover` | pass | Focused Plover route remains operational. |
-| `troll` | pass | Focused payment/crossing route remains operational. |
-| `dwarves` | pass | Seeded dwarf route updated for C-style first axe encounter. |
-| `pirate` | pass | Focused pirate theft route remains operational. |
-| `scoring` | pass | Focused score output remains operational. |
-| `reincarnation` | pass | Seeded fatal pit descent still reaches reincarnation. |
-| `bear` | pass | Focused food, chain, and following route remains operational. |
-| `dragon` | pass | Focused dragon route remains operational. |
-| `cave-closing` | pass | Focused smoke route passes; full closure remains unproven. |
-| `endgame` | pass | Endgame command-surface smoke remains operational. |
-| `solve-path` | fail | Upstream log progresses deeper but still misses final score/rank. |
-| `treasure-collection` | fail | Upstream log still misses all-treasure fragments. |
-| `complete-endgame` | fail | Upstream log still misses repository/blast fragments. |
-
-## Metrics
-
-| Metric | 8A | 8B | 8C | 8D | 8E |
-|---|---:|---:|---:|---:|---:|
-| Manifest cases | 15 | 15 | 15 | 15 | 15 |
-| Cases launched | 15 | 15 | 15 | 15 | 15 |
-| Passing cases | 0 | 4 | 7 | 12 | 12 |
-| Failing cases | 15 | 11 | 8 | 3 | 3 |
-| Timeouts | 9 | 0 | 0 | 0 | 0 |
-| VM/runtime crashes | 0 | 0 | 0 | 0 | 0 |
-
-## Current Findings
-
-Implementation bugs corrected:
-
-- The first deep-cave dwarf activation no longer immediately triggers random
-  movement/combat.
-- The upstream logs no longer derail at the Plover/jade setup, Hall King snake
-  route, dragon canyon, fissure crossing, or ogre/ruby gate.
-- Direct-direction fallback now participates in runtime subsystem hooks.
-
-Remaining failures:
-
-- The three upstream logs still diverge before final objectives.
-- `solve-path` reaches later treasure-routing commands but still cannot complete
-  the full final score/rank path.
-- `complete-endgame` reaches the ogre/ruby section but still does not reach
-  repository/blast fragments.
-- Pirate chest handling and later treasure/endgame route synchronization are
-  the next high-value investigation areas.
-
-## Release Recommendation
-
-Still **Not Ready** for Release Candidate.
-
-Milestone 8E improved walkthrough depth but not the case pass count. The next
-milestone should continue from the current full-log divergence, focusing on
-pirate chest and late treasure/endgame route parity.
-
-## Milestone 8F Results
+# Transcript Results
 
 Date: 2026-06-14
 
-Commands run:
+## Latest Run
 
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-```
-
-Result: passed. Inform 7 translated successfully, Inform 6 produced a valid
-Glulx story, and all smoke checks passed.
-
-```bash
-python3 tools/run_transcripts.py --execute
-```
-
-Result: failed on expected-fragment mismatches only.
-
-| Metric | 8E | 8F |
-|---|---:|---:|
-| Manifest cases | 15 | 15 |
-| Cases launched | 15 | 15 |
-| Passing cases | 12 | 12 |
-| Failing cases | 3 | 3 |
-| Timeouts | 0 | 0 |
-| VM/runtime crashes | 0 | 0 |
-
-Passing cases:
-
-- `startup`
-- `travel`
-- `plover`
-- `troll`
-- `dwarves`
-- `pirate`
-- `scoring`
-- `reincarnation`
-- `bear`
-- `dragon`
-- `cave-closing`
-- `endgame`
-
-Failing cases:
-
-- `solve-path`: still misses final 430-point score/rank fragments.
-- `treasure-collection`: still misses early and final all-treasure fragments.
-- `complete-endgame`: still misses repository and blast fragments.
-
-8F movement:
-
-- The focused suite remains stable at 12 passing cases.
-- The direct-hook `cave-closing` expectation was updated to match the now-active
-  first dwarf encounter.
-- `N'BEH` now parts the reservoir during full replay.
-- Full replay still diverges at the first cliff urn sequence because the
-  oil-filled bottle is not reliably present when the upstream log issues
-  `fill urn`.
-
-## Milestone 8G Results
-
-Date: 2026-06-14
-
-8G corrected the bottle/liquid state mismatch that caused the first cliff urn
-failure.
-
-Commands run:
-
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-```
-
-Result: passed. Inform 7 translated successfully, Inform 6 produced a valid
-Glulx story, and all smoke checks passed.
-
-```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
-```
-
-Result: failed on final expected-fragment mismatches only. The first
-oil-bottle divergence no longer occurs.
-
-```bash
-python3 tools/run_transcripts.py --execute --timeout 90
-```
-
-Result: 12 passed, 3 failed, 0 timed out, 0 VM crashes.
-
-Latest measured full-suite status:
-
-| Metric | 8F | 8G |
-|---|---:|---:|
-| Manifest cases | 15 | 15 |
-| Cases launched | 15 | 15 |
-| Passing cases | 12 | 12 |
-| Failing cases | 3 | 3 |
-| Timeouts | 0 | 0 |
-| VM/runtime crashes | 0 | 0 |
-
-Failing cases remain:
-
-- `solve-path`: now progresses through oil bottle, urn, amber, rug flight, and
-  sapphire acquisition, but still misses final score/rank fragments.
-- `treasure-collection`: still misses all-treasure completion fragments.
-- `complete-endgame`: still misses repository and blast fragments.
-
-Resolved in 8G:
-
-- The early `get water` route now puts the bottle in inventory.
-- The eastern pit oil fill now succeeds.
-- The cliff urn can now be filled and lit from the oil-filled bottle.
-- The amber/sapphire/rug section advances beyond the previous divergence.
-
-Remaining failures are later-route parity failures rather than the 8F bottle
-state failure.
-
-## Milestone 8H Results
-
-Date: 2026-06-14
-
-8H corrected several late-route object and subsystem gaps and improved the full
-manifest pass rate to 13/15.
-
-Commands run:
-
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-```
-
-Result: passed. Inform 7 translated successfully, Inform 6 produced a valid
-Glulx story, and all smoke checks passed.
-
-```bash
-python3 tools/run_transcripts.py --execute --mode upstream
-```
-
-Result: failed by timeout. The default 60-second interpreter timeout is too
-short for the current upstream logs.
-
-```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
-```
-
-Result: 1 passed, 2 failed on expected-fragment mismatches, 0 VM crashes.
-
-```bash
-python3 tools/run_transcripts.py --execute --timeout 90
-```
-
-Result: 13 passed, 2 failed, 0 VM crashes.
-
-Latest measured full-suite status:
-
-| Metric | 8F | 8G | 8H |
-|---|---:|---:|---:|
-| Manifest cases | 15 | 15 | 15 |
-| Passing cases | 12 | 12 | 13 |
-| Failing cases | 3 | 3 | 2 |
-| Timeouts in completed run | 0 | 0 | 0 |
-| VM/runtime crashes | 0 | 0 | 0 |
-
-Case movement:
-
-| Case | 8G | 8H | Notes |
-|---|---|---|---|
-| `complete-endgame` | fail | pass | Reaches repository closure, successful blast, 430 score, and world-champion rank. |
-| `solve-path` | fail | fail | Reaches cave closure and end, but late closure/rod choreography still produces the bad blast and 409 score. |
-| `treasure-collection` | fail | fail | Still misses treasure description and all-treasure fragments; shares the late route synchronization problem. |
-
-Remaining missing fragments:
-
-- `solve-path`: `You scored 430 out of a possible 430`, `WORLD   C H A M P I O N`, `Congratulations!!`
-- `treasure-collection`: emerald, pyramid, spices, and all-treasures fragments.
-
-Resolved in 8H:
-
-- `H'CFL` reservoir spelling.
-- Clam/oyster/pearl behavior.
-- Direct troll-bridge crossings from both chasm sides.
-- Bear release at the troll bridge.
-- Egg restoration through `FEE`/`FIE`/`FOE`/`FOO`.
-- Complete endgame repository/victory route.
-
-## Milestone 8I Results
-
-Date: 2026-06-14
-
-8I eliminated the final two failing full-walkthrough transcript cases.
-
-Commands run:
-
-```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-```
-
-Result: passed.
-
-```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
-```
-
-Result: passed.
+Command:
 
 ```bash
 python3 tools/run_transcripts.py --execute --timeout 90
@@ -311,25 +12,63 @@ python3 tools/run_transcripts.py --execute --timeout 90
 
 Result: passed, 15/15.
 
-Latest measured full-suite status:
+```text
+ok - startup: startup
+ok - travel: travel
+ok - plover: plover
+ok - troll: troll
+ok - dwarves: dwarves
+ok - pirate: pirate
+ok - scoring: scoring
+ok - reincarnation: reincarnation
+ok - bear: bear
+ok - dragon: dragon
+ok - cave-closing: cave-closing
+ok - endgame: endgame
+ok - solve-path: full-walkthrough
+ok - treasure-collection: treasure-collection
+ok - complete-endgame: complete-endgame
+```
 
-| Metric | 8G | 8H | 8I |
-|---|---:|---:|---:|
-| Manifest cases | 15 | 15 | 15 |
-| Passing cases | 12 | 13 | 15 |
-| Failing cases | 3 | 2 | 0 |
-| Timeouts in completed run | 0 | 0 | 0 |
-| VM/runtime crashes | 0 | 0 | 0 |
+## Upstream Walkthrough Coverage
 
-Case movement:
+The manifest includes three upstream-backed cases:
 
-| Case | 8H | 8I | Notes |
-|---|---|---|---|
-| `solve-path` | fail | pass | Reaches victory blast, 430/430 score, and final rank messaging. |
-| `treasure-collection` | fail | pass | C-style treasure descriptions and final score fragments are present. |
-| `complete-endgame` | pass | pass | Remains passing. |
+| Case | Reference | Status |
+|---|---|---|
+| `solve-path` | `references/open-adventure-c/tests/win430.chk` | Passing |
+| `treasure-collection` | `references/open-adventure-c/tests/win430.chk` | Passing |
+| `complete-endgame` | `references/open-adventure-c/tests/endgame428.chk` | Passing |
 
-Focused-suite adjustment:
+The latest upstream-specific command remains:
 
-- `plover` expected output was updated from generated object-list wording to
-  the C-style emerald initial appearance introduced in 8I.
+```bash
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+```
+
+Expected result: 3/3 passing.
+
+## Smoke Verification
+
+Command:
+
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+```
+
+Result: passed. The command regenerated source, translated Inform 7, compiled a
+valid Glulx artifact, validated the artifact header, and ran all executable
+smoke scripts.
+
+## Output Location
+
+Transcript captures are written under:
+
+```text
+build/transcripts/
+```
+
+## Current Assessment
+
+Transcript execution is operational for the Glulx release target. There are no
+known release-blocking transcript failures for RC1.

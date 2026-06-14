@@ -1,69 +1,71 @@
-# Build Status - Milestone 7B
+# Build Status
 
-Date: 2026-06-13
+Date: 2026-06-14
 
-## Current Result
+## Current Release Build
 
-- Default command: `./build.sh --compile`
-- Default target: `Inform6/16` -> `OpenAdventure.inform/Build/OpenAdventure.z8`
-- Result: **blocked**
-- Blocking stage: Inform 6 story-file emission
-- Error: current generated I6 exceeds the Z-machine readable-memory limit:
-  - readable memory used: `110160` bytes
-  - Z-machine maximum: `65536` bytes
+The release target is Glulx.
 
-The previous false-positive artifact has been corrected. `ni` output is now written to:
+```bash
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./build.sh --compile
+```
 
-- `OpenAdventure.inform/Build/OpenAdventure.i6`
+Expected artifact:
 
-`OpenAdventure.inform/Build/OpenAdventure.z8` is only written after `inform6` successfully creates and validates a Z-machine story header. On the current source, no `.z8` file is produced.
+```text
+OpenAdventure.inform/Build/OpenAdventure.ulx
+```
+
+The Glulx artifact is validated by checking the VM header for `Glul`.
+
+## Z8 Status
+
+The default `Inform6/16` Z-machine path remains experimental and is not a
+release target.
+
+The build pipeline is corrected: `ni` output is written to
+`OpenAdventure.inform/Build/OpenAdventure.i6`, and `.z8` is only accepted after
+`inform6` creates a valid Z-machine story file. The earlier false positive where
+Inform 6 source text appeared as `OpenAdventure.z8` is resolved.
+
+The current generated game still exceeds practical Z8 readable-memory limits, so
+Z8 remains non-release pending memory-reduction work.
 
 ## Build Chain
 
-1. `tools/yaml2inform.py` regenerates `generated/*.ni` from `source/adventure.yaml`.
+1. `tools/yaml2inform.py` regenerates `generated/*.ni` from
+   `source/adventure.yaml`.
 2. `build.sh` composes `OpenAdventure.inform/Source/OpenAdventure.generated.ni`.
 3. `ni` translates Inform 7 to Inform 6 source:
-   - `OpenAdventure.inform/Build/OpenAdventure.i6`
-4. `inform6` attempts to compile the I6 intermediate:
-   - Z-machine default: `-v8`
-   - Glulx diagnostic path: `-G`
+   `OpenAdventure.inform/Build/OpenAdventure.i6`.
+4. `inform6` compiles the I6 intermediate:
+   - Glulx release path: `-G`
+   - Z-machine experiment path: `-v8`
 5. `build.sh` validates the final artifact header before reporting success.
-6. `cBlorb`/inblorb packaging remains optional and is not reached by the current default compile.
+6. `cBlorb` packaging remains optional.
 
 ## Verification Commands
 
-Default Z-machine target:
+Release build and smoke verification:
 
 ```bash
-./build.sh --compile
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 ```
 
-Result: fails at `inform6` with readable-memory overflow and produces no `.z8`.
-
-Diagnostic Glulx target:
+Transcript verification:
 
 ```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 \
-./build.sh --compile
+python3 tools/run_transcripts.py --execute --timeout 90
 ```
 
-Result: succeeds and produces:
-
-- `OpenAdventure.inform/Build/OpenAdventure.ulx`
-- `file`: `Glulx game data (Version 3.1.0) Compiled by Inform`
-
-## Test Status
-
-- `./test.sh`: **fails**, because the default Z-machine compile fails.
-- Glulx diagnostic command:
+Upstream walkthrough verification:
 
 ```bash
-OPENADVENTURE_INFORM_FORMAT=Inform6/32 \
-./test.sh
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
 ```
 
-Result: **passes** generation, compile, artifact-header validation, and smoke tests.
+Latest documented status:
 
-## Remaining Artifact Blocker
-
-Milestone 7B corrected BUG-7A-001's mislabeled artifact behavior, but did not produce a runnable Z-machine story file. The remaining blocker is BUG-7A-002: the current Inform 7 output uses too much Z-machine readable memory. Resolving that requires source/runtime size reduction, a different Z-machine generation strategy, or accepting Glulx as the runnable artifact target.
+- Glulx build and smoke tests: passing.
+- Full transcript manifest: 15/15 passing.
+- Upstream solve, treasure, and endgame subset: 3/3 passing.

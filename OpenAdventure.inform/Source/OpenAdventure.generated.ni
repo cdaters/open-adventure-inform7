@@ -6133,7 +6133,7 @@ When play begins:
 Section 1 - Edition Constants
 
 To say openadventure implementation version:
-	say "Milestone 6B development build"
+	say "Release Candidate 1 Glulx build"
 
 To say openadventure repository url:
 	say "https://github.com/cdaters/open-adventure-inform7"
