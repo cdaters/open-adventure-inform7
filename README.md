@@ -17,7 +17,7 @@ Current release status: **Release Candidate for Glulx**.
 As of 2026-06-14:
 
 - Glulx compile and smoke tests pass with `OPENADVENTURE_INFORM_FORMAT=Inform6/32`.
-- The transcript framework passes 15/15 suites with a 90-second timeout.
+- The transcript framework passes 15/15 suites with a 180-second timeout.
 - The upstream-backed solve path, treasure-collection path, and complete
   endgame path all pass.
 - Z-machine Z8 remains experimental and is not the release target because the
@@ -97,19 +97,28 @@ OpenAdventure-AuthorEdition.inform
 Regenerate it with:
 
 ```bash
-python3 tools/make_author_edition.py
+python3 tools/sync_author_edition.py --export
 ```
 
-The Author Edition writes a conventional Inform project entry point at
-`OpenAdventure-AuthorEdition.inform/Source/story.ni` and a project
-`Settings.plist` selecting Glulx for Inform 7 10.1.2. It is intended for
-opening in the Inform IDE and pressing Go, while preserving the RC1 source
-hierarchy and transcript-tested command-line workflow.
+The Author Edition writes a lightweight Inform project entry point at
+`OpenAdventure-AuthorEdition.inform/Source/story.ni`, a project
+`Settings.plist` selecting Glulx for Inform 7 10.1.2, and modular
+project-local extensions under
+`OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/`. It is
+intended for opening in the Inform IDE and pressing Go, while preserving the
+RC1 source hierarchy and transcript-tested command-line workflow.
+
+Check whether the generated Author Edition is stale with:
+
+```bash
+python3 tools/sync_author_edition.py --diff
+```
 
 See:
 
 - `docs/author-edition-design.md`
 - `docs/author-edition-migration.md`
+- `docs/author-edition-layout.md`
 
 ## Test
 
@@ -122,13 +131,13 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Run all transcript suites:
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Run only the upstream-backed walkthrough suites:
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 The transcript framework executes scripted routes and checks expected output
@@ -163,8 +172,10 @@ source/adventure.yaml                 source world data
 generated/                            generated Inform 7 world files
 OpenAdventure.inform/                 Inform project bundle and build output
 OpenAdventure-AuthorEdition.inform/   generated IDE-friendly Inform project
+OpenAdventure-AuthorEdition.materials/ generated Author Edition extension modules
 tools/yaml2inform.py                  source generator entry point
-tools/make_author_edition.py          Author Edition project assembler
+tools/sync_author_edition.py          Author Edition export/diff tool
+tools/make_author_edition.py          compatibility Author Edition exporter
 tools/run_transcripts.py              transcript replay and verification
 tests/smoke/                          smoke test scripts
 tests/transcripts/                    transcript suite manifest

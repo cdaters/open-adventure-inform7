@@ -1,3 +1,7 @@
+Version 1 of OpenAdventure State by OpenAdventure begins here.
+
+[ Exported from OpenAdventure_State.ni by tools/make_author_edition.py. ]
+
 [ Open Adventure Runtime State ]
 
 Section 1 - Core runtime state
@@ -335,3 +339,5 @@ To initialize framework IDs:
 	repeat through the Table of Open Adventure Object IDs:
 		now adventure-id of object-entry entry is object-id-entry entry;
 	now openadventure-framework-in-lookup is false.
+
+OpenAdventure State ends here.

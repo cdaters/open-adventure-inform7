@@ -1,3 +1,7 @@
+Version 1 of OpenAdventure Runtime by OpenAdventure begins here.
+
+[ Exported from OpenAdventure_Runtime.ni by tools/make_author_edition.py. ]
+
 [ Open Adventure Runtime Framework ]
 
 Section 1 - Framework lifecycle
@@ -1464,3 +1468,5 @@ Section 6 - Diagnostics
 To print OpenAdventure runtime state:
 	say "Runtime ready: [if openadventure-framework-ready is true]yes[otherwise]no[end if]; ";
 	say "rule [openadventure-current-travel-rule-id], source [openadventure-active-source-loc].".
+
+OpenAdventure Runtime ends here.

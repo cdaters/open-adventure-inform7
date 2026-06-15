@@ -1,4 +1,4 @@
-"Open Adventure" by Eric S Raymond.
+"Open Adventure in Inform 7" by Craig Daters.
 
 [
 Open Adventure Inform 7 Edition
@@ -1343,6 +1343,7 @@ To decide what text is the OpenAdventure canonical room id of (candidate-room - 
 [ vocabulary=gold, nugge ]
 [ inventory=Large gold nugget ]
 NUGGET is a thing.
+The printed name of NUGGET is "large gold nugget".
 The description of NUGGET is "There is a large sparkling nugget of gold here!".
 NUGGET is in LOC_NUGGET.
 [ scoring_candidate: true ]
@@ -1353,6 +1354,8 @@ NUGGET is in LOC_NUGGET.
 [ vocabulary=diamo ]
 [ inventory=Several diamonds ]
 OBJ_51 is a thing.
+The printed name of OBJ_51 is "several diamonds".
+OBJ_51 is plural-named.
 The description of OBJ_51 is "There are diamonds here!".
 OBJ_51 is in LOC_WESTBANK.
 [ scoring_candidate: true ]
@@ -1363,6 +1366,8 @@ OBJ_51 is in LOC_WESTBANK.
 [ vocabulary=silve, bars ]
 [ inventory=Bars of silver ]
 OBJ_52 is a thing.
+The printed name of OBJ_52 is "bars of silver".
+OBJ_52 is plural-named.
 The description of OBJ_52 is "There are bars of silver here!".
 OBJ_52 is in LOC_FLOORHOLE.
 [ scoring_candidate: true ]
@@ -1373,6 +1378,7 @@ OBJ_52 is in LOC_FLOORHOLE.
 [ vocabulary=jewel ]
 [ inventory=Precious jewelry ]
 OBJ_53 is a thing.
+The printed name of OBJ_53 is "precious jewelry".
 The description of OBJ_53 is "There is precious jewelry here!".
 OBJ_53 is in LOC_SOUTHSIDE.
 [ scoring_candidate: true ]
@@ -1383,6 +1389,8 @@ OBJ_53 is in LOC_SOUTHSIDE.
 [ vocabulary=coins ]
 [ inventory=Rare coins ]
 COINS is a thing.
+The printed name of COINS is "rare coins".
+COINS is plural-named.
 The description of COINS is "There are many coins here!".
 COINS is in LOC_WESTSIDE.
 [ scoring_candidate: true ]
@@ -1393,6 +1401,7 @@ COINS is in LOC_WESTSIDE.
 [ vocabulary=chest, box, treas ]
 [ inventory=Treasure chest ]
 CHEST is a thing.
+The printed name of CHEST is "treasure chest".
 The description of CHEST is "The pirate's treasure chest is here!".
 [ scoring_candidate: true ]
 
@@ -1403,6 +1412,8 @@ The description of CHEST is "The pirate's treasure chest is here!".
 [ inventory=Golden eggs ]
 [ states=EGGS_HERE, EGGS_VANISHED, EGGS_DONE ]
 EGGS is a thing.
+The printed name of EGGS is "golden eggs".
+EGGS is plural-named.
 The description of EGGS is "There is a large nest here, full of golden eggs!".
 EGGS is in LOC_GIANTROOM.
 [ scoring_candidate: true ]
@@ -1413,6 +1424,7 @@ EGGS is in LOC_GIANTROOM.
 [ vocabulary=tride ]
 [ inventory=Jeweled trident ]
 TRIDENT is a thing.
+The printed name of TRIDENT is "jeweled trident".
 The description of TRIDENT is "There is a jewel-encrusted trident here!".
 TRIDENT is in LOC_WATERFALL.
 [ scoring_candidate: true ]
@@ -1425,6 +1437,7 @@ TRIDENT is in LOC_WATERFALL.
 [ states=VASE_WHOLE, VASE_DROPPED, VASE_BROKEN ]
 [ changes=The vase is now resting, delicately, on a velvet pillow., The ming vase drops with a delicate crash., You have taken the vase and hurled it delicately to the ground. ]
 VASE is a thing.
+The printed name of VASE is "ming vase".
 The description of VASE is "There is a delicate, precious, ming vase here!".
 VASE is in LOC_ORIENTAL.
 [ scoring_candidate: true ]
@@ -1435,6 +1448,7 @@ VASE is in LOC_ORIENTAL.
 [ vocabulary=emera ]
 [ inventory=Egg-sized emerald ]
 EMERALD is a thing.
+The printed name of EMERALD is "egg-sized emerald".
 The description of EMERALD is "There is an emerald here the size of a plover's egg!".
 EMERALD is in LOC_PLOVER.
 [ scoring_candidate: true ]
@@ -1445,6 +1459,7 @@ EMERALD is in LOC_PLOVER.
 [ vocabulary=plati, pyram ]
 [ inventory=Platinum pyramid ]
 PYRAMID is a thing.
+The printed name of PYRAMID is "platinum pyramid".
 The description of PYRAMID is "There is a platinum pyramid here, 8 inches on a side!".
 PYRAMID is in LOC_DARKROOM.
 [ scoring_candidate: true ]
@@ -1455,6 +1470,7 @@ PYRAMID is in LOC_DARKROOM.
 [ vocabulary=pearl ]
 [ inventory=Glistening pearl ]
 PEARL is a thing.
+The printed name of PEARL is "glistening pearl".
 The description of PEARL is "Off to one side lies a glistening pearl!".
 [ scoring_candidate: true ]
 
@@ -1466,6 +1482,7 @@ The description of PEARL is "Off to one side lies a glistening pearl!".
 [ inventory=Persian rug ]
 [ states=RUG_FLOOR, RUG_DRAGON, RUG_HOVER ]
 RUG is a thing.
+The printed name of RUG is "persian rug".
 The description of RUG is "There is a Persian rug spread out on the floor!".
 RUG is in LOC_SECRET4.
 [ scoring_candidate: true ]
@@ -1476,6 +1493,8 @@ RUG is in LOC_SECRET4.
 [ vocabulary=spice ]
 [ inventory=Rare spices ]
 OBJ_63 is a thing.
+The printed name of OBJ_63 is "rare spices".
+OBJ_63 is plural-named.
 The description of OBJ_63 is "There are rare spices here!".
 OBJ_63 is in LOC_BOULDERS2.
 [ scoring_candidate: true ]
@@ -1487,6 +1506,7 @@ OBJ_63 is in LOC_BOULDERS2.
 [ inventory=Golden chain ]
 [ states=CHAIN_HEAP, CHAINING_BEAR, CHAIN_FIXED ]
 CHAIN is a thing.
+The printed name of CHAIN is "golden chain".
 The description of CHAIN is "There is a golden chain lying in a heap on the floor!".
 CHAIN is in LOC_BARRENROOM.
 [ scoring_candidate: true ]
@@ -1497,6 +1517,7 @@ CHAIN is in LOC_BARRENROOM.
 [ vocabulary=ruby ]
 [ inventory=Giant ruby ]
 RUBY is a thing.
+The printed name of RUBY is "giant ruby".
 The description of RUBY is "There is an enormous ruby here!".
 RUBY is in LOC_STOREROOM.
 [ scoring_candidate: true ]
@@ -1507,6 +1528,7 @@ RUBY is in LOC_STOREROOM.
 [ vocabulary=jade, neckl ]
 [ inventory=Jade necklace ]
 JADE is a thing.
+The printed name of JADE is "jade necklace".
 The description of JADE is "A precious jade necklace has been dropped here!".
 [ scoring_candidate: true ]
 
@@ -1517,6 +1539,7 @@ The description of JADE is "A precious jade necklace has been dropped here!".
 [ inventory=Amber gemstone ]
 [ states=AMBER_IN_URN, AMBER_IN_ROCK ]
 AMBER is a thing.
+The printed name of AMBER is "amber gemstone".
 The description of AMBER is "There is a rare amber gemstone here!".
 [ scoring_candidate: true ]
 
@@ -1526,6 +1549,7 @@ The description of AMBER is "There is a rare amber gemstone here!".
 [ vocabulary=sapph ]
 [ inventory=Star sapphire ]
 SAPPH is a thing.
+The printed name of SAPPH is "star sapphire".
 The description of SAPPH is "A brilliant blue star sapphire is here!".
 SAPPH is in LOC_LEDGE.
 [ scoring_candidate: true ]
@@ -1536,6 +1560,7 @@ SAPPH is in LOC_LEDGE.
 [ vocabulary=ebony, statu ]
 [ inventory=Ebony statuette ]
 OBJ_69 is a thing.
+The printed name of OBJ_69 is "ebony statuette".
 The description of OBJ_69 is "There is a richly-carved ebony statuette here!".
 OBJ_69 is in LOC_REACHDEAD.
 [ scoring_candidate: true ]
@@ -1547,6 +1572,7 @@ OBJ_69 is in LOC_REACHDEAD.
 [ vocabulary=keys, key ]
 [ inventory=Set of keys ]
 KEYS is a thing.
+The printed name of KEYS is "set of keys".
 The description of KEYS is "There are some keys on the ground here.".
 KEYS is in LOC_BUILDING.
 
@@ -1558,6 +1584,7 @@ KEYS is in LOC_BUILDING.
 [ states=LAMP_DARK, LAMP_BRIGHT ]
 [ changes=Your lamp is now off., Your lamp is now on. ]
 LAMP is a thing.
+The printed name of LAMP is "brass lantern".
 The description of LAMP is "There is a shiny brass lamp nearby.".
 LAMP is in LOC_BUILDING.
 
@@ -1567,6 +1594,7 @@ LAMP is in LOC_BUILDING.
 [ vocabulary=cage ]
 [ inventory=Wicker cage ]
 CAGE is a thing.
+The printed name of CAGE is "wicker cage".
 The description of CAGE is "There is a small wicker cage discarded nearby.".
 CAGE is in LOC_COBBLE.
 
@@ -1576,6 +1604,7 @@ CAGE is in LOC_COBBLE.
 [ vocabulary=rod ]
 [ inventory=Black rod ]
 ROD is a thing.
+The printed name of ROD is "black rod".
 The description of ROD is "A three foot black rod with a rusty star on an end lies nearby.".
 ROD is in LOC_DEBRIS.
 
@@ -1585,6 +1614,7 @@ ROD is in LOC_DEBRIS.
 [ vocabulary=rod ]
 [ inventory=Black rod ]
 ROD2 is a thing.
+The printed name of ROD2 is "black rod".
 The description of ROD2 is "A three foot black rod with a rusty mark on an end lies nearby.".
 
 [ BIRD ]
@@ -1595,6 +1625,7 @@ The description of ROD2 is "A three foot black rod with a rusty mark on an end l
 [ states=BIRD_UNCAGED, BIRD_CAGED, BIRD_FOREST_UNCAGED ]
 [ sounds=The bird's singing is quite melodious., The bird does not seem inclined to sing while in the cage., It almost seems as though the bird is trying to tell you something., To your surprise, you can understand the bird's chirping; it is\nsinging about the joys of its forest home., The bird does not seem inclined to sing while in the cage., The bird is singing to you in gratitude for your having returned it to\nits home.  In return, it informs you of a magic word which it thinks\nyou may find useful somewhere near the Hall of Mists.  The magic word\nchanges frequently, but for now the bird believes it is '%s'.  You\nthank the bird for this information, and it flies off into the forest. ]
 BIRD is a thing.
+The printed name of BIRD is "little bird in cage".
 The description of BIRD is "A cheerful little bird is sitting here singing.".
 BIRD is in LOC_BIRDCHAMBER.
 
@@ -1604,6 +1635,7 @@ BIRD is in LOC_BIRDCHAMBER.
 [ vocabulary=pillo, velve ]
 [ inventory=Velvet pillow ]
 PILLOW is a thing.
+The printed name of PILLOW is "velvet pillow".
 The description of PILLOW is "A small velvet pillow lies on the floor.".
 PILLOW is in LOC_SOFTROOM.
 
@@ -1614,6 +1646,7 @@ PILLOW is in LOC_SOFTROOM.
 [ inventory=Giant oyster  >GROAN!< ]
 [ sounds=Even though it's an oyster, the critter's as tight-mouthed as a clam., It says the same thing it did before.  Hm, maybe it's a pun? ]
 OYSTER is a thing.
+The printed name of OYSTER is "giant oyster  >GROAN!<".
 The description of OYSTER is "There is an enormous oyster here with its shell tightly closed.".
 
 [ MAGAZINE ]
@@ -1623,6 +1656,7 @@ The description of OYSTER is "There is an enormous oyster here with its shell ti
 [ inventory='Spelunker Today' ]
 [ texts=I'm afraid the magazine is written in dwarvish.  But penciled on one\ncover you see, 'Please leave the magazines at the construction site.' ]
 MAGAZINE is a thing.
+The printed name of MAGAZINE is "Spelunker Today".
 The description of MAGAZINE is "There are a few recent issues of 'Spelunker Today' magazine here.".
 MAGAZINE is in LOC_ANTEROOM.
 
@@ -1631,6 +1665,7 @@ MAGAZINE is in LOC_ANTEROOM.
 [ initial_location=LOC_NOWHERE ]
 [ vocabulary=knife, knive ]
 KNIFE is a thing.
+The printed name of KNIFE is "knife".
 
 [ FOOD ]
 [ role=portable ]
@@ -1638,6 +1673,7 @@ KNIFE is a thing.
 [ vocabulary=food, ratio ]
 [ inventory=Tasty food ]
 FOOD is a thing.
+The printed name of FOOD is "tasty food".
 The description of FOOD is "There is food here.".
 FOOD is in LOC_BUILDING.
 
@@ -1649,6 +1685,7 @@ FOOD is in LOC_BUILDING.
 [ states=WATER_BOTTLE, EMPTY_BOTTLE, OIL_BOTTLE ]
 [ changes=Your bottle is now full of water., The bottle of water is now empty., Your bottle is now full of oil. ]
 BOTTLE is a thing.
+The printed name of BOTTLE is "small bottle".
 The description of BOTTLE is "There is a bottle of water here.".
 BOTTLE is in LOC_BUILDING.
 
@@ -1658,6 +1695,7 @@ BOTTLE is in LOC_BUILDING.
 [ vocabulary=water, h2o ]
 [ inventory=Water in the bottle ]
 WATER is a thing.
+The printed name of WATER is "water in the bottle".
 
 [ OIL ]
 [ role=portable ]
@@ -1665,6 +1703,7 @@ WATER is a thing.
 [ vocabulary=oil ]
 [ inventory=Oil in the bottle ]
 OIL is a thing.
+The printed name of OIL is "oil in the bottle".
 
 [ AXE ]
 [ role=portable ]
@@ -1674,6 +1713,7 @@ OIL is a thing.
 [ states=AXE_HERE, AXE_LOST ]
 [ changes=The axe misses and lands near the bear where you can't get at it. ]
 AXE is a thing.
+The printed name of AXE is "dwarf's axe".
 The description of AXE is "There is a little axe here.".
 
 [ BATTERY ]
@@ -1683,6 +1723,8 @@ The description of AXE is "There is a little axe here.".
 [ inventory=Batteries ]
 [ states=FRESH_BATTERIES, DEAD_BATTERIES ]
 BATTERY is a thing.
+The printed name of BATTERY is "batteries".
+BATTERY is plural-named.
 The description of BATTERY is "There are fresh batteries here.".
 
 [ RABBITFOOT ]
@@ -1691,6 +1733,7 @@ The description of BATTERY is "There are fresh batteries here.".
 [ vocabulary=appen, lepor ]
 [ inventory=Leporine appendage ]
 RABBITFOOT is a thing.
+The printed name of RABBITFOOT is "leporine appendage".
 The description of RABBITFOOT is "Your keen eye spots a severed leporine appendage lying on the ground.".
 RABBITFOOT is in LOC_FOREST22.
 
@@ -1703,6 +1746,7 @@ RABBITFOOT is in LOC_FOREST22.
 [ sounds=The clam is as tight-mouthed as a, er, clam. ]
 CLAM is a scenery.
 CLAM is fixed in place.
+The printed name of CLAM is "giant clam  >GRUNT!<".
 The description of CLAM is "There is an enormous clam here with its shell tightly closed.".
 CLAM is in LOC_SHELLROOM.
 
@@ -1713,6 +1757,7 @@ CLAM is in LOC_SHELLROOM.
 [ inventory=*stalactite ]
 OBJ_26 is a scenery.
 OBJ_26 is fixed in place.
+The printed name of OBJ_26 is "stalactite".
 OBJ_26 is in LOC_TOPSTALACTITE.
 
 [ OBJ_27 ]
@@ -1723,6 +1768,7 @@ OBJ_26 is in LOC_TOPSTALACTITE.
 [ inventory=*shadowy figure and/or window ]
 OBJ_27 is a scenery.
 OBJ_27 is fixed in place.
+The printed name of OBJ_27 is "shadowy figure and/or window".
 The description of OBJ_27 is "The shadowy figure seems to be trying to attract your attention.".
 OBJ_27 is in LOC_WINDOW1.
 
@@ -1733,6 +1779,7 @@ OBJ_27 is in LOC_WINDOW1.
 [ inventory=*cave drawings ]
 OBJ_29 is a scenery.
 OBJ_29 is fixed in place.
+The printed name of OBJ_29 is "cave drawings".
 OBJ_29 is in LOC_ORIENTAL.
 
 [ BLOOD ]
@@ -1742,6 +1789,7 @@ OBJ_29 is in LOC_ORIENTAL.
 [ inventory=*blood ]
 BLOOD is a scenery.
 BLOOD is fixed in place.
+The printed name of BLOOD is "blood".
 
 [ Role: puzzle ]
 [ GRATE ]
@@ -1754,6 +1802,7 @@ BLOOD is fixed in place.
 [ changes=The grate is now locked., The grate is now unlocked. ]
 GRATE is a thing.
 GRATE is fixed in place.
+The printed name of GRATE is "grate".
 The description of GRATE is "The grate is locked.".
 GRATE is in LOC_GRATE.
 
@@ -1766,6 +1815,7 @@ GRATE is in LOC_GRATE.
 [ states=STEPS_DOWN, STEPS_UP ]
 STEPS is a thing.
 STEPS is fixed in place.
+The printed name of STEPS is "steps".
 The description of STEPS is "Rough stone steps lead down the pit.".
 STEPS is in LOC_PITTOP.
 
@@ -1778,6 +1828,7 @@ STEPS is in LOC_PITTOP.
 [ changes=The hinges are quite thoroughly rusted now and won't budge., The oil has freed up the hinges so that the door will now move,\nalthough it requires some effort. ]
 The door object is a thing.
 the door object is fixed in place.
+The printed name of the door object is "rusty door".
 The description of the door object is "The way north is barred by a massive, rusty, iron door.".
 the door object is in LOC_IMMENSE.
 
@@ -1791,6 +1842,7 @@ the door object is in LOC_IMMENSE.
 [ changes=The crystal bridge has vanished!, A crystal bridge now spans the fissure. ]
 FISSURE is a thing.
 FISSURE is fixed in place.
+The printed name of FISSURE is "fissure".
 The description of FISSURE is "A crystal bridge spans the fissure.".
 FISSURE is in LOC_EASTBANK.
 
@@ -1802,6 +1854,7 @@ FISSURE is in LOC_EASTBANK.
 [ texts='Congratulations on bringing light into the dark-room!' ]
 OBJ_13 is a thing.
 OBJ_13 is fixed in place.
+The printed name of OBJ_13 is "stone tablet".
 The description of OBJ_13 is "A massive stone tablet embedded in the wall reads:\n'Congratulations on bringing light into the dark-room!'".
 OBJ_13 is in LOC_DARKROOM.
 
@@ -1814,6 +1867,7 @@ OBJ_13 is in LOC_DARKROOM.
 [ changes=You strike the mirror a resounding blow, whereupon it shatters into a\nmyriad tiny fragments. ]
 MIRROR is a thing.
 MIRROR is fixed in place.
+The printed name of MIRROR is "mirror".
 MIRROR is in LOC_MIRRORCANYON.
 
 [ PLANT ]
@@ -1826,6 +1880,7 @@ MIRROR is in LOC_MIRRORCANYON.
 [ sounds=The plant continues to ask plaintively for water., The plant continues to demand water., The plant now maintains a contented silence. ]
 PLANT is a thing.
 PLANT is fixed in place.
+The printed name of PLANT is "plant".
 The description of PLANT is "There is a tiny little plant in the pit, murmuring 'water, water, ...'".
 PLANT is in LOC_WESTPIT.
 
@@ -1839,6 +1894,7 @@ PLANT is in LOC_WESTPIT.
 [ changes=Just as you reach the other side, the bridge buckles beneath the\nweight of the bear, which was still following you around.  You\nscrabble desperately for support, but as the bridge collapses you\nstumble back and fall into the chasm. ]
 CHASM is a thing.
 CHASM is fixed in place.
+The printed name of CHASM is "chasm".
 The description of CHASM is "A rickety wooden bridge extends across the chasm, vanishing into the\nmist.  A notice posted on the bridge reads, 'Stop! Pay troll!'".
 CHASM is in LOC_SWCHASM.
 
@@ -1850,6 +1906,7 @@ CHASM is in LOC_SWCHASM.
 [ texts='This is not the maze where the pirate leaves his treasure chest.' ]
 MESSAG is a thing.
 MESSAG is fixed in place.
+The printed name of MESSAG is "message in second maze".
 The description of MESSAG is "There is a message scrawled in the dust in a flowery script, reading:\n'This is not the maze where the pirate leaves his treasure chest.'".
 
 [ VEND ]
@@ -1862,6 +1919,7 @@ The description of MESSAG is "There is a message scrawled in the dust in a flowe
 [ texts='Drop coins here to receive fresh batteries.', 'Drop coins here to receive fresh batteries.' ]
 VEND is a thing.
 VEND is fixed in place.
+The printed name of VEND is "vending machine".
 The description of VEND is "There is a massive and somewhat battered vending machine here.  The\ninstructions on it read: 'Drop coins here to receive fresh batteries.'".
 VEND is in LOC_DEADEND13.
 
@@ -1874,6 +1932,7 @@ VEND is in LOC_DEADEND13.
 [ changes=The urn is empty and will not light., The urn is now dark., The urn is now lit. ]
 URN is a thing.
 URN is fixed in place.
+The printed name of URN is "urn".
 The description of URN is "A small urn is embedded in the rock.".
 URN is in LOC_CLIFF.
 
@@ -1885,6 +1944,7 @@ URN is in LOC_CLIFF.
 [ states=CAVITY_FULL, CAVITY_EMPTY ]
 CAVITY is a thing.
 CAVITY is fixed in place.
+The printed name of CAVITY is "cavity".
 The description of CAVITY is "There is a small urn-shaped cavity in the rock.".
 
 [ RESER ]
@@ -1897,6 +1957,7 @@ The description of CAVITY is "There is a small urn-shaped cavity in the rock.".
 [ changes=The waters crash together again., The waters have parted to form a narrow path across the reservoir. ]
 RESER is a thing.
 RESER is fixed in place.
+The printed name of RESER is "reservoir".
 The description of RESER is "The waters have parted to form a narrow path across the reservoir.".
 RESER is in LOC_RESERVOIR.
 
@@ -1908,6 +1969,7 @@ RESER is in LOC_RESERVOIR.
 [ texts='MAGIC WORD XYZZY' ]
 OBJ_47 is a thing.
 OBJ_47 is fixed in place.
+The printed name of OBJ_47 is "mud".
 OBJ_47 is in LOC_DEBRIS.
 
 [ OBJ_48 ]
@@ -1918,6 +1980,7 @@ OBJ_47 is in LOC_DEBRIS.
 [ texts='You won't get it up the steps' ]
 OBJ_48 is a thing.
 OBJ_48 is fixed in place.
+The printed name of OBJ_48 is "note".
 OBJ_48 is in LOC_NUGGET.
 
 [ SIGN ]
@@ -1929,6 +1992,7 @@ OBJ_48 is in LOC_NUGGET.
 [ texts=Cave under construction beyond this point.\n           Proceed at own risk.\n       [Witt Construction Company], 'Treasure Vault.  Keys in main office.' ]
 SIGN is a thing.
 SIGN is fixed in place.
+The printed name of SIGN is "sign".
 SIGN is in LOC_ANTEROOM.
 
 [ Role: infrastructure ]
@@ -1940,6 +2004,7 @@ SIGN is in LOC_ANTEROOM.
 [ inventory=*phony plant ]
 PLANT2 is a thing.
 PLANT2 is fixed in place.
+The printed name of PLANT2 is "phony plant".
 The description of PLANT2 is "The top of a 12-foot-tall beanstalk is poking out of the west pit.".
 PLANT2 is in LOC_WESTEND.
 
@@ -1950,6 +2015,7 @@ PLANT2 is in LOC_WESTEND.
 [ inventory=*pirate/genie ]
 OBJ_30 is a thing.
 OBJ_30 is fixed in place.
+The printed name of OBJ_30 is "pirate/genie".
 
 [ VOLCANO ]
 [ role=infrastructure ]
@@ -1958,6 +2024,7 @@ OBJ_30 is fixed in place.
 [ inventory=*volcano and/or geyser ]
 VOLCANO is a thing.
 VOLCANO is fixed in place.
+The printed name of VOLCANO is "volcano and/or geyser".
 VOLCANO is in LOC_BREATHTAKING.
 
 [ OBJ_40 ]
@@ -1967,6 +2034,7 @@ VOLCANO is in LOC_BREATHTAKING.
 [ inventory=*carpet and/or moss and/or curtains ]
 OBJ_40 is a thing.
 OBJ_40 is fixed in place.
+The printed name of OBJ_40 is "carpet and/or moss and/or curtains".
 OBJ_40 is in LOC_SOFTROOM.
 
 [ Role: creature ]
@@ -1979,6 +2047,7 @@ OBJ_40 is in LOC_SOFTROOM.
 [ sounds=The snake is hissing venomously. ]
 SNAKE is a thing.
 SNAKE is fixed in place.
+The printed name of SNAKE is "snake".
 The description of SNAKE is "A huge green fierce snake bars the way!".
 SNAKE is in LOC_KINGHALL.
 
@@ -1988,6 +2057,7 @@ SNAKE is in LOC_KINGHALL.
 [ vocabulary=dwarf, dwarv ]
 DWARF is a thing.
 DWARF is fixed in place.
+The printed name of DWARF is "dwarf".
 
 [ DRAGON ]
 [ role=creature ]
@@ -2000,6 +2070,7 @@ DWARF is fixed in place.
 [ sounds=The dragon's ominous hissing does not bode well for you., The dragon is, not surprisingly, silent., The dragon is, not surprisingly, silent. ]
 DRAGON is a thing.
 DRAGON is fixed in place.
+The printed name of DRAGON is "dragon".
 The description of DRAGON is "A huge green fierce dragon bars the way!".
 DRAGON is in LOC_SECRET4.
 
@@ -2014,6 +2085,7 @@ DRAGON is in LOC_SECRET4.
 [ sounds=The troll sounds quite adamant in his demand for a treasure., The troll sounds quite adamant in his demand for a treasure. ]
 TROLL is a thing.
 TROLL is fixed in place.
+The printed name of TROLL is "troll".
 The description of TROLL is "A burly troll stands by the bridge and insists you throw him a\ntreasure before you may cross.".
 TROLL is in LOC_SWCHASM.
 
@@ -2025,6 +2097,7 @@ TROLL is in LOC_SWCHASM.
 [ inventory=*phony troll ]
 TROLL2 is a thing.
 TROLL2 is fixed in place.
+The printed name of TROLL2 is "phony troll".
 The description of TROLL2 is "The troll is nowhere to be seen.".
 
 [ BEAR ]
@@ -2035,6 +2108,7 @@ The description of TROLL2 is "The troll is nowhere to be seen.".
 [ changes=The bear eagerly wolfs down your food, after which he seems to calm\ndown considerably and even becomes rather friendly. ]
 BEAR is a thing.
 BEAR is fixed in place.
+The printed name of BEAR is "bear".
 The description of BEAR is "There is a ferocious cave bear eyeing you from the far end of the room!".
 BEAR is in LOC_BARRENROOM.
 
@@ -2046,6 +2120,7 @@ BEAR is in LOC_BARRENROOM.
 [ sounds=The ogre is apparently the strong, silent type. ]
 OGRE is a thing.
 OGRE is fixed in place.
+The printed name of OGRE is "ogre".
 The description of OGRE is "A formidable ogre bars the northern exit.".
 OGRE is in LOC_LARGE.
 
@@ -2054,6 +2129,79 @@ OGRE is in LOC_LARGE.
 [ role=unknown ]
 [ vocabulary= ]
 [ unsupported placeholder entry ]
+
+[ Object identity table ]
+Table of Open Adventure Object IDs
+object-entry (thing)	object-id-entry (text)
+NUGGET	"NUGGET"
+OBJ_51	"OBJ_51"
+OBJ_52	"OBJ_52"
+OBJ_53	"OBJ_53"
+COINS	"COINS"
+CHEST	"CHEST"
+EGGS	"EGGS"
+TRIDENT	"TRIDENT"
+VASE	"VASE"
+EMERALD	"EMERALD"
+PYRAMID	"PYRAMID"
+PEARL	"PEARL"
+RUG	"RUG"
+OBJ_63	"OBJ_63"
+CHAIN	"CHAIN"
+RUBY	"RUBY"
+JADE	"JADE"
+AMBER	"AMBER"
+SAPPH	"SAPPH"
+OBJ_69	"OBJ_69"
+KEYS	"KEYS"
+LAMP	"LAMP"
+CAGE	"CAGE"
+ROD	"ROD"
+ROD2	"ROD2"
+BIRD	"BIRD"
+PILLOW	"PILLOW"
+OYSTER	"OYSTER"
+MAGAZINE	"MAGAZINE"
+KNIFE	"KNIFE"
+FOOD	"FOOD"
+BOTTLE	"BOTTLE"
+WATER	"WATER"
+OIL	"OIL"
+AXE	"AXE"
+BATTERY	"BATTERY"
+RABBITFOOT	"RABBITFOOT"
+CLAM	"CLAM"
+OBJ_26	"OBJ_26"
+OBJ_27	"OBJ_27"
+OBJ_29	"OBJ_29"
+BLOOD	"BLOOD"
+GRATE	"GRATE"
+STEPS	"STEPS"
+the door object	"DOOR"
+FISSURE	"FISSURE"
+OBJ_13	"OBJ_13"
+MIRROR	"MIRROR"
+PLANT	"PLANT"
+CHASM	"CHASM"
+MESSAG	"MESSAG"
+VEND	"VEND"
+URN	"URN"
+CAVITY	"CAVITY"
+RESER	"RESER"
+OBJ_47	"OBJ_47"
+OBJ_48	"OBJ_48"
+SIGN	"SIGN"
+PLANT2	"PLANT2"
+OBJ_30	"OBJ_30"
+VOLCANO	"VOLCANO"
+OBJ_40	"OBJ_40"
+SNAKE	"SNAKE"
+DWARF	"DWARF"
+DRAGON	"DRAGON"
+TROLL	"TROLL"
+TROLL2	"TROLL2"
+BEAR	"BEAR"
+OGRE	"OGRE"
 [ Generated Vocabulary ]
 [ Adventure vocabulary is canonical: source/adventure.yaml ]
 [ Taxonomy ]
@@ -4257,8 +4405,8 @@ To initialize framework IDs:
 	now openadventure-framework-in-lookup is true;
 	repeat with candidate-room running through the rooms:
 		now adventure-id of candidate-room is the OpenAdventure canonical room id of candidate-room;
-	repeat with candidate-thing running through the things:
-		now adventure-id of candidate-thing is the normalized adventure id from the printed name of candidate-thing;
+	repeat through the Table of Open Adventure Object IDs:
+		now adventure-id of object-entry entry is object-id-entry entry;
 	now openadventure-framework-in-lookup is false.
 
 [ Open Adventure Predicate Framework ]
@@ -6429,6 +6577,9 @@ The openadventure-subsystem-registration-locked is false.
 The openadventure-foobar-stage is a number that varies.
 The openadventure-foobar-stage is 0.
 
+The openadventure-last-travel-category is a text that varies.
+The openadventure-last-travel-category is "".
+
 To set up OpenAdventure runtime framework:
 	if openadventure-subsystem-registration-locked is false:
 		initialize framework IDs;
@@ -6649,6 +6800,7 @@ To oa-dispatch-openadventure-travel-entry (source-id - text) with rule-id (trave
 	now openadventure-current-travel-rule-id is travel-rule-id;
 	now openadventure-active-source-loc is source-id;
 	now openadventure-active-travel-result is target-id;
+	now openadventure-last-travel-category is travel-category;
 	if travel-category is "goto" or travel-category is "goto_non_direct" or travel-category is "goto_conditional" or travel-category is "goto_forced" or travel-category is "goto_random" or travel-category is "goto_magic_word":
 		oa-dispatch-openadventure-goto source-id to target-id with verb-token openadventure-active-verb-token;
 	if travel-category is "speak" or travel-category is "speak_conditional":
@@ -6708,6 +6860,9 @@ To openadventure emit travel message (message-id - text):
 		stop;
 	if message-id is "NASTY_DRAGON":
 		say "The dragon looks rather nasty.  You'd best not try to get by.";
+		stop;
+	if message-id is "NO_INOUT_HERE":
+		say "I don't know in from out here.  Use compass points or name something in the general direction you want to go.";
 		stop;
 	if message-id is "NO_CROSS":
 		say "There is no way across the fissure.";
@@ -6988,7 +7143,8 @@ Understand "enter slit" as oaenteringslit.
 
 Carry out oaenteringslit:
 	if openadventure non-direct travel from adventure-id of location with verb token "SLIT":
-		process openadventure forced travel from location;
+		if openadventure last travel was movement:
+			process openadventure forced travel from location;
 		stop the action;
 	say "You can't see any such thing.".
 
@@ -6997,7 +7153,8 @@ Understand "enter crack" as oaenteringcrack.
 
 Carry out oaenteringcrack:
 	if openadventure non-direct travel from adventure-id of location with verb token "CRACK":
-		process openadventure forced travel from location;
+		if openadventure last travel was movement:
+			process openadventure forced travel from location;
 		stop the action;
 	say "You can't see any such thing.".
 
@@ -7007,9 +7164,10 @@ Understand "climb" as oabareclimbing.
 
 Carry out oabareclimbing:
 	if openadventure non-direct travel from adventure-id of location with verb token "CLIMB":
-		process openadventure forced travel from location;
+		if openadventure last travel was movement:
+			process openadventure forced travel from location;
 	else:
-		say "You can't go that way.".
+		say "There is nothing here to climb.".
 
 Oabaretaking is an action applying to nothing.
 Understand "take" as oabaretaking.
@@ -7055,11 +7213,24 @@ Carry out oatakingall:
 			say "[item]: ";
 			silently try taking item;
 			if item is carried by the player:
-				say "Taken.";
+				say "Taken.[line break]";
 			otherwise:
-				say "You can't take that.";
+				say "You can't take that.[line break]";
 	if matches is 0:
 		say "There is nothing here to take.".
+
+Instead of taking inventory:
+	let visible-items be 0;
+	repeat with item running through things carried by the player:
+		if item is not WATER and item is not OIL:
+			increase visible-items by 1;
+	if visible-items is 0:
+		say "You're not carrying anything.";
+		stop the action;
+	say "You are carrying:[line break]";
+	repeat with item running through things carried by the player:
+		if item is not WATER and item is not OIL:
+			say "  [item][line break]".
 
 Oabaredropping is an action applying to nothing.
 Understand "drop" as oabaredropping.
@@ -7631,6 +7802,8 @@ To decide what text is the OpenAdventure dispatch token for (raw-command - text)
 		decide on "";
 	if OpenAdventure command token command-token maps to available travel:
 		decide on the OpenAdventure mapped parser token for command-token;
+	if openadventure player expects in-out routing for command-token:
+		decide on the OpenAdventure mapped parser token for command-token;
 	decide on "".
 
 To decide what text is the OpenAdventure mapped parser token for (command-token - text):
@@ -7647,6 +7820,30 @@ To decide whether OpenAdventure command token (command-token - text) maps to ava
 		if source-loc entry is adventure-id of location and forced entry is false:
 			if movement token mapped-token is in token list verbs entry:
 				decide yes;
+	decide no.
+
+To decide whether openadventure player expects in-out routing for (command-token - text):
+	if command-token is "in" or command-token is "inside" or command-token is "inward":
+		decide yes;
+	if command-token is "out" or command-token is "exit" or command-token is "leave":
+		decide yes;
+	if command-token is "enter":
+		decide yes;
+	decide no.
+
+To decide whether openadventure last travel was movement:
+	if openadventure-last-travel-category is "goto":
+		decide yes;
+	if openadventure-last-travel-category is "goto_non_direct":
+		decide yes;
+	if openadventure-last-travel-category is "goto_conditional":
+		decide yes;
+	if openadventure-last-travel-category is "goto_forced":
+		decide yes;
+	if openadventure-last-travel-category is "goto_random":
+		decide yes;
+	if openadventure-last-travel-category is "goto_magic_word":
+		decide yes;
 	decide no.
 
 To finish OpenAdventure direct direction fallback from (source-room - room) with verb-token (verb-token - text):
@@ -7716,9 +7913,12 @@ Carry out oatraveling:
 		stop the action;
 	let source-id be adventure-id of location;
 	if openadventure non-direct travel from source-id with verb token dispatch-token:
-		process openadventure forced travel from location;
+		if openadventure last travel was movement:
+			process openadventure forced travel from location;
 	else if OpenAdventure direct direction fallback handles dispatch-token:
 		do nothing;
+	else if dispatch-token is "INWAR" or dispatch-token is "OUT" or dispatch-token is "ENTER":
+		openadventure emit travel message "NO_INOUT_HERE";
 	else:
 		say "You can't go that way.";
 	now openadventure-parser-dispatch-token is "".

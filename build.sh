@@ -232,6 +232,12 @@ compose_source() {
           }
         }
 
+        if ($0 ~ /^DOOR\t/) {
+          sub(/^DOOR/, "the door object", $0)
+          print $0
+          next
+        }
+
         print $0
       }
     ' "$ROOT_DIR/generated/Objects.ni"
@@ -280,7 +286,12 @@ run_compile() {
   fi
 
   echo "[build] translating Inform 7 source from: $PROJECT_SOURCE_FILE"
+  rm -f "$i6_source"
   "$inform_bin" -at "$inform_resources" -source "$PROJECT_SOURCE_FILE" -release -format="$INFORM_FORMAT" -o "$i6_source"
+  if [ ! -s "$i6_source" ]; then
+    echo "[build] error: Inform 7 translation did not produce $i6_source" >&2
+    return 1
+  fi
 
   rm -f "$tmp_artifact" "$BUILD_ARTIFACT"
   echo "[build] compiling Inform 6 intermediate: $i6_source"

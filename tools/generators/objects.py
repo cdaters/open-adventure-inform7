@@ -75,6 +75,36 @@ def _first_description(obj):
     return ""
 
 
+def _display_name_from_inventory(obj_id: str, obj: dict) -> str:
+    inv = obj.get("inventory")
+    if inv is not None:
+        name = str(inv).strip()
+        if name.startswith("*"):
+            name = name[1:].strip()
+        preserve_case = False
+        if len(name) >= 2 and name[0] == '"' and name[-1] == '"':
+            name = name[1:-1]
+            preserve_case = True
+        if name:
+            if preserve_case:
+                return name
+            return name[:1].lower() + name[1:]
+    return obj_id.replace("_", " ").lower()
+
+
+def _is_plural_display_name(display_name: str) -> bool:
+    lowered = display_name.lower()
+    plural_prefixes = (
+        "several ",
+        "bars of ",
+        "rare coins",
+        "golden eggs",
+        "rare spices",
+        "batteries",
+    )
+    return lowered.startswith(plural_prefixes)
+
+
 def _has_behavioral_fields(obj):
     return any(field in obj for field in ("states", "changes", "sounds", "texts"))
 
@@ -157,6 +187,11 @@ def _emit_object_block(obj_id, obj, role):
         if role in ("puzzle", "infrastructure", "creature"):
             lines.append(f"{i7_id} is fixed in place.")
 
+    display_name = _display_name_from_inventory(obj_id, obj)
+    lines.append(f'The printed name of {i7_id} is "{quote(display_name)}".')
+    if _is_plural_display_name(display_name):
+        lines.append(f"{i7_id} is plural-named.")
+
     if desc:
         lines.append(f'The description of {i7_id} is "{quote(desc)}".')
 
@@ -235,5 +270,15 @@ def generate_objects(data):
         out.append(f"[ Role: {role} ]")
         for obj_id, obj in objects_by_role:
             out.extend(_emit_object_block(obj_id, obj, role))
+
+    out.append("[ Object identity table ]")
+    out.append("Table of Open Adventure Object IDs")
+    out.append("object-entry (thing)\tobject-id-entry (text)")
+    for role in role_order:
+        for obj_id, _obj in by_role[role]:
+            if role == "unknown":
+                continue
+            out.append(f'{i7_identifier(obj_id)}\t"{obj_id}"')
+    out.append("")
 
     return "\n".join(out)

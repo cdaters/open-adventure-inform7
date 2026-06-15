@@ -17,6 +17,8 @@ Required:
 - Build `OpenAdventure.ulx` with `OPENADVENTURE_INFORM_FORMAT=Inform6/32`.
 - Run smoke tests.
 - Run full transcript verification with `--timeout 90`.
+- Confirm `python3 tools/sync_author_edition.py --diff` reports a current
+  modular Author Edition export.
 - Include release notes, known differences, and verification evidence.
 - Tag the release after final verification.
 

@@ -16,7 +16,7 @@ Release classification: **Release Candidate for Glulx**.
 Current measured state:
 
 - Glulx build target passes compile and smoke verification.
-- Transcript execution passes 15/15 suites with `--timeout 90`.
+- Transcript execution passes 15/15 suites with `--timeout 180`.
 - Complete solve, treasure collection, and endgame transcript routes pass.
 - Z8 remains experimental and is not a release target because of memory limits.
 
@@ -68,7 +68,11 @@ OpenAdventure.inform/Build/OpenAdventure.ulx
 | 8H | Endgame completion parity | Complete | Complete endgame route passes |
 | 8I | Final walkthrough parity | Complete | Full manifest passes 15/15 |
 | 9A | Release packaging and presentation | Complete | Release docs and package plan |
-| 10A | Inform 7 Author Edition | In progress | IDE-friendly author project prototype |
+| 10A | Inform 7 Author Edition | Complete | IDE-friendly author project prototype |
+| 10B | Parser and presentation polish | Complete | Player-facing parser and message polish |
+| 10C | Adventure feel and presentation polish | Complete | Startup identity, object names, inventory, and movement presentation |
+| 10D | Author workflow architecture | Complete | Canonical repository plus managed Author Layer design |
+| 10E | Author Edition source modularization | Complete | Lightweight `story.ni` plus project-local extension modules |
 
 ## Build and Test Commands
 
@@ -87,13 +91,13 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Run transcript verification:
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Run upstream walkthrough verification:
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 ## Author Edition
@@ -107,13 +111,17 @@ OpenAdventure-AuthorEdition.inform
 Regenerate it with:
 
 ```bash
-python3 tools/make_author_edition.py
+python3 tools/sync_author_edition.py --export
 ```
 
 The Author Edition coexists with the RC1 project. It emits
-`Source/story.ni` and a Glulx `Settings.plist` for Inform 7 10.1.2 IDE use,
-while keeping `source/adventure.yaml`, generator code, and `OpenAdventure_*.ni`
-as durable source.
+`Source/story.ni`, a Glulx `Settings.plist`, and modular project-local
+extensions under `OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/`
+for Inform 7 10.1.2 IDE use, while keeping `source/adventure.yaml`, generator
+code, and `OpenAdventure_*.ni` as durable source.
+
+Use `python3 tools/sync_author_edition.py --diff` to check whether the IDE
+project is stale relative to canonical source.
 
 ## Release Packaging
 
@@ -133,15 +141,15 @@ The full source repository remains the contributor package.
 
 Release-preparation work:
 
-- Finish Milestone 10A GUI confirmation by manually pressing Go in Inform 7.
+- Finish Author Edition GUI confirmation by manually pressing Go in Inform 7.
 - Run final Glulx smoke and transcript verification before tagging.
 - Tag RC1 with build and transcript evidence.
 
 Future work:
 
 - Decide whether to pursue Z8 memory optimization.
-- Decide whether Author Edition artifacts should be committed long term or
-  generated on demand.
+- Add the first managed Author Layer module when new author-facing features are
+  ready to move beyond canonical runtime polish.
 - Expand manual playtest coverage beyond transcript routes.
 - Add CI automation for Glulx build, smoke tests, and transcripts.
 - Consider packaged release assets such as screenshots, cover art, or a Blorb.

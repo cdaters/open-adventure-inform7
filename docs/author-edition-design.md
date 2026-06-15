@@ -86,7 +86,8 @@ OpenAdventure-AuthorEdition.inform/
   Settings.plist
   uuid.txt
   Source/story.ni
-  Materials/
+OpenAdventure-AuthorEdition.materials/
+  Extensions/OpenAdventure/
 ```
 
 Benefits:
@@ -98,7 +99,7 @@ Benefits:
 
 Costs:
 
-- `story.ni` is a generated composition artifact and should not become the
+- exported source modules are generated artifacts and should not become the
   long-term hand-edited source of truth.
 - Authors must understand which files are durable source and which are emitted
   output.
@@ -140,27 +141,52 @@ Costs:
 
 ## Recommendation
 
-Use **Option C**.
+Use **Option C**, refined by Milestone 10D as **canonical repository plus
+managed Author Layer**.
 
 The long-term structure should maintain both workflows:
 
 - `OpenAdventure.inform`: RC1 command-line build/test target.
 - `OpenAdventure-AuthorEdition.inform`: generated IDE author project.
-- `tools/make_author_edition.py`: assembler for the author project.
+- `tools/sync_author_edition.py --export`: preferred assembler for the author
+  project.
+- `tools/sync_author_edition.py --diff`: stale-export detector.
+- `tools/make_author_edition.py`: compatibility exporter retained for existing
+  documentation and habits.
 
 The Author Edition should be treated as a convenience artifact generated from
-the same source hierarchy as RC1, not as a replacement architecture.
+the same source hierarchy as RC1, not as a replacement architecture. Full-file
+import from the exported Author Edition source tree is intentionally
+unsupported.
+
+Future author-facing work should live in a bounded Author Layer rather than in
+generated files or the composed Author Edition output. See:
+
+- `docs/author-workflow.md`
+- `docs/author-layer-design.md`
 
 ## Prototype Architecture
 
-`tools/make_author_edition.py` now assembles:
+`tools/sync_author_edition.py --export` and the compatibility
+`tools/make_author_edition.py` now assemble a modular Author Edition:
 
 ```text
 OpenAdventure-AuthorEdition.inform/Source/story.ni
 OpenAdventure-AuthorEdition.inform/Settings.plist
 OpenAdventure-AuthorEdition.inform/uuid.txt
-OpenAdventure-AuthorEdition.inform/Materials/.gitkeep
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Rooms.i7x
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Objects.i7x
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Vocabulary.i7x
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Travel.i7x
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure State.i7x
+...
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Runtime.i7x
 ```
+
+`story.ni` is an include spine. Inform 7 10.1.2 does not accept quoted local
+source includes such as `Include "Rooms.ni".`, so the Author Edition uses
+project-local extensions in the sibling `.materials` package. This is the
+Inform-compatible modular layout.
 
 The generated `Settings.plist` uses Inform's bundled sample-project convention:
 
@@ -175,18 +201,17 @@ That setting selects Glulx in Inform 7 10.1.2.
 Prototype command-line verification:
 
 ```bash
-python3 tools/make_author_edition.py
+python3 tools/sync_author_edition.py --export
 /Applications/Inform.app/Contents/MacOS/ni \
   -at /Applications/Inform.app/Contents/Resources \
-  -source OpenAdventure-AuthorEdition.inform/Source/story.ni \
-  -release -format=Inform6/32 \
-  -o OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.i6
+  -project OpenAdventure-AuthorEdition.inform \
+  -release -format=Inform6/32
 /Applications/Inform.app/Contents/MacOS/inform6 \
   -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
-  OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.i6 \
+  OpenAdventure-AuthorEdition.inform/Build/auto.inf \
   OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx
-OPENADVENTURE_STORY=OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx \
-  python3 tools/run_transcripts.py --execute --timeout 90
+OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Result:
@@ -196,9 +221,23 @@ Result:
 - Author-edition artifact was identified as Glulx game data.
 - Transcript replay passed 15/15.
 
+Milestone 10D adds export diff verification, and Milestone 10E expands it to
+all exported extension modules:
+
+```bash
+python3 tools/sync_author_edition.py --diff
+```
+
+`--diff` exits successfully when the Author Edition matches canonical source.
+
 GUI note:
 
 - The project has the expected IDE shape and Glulx settings.
-- This milestone verified the exact `Source/story.ni` compilation path from the
-  command line. Manual GUI confirmation should consist of opening
+- This milestone verified project-mode compilation from the command line,
+  including project-local extension resolution. Manual GUI confirmation should
+  consist of opening
   `OpenAdventure-AuthorEdition.inform` in Inform 7 10.1.2 and pressing Go.
+
+See also:
+
+- `docs/author-edition-layout.md`

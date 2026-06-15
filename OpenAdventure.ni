@@ -1,4 +1,4 @@
-"Open Adventure" by Eric S Raymond.
+"Open Adventure in Inform 7" by Craig Daters.
 
 [
 Open Adventure Inform 7 Edition

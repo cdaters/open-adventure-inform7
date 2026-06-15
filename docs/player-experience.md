@@ -2,8 +2,8 @@
 
 Date: 2026-06-14
 
-Milestone 10B reviewed common player commands and presentation issues while
-preserving RC1 gameplay parity.
+Milestones 10B and 10C reviewed common player commands and presentation issues
+while preserving RC1 gameplay parity.
 
 ## Goals
 
@@ -23,7 +23,7 @@ preserving RC1 gameplay parity.
 | `leave building` | Leaves the building through the Open Adventure `OUT` route. |
 | `take all` | Takes available portable items with explicit per-object results. |
 | `get all` | Same as `take all`. |
-| `climb` | Routes through generated Open Adventure travel where valid; otherwise gives a travel-style refusal. |
+| `climb` | Routes through generated Open Adventure travel where valid; otherwise reports that there is nothing here to climb. |
 | `enter slit` | At the slit, prints `You don't fit through a two-inch slit!`. |
 | `enter crack` | Routes through Open Adventure crack travel where valid; otherwise reports no visible crack. |
 | `enter stream` | At the surface stream, prints `Your feet are now wet.`; at the two-inch slit, prints the `DONT_FIT` text. |
@@ -85,6 +85,28 @@ parser.
 - `enter crack`
 - `enter stream`
 
+### Adventure-Style Failed Movement
+
+Bare `in`, `out`, `enter`, `exit`, and `leave` commands now stay on the Open
+Adventure travel path even when no route is available. Failed in/out attempts
+use the Adventure message:
+
+```text
+I don't know in from out here.  Use compass points or name something in the general direction you want to go.
+```
+
+Failed `speak` travel rows such as `DONT_FIT` no longer trigger forced-travel
+follow-up handling.
+
+### Object and Inventory Presentation
+
+Generated objects now have player-facing printed names from
+`source/adventure.yaml` inventory labels while retaining canonical runtime IDs
+through a generated identity table.
+
+Inventory hides internal `WATER` and `OIL` carrier objects, so bottle contents
+do not appear as separate inventory items.
+
 ## Presentation Review
 
 Startup remains:
@@ -97,6 +119,10 @@ Welcome to Adventure!
 
 HELP, ABOUT, INFO, NEWS, and VERSION remain available. VERSION identifies the
 Inform 7 edition and RC1 Glulx build.
+
+The startup banner now identifies the implementation as Open Adventure in
+Inform 7 by Craig Daters, while HELP/CREDITS preserve the full historical
+lineage.
 
 ## Verification Notes
 
@@ -116,6 +142,8 @@ Targeted local probes verified:
 - west-from-slit no longer prints Inform score notification.
 - building `exit`/`leave` forms route naturally.
 - `take all` and `get all` produce cleaner output.
+- generated object IDs no longer appear in ordinary object listings.
+- inventory no longer exposes `WATER`/`OIL` implementation objects.
 
 Full transcript verification should remain the release gate:
 

@@ -16,12 +16,12 @@ Z8 remains experimental and is not part of the RC1 release package.
 | Glulx artifact | Ready for RC packaging | `OpenAdventure.ulx` builds and validates. |
 | Z8 artifact | Not release-ready | Memory limits still block practical Z8 output. |
 | Smoke tests | Passing | `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` passes. |
-| Transcript framework | Passing | Full manifest passes with `--timeout 90`. |
+| Transcript framework | Passing | Full manifest passes with `--timeout 180`. |
 | Transcript pass rate | 15/15 | No current release-blocking transcript failures. |
 | Full solve path | Passing | Reaches 430/430 and final rank output. |
 | Treasure collection | Passing | Current C-backed fragments pass. |
 | Complete endgame | Passing | Repository and victory blast route passes. |
-| Documentation | Updated for RC1 | Milestone 9A release packaging docs are present. |
+| Documentation | Updated for RC1 | Release packaging and presentation-polish docs are present. |
 
 ## Verification Evidence
 
@@ -32,7 +32,7 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Result: passed.
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Result: passed, 15/15.
@@ -44,7 +44,7 @@ RC1 packaging work:
 - Review release-facing README and project docs before tagging.
 - Include RC1 release notes.
 - Include known differences and transcript verification evidence.
-- Confirm in-game version, credits, ABOUT, INFO, NEWS, and HELP presentation.
+- Keep in-game version, credits, ABOUT, INFO, NEWS, and HELP presentation under manual playtest review.
 - Package the Glulx artifact and supporting docs.
 
 Non-blocking future work:

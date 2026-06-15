@@ -12,6 +12,9 @@ __pycache__/
 
 Build/
 Index/
+*.inform/Metadata.iFiction
+*.inform/Release.blurb
+*.inform/manifest.plist
 
 # VS Code
 

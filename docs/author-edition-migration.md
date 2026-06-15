@@ -22,7 +22,13 @@ OpenAdventure-AuthorEdition.inform/
 
 ## Regenerating the Author Edition
 
-Run:
+Preferred command:
+
+```bash
+python3 tools/sync_author_edition.py --export
+```
+
+Compatibility command:
 
 ```bash
 python3 tools/make_author_edition.py
@@ -33,12 +39,19 @@ This regenerates `generated/*.ni` and writes:
 ```text
 OpenAdventure-AuthorEdition.inform/Source/story.ni
 OpenAdventure-AuthorEdition.inform/Settings.plist
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/*.i7x
 ```
 
 To reuse existing generated files without rerunning the YAML generator:
 
 ```bash
-python3 tools/make_author_edition.py --no-generate
+python3 tools/sync_author_edition.py --export --no-generate
+```
+
+To check whether the Author Edition is stale:
+
+```bash
+python3 tools/sync_author_edition.py --diff
 ```
 
 ## Opening in Inform 7
@@ -53,7 +66,8 @@ Expected IDE behavior:
 
 - Source pane opens `Source/story.ni`.
 - Project settings select Glulx.
-- Pressing Go compiles through Inform 7 10.1.2.
+- Pressing Go compiles through Inform 7 10.1.2 using the project-local
+  extension modules in `OpenAdventure-AuthorEdition.materials`.
 
 If the IDE does not honor the project setting on a local installation, open
 Settings and choose:
@@ -68,9 +82,10 @@ Do not make durable changes directly in:
 
 ```text
 OpenAdventure-AuthorEdition.inform/Source/story.ni
+OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/*.i7x
 ```
 
-That file is regenerated.
+Those files are regenerated.
 
 Instead:
 
@@ -78,6 +93,8 @@ Instead:
 - Edit `tools/generators/*.py` for generated source structure.
 - Edit `OpenAdventure_*.ni` for gameplay behavior.
 - Edit `OpenAdventure.ni` for project-level source text.
+- Edit the future Author Layer for presentation, help, menus, hints, and
+  parser polish that is not generated world data.
 
 Then regenerate the Author Edition.
 
@@ -88,10 +105,11 @@ Recommended migration stages:
 1. Keep RC1 build/test workflow unchanged.
 2. Generate Author Edition on demand for IDE authoring.
 3. Add CI or smoke coverage that verifies `tools/make_author_edition.py`.
-4. If future authors need more IDE ergonomics, split generated `story.ni` into
-   Inform extensions or chaptered source files while preserving the generator as
-   the source of truth.
-5. Revisit whether Author Edition artifacts should be committed after several
+4. Add a managed Author Layer for menus, hints, help text, parser polish, and
+   other author-owned presentation work.
+5. Keep the Milestone 10E modular extension layout as the default Author
+   Edition structure.
+6. Revisit whether Author Edition artifacts should be committed after several
    development cycles.
 
 ## What Not To Migrate Yet
@@ -106,12 +124,20 @@ Reasons:
 - It would make generated world updates harder to review.
 - It would force a large architecture change after RC1 parity has stabilized.
 
+Milestone 10E also showed that quoted local source includes such as
+`Include "Rooms.ni".` do not compile in Inform 7 10.1.2. Use project-local
+extensions for modular Author Edition source files.
+
 ## Long-Term Recommendation
 
 Maintain both workflows:
 
 - Generator-driven RC workflow for release verification.
-- Regenerated Author Edition for IDE authoring and future presentation work.
+- Regenerated Author Edition for IDE authoring.
+- Managed Author Layer for future presentation work.
 
 This gives Inform authors a practical editing surface while keeping the current
 parity-tested architecture intact.
+
+Do not implement full-file bidirectional synchronization. Import should be
+considered only for explicitly marked Author Layer files or regions.

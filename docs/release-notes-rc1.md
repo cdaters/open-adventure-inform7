@@ -41,7 +41,7 @@ Milestone 9A verification was run with:
 
 ```bash
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Result:

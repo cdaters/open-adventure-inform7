@@ -1,3 +1,7 @@
+Version 1 of OpenAdventure Objects by OpenAdventure begins here.
+
+[ Exported from Objects.ni by tools/make_author_edition.py. ]
+
 [ Generated Objects ]
 [ Object role taxonomy ]
 [ treasure: object with adventure.yaml treasure: true ]
@@ -499,13 +503,13 @@ STEPS is in LOC_PITTOP.
 [ initial_location=LOC_IMMENSE ]
 [ vocabulary=door ]
 [ inventory=*rusty door ]
-[ states=DOOR_RUSTED, DOOR_UNRUSTED ]
+[ states=the door object_RUSTED, the door object_UNRUSTED ]
 [ changes=The hinges are quite thoroughly rusted now and won't budge., The oil has freed up the hinges so that the door will now move,\nalthough it requires some effort. ]
-DOOR is a thing.
-DOOR is fixed in place.
-The printed name of DOOR is "rusty door".
-The description of DOOR is "The way north is barred by a massive, rusty, iron door.".
-DOOR is in LOC_IMMENSE.
+The door object is a thing.
+the door object is fixed in place.
+The printed name of the door object is "rusty door".
+The description of the door object is "The way north is barred by a massive, rusty, iron door.".
+the door object is in LOC_IMMENSE.
 
 [ FISSURE ]
 [ role=puzzle ]
@@ -852,7 +856,7 @@ OBJ_29	"OBJ_29"
 BLOOD	"BLOOD"
 GRATE	"GRATE"
 STEPS	"STEPS"
-DOOR	"DOOR"
+the door object	"DOOR"
 FISSURE	"FISSURE"
 OBJ_13	"OBJ_13"
 MIRROR	"MIRROR"
@@ -877,3 +881,5 @@ TROLL	"TROLL"
 TROLL2	"TROLL2"
 BEAR	"BEAR"
 OGRE	"OGRE"
+
+OpenAdventure Objects ends here.
