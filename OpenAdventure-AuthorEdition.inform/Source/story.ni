@@ -3,7 +3,13 @@
 [ Source modules are exported from canonical repository files. ]
 [ Edit source/adventure.yaml, OpenAdventure_*.ni, OpenAdventure.ni, or future Author Layer files, then regenerate this project. ]
 
-"Open Adventure in Inform 7" by Craig Daters.
+"Adventure" by Will Crowther and Don Woods.
+The story headline is "The original cave adventure game".
+
+Rule for printing the banner text:
+    do nothing.
+
+Use American dialect and the serial comma.
 
 [
 Open Adventure Inform 7 Edition

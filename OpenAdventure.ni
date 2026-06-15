@@ -1,4 +1,10 @@
-"Open Adventure in Inform 7" by Craig Daters.
+"Adventure" by Will Crowther and Don Woods.
+The story headline is "The original cave adventure game".
+
+Rule for printing the banner text:
+    do nothing.
+
+Use American dialect and the serial comma.
 
 [
 Open Adventure Inform 7 Edition

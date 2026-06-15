@@ -26,7 +26,13 @@ To display openadventure startup presentation:
 	if openadventure-information-startup-presented is true:
 		stop;
 	now openadventure-information-startup-presented is true;
-	say "[line break]Welcome to Adventure![paragraph break](Please type HELP for instructions and information.)[paragraph break]".
+	say "[line break]Welcome to Adventure![line break]";
+	say "(Please type HELP for instructions and information.)[paragraph break]";
+	say "[bold type]Adventure[roman type][line break]The original cave adventure game.[paragraph break]";
+	say "Created by Will Crowther (1976). Expanded by Don Woods (1977).[line break]";
+	say "Based on 'Open Adventure' by Eric S. Raymond and contributors.[line break]";
+	say "Implemented in Inform 7 by Craig Daters and contributors.[paragraph break]";
+	say "Release Candidate 1 / Serial number 260614 / Inform 7 v10.1.2[paragraph break]".
 
 Section 3 - Menu and Sections
 
