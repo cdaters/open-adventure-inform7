@@ -1,5 +1,8 @@
 # Death and Reincarnation System (Milestone 5A)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Scope
 
 Milestone 5A implements Open Adventure death handling and reincarnation flow. Open Adventure C is authoritative; Advent.inf and Conley Inform 7 were checked for comparison.
@@ -139,7 +142,8 @@ Milestone 5D sets `openadventure-cave-closing-active` when the cave-closing warn
 
 ## Parity Gaps
 
-- Transcript-level death/reincarnation validation is pending.
+- Historical note: this was written before the current transcript suite.
+  Current transcript status is tracked in `../transcript-results.md`.
 - Dark-pit death is not yet wired because the full darkness/lamp hazard flow is not implemented.
 - Reverse object-order dropping remains future parity work.
 - Terminal score/ranking output remains part of the later endgame/termination milestone.

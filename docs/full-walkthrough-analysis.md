@@ -1,5 +1,8 @@
 # Full Walkthrough Analysis - Milestone 8E
 
+Historical note: this report records an intermediate failing walkthrough state.
+Current full-walkthrough status is passing; see `docs/transcript-results.md`.
+
 Date: 2026-06-13
 
 ## Scope

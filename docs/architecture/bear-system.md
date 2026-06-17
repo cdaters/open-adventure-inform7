@@ -1,5 +1,8 @@
 # Bear System (Milestone 5B)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Scope
 
 Milestone 5B implements the Open Adventure bear puzzle baseline and its troll/bridge interaction. Open Adventure C is authoritative; Advent.inf and Conley Inform 7 were checked for comparison.
@@ -104,7 +107,8 @@ No separate bear score delta is added in Milestone 5B.
 
 ## Parity Gaps
 
-- Transcript-level bear puzzle validation is pending.
+- Historical note: this was written before the current transcript suite.
+  Current transcript status is tracked in `../transcript-results.md`.
 - The C exact object-order and fixed-second-location mechanics are approximated through Inform object placement.
 - Full troll dual-location display remains a future hardening task inherited from the troll subsystem.
 - Full lamp/darkness context for bear following is pending the darkness/lamp hazard subsystem.

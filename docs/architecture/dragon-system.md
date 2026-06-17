@@ -1,5 +1,8 @@
 # Dragon System (Milestone 5C)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Scope
 
 Milestone 5C implements the Open Adventure dragon confrontation and room-transformation baseline. Open Adventure C is authoritative; Advent.inf and Conley Inform 7 were checked for comparison.
@@ -109,7 +112,8 @@ No independent score is awarded for killing the dragon in Open Adventure C.
 
 ## Parity Gaps
 
-- Transcript-level dragon regression tests are pending.
+- Historical note: this was written before the current transcript suite.
+  Current transcript status is tracked in `../transcript-results.md`.
 - The exact C fixed-secondary-location representation is approximated with Inform object moves from `LOC_SECRET4` and `LOC_SECRET6` into `LOC_SECRET5`.
 - Drinking blood records state, but bird-sound changes that depend on `game.blooded` await the later sound/listen behavior pass.
 - Full parser parity for every attack/throw variant remains part of the broader parser hardening work.

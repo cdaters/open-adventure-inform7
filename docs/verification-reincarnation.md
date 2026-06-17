@@ -1,5 +1,8 @@
 # Verification Report - Death and Reincarnation System (Milestone 5A)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`
@@ -41,7 +44,9 @@
 
 ## Remaining gaps
 
-- Transcript-level death/reincarnation assertions are pending.
+- Historical note: transcript-level death/reincarnation coverage was pending
+  when this report was written; current transcript status is tracked in
+  `docs/transcript-results.md`.
 - Dark-pit death needs the future darkness/lamp hazard integration.
 - Cave-closing death awaits the cave-closing subsystem to set `openadventure-cave-closing-active`.
 - Reverse object-order dropping is not yet modeled.

@@ -1,5 +1,9 @@
 # Transcript Discrepancy Inventory - Milestone 8E
 
+Historical note: this inventory records failures seen during Milestones 8E and
+8F. Those release blockers were later resolved; the current transcript suite
+passes 15/15. For current status, see `docs/transcript-results.md`.
+
 Date: 2026-06-13
 
 ## Current Result

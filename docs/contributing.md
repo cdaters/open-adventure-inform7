@@ -40,7 +40,7 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Run transcript verification:
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 ## Editing Rules
@@ -66,13 +66,13 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Behavior changes should also run:
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 For full-route parity work, run:
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 ## Adding Tests

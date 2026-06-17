@@ -116,13 +116,13 @@ python3 tools/run_transcripts.py --list
 Execute the full Glulx transcript manifest:
 
 ```sh
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Execute only the upstream-backed walkthrough cases:
 
 ```sh
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 Current status:

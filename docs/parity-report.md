@@ -1,10 +1,10 @@
 # Parity Report
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 ## Summary
 
-Open Adventure in Inform 7 currently meets the Glulx Release Candidate parity
+Open Adventure in Inform 7 currently meets the Glulx release-candidate parity
 bar defined by the transcript suite.
 
 Latest measured status:
@@ -65,6 +65,6 @@ transcript replay.
 
 ## Release Recommendation
 
-**Release Candidate for Glulx**.
+**Release candidate for Glulx**.
 
 Z8 remains experimental and should not be included as an RC1 release artifact.

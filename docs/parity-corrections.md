@@ -1,5 +1,8 @@
 # Parity Corrections - Milestone 8C
 
+Historical note: this report predates final walkthrough parity. The release
+blockers named here were resolved by later milestones.
+
 Date: 2026-06-13
 
 ## Objective

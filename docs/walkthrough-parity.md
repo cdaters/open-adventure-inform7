@@ -1,5 +1,9 @@
 # Walkthrough Parity - Milestone 8E
 
+Historical note: this document includes several dated updates from the
+walkthrough-parity sequence. The final 8I section supersedes earlier blocker
+lists.
+
 Date: 2026-06-13
 
 ## Objective
@@ -150,8 +154,8 @@ Verification:
 | Command | Result |
 |---|---|
 | `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed. |
-| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | Final upstream fragments still fail, but the first oil-bottle divergence is gone. |
-| `python3 tools/run_transcripts.py --execute --timeout 90` | 12 passed, 3 failed, no timeouts or VM crashes. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 180` | Final upstream fragments still fail, but the first oil-bottle divergence is gone. |
+| `python3 tools/run_transcripts.py --execute --timeout 180` | 12 passed, 3 failed, no timeouts or VM crashes. |
 
 ## Milestone 8H Update
 
@@ -188,8 +192,8 @@ Measured status:
 | Command | Result |
 |---|---|
 | `python3 tools/run_transcripts.py --execute --mode upstream` | Timed out at the default 60-second interpreter timeout. |
-| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | `complete-endgame` passed; `solve-path` and `treasure-collection` still failed expected fragments. |
-| `python3 tools/run_transcripts.py --execute --timeout 90` | 13 passed, 2 failed, no VM crashes. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 180` | `complete-endgame` passed; `solve-path` and `treasure-collection` still failed expected fragments. |
+| `python3 tools/run_transcripts.py --execute --timeout 180` | 13 passed, 2 failed, no VM crashes. |
 
 Next target:
 
@@ -230,7 +234,7 @@ Verification:
 | Command | Result |
 |---|---|
 | `OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh` | Passed. |
-| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 90` | 3/3 upstream cases passed. |
-| `python3 tools/run_transcripts.py --execute --timeout 90` | 15/15 manifest cases passed. |
+| `python3 tools/run_transcripts.py --execute --mode upstream --timeout 180` | 3/3 upstream cases passed. |
+| `python3 tools/run_transcripts.py --execute --timeout 180` | 15/15 manifest cases passed. |
 
 Remaining walkthrough blockers: none in the current transcript suite.

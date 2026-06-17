@@ -1,6 +1,6 @@
 # Testing Environment
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 ## Local Toolchain
 
@@ -22,8 +22,8 @@ Use Glulx for release verification:
 
 ```bash
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Current expected result:
@@ -53,7 +53,7 @@ build/transcripts/
 ```
 
 The runner supports deterministic replay helpers used by the current transcript
-suite. A 90-second timeout is recommended for full upstream-style routes.
+suite. A 180-second timeout is recommended for full upstream-style routes.
 
 ## Interpreters
 

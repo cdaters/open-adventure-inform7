@@ -1,6 +1,6 @@
 # Author Layer Design
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 The Author Layer is the proposed home for future author-facing work that should
 coexist with the parity-verified Open Adventure implementation without

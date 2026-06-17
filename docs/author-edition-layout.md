@@ -1,6 +1,6 @@
 # Author Edition Layout
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 Milestone 10E modularizes the Author Edition while preserving the canonical
 RC1 build and transcript workflow.

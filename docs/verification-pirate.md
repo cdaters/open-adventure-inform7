@@ -1,5 +1,8 @@
 # Verification Report - Pirate System (Milestone 4E)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`

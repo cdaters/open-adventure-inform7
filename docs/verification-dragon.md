@@ -1,5 +1,8 @@
 # Verification Report - Dragon System (Milestone 5C)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`
@@ -44,7 +47,9 @@
 
 ## Remaining gaps
 
-- Transcript-level dragon regression tests are pending.
+- Historical note: transcript-level dragon coverage was pending when this
+  report was written; current transcript status is tracked in
+  `docs/transcript-results.md`.
 - Exact C dual-location fixed-object behavior is approximated.
 - Dragon-blood bird sound/listen parity awaits future sound behavior work.
 - Broader parser command parity remains pending for the parser hardening milestone.

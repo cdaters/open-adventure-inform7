@@ -1,6 +1,6 @@
 # Known Differences
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 This file records known gaps after Milestone 8I. Earlier milestone sections in
 other reports may describe failures that have since been resolved.
@@ -9,7 +9,7 @@ other reports may describe failures that have since been resolved.
 
 None currently known for the Glulx RC1 transcript suite.
 
-The full transcript manifest passes 15/15 with `--timeout 90`, including the
+The full transcript manifest passes 15/15 with `--timeout 180`, including the
 upstream-backed solve path, treasure-collection path, and complete endgame path.
 
 ## Open Issues
@@ -43,6 +43,7 @@ upstream-backed solve path, treasure-collection path, and complete endgame path.
 | `BUG-8A-001` | lamp parser | Lamp `on`/`off` command forms recognized. |
 | `BUG-8B-001` | fatal travel | Fatal travel destinations invoke death/reincarnation handling. |
 | `BUG-8I-001` | cave-closing escape | Post-warning magic-word movement to outside targets is blocked, restoring final walkthrough parity. |
+| `BUG-11D-001` | verbose repeated-location reporting | Verbose movement now continues printing repeated-description forest and maze locations. |
 
 ## Recommended Future Work
 

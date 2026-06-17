@@ -1,8 +1,8 @@
 # Project Roadmap
 
-Date: 2026-06-14
+Date: 2026-06-17
 
-The project has reached Glulx Release Candidate readiness. The remaining work is
+The project has reached Glulx release-candidate readiness. The remaining work is
 packaging, external validation, and optional post-RC optimization.
 
 ## RC1
@@ -10,15 +10,12 @@ packaging, external validation, and optional post-RC optimization.
 Goal: publish a source-and-Glulx release candidate that a new player or
 contributor can understand and verify.
 
-Required:
+Required before tagging:
 
-- Finish release-facing README and project docs.
-- Update in-game version text to identify the RC line.
 - Build `OpenAdventure.ulx` with `OPENADVENTURE_INFORM_FORMAT=Inform6/32`.
 - Run smoke tests.
-- Run full transcript verification with `--timeout 90`.
-- Confirm `python3 tools/sync_author_edition.py --diff` reports a current
-  modular Author Edition export.
+- Run full transcript verification with `--timeout 180`.
+- Export and verify the modular Author Edition.
 - Include release notes, known differences, and verification evidence.
 - Tag the release after final verification.
 

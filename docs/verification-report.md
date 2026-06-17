@@ -1,5 +1,9 @@
 # Verification Report - Milestone 4B
 
+Historical note: this is a milestone report from early implementation. The
+blockers listed here were resolved by later milestones. For current status, see
+`docs/current-state.md` and `docs/transcript-results.md`.
+
 ## Verification commands
 
 Executed at environment-local time during this pass:

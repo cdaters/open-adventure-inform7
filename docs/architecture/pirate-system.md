@@ -1,5 +1,8 @@
 # Pirate System (Milestone 4E)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Scope
 
 Milestone 4E implements the Open Adventure pirate baseline and integrates it with the dwarf subsystem. Open Adventure C remains authoritative, with Advent.inf and Conley Inform 7 used as comparison references.
@@ -90,4 +93,5 @@ Declared in `OpenAdventure_State.ni`:
 
 - Full C-style generated-edge movement for dwarf slot `6` depends on the future dwarf movement hardening task.
 - The final-treasure `tally == 1` chest-placement branch is represented by `openadventure-pirate-force-chest-ready`; Milestone 4F scoring/found-treasure integration now sets it when all non-chest treasures have been found.
-- Transcript-level behavioral validation is still pending.
+- Historical note: this was written before the current transcript suite.
+  Current transcript status is tracked in `../transcript-results.md`.

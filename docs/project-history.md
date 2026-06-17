@@ -107,3 +107,35 @@ Transcript verification evolved through several stages:
 
 By Milestone 8I, the full transcript manifest passed 15/15, including the
 upstream-backed solve path, treasure-collection path, and complete endgame path.
+
+## Release-Candidate Work
+
+Milestone 9A established the Glulx release-candidate package plan:
+
+- Glulx selected as the release target.
+- Z8 kept as an experimental memory-reduction track.
+- Release notes, known differences, build/test docs, and transcript results
+  prepared as package evidence.
+
+Milestones 10A through 10E added the Author Edition:
+
+- `OpenAdventure-AuthorEdition.inform` generated as an Inform 7 IDE project.
+- Runtime and generated source exported as project-local extensions.
+- `tools/sync_author_edition.py --export` and `--diff` made export repeatable.
+- Command-line Author Edition release compilation verified.
+
+Milestone 11 refined player-facing presentation:
+
+- Startup, parser refusals, inventory, object names, and failed movement text
+  were polished.
+- HELP became an interactive menu with concise status-line titles and full
+  topic headings.
+- Historical Background was rewritten as original overview text.
+- Author Edition `Release.blurb` generation was fixed so IFID values stay on
+  one line.
+- Verbose movement reporting was restored for repeated-description regions
+  such as the forest and maze.
+
+Milestone 12A refreshed contributor documentation so new readers can understand
+the project, build it, export the Author Edition, run tests, and prepare a
+release without reading the full milestone history first.

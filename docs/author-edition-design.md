@@ -1,6 +1,6 @@
 # Author Edition Design
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 ## Objective
 
@@ -230,13 +230,13 @@ python3 tools/sync_author_edition.py --diff
 
 `--diff` exits successfully when the Author Edition matches canonical source.
 
-GUI note:
+IDE note:
 
 - The project has the expected IDE shape and Glulx settings.
-- This milestone verified project-mode compilation from the command line,
-  including project-local extension resolution. Manual GUI confirmation should
-  consist of opening
-  `OpenAdventure-AuthorEdition.inform` in Inform 7 10.1.2 and pressing Go.
+- Project-mode release compilation succeeds from the command line, including
+  project-local extension resolution and Inform 6 Glulx compilation.
+- Inform authors can open `OpenAdventure-AuthorEdition.inform` in Inform 7
+  10.1.2 and press Go to browse or compile the project.
 
 See also:
 

@@ -1,5 +1,8 @@
 # Verification Report - Dwarf Runtime Integration (Milestone 4D)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`
@@ -37,7 +40,9 @@
 
 - Dwarf movement pressure is simplified and does not yet enumerate the full generated `travel[]` candidate list.
 - Pirate interaction points are not fully implemented.
-- Knife-hit death now routes through the Milestone 5A reincarnation subsystem; transcript validation is still pending.
+- Knife-hit death now routes through the Milestone 5A reincarnation subsystem.
+  Historical note: transcript validation was pending when this report was
+  written; current transcript status is tracked in `docs/transcript-results.md`.
 
 ## Remaining blockers after 4D
 

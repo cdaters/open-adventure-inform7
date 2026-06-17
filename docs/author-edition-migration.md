@@ -1,6 +1,6 @@
 # Author Edition Migration
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 ## Recommended Workflow
 
@@ -104,12 +104,14 @@ Recommended migration stages:
 
 1. Keep RC1 build/test workflow unchanged.
 2. Generate Author Edition on demand for IDE authoring.
-3. Add CI or smoke coverage that verifies `tools/make_author_edition.py`.
-4. Add a managed Author Layer for menus, hints, help text, parser polish, and
+3. Keep command-line Author Edition release compilation in the release
+   checklist.
+4. Add CI or smoke coverage for Author Edition export and diff checks.
+5. Add a managed Author Layer for menus, hints, help text, parser polish, and
    other author-owned presentation work.
-5. Keep the Milestone 10E modular extension layout as the default Author
+6. Keep the Milestone 10E modular extension layout as the default Author
    Edition structure.
-6. Revisit whether Author Edition artifacts should be committed after several
+7. Revisit whether Author Edition artifacts should be committed after several
    development cycles.
 
 ## What Not To Migrate Yet

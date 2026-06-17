@@ -1,5 +1,8 @@
 # Treasure and Scoring System (Milestone 4F)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Scope
 
 Milestone 4F implements Open Adventure treasure tracking and score bookkeeping. Open Adventure C is authoritative; Advent.inf and Conley Inform 7 were checked for comparison.
@@ -115,6 +118,7 @@ Terminal ranking output is not yet wired to a full endgame termination flow.
 
 ## Parity Gaps
 
-- Transcript-level scoring validation is still pending because the repository does not yet have a command transcript harness.
+- Historical note: this was written before the command transcript harness.
+  Current transcript status is tracked in `../transcript-results.md`.
 - Broken/stashed treasure edge cases will need revisiting when vase, eggs, and endgame object-state systems are implemented.
 - Hint, save, novice, turn-loss, closed-cave bonus selection, and full termination/ranking output hooks are not yet wired to completed gameplay systems.

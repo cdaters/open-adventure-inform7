@@ -1,5 +1,8 @@
 # Verification Report - Bear System (Milestone 5B)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`
@@ -42,7 +45,9 @@
 
 ## Remaining gaps
 
-- Transcript-level bear regression tests are pending.
+- Historical note: transcript-level bear coverage was pending when this report
+  was written; current transcript status is tracked in
+  `docs/transcript-results.md`.
 - Full C fixed-secondary-location behavior for bridge/troll objects is approximated.
 - Bear-follow dark-room suppression awaits the darkness/lamp subsystem.
 - Broader parser command parity remains pending for future transcript work.

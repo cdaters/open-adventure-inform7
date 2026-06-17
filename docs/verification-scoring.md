@@ -1,5 +1,8 @@
 # Verification Report - Treasure and Scoring System (Milestone 4F)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`
@@ -46,7 +49,9 @@
 
 ## Remaining gaps
 
-- Transcript-level score assertions are pending.
+- Historical note: transcript-level scoring coverage was pending when this
+  report was written; current transcript status is tracked in
+  `docs/transcript-results.md`.
 - Reincarnation is still not implemented.
 - Hint, save, novice, turn-loss, cave-closing, and terminal ranking outputs await their owning systems.
 - Broken/stashed treasure edge cases should be tightened when object-state systems are expanded.

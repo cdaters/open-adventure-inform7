@@ -1,10 +1,10 @@
 # Release Readiness
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 ## Recommendation
 
-**Release Candidate for Glulx**.
+**Release candidate for Glulx**.
 
 The project has passed the release-candidate parity bar for the Glulx target.
 Z8 remains experimental and is not part of the RC1 release package.
@@ -21,7 +21,8 @@ Z8 remains experimental and is not part of the RC1 release package.
 | Full solve path | Passing | Reaches 430/430 and final rank output. |
 | Treasure collection | Passing | Current C-backed fragments pass. |
 | Complete endgame | Passing | Repository and victory blast route passes. |
-| Documentation | Updated for RC1 | Release packaging and presentation-polish docs are present. |
+| Documentation | Updated for RC1 | Contributor, Author Edition, release, and workflow docs are current. |
+| Author Edition | Ready for RC packaging | Export and command-line release compilation succeed. |
 
 ## Verification Evidence
 
@@ -41,7 +42,6 @@ Result: passed, 15/15.
 
 RC1 packaging work:
 
-- Review release-facing README and project docs before tagging.
 - Include RC1 release notes.
 - Include known differences and transcript verification evidence.
 - Keep in-game version, credits, ABOUT, INFO, NEWS, and HELP presentation under manual playtest review.
@@ -57,6 +57,6 @@ Non-blocking future work:
 
 ## Classification
 
-Release classification: **Release Candidate** for Glulx.
+Release classification: **Release candidate** for Glulx.
 
 The project should not be classified as a Z8 release candidate.

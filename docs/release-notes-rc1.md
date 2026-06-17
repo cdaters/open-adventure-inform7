@@ -1,12 +1,12 @@
 # Release Notes - RC1
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 RC1 is the first release-candidate package for Open Adventure in Inform 7.
 
 ## Release Classification
 
-**Release Candidate for Glulx**
+**Release candidate for Glulx**
 
 This release candidate targets Glulx only. Z8 remains experimental and is not a
 release artifact for RC1.
@@ -17,6 +17,10 @@ release artifact for RC1.
 - Hand-written runtime subsystems for travel, hazards, scoring, cave closing,
   and endgame behavior.
 - Player-facing startup, HELP, ABOUT, INFO, NEWS, credits, and version system.
+- Interactive HELP menu with concise status titles and full page headings.
+- Original historical background text for the help system.
+- Author Edition export for Inform 7 IDE browsing and compilation.
+- Verbose movement reporting parity for repeated-description regions.
 - Complete Glulx smoke verification.
 - Transcript parity verification for 15/15 suites.
 - Passing upstream-backed full solve, treasure-collection, and endgame routes.
@@ -49,6 +53,7 @@ Result:
 - Smoke tests pass.
 - Full transcript manifest passes 15/15.
 - Upstream-backed manifest cases pass as part of the full run.
+- Author Edition release translation and Inform 6 Glulx compilation pass.
 
 ## Known Limitations
 

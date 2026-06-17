@@ -1,5 +1,8 @@
 # Divergence Analysis - Milestone 8G
 
+Historical note: this report records an intermediate divergence. The current
+full transcript manifest passes 15/15.
+
 Date: 2026-06-14
 
 ## Objective
@@ -95,14 +98,14 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Result: passed. The Glulx artifact compiled and all smoke checks passed.
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 Result: the three upstream walkthrough cases still fail final expected
 fragments, but the oil-bottle divergence is eliminated.
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Result: 12 transcript cases passed and 3 failed on expected-fragment

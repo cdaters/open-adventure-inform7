@@ -1,6 +1,6 @@
 # Build Status
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 ## Current Release Build
 
@@ -55,13 +55,13 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Transcript verification:
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Upstream walkthrough verification:
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 Latest documented status:

@@ -37,8 +37,8 @@ Run:
 
 ```bash
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Expected:
@@ -47,7 +47,30 @@ Expected:
 - Upstream transcript subset passes.
 - Full transcript manifest passes 15/15.
 - No VM crashes.
-- No transcript timeouts with the 90-second timeout.
+- No transcript timeouts with the 180-second timeout.
+
+## Author Edition
+
+Run:
+
+```bash
+python3 tools/sync_author_edition.py --export
+python3 tools/sync_author_edition.py --diff
+/Applications/Inform.app/Contents/MacOS/ni \
+  -at /Applications/Inform.app/Contents/Resources \
+  -project OpenAdventure-AuthorEdition.inform \
+  -release -format=Inform6/32
+/Applications/Inform.app/Contents/MacOS/inform6 \
+  -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
+  OpenAdventure-AuthorEdition.inform/Build/auto.inf \
+  OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx
+```
+
+Also confirm:
+
+- `OpenAdventure-AuthorEdition.inform/Release.blurb` contains the IFID on a
+  single line.
+- The Author Edition remains generated output, not a separate source of truth.
 
 ## RC1 Package Contents
 

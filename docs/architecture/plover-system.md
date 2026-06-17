@@ -1,5 +1,8 @@
 # Plover System (Milestone 4A)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Objective
 
 Implement the plover travel subsystem in the Inform runtime so the generated plover movement rows match Open Adventure behavior while leaving troll/bridge, dwarves, scoring, and cave-closing logic for later milestones.

@@ -1,5 +1,8 @@
 # Endgame Parity - Milestone 8F
 
+Historical note: this report predates final endgame parity. The "Not Ready"
+classification below has been superseded by the Glulx release-candidate status.
+
 Date: 2026-06-14
 
 ## Objective

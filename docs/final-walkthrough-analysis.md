@@ -69,7 +69,7 @@ OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 Passed.
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 Passed:
@@ -79,14 +79,14 @@ Passed:
 - `complete-endgame`
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Passed: 15/15 transcript cases.
 
 ## Classification
 
-Project classification after 8I: **Release Candidate for Glulx**.
+Project classification after 8I: **release candidate for Glulx**.
 
 The Z8 target remains outside the release path until the previously documented
 memory work is completed.

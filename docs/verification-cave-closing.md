@@ -1,5 +1,8 @@
 # Verification Report - Cave Closing System (Milestone 5D)
 
+Historical note: this milestone report predates the current transcript suite.
+For current release status, see `docs/current-state.md`.
+
 ## Commands executed
 
 - `./build.sh --compile`
@@ -42,7 +45,9 @@
 
 ## Remaining gaps
 
-- Transcript-level cave-closing regression tests are pending.
+- Historical note: transcript-level cave-closing coverage was pending when this
+  report was written; current transcript status is tracked in
+  `docs/transcript-results.md`.
 - Full turn-penalty/lamp depletion timing remains pending.
 - Exact C fixed-secondary-location behavior is approximated.
 - Endgame blast outcomes and final closed-cave bonus scoring are deferred.

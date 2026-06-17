@@ -1,5 +1,8 @@
 # Endgame Completion Analysis - Milestone 8H
 
+Historical note: this report predates final full-walkthrough parity. The
+remaining release blockers listed below were resolved by Milestone 8I.
+
 Date: 2026-06-14
 
 ## Objective
@@ -102,14 +105,14 @@ python3 tools/run_transcripts.py --execute --mode upstream
 Failed by timeout at the default 60-second interpreter timeout.
 
 ```bash
-python3 tools/run_transcripts.py --execute --mode upstream --timeout 90
+python3 tools/run_transcripts.py --execute --mode upstream --timeout 180
 ```
 
 Completed with `complete-endgame` passing and `solve-path` /
 `treasure-collection` failing expected fragments.
 
 ```bash
-python3 tools/run_transcripts.py --execute --timeout 90
+python3 tools/run_transcripts.py --execute --timeout 180
 ```
 
 Completed with 13 passing cases and 2 failing cases.

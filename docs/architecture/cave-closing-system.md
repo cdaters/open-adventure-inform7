@@ -1,5 +1,8 @@
 # Cave Closing System (Milestone 5D)
 
+Historical note: this subsystem design predates final transcript parity. For
+current release status, see `../current-state.md`.
+
 ## Scope
 
 Milestone 5D implements the Open Adventure cave-closing baseline: warning clock, panic clock, repository transition, exit restrictions, and integration with scoring and reincarnation. Open Adventure C is authoritative; Advent.inf and Conley Inform 7 were checked for comparison.
@@ -137,7 +140,8 @@ The closed-cave final bonus remains reserved for the endgame/blast outcome miles
 
 ## Parity Gaps
 
-- Transcript-level cave-closing regression tests are pending.
+- Historical note: this was written before the current transcript suite.
+  Current transcript status is tracked in `../transcript-results.md`.
 - Turn-threshold penalties and lamp depletion remain part of later clock/lamp hardening.
 - Exact C fixed-location mechanics are approximated through Inform placement.
 - Endgame blast outcomes and final closed-cave bonus selection are deferred to the endgame milestone.
