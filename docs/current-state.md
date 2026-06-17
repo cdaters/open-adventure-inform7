@@ -33,7 +33,7 @@ Implemented runtime subsystems:
 - Dragon
 - Cave closing
 - Endgame repository and blast outcomes
-- Player-facing information system
+- Menu-driven player-facing information system
 - Presentation polish for startup, parser refusals, object names, inventory, and
   `take all`/`get all`
 
@@ -97,6 +97,22 @@ Latest documented result:
 - Smoke suite: passed.
 - Full transcript manifest: passed 15/15.
 - Upstream walkthrough subset: passed 3/3.
+
+## Information System Status
+
+Bare HELP now opens an interactive menu with Adventure-focused topics:
+
+- Instructions for Playing
+- Historical Background
+- Open Adventure
+- About this Edition
+- Credits
+- Version Information
+
+The menu is implemented in `OpenAdventure_Information.ni` with an
+OpenAdventure-specific adaptation of Emily Short's table/key-loop pattern.
+ABOUT, INFO, NEWS, VERSION, and focused HELP subcommands remain available as
+direct commands.
 
 ## Known Limitations
 

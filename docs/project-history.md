@@ -36,6 +36,8 @@ Runtime milestones added dedicated gameplay systems:
 - Cave closing and repository transition.
 - Endgame blast outcomes and ranking.
 - Player-facing information commands.
+- Menu-driven HELP presentation adapted from Emily Short's menu model and
+  Graham Nelson's `Advent.inf` experience.
 
 Verification milestones corrected the build and parity process:
 

@@ -2,8 +2,8 @@
 
 Date: 2026-06-14
 
-Milestones 10B and 10C reviewed common player commands and presentation issues
-while preserving RC1 gameplay parity.
+Milestones 10B, 10C, and 11A reviewed common player commands and presentation
+issues while preserving RC1 gameplay parity.
 
 ## Goals
 
@@ -123,6 +123,30 @@ Inform 7 edition and RC1 Glulx build.
 The startup banner now identifies the implementation as Open Adventure in
 Inform 7 by Craig Daters, while HELP/CREDITS preserve the full historical
 lineage.
+
+## Menu-Driven Help
+
+Milestone 11A changes bare HELP from a typed subcommand list into an
+interactive menu inspired by Graham Nelson's `Advent.inf` and Emily Short's
+table-driven menu extensions.
+
+Top-level HELP topics:
+
+- Instructions for Playing
+- Historical Background
+- Open Adventure
+- About this Edition
+- Credits
+- Version Information
+
+The menu visibly presents arrow-key movement, RETURN/SPACE selection, and
+Q/ESC exit. N/P remain supported for compatibility. While the menu is active,
+the status line shows menu context such as `Open Adventure Help`,
+`Instructions`, or `Version Info` instead of the room name, score, and move
+count.
+
+Existing direct commands such as `HELP INSTRUCTIONS`, `ABOUT`, `INFO`, `NEWS`,
+and `VERSION` still print their focused information text directly.
 
 ## Verification Notes
 

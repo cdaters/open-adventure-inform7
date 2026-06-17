@@ -1,4 +1,5 @@
 help
+q
 help instructions
 help history
 about

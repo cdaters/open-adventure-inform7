@@ -4,7 +4,7 @@ Section 1 - Edition Constants
 
 To say openadventure version:
 	say "Candidate [release number]"
-	
+
 To say openadventure serial:
 	say "260616"
 
@@ -38,16 +38,129 @@ To display openadventure startup presentation:
 
 Section 3 - Menu and Sections
 
+The openadventure-menu-title is a text that varies. The openadventure-menu-title is "Open Adventure Help".
+The openadventure-menu-status-title is a text that varies. The openadventure-menu-status-title is "Open Adventure Help".
+
+To clear the openadventure menu screen:
+	(- VM_ClearScreen(2); -).
+
+To draw the openadventure status line:
+	(- DrawStatusLine(); -).
+
+To redraw openadventure menu status line:
+	now the left hand status line is openadventure-menu-status-title;
+	now the right hand status line is "";
+	draw the openadventure status line.
+
+To decide what number is the openadventure menu key:
+	(- VM_KeyChar() -).
+
+To decide whether openadventure menu key (keycode - number) is down:
+	if keycode is 78 or keycode is 110 or keycode is 130 or keycode is -5:
+		decide yes;
+	decide no.
+
+To decide whether openadventure menu key (keycode - number) is up:
+	if keycode is 80 or keycode is 112 or keycode is 129 or keycode is -4:
+		decide yes;
+	decide no.
+
+To decide whether openadventure menu key (keycode - number) is select:
+	if keycode is 13 or keycode is 31 or keycode is 32 or keycode is -6:
+		decide yes;
+	decide no.
+
+To decide whether openadventure menu key (keycode - number) is quit:
+	if keycode is 27 or keycode is 81 or keycode is 113 or keycode is -8:
+		decide yes;
+	decide no.
+
+Table of OpenAdventure Help Menu
+menu-title (text)	menu-topic (text)	menu-status-title (text)
+"Instructions for Playing"	"instructions"	"Instructions"
+"Historical Background"	"history"	"History"
+"Open Adventure"	"open-adventure"	"Open Adventure"
+"About this Edition"	"edition"	"This Edition"
+"Credits"	"credits"	"Credits"
+"Version Information"	"version"	"Version Info"
+
 To display openadventure help menu:
 	now openadventure-information-last-section is "menu";
-	say "There is information provided on the following:[paragraph break]";
-	say "     Instructions for Playing[line break]";
-	say "     Historical Background[line break]";
-	say "     Open Adventure[line break]";
-	say "     About this Edition[line break]";
-	say "     Credits[line break]";
-	say "     Version Information[paragraph break]";
-	say "Type HELP INSTRUCTIONS, HELP HISTORY, HELP OPEN ADVENTURE, HELP EDITION, HELP CREDITS, or HELP VERSION.  ABOUT, INFO, NEWS, and VERSION are also available."
+	let saved-left-status be the left hand status line;
+	let saved-right-status be the right hand status line;
+	let selected-row be 1;
+	let menu-open be true;
+	while menu-open is true:
+		now openadventure-menu-status-title is "Open Adventure Help";
+		redraw openadventure menu status line;
+		clear the openadventure menu screen;
+		display openadventure help menu screen with selection selected-row;
+		let keycode be the openadventure menu key;
+		if openadventure menu key keycode is quit:
+			now menu-open is false;
+		otherwise if openadventure menu key keycode is down:
+			if selected-row is less than the number of filled rows in the Table of OpenAdventure Help Menu:
+				increase selected-row by 1;
+		otherwise if openadventure menu key keycode is up:
+			if selected-row is greater than 1:
+				decrease selected-row by 1;
+		otherwise if openadventure menu key keycode is select:
+			choose row selected-row in the Table of OpenAdventure Help Menu;
+			if displaying openadventure help topic menu-topic entry with status title menu-status-title entry requests menu exit:
+				now menu-open is false;
+	now the left hand status line is saved-left-status;
+	now the right hand status line is saved-right-status;
+	draw the openadventure status line;
+	clear the openadventure menu screen;
+	try looking.
+
+To display openadventure help menu screen with selection (selected-row - number):
+	say "[bold type]Open Adventure Help[roman type][paragraph break]";
+	say "Use the arrow keys to move,[line break]";
+	say "RETURN or SPACE to select,[line break]";
+	say "Q or ESC to leave.[paragraph break]";
+	let row-number be 1;
+	repeat through the Table of OpenAdventure Help Menu:
+		if row-number is selected-row:
+			say " > ";
+		otherwise:
+			say "   ";
+		say "[menu-title entry][line break]";
+		increase row-number by 1.
+
+To decide whether displaying openadventure help topic (topic - text) with status title (topic-title - text) requests menu exit:
+	now openadventure-menu-status-title is topic-title;
+	redraw openadventure menu status line;
+	clear the openadventure menu screen;
+	say "[bold type][topic-title][roman type][paragraph break]";
+	display openadventure information topic topic;
+	say "[paragraph break]Press SPACE or RETURN to return to the menu, or Q or ESC to leave.";
+	while 1 is 1:
+		let keycode be the openadventure menu key;
+		if openadventure menu key keycode is quit:
+			decide yes;
+		if openadventure menu key keycode is select:
+			decide no.
+
+To display openadventure information topic (topic - text):
+	if topic is "instructions":
+		display openadventure instructions;
+		stop;
+	if topic is "history":
+		display openadventure historical background;
+		stop;
+	if topic is "open-adventure":
+		display openadventure open adventure information;
+		stop;
+	if topic is "edition":
+		display openadventure edition information;
+		stop;
+	if topic is "credits":
+		display openadventure credits;
+		stop;
+	if topic is "version":
+		display openadventure version information;
+		stop.
 
 To display openadventure instructions:
 	now openadventure-information-last-section is "instructions";
