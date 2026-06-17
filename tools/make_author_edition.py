@@ -81,6 +81,17 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def normalized_ifid(project: Path) -> str:
+    uuid_file = project / "uuid.txt"
+    if uuid_file.exists():
+        ifid = read_text(uuid_file).strip()
+    else:
+        ifid = str(uuid.uuid4()).upper()
+    if not ifid:
+        raise ValueError(f"empty IFID in {uuid_file}")
+    return ifid
+
+
 def materials_dir_for(project: Path) -> Path:
     return project.with_suffix(".materials")
 
@@ -277,8 +288,7 @@ def write_project(project: Path, regenerate: bool) -> None:
     for path, text in desired_project_files(project).items():
         write_text(path, text)
     uuid_file = project / "uuid.txt"
-    if not uuid_file.exists():
-        write_text(uuid_file, str(uuid.uuid4()).upper() + "\n")
+    write_text(uuid_file, normalized_ifid(project))
     (project / "Materials").mkdir(parents=True, exist_ok=True)
     materials_dir = materials_dir_for(project)
     materials_dir.mkdir(parents=True, exist_ok=True)
