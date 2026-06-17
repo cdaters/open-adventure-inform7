@@ -80,13 +80,13 @@ To decide whether openadventure menu key (keycode - number) is quit:
 	decide no.
 
 Table of OpenAdventure Help Menu
-menu-title (text)	menu-topic (text)	menu-status-title (text)
-"Instructions for Playing"	"instructions"	"Instructions"
-"Historical Background"	"history"	"History"
-"Open Adventure"	"open-adventure"	"Open Adventure"
-"About this Edition"	"edition"	"This Edition"
-"Credits"	"credits"	"Credits"
-"Version Information"	"version"	"Version Info"
+menu-title (text)	menu-topic (text)	menu-status-title (text)	menu-page-title (text)
+"Instructions for Playing"	"instructions"	"Instructions"	"Instructions for Playing"
+"Historical Background"	"history"	"History"	"Historical Background"
+"Open Adventure"	"open-adventure"	"Open Adventure"	"Open Adventure"
+"About This Edition"	"edition"	"This Edition"	"About This Edition"
+"Credits"	"credits"	"Credits"	"Credits"
+"Version Information"	"version"	"Version Info"	"Version Information"
 
 To display openadventure help menu:
 	now openadventure-information-last-section is "menu";
@@ -110,7 +110,7 @@ To display openadventure help menu:
 				decrease selected-row by 1;
 		otherwise if openadventure menu key keycode is select:
 			choose row selected-row in the Table of OpenAdventure Help Menu;
-			if displaying openadventure help topic menu-topic entry with status title menu-status-title entry requests menu exit:
+			if displaying openadventure help topic menu-topic entry with status title menu-status-title entry and page title menu-page-title entry requests menu exit:
 				now menu-open is false;
 	now the left hand status line is saved-left-status;
 	now the right hand status line is saved-right-status;
@@ -120,9 +120,7 @@ To display openadventure help menu:
 
 To display openadventure help menu screen with selection (selected-row - number):
 	say "[bold type]Open Adventure Help[roman type][paragraph break]";
-	say "Use the arrow keys to move,[line break]";
-	say "RETURN or SPACE to select,[line break]";
-	say "Q or ESC to leave.[paragraph break]";
+	say "Use arrows to move, RETURN or SPACE to select, Q or ESC to leave.[paragraph break]";
 	let row-number be 1;
 	repeat through the Table of OpenAdventure Help Menu:
 		if row-number is selected-row:
@@ -132,11 +130,11 @@ To display openadventure help menu screen with selection (selected-row - number)
 		say "[menu-title entry][line break]";
 		increase row-number by 1.
 
-To decide whether displaying openadventure help topic (topic - text) with status title (topic-title - text) requests menu exit:
+To decide whether displaying openadventure help topic (topic - text) with status title (topic-title - text) and page title (page-title - text) requests menu exit:
 	now openadventure-menu-status-title is topic-title;
 	redraw openadventure menu status line;
 	clear the openadventure menu screen;
-	say "[bold type][topic-title][roman type][paragraph break]";
+	say "[bold type][page-title][roman type][paragraph break]";
 	display openadventure information topic topic;
 	say "[paragraph break]Press SPACE or RETURN to return to the menu, or Q or ESC to leave.";
 	while 1 is 1:
@@ -168,25 +166,28 @@ To display openadventure information topic (topic - text):
 
 To display openadventure instructions:
 	now openadventure-information-last-section is "instructions";
-	say "I know of places, actions, and things.  Most of my vocabulary describes places and is used to move you there.  To move, try words like FOREST, BUILDING, DOWNSTREAM, ENTER, EAST, WEST, NORTH, SOUTH, UP, and DOWN.[paragraph break]";
-	say "I know about a few special objects, like a black rod hidden in the cave.  These objects can be manipulated with action words.  Usually you will need to give both an action and an object, but sometimes I can infer the object from the verb alone.[paragraph break]";
-	say "Some commands have short forms: I for INVENTORY, L for LOOK, and common compass abbreviations such as N, S, E, W, U, and D.  Cave passages turn often, so leaving one place to the north does not guarantee entering the next from the south.[paragraph break]";
-	say "If you want to end your adventure early, type QUIT.  To see how well you are doing, type SCORE.  To get full credit for a treasure, leave it safely in the building; partial credit is awarded for finding it.[paragraph break]";
+	say "I know about places, actions, and things.  Many words name places or directions and will move you if a route is available.  Try FOREST, BUILDING, DOWNSTREAM, ENTER, EAST, WEST, NORTH, SOUTH, UP, and DOWN.[paragraph break]";
+	say "I also know about objects, including a few unusual ones hidden in the cave.  To do something with an object, give an action and usually the object's name.  Sometimes the action alone is enough for me to infer what you mean.[paragraph break]";
+	say "Useful short forms include I for INVENTORY, L for LOOK, and compass abbreviations such as N, S, E, W, U, and D.  Cave passages twist, so leaving one place to the north does not promise that the way back is south.[paragraph break]";
+	say "If you want to end your adventure early, type QUIT.  To see how well you are doing, type SCORE.  To get full credit for a treasure, leave it safely in the building; you receive partial credit for finding it.[paragraph break]";
 	say "Good luck!"
 
 To display openadventure historical background:
 	now openadventure-information-last-section is "history";
-	say "Adventure began with William Crowther's cave exploration program, written after his work in the Mammoth Cave region and with caving language and geography at its heart.  Don Woods later found the program, contacted Crowther, and expanded it into the puzzle-rich game that became a landmark of interactive fiction.[paragraph break]";
-	say "Graham Nelson's Advent.inf preserved this history with a long historical preface about Mammoth Cave, Stephen Bishop, Crowther's caving background, and Woods's expansion.  This edition keeps that spirit: the game is not only a fantasy cave, but also a descendant of real caving, early network culture, and the first widely shared adventure-game tradition."
+	say "Adventure's cave has roots in a real place.  Mammoth Cave in Kentucky was mined, toured, mapped, fought over, and explored for generations before it entered computer history.  Its mixture of commercial showmanship, dangerous passages, underground rivers, and grand room names helped shape the language of American caving.[paragraph break]";
+	say "One of Mammoth Cave's great early figures was Stephen Bishop, an enslaved guide whose memory, daring, and mapmaking transformed what visitors understood of the cave.  Later explorers pushed beyond the tourist routes into the Flint Ridge and Bedquilt regions, tracing difficult passages and proving that the Mammoth Cave system was far larger than any show-cave entrance suggested.[paragraph break]";
+	say "Will Crowther knew that world firsthand as a caver and programmer.  In 1976 he wrote a small FORTRAN cave exploration for his children, blending remembered underground geography with a friendly typed-command interface.  It was not yet the full treasure hunt familiar today, but its rooms, crawls, fissures, streambeds, and vocabulary carried the authority of lived caving experience.[paragraph break]";
+	say "Don Woods found Crowther's program on a networked computer at Stanford, contacted him, and expanded the work.  Woods added treasures, score, magic words, dwarves, the troll bridge, and much of the puzzle structure that made Adventure travel by tape, account, and word of mouth.  The result helped define the text adventure: a landscape to explore, a parser to negotiate with, and a world that answered in prose.[paragraph break]";
+	say "Open Adventure, maintained by Eric S. Raymond and contributors with the original authors' approval, preserves the 430-point Adventure 2.5 line as open source and backs it with tests and documentation.  This Inform 7 edition follows Open Adventure as its behavioral authority while presenting the game through Inform's world model, keeping the path visible from Mammoth Cave to Adventure, from Adventure to Open Adventure, and from Open Adventure to this edition."
 
 To display openadventure open adventure information:
 	now openadventure-information-last-section is "open-adventure";
-	say "Open Adventure is Eric S. Raymond's author-approved open-source release of Crowther and Woods Adventure 2.5.  It preserves the 430-point game line while correcting bugs, maintaining reproducible tests, and documenting the game's history.[paragraph break]";
+	say "Open Adventure is Eric S. Raymond's author-approved open-source release of Crowther and Woods Adventure 2.5.  It preserves the 430-point game line, maintains reproducible tests, corrects long-standing bugs, and documents the game's lineage.[paragraph break]";
 	say "This Inform 7 project treats the Open Adventure C implementation and its adventure.yaml world data as authoritative for gameplay behavior.  Upstream Open Adventure resources are available at [openadventure upstream url]."
 
 To display openadventure edition information:
 	now openadventure-information-last-section is "edition";
-	say "This is Open Adventure in Inform 7, an Inform 7 10.1.2 reconstruction built from generated world data plus hand-written runtime subsystems for travel, scoring, hazards, cave closing, and endgame behavior.[paragraph break]";
+	say "This is Open Adventure in Inform 7, an Inform 7 10.1.2 reconstruction of the Open Adventure 430-point game line.  Generated world data supplies the rooms, objects, vocabulary, and travel rows; hand-written runtime subsystems handle travel, scoring, hazards, cave closing, and endgame behavior.[paragraph break]";
 	say "The implementation is maintained by Craig Daters and contributors.  The project repository is [openadventure repository url]."
 
 To display openadventure credits:
@@ -195,12 +196,13 @@ To display openadventure credits:
 	say "Open Adventure: Eric S. Raymond and contributors.[line break]";
 	say "Inform 7 implementation: Craig Daters and contributors.[line break]";
 	say "Inform lineage and reference material: Graham Nelson's Advent.inf and Chris Conley's Inform 7 Adventure port.[paragraph break]";
+	say "Historical background is informed by the Adventure lineage preserved in those references and by the Open Adventure distribution.[paragraph break]";
 	say "This repository is distributed under the BSD 2-Clause License.  The Open Adventure reference distribution is also BSD 2-Clause licensed; its documentation includes CC-BY-4.0 material."
 
 To display openadventure version information:
 	now openadventure-information-last-section is "version";
 	say "There is a puff of orange smoke; within it, fiery runes spell out:[paragraph break]";
-	say "Open Adventure in Inform 7 - [openadventure implementation version][line break]";
+	say "Open Adventure Inform 7 Edition - [openadventure implementation version][line break]";
 	say "Story release: [release number][line break]";
 	say "Build serial: development source build[line break]";
 	say "Inform 7: 10.1.2 target source[line break]";
@@ -210,13 +212,13 @@ To display openadventure version information:
 To display openadventure info:
 	now openadventure-information-last-section is "info";
 	say "For a summary of Open Adventure changes, type NEWS.  If you want to end your adventure early, type QUIT.  To suspend or resume an adventure, use the interpreter's SAVE and RESTORE support where available.  To see how well you are doing, type SCORE.[paragraph break]";
-	say "To get full credit for a treasure, you must leave it safely in the building, though you get partial credit just for locating it.  You lose points for getting killed.  There are also points based on how much of the cave you have managed to explore.[paragraph break]";
-	say "If you think you have found all the treasures, keep exploring for a while.  If nothing interesting happens, you have not found them all yet.  If something interesting does happen, it means you are getting a bonus and have an opportunity to collect more points in the Master's section."
+	say "To get full credit for a treasure, leave it safely in the building.  You receive partial credit for locating treasure, lose points for getting killed, and gain points for exploring more of the cave.[paragraph break]";
+	say "If you think you have found every treasure, keep exploring for a while.  If nothing interesting happens, something is still missing.  If something interesting does happen, you have reached a bonus opportunity in the Master's section."
 
 To display openadventure news:
 	now openadventure-information-last-section is "news";
-	say "Open Adventure is an author-approved open-source release of Version 2.5.  Version 2.5 is essentially the Version II cave and hazard set, with a 430-point top score, more hints for obscure puzzles, bug fixes, and cosmetic corrections.[paragraph break]";
-	say "The upstream Open Adventure news stream currently identifies release 1.21, dated 2026-03-22, as code hardening with ChatGPT 5.2, cppcheck, pylint, and spellchecking.[paragraph break]";
+	say "Open Adventure is an author-approved open-source release of Version 2.5.  Version 2.5 is essentially the Version II cave and hazard set, with a 430-point top score, additional hints for obscure puzzles, bug fixes, and cosmetic corrections.[paragraph break]";
+	say "The bundled Open Adventure news file identifies release 1.21, dated 2026-03-22, as code hardening with ChatGPT 5.2, cppcheck, pylint, and spellchecking.[paragraph break]";
 	say "This Inform 7 edition is a separate reconstruction.  Current implementation status is [openadventure implementation version]."
 
 Section 4 - Commands

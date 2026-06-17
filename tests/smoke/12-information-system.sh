@@ -31,7 +31,7 @@ require_line 'To display openadventure help menu' "$ROOT_DIR/OpenAdventure_Infor
 require_line 'Instructions for Playing' "$ROOT_DIR/OpenAdventure_Information.ni"
 require_line 'Historical Background' "$ROOT_DIR/OpenAdventure_Information.ni"
 require_line 'Open Adventure' "$ROOT_DIR/OpenAdventure_Information.ni"
-require_line 'About this Edition' "$ROOT_DIR/OpenAdventure_Information.ni"
+require_line 'About This Edition' "$ROOT_DIR/OpenAdventure_Information.ni"
 require_line 'Credits' "$ROOT_DIR/OpenAdventure_Information.ni"
 require_line 'Version Information' "$ROOT_DIR/OpenAdventure_Information.ni"
 

@@ -1,9 +1,9 @@
 # Player Experience
 
-Date: 2026-06-14
+Date: 2026-06-17
 
-Milestones 10B, 10C, and 11A reviewed common player commands and presentation
-issues while preserving RC1 gameplay parity.
+Milestones 10B, 10C, 11A, and 11C reviewed common player commands and
+presentation issues while preserving RC1 gameplay parity.
 
 ## Goals
 
@@ -126,24 +126,36 @@ lineage.
 
 ## Menu-Driven Help
 
-Milestone 11A changes bare HELP from a typed subcommand list into an
+Milestone 11A changed bare HELP from a typed subcommand list into an
 interactive menu inspired by Graham Nelson's `Advent.inf` and Emily Short's
-table-driven menu extensions.
+table-driven menu extensions.  Milestone 11C refines that menu into a more
+polished in-game information system.
 
 Top-level HELP topics:
 
 - Instructions for Playing
 - Historical Background
 - Open Adventure
-- About this Edition
+- About This Edition
 - Credits
 - Version Information
 
-The menu visibly presents arrow-key movement, RETURN/SPACE selection, and
-Q/ESC exit. N/P remain supported for compatibility. While the menu is active,
-the status line shows menu context such as `Open Adventure Help`,
-`Instructions`, or `Version Info` instead of the room name, score, and move
-count.
+The menu uses a single concise instruction line for arrow-key movement,
+RETURN/SPACE selection, and Q/ESC exit. N/P remain supported for compatibility.
+While the menu is active, the status line shows compact menu context such as
+`Open Adventure Help`, `Instructions`, `History`, or `Version Info` instead of
+the room name, score, and move count.
+
+Topic pages keep full headings, so `Instructions` in the status line opens a
+page headed `Instructions for Playing`, `History` opens `Historical
+Background`, and `Version Info` opens `Version Information`.
+
+The Historical Background topic now reads as a concise historical overview:
+Mammoth Cave and Stephen Bishop lead into early cave exploration, Will
+Crowther's cave program, Don Woods's expansion, Open Adventure, and the Inform
+7 edition.  The result presents the lineage Adventure -> Open Adventure ->
+Open Adventure Inform 7 Edition as part of the game rather than as technical
+release notes.
 
 Existing direct commands such as `HELP INSTRUCTIONS`, `ABOUT`, `INFO`, `NEWS`,
 and `VERSION` still print their focused information text directly.

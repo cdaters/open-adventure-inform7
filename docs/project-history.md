@@ -5,10 +5,24 @@ with Open Adventure C as the behavioral authority.
 
 ## Historical Lineage
 
-Adventure began as William Crowther's cave exploration program and was expanded
-by Don Woods into the landmark text adventure. Eric S. Raymond's Open Adventure
-is the author-approved open-source release of Adventure 2.5 and provides the
-reference implementation and regression material used by this project.
+Adventure began in the meeting point between real cave exploration and early
+networked computing.  Mammoth Cave's history, Stephen Bishop's mapping, and
+later exploration of the Flint Ridge and Bedquilt regions supplied much of the
+language and atmosphere that Will Crowther drew on for his 1976 cave program.
+
+Don Woods found Crowther's program, contacted him, and expanded it into the
+treasure-scored, puzzle-rich Adventure that became a landmark of interactive
+fiction.  Eric S. Raymond's Open Adventure is the author-approved open-source
+release of Adventure 2.5 and provides the reference implementation and
+regression material used by this project.
+
+The resulting project lineage is:
+
+```text
+Adventure
+-> Open Adventure
+-> Open Adventure Inform 7 Edition
+```
 
 This repository also draws on two Inform lineage references:
 
@@ -38,6 +52,8 @@ Runtime milestones added dedicated gameplay systems:
 - Player-facing information commands.
 - Menu-driven HELP presentation adapted from Emily Short's menu model and
   Graham Nelson's `Advent.inf` experience.
+- Help content refinement with compact menu status titles, full topic page
+  headings, and an original historical overview.
 
 Verification milestones corrected the build and parity process:
 

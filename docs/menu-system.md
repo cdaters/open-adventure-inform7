@@ -1,17 +1,20 @@
 # Menu System
 
-Date: 2026-06-16
+Date: 2026-06-17
 
-Milestone 11A replaces the command-list HELP screen with an interactive
-menu-driven information system.
+Milestone 11C refines the interactive HELP system introduced in 11A.  HELP
+remains menu-driven, but the presentation now separates compact status-line
+labels from fuller topic headings and the historical material has been rewritten
+as original in-game overview text.
 
 ## Goals
 
 - Preserve RC1 gameplay parity.
-- Preserve existing HELP, ABOUT, INFO, NEWS, and VERSION content.
+- Preserve existing HELP, ABOUT, INFO, NEWS, and VERSION behavior.
 - Move bare HELP closer to Graham Nelson's `Advent.inf` menu experience.
 - Adapt Emily Short's menu approach without importing the reference extensions
   unchanged.
+- Make the help topics feel curated rather than like implementation notes.
 
 ## Reference Material
 
@@ -72,16 +75,26 @@ context:
 When the menu exits, the previous status-line text is restored before play
 returns to the normal room view.
 
-The top-level menu copy is intentionally terse:
+The top-level menu copy is intentionally terse and fits on one line:
 
 ```text
-Use the arrow keys to move,
-RETURN or SPACE to select,
-Q or ESC to leave.
+Use arrows to move, RETURN or SPACE to select, Q or ESC to leave.
 ```
 
 `N` and `P` remain supported for compatibility with the Emily Short and
 `Advent.inf` style, but they are no longer foregrounded in the visible prompt.
+
+Topic pages use full descriptive headings even when their status-line titles
+are compact:
+
+| Status line | Page heading |
+|---|---|
+| `Instructions` | `Instructions for Playing` |
+| `History` | `Historical Background` |
+| `Open Adventure` | `Open Adventure` |
+| `This Edition` | `About This Edition` |
+| `Credits` | `Credits` |
+| `Version Info` | `Version Information` |
 
 ## Menu Topics
 
@@ -90,9 +103,15 @@ Bare HELP opens the top-level menu:
 - Instructions for Playing
 - Historical Background
 - Open Adventure
-- About this Edition
+- About This Edition
 - Credits
 - Version Information
+
+The Historical Background topic is original narrative text informed by
+`references/nelson-inform6/history.txt`, Graham Nelson's `Advent.inf` lineage,
+and the bundled Open Adventure reference material.  It summarizes the path from
+Mammoth Cave and Stephen Bishop through Will Crowther, Don Woods, Open
+Adventure, and this Inform 7 edition without copying the reference prose.
 
 The existing topic commands remain available:
 
@@ -148,12 +167,12 @@ the expected information fragments and the full manifest remains passing.
 
 ## Verification
 
-Milestone 11A verification:
+Milestone 11C verification:
 
 ```bash
+python3 tools/sync_author_edition.py --export
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 python3 tools/run_transcripts.py --execute --timeout 180
-python3 tools/sync_author_edition.py --export
 ```
 
 The Author Edition is then compiled in project mode with Inform 7 10.1.2 to
