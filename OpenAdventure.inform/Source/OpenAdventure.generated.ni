@@ -6721,6 +6721,9 @@ The openadventure-foobar-stage is 0.
 The openadventure-last-travel-category is a text that varies.
 The openadventure-last-travel-category is "".
 
+The openadventure-verbose-room-reporting is a truth state that varies.
+The openadventure-verbose-room-reporting is false.
+
 To set up OpenAdventure runtime framework:
 	if openadventure-subsystem-registration-locked is false:
 		initialize framework IDs;
@@ -6785,7 +6788,28 @@ After going to a room (called target-room) from a room (called source-room):
 		continue the action;
 	if openadventure-framework-has-pending-travel is true:
 		continue the action;
-	run openadventure post-travel hooks for source source-room destination target-room verb "".
+	run openadventure post-travel hooks for source source-room destination target-room verb "";
+	if openadventure-verbose-room-reporting is true:
+		try looking;
+	stop the action.
+
+Report preferring unabbreviated room descriptions (this is the OpenAdventure track verbose room reporting rule):
+	now openadventure-verbose-room-reporting is true;
+	continue the action.
+
+The OpenAdventure track verbose room reporting rule is listed before the standard report preferring unabbreviated room descriptions rule in the report preferring unabbreviated room descriptions rulebook.
+
+Report preferring sometimes abbreviated room descriptions (this is the OpenAdventure track brief room reporting rule):
+	now openadventure-verbose-room-reporting is false;
+	continue the action.
+
+The OpenAdventure track brief room reporting rule is listed before the standard report preferring sometimes abbreviated room descriptions rule in the report preferring sometimes abbreviated room descriptions rulebook.
+
+Report preferring abbreviated room descriptions (this is the OpenAdventure track superbrief room reporting rule):
+	now openadventure-verbose-room-reporting is false;
+	continue the action.
+
+The OpenAdventure track superbrief room reporting rule is listed before the standard report preferring abbreviated room descriptions rule in the report preferring abbreviated room descriptions rulebook.
 
 To run openadventure inventory hooks for carried object (item - thing):
 	do nothing.
@@ -6962,7 +6986,11 @@ To oa-dispatch-openadventure-goto (source-id - text) to (destination-id - text) 
 	if not openadventure pre-travel hooks allow source source-room destination destination-room verb verb-token:
 		now openadventure-runtime-check-result is false;
 		stop;
-	move the player to destination-room;
+	if openadventure-verbose-room-reporting is true:
+		move the player to destination-room, without printing a room description;
+		produce a room description with going spacing conventions;
+	otherwise:
+		move the player to destination-room;
 	if destination-room is LOC_NECKBROKE or destination-room is LOC_NOMAKE or destination-room is LOC_FOOTSLIP or destination-room is LOC_GRUESOME:
 		now openadventure-framework-has-pending-travel is false;
 		now openadventure-runtime-check-result is true;
@@ -7991,45 +8019,77 @@ To finish OpenAdventure direct direction fallback from (source-room - room) with
 	if location is not source-room:
 		run openadventure post-travel hooks for source source-room destination location verb verb-token.
 
+To decide whether OpenAdventure verbose direct direction fallback moves (way - direction) with verb-token (verb-token - text):
+	let source-room be the location;
+	let destination-room be the room way from source-room;
+	if destination-room is nothing:
+		decide no;
+	if not openadventure pre-travel hooks allow source source-room destination destination-room verb verb-token:
+		decide yes;
+	move the player to destination-room, without printing a room description;
+	run openadventure post-travel hooks for source source-room destination destination-room verb verb-token;
+	try looking;
+	decide yes.
+
 To decide whether OpenAdventure direct direction fallback handles (verb-token - text):
 	let source-room be the location;
 	if verb-token is "NORTH":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves north with verb-token verb-token;
 		try going north;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "SOUTH":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves south with verb-token verb-token;
 		try going south;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "EAST":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves east with verb-token verb-token;
 		try going east;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "WEST":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves west with verb-token verb-token;
 		try going west;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "UPWAR":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves up with verb-token verb-token;
 		try going up;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "DOWN":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves down with verb-token verb-token;
 		try going down;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "NE":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves northeast with verb-token verb-token;
 		try going northeast;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "SE":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves southeast with verb-token verb-token;
 		try going southeast;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "SW":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves southwest with verb-token verb-token;
 		try going southwest;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;
 	if verb-token is "NW":
+		if openadventure-verbose-room-reporting is true:
+			decide on whether or not OpenAdventure verbose direct direction fallback moves northwest with verb-token verb-token;
 		try going northwest;
 		finish OpenAdventure direct direction fallback from source-room with verb-token verb-token;
 		decide yes;

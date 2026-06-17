@@ -1,6 +1,6 @@
 # Current State
 
-Date: 2026-06-14
+Date: 2026-06-17
 
 Open Adventure in Inform 7 is currently a **Glulx Release Candidate**.
 
@@ -36,6 +36,8 @@ Implemented runtime subsystems:
 - Menu-driven player-facing information system
 - Presentation polish for startup, parser refusals, object names, inventory, and
   `take all`/`get all`
+- Adventure-compatible verbose movement reporting for repeated-description
+  regions such as the forest and maze
 
 The major gameplay systems required for the 430-point route are operational in
 the Glulx transcript suite.
@@ -113,6 +115,15 @@ The menu is implemented in `OpenAdventure_Information.ni` with an
 OpenAdventure-specific adaptation of Emily Short's table/key-loop pattern.
 ABOUT, INFO, NEWS, VERSION, and focused HELP subcommands remain available as
 direct commands.
+
+## Movement Reporting Status
+
+Verbose mode now reports repeated-description locations after movement in the
+same style as Open Adventure C.  Generated forest rooms still share their
+intended description and fallback printed name, but movement reporting no
+longer suppresses their descriptions merely because adjacent rooms look alike.
+The same fix applies to other repeated-description regions, including maze
+rooms and repeated dead ends.  Explicit LOOK behavior is unchanged.
 
 ## Known Limitations
 

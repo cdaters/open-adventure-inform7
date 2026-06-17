@@ -2,7 +2,7 @@
 
 Date: 2026-06-17
 
-Milestones 10B, 10C, 11A, and 11C reviewed common player commands and
+Milestones 10B, 10C, 11A, 11C, and 11D reviewed common player commands and
 presentation issues while preserving RC1 gameplay parity.
 
 ## Goals
@@ -106,6 +106,36 @@ through a generated identity table.
 
 Inventory hides internal `WATER` and `OIL` carrier objects, so bottle contents
 do not appear as separate inventory items.
+
+### Verbose Repeated-Location Reporting
+
+Milestone 11D corrects movement reporting for regions with repeated room text,
+including the forest and the alike/dead-end maze rooms.
+
+The issue was not the generated room descriptions themselves.  Forest rooms in
+`source/adventure.yaml` intentionally share the same long description and have
+no source short description, so `generated/Rooms.ni` gives them the shared
+fallback short description:
+
+```text
+You're in forest.
+```
+
+The suppression came from movement reporting.  Ordinary generated-map movement
+entered `After going to a room`, ran OpenAdventure post-travel hooks, and then
+stopped the action before Inform's standard `Report going` rule could print
+the room description.  OpenAdventure-dispatched travel also used Inform's
+low-level `move the player to ...` phrase, whose conditional description path
+does not model Open Adventure C's per-location abbreviation counter.
+
+Open Adventure C reports locations from `describe_location()`, choosing long
+or short text from a per-location `abbrev` counter and `abbnum`; it does not
+suppress output because another location has the same description or map tag.
+Graham Nelson's `Advent.inf` follows the Inform 6 library's normal
+verbose/brief location-reporting model.  The Inform 7 edition now follows the
+same player-facing rule: in verbose mode, movement through repeated-description
+regions continues to print the location description after each move.  LOOK
+remains unchanged.
 
 ## Presentation Review
 
