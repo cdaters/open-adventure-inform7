@@ -2,8 +2,14 @@
 
 Section 1 - Edition Constants
 
+To say openadventure version:
+	say "Candidate [release number]"
+	
+To say openadventure serial:
+	say "260616"
+
 To say openadventure implementation version:
-	say "Release Candidate 1 Glulx build"
+	say "Release [openadventure version] / Glulx build"
 
 To say openadventure repository url:
 	say "https://github.com/cdaters/open-adventure-inform7"
@@ -28,7 +34,7 @@ To display openadventure startup presentation:
 	say "Created by Will Crowther (1976). Expanded by Don Woods (1977).[line break]";
 	say "Based on 'Open Adventure' by Eric S. Raymond and contributors.[line break]";
 	say "Implemented in Inform 7 by Craig Daters and contributors.[paragraph break]";
-	say "Release Candidate 1 / Serial number 260614 / Inform 7 v10.1.2[paragraph break]".
+	say "Release [openadventure version] / Serial number [openadventure serial] / Inform 7 v10.1.2[paragraph break]".
 
 Section 3 - Menu and Sections
 
