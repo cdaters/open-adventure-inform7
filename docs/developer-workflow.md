@@ -34,9 +34,10 @@ generated/Rooms.ni
 generated/Objects.ni
 generated/Vocabulary.ni
 generated/Travel.ni
+OpenAdventure.inform/Source/OpenAdventure.generated.ni
 ```
 
-The composed Inform project source is rewritten during compile:
+The composed Inform project source is also rewritten during compile:
 
 ```text
 OpenAdventure.inform/Source/OpenAdventure.generated.ni

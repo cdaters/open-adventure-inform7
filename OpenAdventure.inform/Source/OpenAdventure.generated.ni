@@ -1,5 +1,5 @@
-"Adventure" by Will Crowther and Don Woods.
-The story headline is "The original cave adventure game".
+"Adventure" by Craig Daters.
+The story headline is "The original cave adventure game. Based on Open Adventure by Eric S. Raymond and contributors."
 
 Rule for printing the banner text:
     do nothing.
@@ -6557,10 +6557,10 @@ To display openadventure information topic (topic - text):
 
 To display openadventure instructions:
 	now openadventure-information-last-section is "instructions";
-	say "I know about places, actions, and things.  Many words name places or directions and will move you if a route is available.  Try FOREST, BUILDING, DOWNSTREAM, ENTER, EAST, WEST, NORTH, SOUTH, UP, and DOWN.[paragraph break]";
-	say "I also know about objects, including a few unusual ones hidden in the cave.  To do something with an object, give an action and usually the object's name.  Sometimes the action alone is enough for me to infer what you mean.[paragraph break]";
-	say "Useful short forms include I for INVENTORY, L for LOOK, and compass abbreviations such as N, S, E, W, U, and D.  Cave passages twist, so leaving one place to the north does not promise that the way back is south.[paragraph break]";
-	say "If you want to end your adventure early, type QUIT.  To see how well you are doing, type SCORE.  To get full credit for a treasure, leave it safely in the building; you receive partial credit for finding it.[paragraph break]";
+	say "I know about places, actions, and things. Many words name places or directions and will move you if a route is available. Try [bold type]forest[roman type], [bold type]building[roman type], [bold type]downstream[roman type], [bold type]enter[roman type], [bold type]east[roman type], [bold type]west[roman type], [bold type]north[roman type], [bold type]south[roman type], [bold type]up[roman type], and [bold type]down[roman type].[paragraph break]";
+	say "I also know about objects, including a few unusual ones hidden in the cave. To do something with an object, give an action and usually the object's name. Sometimes the action alone is enough for me to infer what you mean.[paragraph break]";
+	say "Useful short forms include [bold type]i[roman type] for [bold type]inventory[roman type], [bold type]l[roman type] for [bold type]look[roman type], and compass abbreviations such as [bold type]n[roman type], [bold type]s[roman type], [bold type]e[roman type], [bold type]w[roman type], [bold type]u[roman type], and [bold type]d[roman type]. Cave passages twist, so leaving one place to the north does not promise that the way back is south.[paragraph break]";
+	say "If you want to end your adventure early, type [bold type]quit[roman type]. To see how well you are doing, type [bold type]score[roman type]. To get full credit for a treasure, leave it safely in the building; you receive partial credit for finding it.[paragraph break]";
 	say "Good luck!"
 
 To display openadventure historical background:
@@ -6581,13 +6581,13 @@ To display openadventure historical background:
 
 To display openadventure open adventure information:
 	now openadventure-information-last-section is "open-adventure";
-	say "Open Adventure is Eric S. Raymond's author-approved open-source release of Crowther and Woods Adventure 2.5.  It preserves the 430-point game line, maintains reproducible tests, corrects long-standing bugs, and documents the game's lineage.[paragraph break]";
-	say "This Inform 7 project treats the Open Adventure C implementation and its adventure.yaml world data as authoritative for gameplay behavior.  Upstream Open Adventure resources are available at [openadventure upstream url]."
+	say "Open Adventure is Eric S. Raymond's author-approved open-source release of Crowther and Woods Adventure 2.5. It preserves the 430-point game line, maintains reproducible tests, corrects long-standing bugs, and documents the game's lineage.[paragraph break]";
+	say "This Inform 7 project treats the Open Adventure C implementation and its adventure.yaml world data as authoritative for gameplay behavior. Upstream Open Adventure resources are available at [openadventure upstream url]."
 
 To display openadventure edition information:
 	now openadventure-information-last-section is "edition";
-	say "This is Open Adventure in Inform 7, an Inform 7 10.1.2 reconstruction of the Open Adventure 430-point game line.  Generated world data supplies the rooms, objects, vocabulary, and travel rows; hand-written runtime subsystems handle travel, scoring, hazards, cave closing, and endgame behavior.[paragraph break]";
-	say "The implementation is maintained by Craig Daters and contributors.  The project repository is [openadventure repository url]."
+	say "This is Open Adventure in Inform 7, an Inform 7 10.1.2 reconstruction of the Open Adventure 430-point game line. Generated world data supplies the rooms, objects, vocabulary, and travel rows; hand-written runtime subsystems handle travel, scoring, hazards, cave closing, and endgame behavior.[paragraph break]";
+	say "The implementation is maintained by Craig Daters and contributors. The project repository is [openadventure repository url]."
 
 To display openadventure credits:
 	now openadventure-information-last-section is "credits";
@@ -6596,7 +6596,7 @@ To display openadventure credits:
 	say "Inform 7 implementation: Craig Daters and contributors.[line break]";
 	say "Inform lineage and reference material: Graham Nelson's Advent.inf and Chris Conley's Inform 7 Adventure port.[paragraph break]";
 	say "Historical background is informed by the Adventure lineage preserved in those references and by the Open Adventure distribution.[paragraph break]";
-	say "This repository is distributed under the BSD 2-Clause License.  The Open Adventure reference distribution is also BSD 2-Clause licensed; its documentation includes CC-BY-4.0 material."
+	say "This repository is distributed under the BSD 2-Clause License. The Open Adventure reference distribution is also BSD 2-Clause licensed; its documentation includes CC-BY-4.0 material."
 
 To display openadventure version information:
 	now openadventure-information-last-section is "version";
@@ -6610,15 +6610,15 @@ To display openadventure version information:
 
 To display openadventure info:
 	now openadventure-information-last-section is "info";
-	say "For a summary of Open Adventure changes, type NEWS.  If you want to end your adventure early, type QUIT.  To suspend or resume an adventure, use the interpreter's SAVE and RESTORE support where available.  To see how well you are doing, type SCORE.[paragraph break]";
-	say "To get full credit for a treasure, leave it safely in the building.  You receive partial credit for locating treasure, lose points for getting killed, and gain points for exploring more of the cave.[paragraph break]";
-	say "If you think you have found every treasure, keep exploring for a while.  If nothing interesting happens, something is still missing.  If something interesting does happen, you have reached a bonus opportunity in the Master's section."
+	say "For a summary of Open Adventure changes, type [bold type]news[roman type]. If you want to end your adventure early, type [bold type]quit[roman type]. To suspend or resume an adventure, use the interpreter's [bold type]save[roman type] and [bold type]restore[roman type] support where available. To see how well you are doing, type [bold type]score[roman type].[paragraph break]";
+	say "To get full credit for a treasure, leave it safely in the building. You receive partial credit for locating treasure, lose points for getting killed, and gain points for exploring more of the cave.[paragraph break]";
+	say "If you think you have found every treasure, keep exploring for a while. If nothing interesting happens, something is still missing. If something interesting does happen, you have reached a bonus opportunity in the Master's section."
 
 To display openadventure news:
 	now openadventure-information-last-section is "news";
-	say "Open Adventure is an author-approved open-source release of Version 2.5.  Version 2.5 is essentially the Version II cave and hazard set, with a 430-point top score, additional hints for obscure puzzles, bug fixes, and cosmetic corrections.[paragraph break]";
+	say "Open Adventure is an author-approved open-source release of Version 2.5. Version 2.5 is essentially the Version II cave and hazard set, with a 430-point top score, additional hints for obscure puzzles, bug fixes, and cosmetic corrections.[paragraph break]";
 	say "The bundled Open Adventure news file identifies release 1.21, dated 2026-03-22, as code hardening with ChatGPT 5.2, cppcheck, pylint, and spellchecking.[paragraph break]";
-	say "This Inform 7 edition is a separate reconstruction.  Current implementation status is [openadventure implementation version]."
+	say "This Inform 7 edition is a separate reconstruction. Current implementation status is [openadventure implementation version]."
 
 Section 4 - Commands
 

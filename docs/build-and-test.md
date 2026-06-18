@@ -38,6 +38,7 @@ This regenerates:
 - `generated/Objects.ni`
 - `generated/Vocabulary.ni`
 - `generated/Travel.ni`
+- `OpenAdventure.inform/Source/OpenAdventure.generated.ni`
 
 ## Build Glulx
 

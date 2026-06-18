@@ -1,5 +1,5 @@
-"Adventure" by Will Crowther and Don Woods.
-The story headline is "The original cave adventure game".
+"Adventure" by Craig Daters.
+The story headline is "The original cave adventure game. Based on Open Adventure by Eric S. Raymond and contributors."
 
 Rule for printing the banner text:
     do nothing.

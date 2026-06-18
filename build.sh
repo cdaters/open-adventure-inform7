@@ -464,6 +464,7 @@ fi
 run_generator
 
 if [ "$GENERATE_ONLY" -eq 1 ]; then
+  compose_source
   echo "[build] complete (generate-only)." | tee -a "$LOG_FILE"
   exit 0
 fi
