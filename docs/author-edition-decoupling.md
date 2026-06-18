@@ -95,7 +95,8 @@ clearer for contributors.
 
 ## Migration Outcome
 
-After verification, remove from version control:
+After verification, the generated Author Edition workspaces were removed from
+version control:
 
 ```text
 OpenAdventure-AuthorEdition.inform/

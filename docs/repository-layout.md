@@ -132,6 +132,9 @@ The repository should not track compiled story files or packaged release
 archives unless a future release policy explicitly creates a small, documented
 exception.
 
+See `docs/release-workflow.md` for the current release staging and publishing
+steps.
+
 ## Legacy and Reference Material
 
 `references/` contains imported source, transcripts, and build outputs from
@@ -142,3 +145,5 @@ history.
 `OpenAdventure.materials/` may appear as an empty local directory from older
 Inform workflows. It is not required by the current build or Author Edition
 export path and should not be used for durable source.
+
+For an end-to-end checkout workflow, see `docs/fresh-clone-workflow.md`.

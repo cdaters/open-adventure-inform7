@@ -137,7 +137,7 @@ Compile the generated Inform 6 output:
 
 ```bash
 /Applications/Inform.app/Contents/MacOS/inform6 \
-  -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
+  -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Internal/Inform6/Library \
   OpenAdventure-AuthorEdition.inform/Build/auto.inf \
   OpenAdventure-AuthorEdition.inform/Build/output.ulx
 ```
@@ -166,4 +166,5 @@ Before tagging a release candidate:
 9. Publish compiled artifacts through GitHub Releases.
 10. Tag the release.
 
-See `docs/release-checklist.md` for the release checklist.
+See `docs/release-workflow.md` and `docs/release-checklist.md` for release
+steps.

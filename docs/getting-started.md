@@ -19,6 +19,16 @@ On macOS, the scripts look for Inform at:
 See `docs/build-and-test.md` for environment variable overrides if Inform is
 installed somewhere else.
 
+## Clone the Repository
+
+```bash
+git clone <repository-url>
+cd open-adventure-inform7
+```
+
+A fresh clone does not include the generated Author Edition workspace. That is
+expected; export it when you need it.
+
 ## Build the Game
 
 From the repository root:
@@ -92,6 +102,7 @@ in Inform 7 10.1.2.
 
 More detail:
 
+- `docs/fresh-clone-workflow.md`
 - `docs/repository-layout.md`
 - `docs/artifact-classification.md`
 - `docs/developer-workflow.md`

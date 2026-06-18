@@ -139,3 +139,15 @@ Milestone 11 refined player-facing presentation:
 Milestone 12A refreshed contributor documentation so new readers can understand
 the project, build it, export the Author Edition, run tests, and prepare a
 release without reading the full milestone history first.
+
+Milestones 12B through 12D clarified repository hygiene after the Author
+Edition became fully generated output:
+
+- Classified canonical source, generated files, author workspaces, release
+  artifacts, and legacy/reference material.
+- Moved the IFID into canonical `source/ifid.txt`.
+- Made `tools/sync_author_edition.py --diff` work in a fresh clone without a
+  checked-in Author Edition tree.
+- Removed tracked `OpenAdventure-AuthorEdition.inform/` and
+  `OpenAdventure-AuthorEdition.materials/` artifacts.
+- Added fresh-clone and release workflow documentation.

@@ -126,7 +126,7 @@ For release validation, compile the Author Edition project:
   -release -format=Inform6/32
 
 /Applications/Inform.app/Contents/MacOS/inform6 \
-  -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
+  -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Internal/Inform6/Library \
   OpenAdventure-AuthorEdition.inform/Build/auto.inf \
   OpenAdventure-AuthorEdition.inform/Build/output.ulx
 

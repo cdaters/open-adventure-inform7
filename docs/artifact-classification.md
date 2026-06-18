@@ -170,7 +170,7 @@ Do not commit compiled story files such as:
 
 ## Cleanup Recommendations
 
-Milestone 12C removes the tracked Author Edition workspace after moving its
+Milestone 12C removed the tracked Author Edition workspace after moving its
 stable IFID into `source/ifid.txt` and making fresh-clone export, diff,
 compile, and packaging workflows independent of checked-in Author Edition
 artifacts.
@@ -185,3 +185,6 @@ Recommended hygiene:
 - use `python3 tools/sync_author_edition.py --export --destination <dir>` for a
   disposable external IDE workspace;
 - publish release binaries through GitHub Releases rather than committing them.
+
+See `docs/fresh-clone-workflow.md` and `docs/release-workflow.md` for the
+current end-to-end workflows.

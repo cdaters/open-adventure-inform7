@@ -9,6 +9,9 @@ Milestone 12B added repository hygiene documentation so contributors can
 distinguish canonical source, generated artifacts, Author Edition workspace
 files, release artifacts, and legacy/reference material.
 
+Milestone 12D added fresh-clone and release workflow documentation after the
+Author Edition workspace was decoupled from version control.
+
 ## Changes Made
 
 - Rewrote `README.md` around the questions new readers ask first:
@@ -30,6 +33,8 @@ files, release artifacts, and legacy/reference material.
   packaging validation, `Release.blurb` IFID handling, and verbose reporting
   parity.
 - Added `docs/repository-layout.md` and `docs/artifact-classification.md`.
+- Added `docs/fresh-clone-workflow.md`, `docs/release-workflow.md`, and
+  `docs/documentation-audit-12d.md`.
 - Updated author and developer workflows to cover external Author Edition
   workspace export with `--destination`.
 - Documented GitHub Releases as the preferred home for compiled release

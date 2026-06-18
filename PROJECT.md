@@ -21,6 +21,7 @@ Current measured state:
 - Transcript execution passes 15/15 suites with `--timeout 180`.
 - Complete solve, treasure collection, and endgame transcript routes pass.
 - Author Edition export and command-line release compilation succeed.
+- Author Edition workspace files are generated on demand and are not tracked.
 - Z8 remains experimental and is not a release target because of memory limits.
 
 Primary release artifact:
@@ -48,6 +49,8 @@ Completed work:
 - Author Edition `Release.blurb` IFID normalization.
 - Verbose movement reporting parity for repeated-description regions.
 - Repository layout and artifact classification documentation.
+- Author Edition decoupling from tracked generated workspace files.
+- Fresh-clone and release workflow documentation.
 
 The detailed milestone history is preserved in `docs/project-history.md`.
 
@@ -115,6 +118,8 @@ legacy/reference material are classified in:
 
 - `docs/repository-layout.md`
 - `docs/artifact-classification.md`
+- `docs/fresh-clone-workflow.md`
+- `docs/release-workflow.md`
 
 The Author Edition is generated on demand and no longer needs to be tracked in
 the repository. A disposable external IDE workspace can be generated with:

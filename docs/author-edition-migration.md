@@ -100,19 +100,22 @@ Then regenerate the Author Edition.
 
 ## Migration Path
 
-Recommended migration stages:
+Completed migration stages:
 
 1. Keep RC1 build/test workflow unchanged.
 2. Generate Author Edition on demand for IDE authoring.
 3. Keep command-line Author Edition release compilation in the release
    checklist.
-4. Add CI or smoke coverage for Author Edition export and diff checks.
-5. Add a managed Author Layer for menus, hints, help text, parser polish, and
-   other author-owned presentation work.
-6. Keep the Milestone 10E modular extension layout as the default Author
+4. Keep the Milestone 10E modular extension layout as the default Author
    Edition structure.
-7. Revisit whether Author Edition artifacts should be committed after several
-   development cycles.
+5. Move the stable IFID to `source/ifid.txt`.
+6. Remove generated Author Edition workspaces from version control.
+
+Recommended future stages:
+
+1. Add CI or smoke coverage for Author Edition export and diff checks.
+2. Add a managed Author Layer for menus, hints, help text, parser polish, and
+   other author-owned presentation work.
 
 ## What Not To Migrate Yet
 

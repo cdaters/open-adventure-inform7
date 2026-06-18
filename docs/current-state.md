@@ -45,7 +45,7 @@ the Glulx transcript suite.
 
 ## Author Edition Status
 
-Milestone 10A adds an IDE-friendly prototype:
+The Author Edition is an IDE-friendly generated project:
 
 ```text
 OpenAdventure-AuthorEdition.inform
@@ -65,8 +65,8 @@ OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/
 ```
 
 Command-line project-mode release verification succeeds, including
-project-local extension resolution and Inform 6 Glulx compilation. The
-canonical smoke and transcript gates still pass after export.
+project-local extension resolution, Inform 6 Glulx compilation, and cBlorb
+packaging. The canonical smoke and transcript gates still pass after export.
 
 `source/ifid.txt` is the canonical IFID source. Export writes that value to
 `OpenAdventure-AuthorEdition.inform/uuid.txt`.
@@ -78,6 +78,10 @@ workspace can be generated with:
 python3 tools/sync_author_edition.py --export \
   --destination ~/Documents/if/OpenAdventure-Inform7
 ```
+
+A fresh clone does not need `OpenAdventure-AuthorEdition.inform/` or
+`OpenAdventure-AuthorEdition.materials/` to already exist. See
+`docs/fresh-clone-workflow.md`.
 
 ## Build Status
 

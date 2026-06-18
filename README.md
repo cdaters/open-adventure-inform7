@@ -42,6 +42,7 @@ Current verification status:
 - Transcript verification passes 15/15 with `--timeout 180`.
 - Upstream-backed solve, treasure-collection, and complete-endgame routes pass.
 - Author Edition export and command-line release compilation succeed.
+- A fresh clone can generate the ignored Author Edition workspace on demand.
 
 Z8 is experimental and is not a release target. The current generated game
 exceeds practical Z-machine memory limits.
@@ -148,6 +149,24 @@ canonical source files, then exported again.
 See `docs/repository-layout.md` and `docs/artifact-classification.md` for the
 source/generated/workspace/release artifact split.
 
+## Release Artifacts
+
+The command-line build writes the primary playable story file locally:
+
+```text
+OpenAdventure.inform/Build/OpenAdventure.ulx
+```
+
+Author Edition release packaging writes local ignored output under:
+
+```text
+OpenAdventure-AuthorEdition.materials/Release/
+```
+
+Compiled story files, Blorb files, archives, and checksums should be staged in
+ignored `dist/` when needed and published through GitHub Releases. They should
+not be committed to the repository.
+
 ## How Do I Contribute?
 
 Start here:
@@ -155,6 +174,8 @@ Start here:
 - `docs/getting-started.md`
 - `docs/developer-workflow.md`
 - `docs/author-workflow.md`
+- `docs/fresh-clone-workflow.md`
+- `docs/release-workflow.md`
 - `docs/contributing.md`
 
 Use this source hierarchy when deciding where to edit:
@@ -196,6 +217,8 @@ Useful entry points:
 - `docs/current-state.md`
 - `docs/repository-layout.md`
 - `docs/artifact-classification.md`
+- `docs/fresh-clone-workflow.md`
+- `docs/release-workflow.md`
 - `docs/project-history.md`
 - `docs/build-and-test.md`
 - `docs/release-checklist.md`
