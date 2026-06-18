@@ -6,12 +6,12 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
-import uuid
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROJECT = ROOT / "OpenAdventure-AuthorEdition.inform"
+CANONICAL_IFID = ROOT / "source" / "ifid.txt"
 EXTENSION_AUTHOR = "OpenAdventure"
 
 RUNTIME_FILES = [
@@ -82,13 +82,14 @@ def write_text(path: Path, text: str) -> None:
 
 
 def normalized_ifid(project: Path) -> str:
-    uuid_file = project / "uuid.txt"
-    if uuid_file.exists():
-        ifid = read_text(uuid_file).strip()
+    if CANONICAL_IFID.exists():
+        ifid = read_text(CANONICAL_IFID).strip()
     else:
-        ifid = str(uuid.uuid4()).upper()
+        raise FileNotFoundError(f"canonical IFID file missing: {CANONICAL_IFID}")
     if not ifid:
-        raise ValueError(f"empty IFID in {uuid_file}")
+        raise ValueError(f"empty IFID in {CANONICAL_IFID}")
+    if not re.fullmatch(r"[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}", ifid):
+        raise ValueError(f"invalid IFID in {CANONICAL_IFID}: {ifid}")
     return ifid
 
 
@@ -257,7 +258,10 @@ def extension_text(title: str, source_filename: str, body: str) -> str:
 
 
 def desired_project_files(project: Path) -> dict[Path, str]:
-    files = {project / "Source" / "story.ni": compose_story()}
+    files = {
+        project / "Source" / "story.ni": compose_story(),
+        project / "uuid.txt": normalized_ifid(project),
+    }
     title_by_filename = dict(source_module_specs())
     extension_dir = materials_dir_for(project) / "Extensions" / EXTENSION_AUTHOR
     for filename, text in source_module_texts():

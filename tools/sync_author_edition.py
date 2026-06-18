@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import difflib
 import sys
+import tempfile
 from pathlib import Path
 
 import make_author_edition as author
@@ -28,6 +29,10 @@ def rel(path: Path) -> str:
 
 def desired_files(project: Path) -> dict[Path, str]:
     return author.desired_project_files(project)
+
+
+def exported_author_edition_exists(project: Path) -> bool:
+    return (project / "Source" / "story.ni").exists()
 
 
 def resolve_project_path(project: Path | None, destination: Path | None) -> Path:
@@ -61,9 +66,14 @@ def diff_file(path: Path, desired: str) -> list[str]:
     )
 
 
-def run_diff(project: Path, regenerate: bool) -> int:
+def run_diff(project: Path, regenerate: bool, temp_if_missing: bool) -> int:
     if regenerate:
         author.run_generator()
+    if temp_if_missing and not exported_author_edition_exists(project):
+        with tempfile.TemporaryDirectory(prefix="openadventure-author-diff-") as tmp:
+            temp_project = Path(tmp) / author.DEFAULT_PROJECT.name
+            author.write_project(temp_project, regenerate=False)
+            return run_diff(temp_project, regenerate=False, temp_if_missing=False)
     differences: list[str] = []
     for path, desired in desired_files(project).items():
         differences.extend(diff_file(path, desired))
@@ -134,7 +144,8 @@ def main() -> int:
     if args.import_:
         return run_import(project)
     if args.diff:
-        return run_diff(project, regenerate=regenerate)
+        temp_if_missing = args.project is None and args.destination is None
+        return run_diff(project, regenerate=regenerate, temp_if_missing=temp_if_missing)
     return run_export(project, regenerate=regenerate)
 
 

@@ -45,6 +45,9 @@ OpenAdventure.inform/Source/OpenAdventure.generated.ni
 These generated files are tracked for review and reproducibility, but they are
 not durable source. Edit the YAML, generator code, or runtime modules instead.
 
+The canonical IFID for Author Edition export and release packaging is
+`source/ifid.txt`.
+
 ## Build
 
 Build the Glulx release target:
@@ -95,6 +98,10 @@ Check whether the export is current:
 python3 tools/sync_author_edition.py --diff
 ```
 
+If the default generated workspace is absent, `--diff` uses a temporary export
+so the command still works on a fresh clone. Use `--destination <dir>` with
+`--diff` to check a specific exported workspace.
+
 The export writes:
 
 ```text
@@ -132,7 +139,14 @@ Compile the generated Inform 6 output:
 /Applications/Inform.app/Contents/MacOS/inform6 \
   -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
   OpenAdventure-AuthorEdition.inform/Build/auto.inf \
-  OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx
+  OpenAdventure-AuthorEdition.inform/Build/output.ulx
+```
+
+Package the Author Edition release:
+
+```bash
+/Applications/Inform.app/Contents/MacOS/cBlorb \
+  -project OpenAdventure-AuthorEdition.inform
 ```
 
 ## Release Workflow

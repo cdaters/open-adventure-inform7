@@ -185,6 +185,8 @@ OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Sta
 OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/OpenAdventure Runtime.i7x
 ```
 
+`uuid.txt` is generated from canonical `source/ifid.txt`.
+
 `story.ni` is an include spine. Inform 7 10.1.2 does not accept quoted local
 source includes such as `Include "Rooms.ni".`, so the Author Edition uses
 project-local extensions in the sibling `.materials` package. This is the
@@ -211,7 +213,7 @@ python3 tools/sync_author_edition.py --export
 /Applications/Inform.app/Contents/MacOS/inform6 \
   -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
   OpenAdventure-AuthorEdition.inform/Build/auto.inf \
-  OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx
+  OpenAdventure-AuthorEdition.inform/Build/output.ulx
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 python3 tools/run_transcripts.py --execute --timeout 180
 ```

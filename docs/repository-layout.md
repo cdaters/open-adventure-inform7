@@ -17,6 +17,7 @@ Use this tree for durable source changes:
 
 ```text
 source/                         source world data from Open Adventure
+source/ifid.txt                  canonical IFID used by Author Edition export
 generated/                      generated Inform world files, tracked for review
 OpenAdventure.ni                main source wrapper and project metadata
 OpenAdventure_*.ni              hand-written runtime and presentation modules
@@ -45,12 +46,8 @@ Inform build target reproducible, but they are not durable editing targets.
 
 ## Author Edition Workspace
 
-The tracked in-repository Author Edition is:
-
-```text
-OpenAdventure-AuthorEdition.inform/
-OpenAdventure-AuthorEdition.materials/
-```
+The Author Edition is generated on demand. It is no longer required to exist in
+the repository checkout.
 
 Regenerate it with:
 
@@ -77,6 +74,19 @@ When `--destination` or `--project` names a path ending in `.inform`, that path
 is used as the project bundle and the sibling `.materials` package is derived
 from it.
 
+The default command still writes an ignored local workspace at the repository
+root:
+
+```text
+OpenAdventure-AuthorEdition.inform/
+OpenAdventure-AuthorEdition.materials/
+```
+
+Those directories are generated output. They should not be committed.
+
+`python3 tools/sync_author_edition.py --diff` works without those directories:
+when the default export is absent, it checks a temporary generated export.
+
 Durable changes discovered while working in the IDE should be moved back to:
 
 - `source/adventure.yaml`
@@ -95,6 +105,7 @@ OpenAdventure.inform/Build/
 OpenAdventure.inform/Index/
 OpenAdventure-AuthorEdition.inform/Build/
 OpenAdventure-AuthorEdition.inform/Index/
+OpenAdventure-AuthorEdition.materials/Release/
 build/
 ```
 

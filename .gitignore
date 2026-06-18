@@ -12,6 +12,8 @@ __pycache__/
 
 Build/
 Index/
+OpenAdventure-AuthorEdition.inform/
+OpenAdventure-AuthorEdition.materials/
 *.inform/Metadata.iFiction
 *.inform/Release.blurb
 *.inform/manifest.plist

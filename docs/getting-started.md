@@ -84,6 +84,7 @@ in Inform 7 10.1.2.
 ## Where To Make Changes
 
 - World data: `source/adventure.yaml`
+- Release identity: `source/ifid.txt`
 - Generated Inform structure: `tools/generators/*.py`
 - Gameplay and presentation behavior: `OpenAdventure_*.ni`
 - Project metadata: `OpenAdventure.ni`

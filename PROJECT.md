@@ -7,8 +7,9 @@ Source of truth:
 
 1. Open Adventure C is authoritative for gameplay behavior.
 2. `source/adventure.yaml` is authoritative for generated world data.
-3. Generated Inform files are build artifacts.
-4. `OpenAdventure_*.ni` files implement runtime behavior.
+3. `source/ifid.txt` is authoritative for release identity.
+4. Generated Inform files are build artifacts.
+5. `OpenAdventure_*.ni` files implement runtime behavior.
 
 ## Current Status
 
@@ -115,8 +116,8 @@ legacy/reference material are classified in:
 - `docs/repository-layout.md`
 - `docs/artifact-classification.md`
 
-The in-repository Author Edition remains a reproducible generated export. A
-disposable external IDE workspace can be generated with:
+The Author Edition is generated on demand and no longer needs to be tracked in
+the repository. A disposable external IDE workspace can be generated with:
 
 ```bash
 python3 tools/sync_author_edition.py --export \

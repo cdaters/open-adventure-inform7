@@ -16,7 +16,7 @@ Open Adventure in Inform 7 is currently a **Glulx release candidate**.
 | Upstream solve path | Passing |
 | Upstream treasure collection | Passing |
 | Upstream complete endgame | Passing |
-| Author Edition | Modular IDE project export generated and release-compiled |
+| Author Edition | Modular IDE project export generated on demand and release-compiled |
 | Repository layout | Source, generated output, author workspace files, release artifacts, and legacy/reference material classified |
 
 ## Gameplay Status
@@ -68,8 +68,11 @@ Command-line project-mode release verification succeeds, including
 project-local extension resolution and Inform 6 Glulx compilation. The
 canonical smoke and transcript gates still pass after export.
 
-The default export remains in the repository for reproducibility. A disposable
-external author workspace can be generated with:
+`source/ifid.txt` is the canonical IFID source. Export writes that value to
+`OpenAdventure-AuthorEdition.inform/uuid.txt`.
+
+The default export is ignored local output. A disposable external author
+workspace can be generated with:
 
 ```bash
 python3 tools/sync_author_edition.py --export \

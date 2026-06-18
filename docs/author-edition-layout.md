@@ -138,7 +138,7 @@ Milestone 10E verification:
 /Applications/Inform.app/Contents/MacOS/inform6 \
   -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
   OpenAdventure-AuthorEdition.inform/Build/auto.inf \
-  OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx
+  OpenAdventure-AuthorEdition.inform/Build/output.ulx
 
 OPENADVENTURE_INFORM_FORMAT=Inform6/32 ./test.sh
 python3 tools/run_transcripts.py --execute --timeout 180

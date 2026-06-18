@@ -66,6 +66,7 @@ and index files without adding noise to the repository.
 Durable source files:
 
 - `source/adventure.yaml`: rooms, objects, travel, vocabulary
+- `source/ifid.txt`: canonical IFID used by Author Edition export
 - `tools/generators/*.py`: generated Inform structure
 - `OpenAdventure.ni`: project title and metadata
 - `OpenAdventure_*.ni`: runtime behavior, presentation, help, scoring, systems

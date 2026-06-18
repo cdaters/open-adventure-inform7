@@ -114,7 +114,8 @@ Transcript output is written under `build/transcripts/`.
 
 ## Author Edition
 
-The Author Edition is the IDE-friendly Inform 7 project:
+The Author Edition is the IDE-friendly Inform 7 project generated from
+canonical source:
 
 ```text
 OpenAdventure-AuthorEdition.inform
@@ -140,8 +141,9 @@ python3 tools/sync_author_edition.py --diff
 ```
 
 Open `OpenAdventure-AuthorEdition.inform` in Inform 7 10.1.2 to browse and
-compile the modular project. Durable edits should be made in canonical source
-files, then exported again.
+compile the modular project. The default export is ignored local output; use
+`--destination` for a separate IDE workspace. Durable edits should be made in
+canonical source files, then exported again.
 
 See `docs/repository-layout.md` and `docs/artifact-classification.md` for the
 source/generated/workspace/release artifact split.
@@ -158,6 +160,7 @@ Start here:
 Use this source hierarchy when deciding where to edit:
 
 - `source/adventure.yaml`: rooms, objects, travel data, vocabulary
+- `source/ifid.txt`: canonical IFID
 - `tools/generators/*.py`: generated Inform source structure
 - `OpenAdventure_*.ni`: gameplay and presentation behavior
 - `OpenAdventure.ni`: project metadata
@@ -175,8 +178,8 @@ OpenAdventure_*.ni                    hand-written runtime modules
 source/adventure.yaml                 source world data
 generated/                            generated Inform 7 world files
 OpenAdventure.inform/                 command-line Inform project
-OpenAdventure-AuthorEdition.inform/   generated IDE-friendly Inform project
-OpenAdventure-AuthorEdition.materials/ generated Author Edition extensions
+OpenAdventure-AuthorEdition.inform/   generated local IDE project, ignored
+OpenAdventure-AuthorEdition.materials/ generated local extensions/release output, ignored
 tools/                                generators, build helpers, transcript runner
 tests/smoke/                          smoke tests
 tests/transcripts/                    transcript manifest and expectations

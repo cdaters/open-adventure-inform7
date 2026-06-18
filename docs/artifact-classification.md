@@ -27,15 +27,15 @@ what to edit, what to regenerate, and what to ignore.
 | `PROJECT.md` | Canonical Source | Track | Current status summary. |
 | `OpenAdventure.ni` | Canonical Source | Track | Main source wrapper and metadata. |
 | `OpenAdventure_*.ni` | Canonical Source | Track | Hand-written runtime, gameplay, and presentation modules. |
-| `source/` | Canonical Source | Track | `source/adventure.yaml` is the source world data. |
+| `source/` | Canonical Source | Track | `source/adventure.yaml` is source world data; `source/ifid.txt` is the canonical IFID. |
 | `tools/` | Canonical Source | Track | Generators, build helpers, Author Edition export, transcript runner. Python caches are ignored. |
 | `tests/` | Canonical Source | Track | Smoke tests and transcript fixtures. |
 | `docs/` | Canonical Source | Track | Current docs plus historical milestone reports. |
 | `generated/` | Generated Artifact | Track | Generated world files. Tracked to review generator output and support reproducible composition. |
 | `OpenAdventure.inform/` | Generated Artifact | Track selected files | Command-line Inform build target. Source file is generated and tracked; `Build/` and `Index/` are ignored. |
 | `OpenAdventure.materials/` | Legacy Artifact | Do not track unless repurposed | Empty local materials directory from older/current Inform conventions. Not required by current workflows. |
-| `OpenAdventure-AuthorEdition.inform/` | Author Workspace | Track selected files | Generated IDE project shell. `Source/story.ni`, `Settings.plist`, `uuid.txt`, and placeholders are tracked; build/index/release byproducts are ignored. |
-| `OpenAdventure-AuthorEdition.materials/` | Author Workspace | Track selected files | Generated project-local extensions and release source manifest. |
+| `OpenAdventure-AuthorEdition.inform/` | Author Workspace | Ignore | Generated IDE project shell. Export on demand; do not track. |
+| `OpenAdventure-AuthorEdition.materials/` | Author Workspace | Ignore | Generated project-local extensions and release output. Export/package on demand; do not track. |
 | `build/` | Generated Artifact | Ignore | Build logs and transcript output. |
 | `build.sh` | Canonical Source | Track | Generates and composes source, builds Glulx, optionally packages. |
 | `test.sh` | Canonical Source | Track | Smoke-test entry point. |
@@ -95,19 +95,21 @@ Why it exists:
 
 Current status:
 
-- still required for Author Edition verification;
-- should remain under version control as a reproducible export target, not as
-  canonical source.
+- still required as a generated workspace for Author Edition verification;
+- no longer required under version control.
 
-Track:
+Generated contents:
 
 - `Source/story.ni`
 - `Settings.plist`
 - `uuid.txt`
 - `Materials/.gitkeep`
 
+`uuid.txt` is generated from canonical `source/ifid.txt`.
+
 Ignore:
 
+- the whole generated `OpenAdventure-AuthorEdition.inform/` workspace;
 - `Build/`
 - `Index/`
 - `Metadata.iFiction`
@@ -124,10 +126,9 @@ Why it exists:
 Current status:
 
 - still required for IDE and command-line Author Edition compilation;
-- should remain tracked because it is the reviewed generated Author Edition
-  output.
+- no longer required under version control.
 
-Track:
+Generated contents:
 
 - `Extensions/OpenAdventure/*.i7x`
 - `Release/source.txt`
@@ -135,6 +136,7 @@ Track:
 
 Ignore:
 
+- the whole generated `OpenAdventure-AuthorEdition.materials/` workspace;
 - future compiled story files or packaged release output.
 
 ## Generated Output Policy
@@ -144,7 +146,7 @@ when they serve one of these purposes:
 
 - reviewing changes from `source/adventure.yaml` or generator code;
 - making the command-line Inform project buildable from a checkout;
-- keeping the Author Edition export reproducible and diffable.
+- keeping command-line build composition reviewable.
 
 Do not make durable edits directly in generated files. Move the change to
 canonical source and regenerate.
@@ -168,14 +170,18 @@ Do not commit compiled story files such as:
 
 ## Cleanup Recommendations
 
-No tracked files should be removed for Milestone 12B.
+Milestone 12C removes the tracked Author Edition workspace after moving its
+stable IFID into `source/ifid.txt` and making fresh-clone export, diff,
+compile, and packaging workflows independent of checked-in Author Edition
+artifacts.
 
 Recommended hygiene:
 
-- keep `generated/`, `OpenAdventure.inform/Source/OpenAdventure.generated.ni`,
-  and Author Edition output tracked for reproducibility;
+- keep `generated/` and
+  `OpenAdventure.inform/Source/OpenAdventure.generated.ni` tracked for
+  reproducibility;
 - keep `Build/`, `Index/`, `build/`, `dist/`, compiled story files, Python
-  caches, and `.DS_Store` ignored;
+  caches, `.DS_Store`, and generated Author Edition workspaces ignored;
 - use `python3 tools/sync_author_edition.py --export --destination <dir>` for a
   disposable external IDE workspace;
 - publish release binaries through GitHub Releases rather than committing them.

@@ -63,11 +63,14 @@ python3 tools/sync_author_edition.py --diff
 /Applications/Inform.app/Contents/MacOS/inform6 \
   -E2w~S~DG +/Applications/Inform.app/Contents/Resources/Library/6.11 \
   OpenAdventure-AuthorEdition.inform/Build/auto.inf \
-  OpenAdventure-AuthorEdition.inform/Build/OpenAdventure-AuthorEdition.ulx
+  OpenAdventure-AuthorEdition.inform/Build/output.ulx
+/Applications/Inform.app/Contents/MacOS/cBlorb \
+  -project OpenAdventure-AuthorEdition.inform
 ```
 
 Also confirm:
 
+- `source/ifid.txt` contains the intended release IFID.
 - `OpenAdventure-AuthorEdition.inform/Release.blurb` contains the IFID on a
   single line.
 - The Author Edition remains generated output, not a separate source of truth.
