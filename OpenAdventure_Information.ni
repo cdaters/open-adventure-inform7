@@ -91,7 +91,7 @@ To display openadventure help menu:
 	let selected-row be 1;
 	let menu-open be true;
 	while menu-open is true:
-		now openadventure-menu-status-title is "Open Adventure Help";
+		now openadventure-menu-status-title is "Adventure Help";
 		redraw openadventure menu status line;
 		clear the openadventure menu screen;
 		display openadventure help menu screen with selection selected-row;
@@ -115,7 +115,7 @@ To display openadventure help menu:
 	try looking.
 
 To display openadventure help menu screen with selection (selected-row - number):
-	say "[bold type]Open Adventure Help[roman type][paragraph break]";
+	say "[bold type]Adventure Help[roman type][paragraph break]";
 	say "Use arrows to move, RETURN or SPACE to select, Q or ESC to leave.[paragraph break]";
 	let row-number be 1;
 	repeat through the Table of OpenAdventure Help Menu:
@@ -163,7 +163,7 @@ To display openadventure information topic (topic - text):
 To display openadventure instructions:
 	now openadventure-information-last-section is "instructions";
 	say "I know about places, actions, and things. Many words name places or directions and will move you if a route is available. Try [bold type]FOREST[roman type], [bold type]BUILDING[roman type], [bold type]DOWNSTREAM[roman type], [bold type]ENTER[roman type], [bold type]EAST[roman type], [bold type]WEST[roman type], [bold type]NORTH[roman type], [bold type]SOUTH[roman type], [bold type]UP[roman type], and [bold type]DOWN[roman type].[paragraph break]";
-	say "I also know about objects, including a few unusual ones hidden in the cave. To do something with an object, give an action and usually the object's name. Sometimes the action alone is enough for me to infer what you mean.[paragraph break]";
+	say "I also know about objects, including a few unusual ones hidden in the cave. To do something with an object, give an action and usually the object's name. Sometimes a simple command is enough and I can figure out what you mean.[paragraph break]";
 	say "Useful short forms include [bold type]I[roman type] for [bold type]INVENTORY[roman type], [bold type]L[roman type] for [bold type]LOOK[roman type], and compass abbreviations such as [bold type]N[roman type], [bold type]S[roman type], [bold type]E[roman type], [bold type]W[roman type], [bold type]U[roman type], and [bold type]D[roman type]. Cave passages twist, so leaving one place to the north does not promise that the way back is south.[paragraph break]";
 	say "If you want to end your adventure early, type [bold type]QUIT[roman type]. To see how well you are doing, type [bold type]SCORE[roman type]. To get full credit for a treasure, leave it safely in the building; you receive partial credit for finding it.[paragraph break]";
 	say "Good luck!"
@@ -177,7 +177,7 @@ To display openadventure historical background:
 	say "Adventure itself began in 1976 when cave explorer and programmer Will Crowther created a small FORTRAN game inspired by his experiences in Mammoth Cave. Crowther later explained that the project emerged during a difficult period of his life. After a divorce, he missed spending time with his children and wanted to create something they could enjoy together. He was also an active cave explorer and had recently been involved in the emerging hobby of Dungeons & Dragons.[paragraph break]";
 	say "Crowther described his goal this way:[paragraph break]";
 	say "'I had been involved in a non-computer role-playing game called Dungeons and Dragons at the time, and also I had been actively exploring in caves -- Mammoth Cave in Kentucky in particular. Suddenly, I got involved in a divorce, and that left me a bit pulled apart in various ways. In particular I was missing my kids. Also the caving had stopped, because that had become awkward, so I decided I would fool around and write a program that was a re-creation in fantasy of my caving, and also would be a game for the kids.'[paragraph break]";
-	say "He also wanted the game to be approachable to people who were not programmers. Rather than requiring special commands, players could interact using ordinary language. This decision helped establish one of the defining characteristics of interactive fiction: the parser.[paragraph break]";
+	say "He also wanted the game to be approachable to people who were not programmers. Rather than requiring special commands, players could interact using ordinary language. This decision helped establish one of the defining features of interactive fiction: the ability to interact with a game by typing natural-language commands.[paragraph break]";
 	say "Crowther's original game emphasized exploration more than puzzle solving. Many familiar locations, geological details, and cave terms came directly from Mammoth Cave itself. The world was relatively small, the treasure hunt was limited, and formal scoring had not yet become central to the experience.[paragraph break]";
 	say "The next major step came when Don Woods discovered Crowther's program and contacted him for permission to expand it. Woods added treasures, scoring, magic words, dwarves, the troll bridge, and many of the puzzles that players now associate with Adventure. His expanded version spread rapidly through universities and computer centers and became one of the most influential computer games ever created.[paragraph break]";
 	say "Adventure inspired an entire genre. Zork, Infocom, TADS, Inform, and countless other interactive fiction systems all trace part of their lineage back to Crowther and Woods. Even modern parser-based games still inherit concepts that first became popular through Adventure.[paragraph break]";
@@ -186,13 +186,13 @@ To display openadventure historical background:
 
 To display openadventure open adventure information:
 	now openadventure-information-last-section is "open-adventure";
-	say "Open Adventure is Eric S. Raymond's author-approved open-source release of Crowther and Woods Adventure 2.5. It preserves the 430-point game line, maintains reproducible tests, corrects long-standing bugs, and documents the game's lineage.[paragraph break]";
+	say "Open Adventure is the author-approved open-source edition of the classic Adventure, maintained by Eric S. Raymond and contributors.[paragraph break]";
 	say "This Inform 7 project treats the Open Adventure C implementation and its adventure.yaml world data as authoritative for gameplay behavior. Upstream Open Adventure resources are available at [openadventure upstream url]."
 
 To display openadventure edition information:
 	now openadventure-information-last-section is "edition";
-	say "This is Open Adventure in Inform 7, an Inform 7 10.1.2 reconstruction of the Open Adventure 430-point game line. Generated world data supplies the rooms, objects, vocabulary, and travel rows; hand-written runtime subsystems handle travel, scoring, hazards, cave closing, and endgame behavior.[paragraph break]";
-	say "The implementation is maintained by Craig Daters and contributors. The project repository is [openadventure repository url]."
+	say "This is Open Adventure in Inform 7, an Inform 7 10.1.2 reconstruction of the Open Adventure 430-point game line. This edition recreates Open Adventure in Inform 7 while preserving the gameplay, puzzles, scoring, and behavior of the original 430-point game.[paragraph break]";
+	say "The project is maintained by Craig Daters and contributors. The project repository is [openadventure repository url]."
 
 To display openadventure credits:
 	now openadventure-information-last-section is "credits";
@@ -200,7 +200,7 @@ To display openadventure credits:
 	say "Open Adventure: Eric S. Raymond and contributors.[line break]";
 	say "Inform 7 implementation: Craig Daters and contributors.[line break]";
 	say "Inform lineage and reference material: Graham Nelson's Advent.inf and Chris Conley's Inform 7 Adventure port.[paragraph break]";
-	say "Historical background is informed by the Adventure lineage preserved in those references and by the Open Adventure distribution.[paragraph break]";
+	say "The Historical Background section draws on the work of many Adventure historians, researchers, and preservationists, including the Open Adventure project and the reference materials listed above.[paragraph break]";
 	say "This repository is distributed under the BSD 2-Clause License. The Open Adventure reference distribution is also BSD 2-Clause licensed; its documentation includes CC-BY-4.0 material."
 
 To display openadventure version information:
