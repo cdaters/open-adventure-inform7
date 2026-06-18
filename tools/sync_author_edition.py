@@ -30,6 +30,23 @@ def desired_files(project: Path) -> dict[Path, str]:
     return author.desired_project_files(project)
 
 
+def resolve_project_path(project: Path | None, destination: Path | None) -> Path:
+    if project is not None and destination is not None:
+        raise ValueError("--project and --destination cannot be used together")
+    if destination is not None:
+        destination = destination.expanduser()
+        if not destination.is_absolute():
+            destination = ROOT / destination
+        if destination.suffix == ".inform":
+            return destination
+        return destination / author.DEFAULT_PROJECT.name
+    project = project or author.DEFAULT_PROJECT
+    project = project.expanduser()
+    if not project.is_absolute():
+        project = ROOT / project
+    return project
+
+
 def diff_file(path: Path, desired: str) -> list[str]:
     current = path.read_text(encoding="utf-8") if path.exists() else ""
     if current == desired:
@@ -85,11 +102,22 @@ def parse_args() -> argparse.Namespace:
     mode.add_argument("--export", action="store_true", help="write the Author Edition project")
     mode.add_argument("--diff", action="store_true", help="show differences without writing the Author Edition")
     mode.add_argument("--import", dest="import_", action="store_true", help="explain why full import is unsupported")
-    parser.add_argument(
+    destination = parser.add_mutually_exclusive_group()
+    destination.add_argument(
         "--project",
         type=Path,
-        default=author.DEFAULT_PROJECT,
+        default=None,
         help="Author Edition .inform project path.",
+    )
+    destination.add_argument(
+        "--destination",
+        type=Path,
+        default=None,
+        help=(
+            "Author workspace directory, or an explicit .inform project path. "
+            "When a directory is given, OpenAdventure-AuthorEdition.inform is "
+            "written inside it."
+        ),
     )
     parser.add_argument(
         "--no-generate",
@@ -101,7 +129,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    project = args.project if args.project.is_absolute() else ROOT / args.project
+    project = resolve_project_path(args.project, args.destination)
     regenerate = not args.no_generate
     if args.import_:
         return run_import(project)

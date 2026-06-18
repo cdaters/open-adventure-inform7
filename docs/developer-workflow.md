@@ -2,6 +2,12 @@
 
 This document describes the normal repository workflow for contributors.
 
+For a full map of source, generated output, author workspace files, release
+artifacts, and legacy/reference material, see:
+
+- `docs/repository-layout.md`
+- `docs/artifact-classification.md`
+
 ## Clone
 
 Clone the repository and enter it:
@@ -28,11 +34,16 @@ generated/Rooms.ni
 generated/Objects.ni
 generated/Vocabulary.ni
 generated/Travel.ni
+```
+
+The composed Inform project source is rewritten during compile:
+
+```text
 OpenAdventure.inform/Source/OpenAdventure.generated.ni
 ```
 
-Do not make durable edits in generated files. Edit the YAML, generator code,
-or runtime modules instead.
+These generated files are tracked for review and reproducibility, but they are
+not durable source. Edit the YAML, generator code, or runtime modules instead.
 
 ## Build
 
@@ -92,6 +103,18 @@ OpenAdventure-AuthorEdition.inform/Settings.plist
 OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/*.i7x
 ```
 
+To export a disposable IDE workspace outside the repository:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
+That writes `OpenAdventure-AuthorEdition.inform` and
+`OpenAdventure-AuthorEdition.materials` inside the destination directory.
+Durable changes still belong in canonical repository source, followed by a new
+export.
+
 ## Verify the Author Edition
 
 Translate the Author Edition project:
@@ -123,9 +146,10 @@ Before tagging a release candidate:
 5. Export and verify the Author Edition.
 6. Confirm `OpenAdventure-AuthorEdition.inform/Release.blurb` has the IFID on
    one line.
-7. Package `OpenAdventure.ulx`, `README.md`, `LICENSE`, release notes, known
-   differences, build/test docs, and transcript results.
+7. Stage `OpenAdventure.ulx`, `README.md`, `LICENSE`, release notes, known
+   differences, build/test docs, and transcript results in local `dist/`.
 8. Record command results and artifact checksums.
-9. Tag the release.
+9. Publish compiled artifacts through GitHub Releases.
+10. Tag the release.
 
 See `docs/release-checklist.md` for the release checklist.

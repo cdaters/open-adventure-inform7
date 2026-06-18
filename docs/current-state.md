@@ -17,6 +17,7 @@ Open Adventure in Inform 7 is currently a **Glulx release candidate**.
 | Upstream treasure collection | Passing |
 | Upstream complete endgame | Passing |
 | Author Edition | Modular IDE project export generated and release-compiled |
+| Repository layout | Source, generated output, author workspace files, release artifacts, and legacy/reference material classified |
 
 ## Gameplay Status
 
@@ -66,6 +67,14 @@ OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/
 Command-line project-mode release verification succeeds, including
 project-local extension resolution and Inform 6 Glulx compilation. The
 canonical smoke and transcript gates still pass after export.
+
+The default export remains in the repository for reproducibility. A disposable
+external author workspace can be generated with:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
 
 ## Build Status
 
@@ -139,6 +148,8 @@ behavior is unchanged.
 - Some older milestone documents are historical reports. The current status,
   release, and workflow docs supersede older "Not Ready" or blocker lists.
 - Screenshots and packaged visual assets have not yet been produced.
+- Release binaries should be staged locally in ignored `dist/` when needed and
+  published through GitHub Releases rather than committed.
 
 ## Next Work
 

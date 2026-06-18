@@ -104,6 +104,13 @@ Export the Author Edition:
 python3 tools/sync_author_edition.py --export
 ```
 
+Export a separate local IDE workspace:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
 Check whether it is current:
 
 ```bash

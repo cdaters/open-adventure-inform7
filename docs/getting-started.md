@@ -91,6 +91,8 @@ in Inform 7 10.1.2.
 
 More detail:
 
+- `docs/repository-layout.md`
+- `docs/artifact-classification.md`
 - `docs/developer-workflow.md`
 - `docs/author-workflow.md`
 - `docs/contributing.md`

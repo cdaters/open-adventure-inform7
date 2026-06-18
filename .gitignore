@@ -15,6 +15,15 @@ Index/
 *.inform/Metadata.iFiction
 *.inform/Release.blurb
 *.inform/manifest.plist
+*.ulx
+*.gblorb
+*.zblorb
+*.z8
+*.z5
+
+# Release staging
+
+dist/
 
 # VS Code
 

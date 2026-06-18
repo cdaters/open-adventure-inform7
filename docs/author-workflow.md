@@ -5,6 +5,11 @@ Date: 2026-06-17
 This guide is for Inform authors who want to inspect, compile, or improve the
 Author Edition.
 
+For the full source/generated/workspace classification, see:
+
+- `docs/repository-layout.md`
+- `docs/artifact-classification.md`
+
 ## The Short Version
 
 The repository is the source of truth. The Author Edition is generated from it.
@@ -38,6 +43,23 @@ OpenAdventure-AuthorEdition.materials/Extensions/OpenAdventure/*.i7x
 
 `story.ni` is a small include spine. The real content is split into
 project-local extensions so Inform 7 can open and compile the project normally.
+
+You can also export a separate local workspace outside the repository:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
+That creates:
+
+```text
+~/Documents/if/OpenAdventure-Inform7/OpenAdventure-AuthorEdition.inform
+~/Documents/if/OpenAdventure-Inform7/OpenAdventure-AuthorEdition.materials
+```
+
+Use this when you want an IDE workspace that can accumulate local Inform build
+and index files without adding noise to the repository.
 
 ## What To Edit
 
@@ -80,6 +102,9 @@ the durable source for a change.
 
 4. Press Go.
 
+For an external workspace, use `--destination` and open the generated
+`.inform` project inside that directory.
+
 ## Make Changes
 
 Use the source routing table:
@@ -117,6 +142,13 @@ Check the Author Edition export:
 
 ```bash
 python3 tools/sync_author_edition.py --diff
+```
+
+If you exported to an external workspace, compare that workspace with:
+
+```bash
+python3 tools/sync_author_edition.py --diff \
+  --destination ~/Documents/if/OpenAdventure-Inform7
 ```
 
 ## Why Import Is Unsupported

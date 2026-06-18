@@ -82,6 +82,10 @@ Also confirm:
 - `docs/build-and-test.md`
 - `docs/transcript-results.md`
 
+Stage packages locally under ignored `dist/` if needed, then publish compiled
+artifacts and checksums through GitHub Releases. Do not commit compiled story
+files to the repository.
+
 ## Beta Package Contents
 
 - RC1 package contents.

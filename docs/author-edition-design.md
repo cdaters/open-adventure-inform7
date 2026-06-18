@@ -150,6 +150,8 @@ The long-term structure should maintain both workflows:
 - `OpenAdventure-AuthorEdition.inform`: generated IDE author project.
 - `tools/sync_author_edition.py --export`: preferred assembler for the author
   project.
+- `tools/sync_author_edition.py --export --destination <dir>`: external
+  workspace export for local IDE use outside the repository.
 - `tools/sync_author_edition.py --diff`: stale-export detector.
 - `tools/make_author_edition.py`: compatibility exporter retained for existing
   documentation and habits.
@@ -229,6 +231,17 @@ python3 tools/sync_author_edition.py --diff
 ```
 
 `--diff` exits successfully when the Author Edition matches canonical source.
+
+Milestone 12B adds a destination option for disposable external workspaces:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
+If the destination is a directory, the exporter writes the Author Edition
+project and sibling materials package inside that directory. If the destination
+ends in `.inform`, it is treated as the project bundle path.
 
 IDE note:
 

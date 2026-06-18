@@ -126,6 +126,13 @@ Regenerate it from canonical source:
 python3 tools/sync_author_edition.py --export
 ```
 
+Export a separate local IDE workspace:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
 Check whether it is current:
 
 ```bash
@@ -135,6 +142,9 @@ python3 tools/sync_author_edition.py --diff
 Open `OpenAdventure-AuthorEdition.inform` in Inform 7 10.1.2 to browse and
 compile the modular project. Durable edits should be made in canonical source
 files, then exported again.
+
+See `docs/repository-layout.md` and `docs/artifact-classification.md` for the
+source/generated/workspace/release artifact split.
 
 ## How Do I Contribute?
 
@@ -181,6 +191,8 @@ references/conley-inform7/            Inform 7 reference
 Useful entry points:
 
 - `docs/current-state.md`
+- `docs/repository-layout.md`
+- `docs/artifact-classification.md`
 - `docs/project-history.md`
 - `docs/build-and-test.md`
 - `docs/release-checklist.md`

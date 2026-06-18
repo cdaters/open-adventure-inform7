@@ -299,15 +299,43 @@ def write_project(project: Path, regenerate: bool) -> None:
         gitkeep.write_text("", encoding="utf-8")
 
 
+def resolve_project_path(project: Path | None, destination: Path | None) -> Path:
+    if project is not None and destination is not None:
+        raise ValueError("--project and --destination cannot be used together")
+    if destination is not None:
+        destination = destination.expanduser()
+        if not destination.is_absolute():
+            destination = ROOT / destination
+        if destination.suffix == ".inform":
+            return destination
+        return destination / DEFAULT_PROJECT.name
+    project = project or DEFAULT_PROJECT
+    project = project.expanduser()
+    if not project.is_absolute():
+        project = ROOT / project
+    return project
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Assemble OpenAdventure-AuthorEdition.inform for Inform 7 IDE use."
     )
-    parser.add_argument(
+    destination = parser.add_mutually_exclusive_group()
+    destination.add_argument(
         "--project",
         type=Path,
-        default=DEFAULT_PROJECT,
+        default=None,
         help="Author Edition .inform project path.",
+    )
+    destination.add_argument(
+        "--destination",
+        type=Path,
+        default=None,
+        help=(
+            "Author workspace directory, or an explicit .inform project path. "
+            "When a directory is given, OpenAdventure-AuthorEdition.inform is "
+            "written inside it."
+        ),
     )
     parser.add_argument(
         "--no-generate",
@@ -319,9 +347,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    project = args.project
-    if not project.is_absolute():
-        project = ROOT / project
+    project = resolve_project_path(args.project, args.destination)
     write_project(project, regenerate=not args.no_generate)
     rel_project = project.relative_to(ROOT) if project.is_relative_to(ROOT) else project
     print(f"[author-edition] wrote {rel_project / 'Source' / 'story.ni'}")

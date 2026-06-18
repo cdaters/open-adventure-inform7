@@ -96,11 +96,25 @@ Export:
 python3 tools/sync_author_edition.py --export
 ```
 
+Export to a separate local workspace:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
+When `--destination` names a directory, the generated project and sibling
+materials package are written inside it. When it names a `.inform` path, that
+path is used as the project bundle.
+
 Diff:
 
 ```bash
 python3 tools/sync_author_edition.py --diff
 ```
+
+Use the same `--destination` value with `--diff` to check an external
+workspace export.
 
 `--diff` compares:
 

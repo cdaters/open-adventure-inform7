@@ -5,6 +5,10 @@ Date: 2026-06-17
 Milestone 12A reviewed the project documentation for current release status,
 contributor usability, and stale roadmap language.
 
+Milestone 12B added repository hygiene documentation so contributors can
+distinguish canonical source, generated artifacts, Author Edition workspace
+files, release artifacts, and legacy/reference material.
+
 ## Changes Made
 
 - Rewrote `README.md` around the questions new readers ask first:
@@ -25,6 +29,11 @@ contributor usability, and stale roadmap language.
 - Updated project history with RC1, Author Edition, menu integration, release
   packaging validation, `Release.blurb` IFID handling, and verbose reporting
   parity.
+- Added `docs/repository-layout.md` and `docs/artifact-classification.md`.
+- Updated author and developer workflows to cover external Author Edition
+  workspace export with `--destination`.
+- Documented GitHub Releases as the preferred home for compiled release
+  artifacts, with ignored local `dist/` staging.
 
 ## Stale Content Removed or Reframed
 

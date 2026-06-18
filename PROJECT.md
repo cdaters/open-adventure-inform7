@@ -46,6 +46,7 @@ Completed work:
 - Interactive help menu integration and historical background content.
 - Author Edition `Release.blurb` IFID normalization.
 - Verbose movement reporting parity for repeated-description regions.
+- Repository layout and artifact classification documentation.
 
 The detailed milestone history is preserved in `docs/project-history.md`.
 
@@ -106,6 +107,22 @@ These files are generated output. Durable edits should be made in
 `source/adventure.yaml`, `tools/generators/*.py`, `OpenAdventure.ni`, or
 `OpenAdventure_*.ni`, then exported again.
 
+## Repository Layout
+
+Source, generated output, Author Edition workspace files, release artifacts, and
+legacy/reference material are classified in:
+
+- `docs/repository-layout.md`
+- `docs/artifact-classification.md`
+
+The in-repository Author Edition remains a reproducible generated export. A
+disposable external IDE workspace can be generated with:
+
+```bash
+python3 tools/sync_author_edition.py --export \
+  --destination ~/Documents/if/OpenAdventure-Inform7
+```
+
 ## Release Packaging
 
 RC1 should ship as a Glulx release containing:
@@ -117,6 +134,9 @@ RC1 should ship as a Glulx release containing:
 - `docs/known-differences.md`
 - `docs/build-and-test.md`
 - `docs/transcript-results.md`
+
+Compiled story files should be staged locally under ignored `dist/` when
+needed and published through GitHub Releases rather than committed.
 
 The full repository remains the contributor package.
 
