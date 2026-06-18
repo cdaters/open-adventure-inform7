@@ -36,8 +36,8 @@ Implemented runtime subsystems:
 - Menu-driven player-facing information system
 - Presentation polish for startup, parser refusals, object names, inventory, and
   `take all`/`get all`
-- Adventure-compatible verbose movement reporting for repeated-description
-  regions such as the forest and maze
+- Adventure-compatible travel reporting for BRIEF, VERBOSE, and SUPERBRIEF
+  movement through repeated-description regions such as the forest and maze
 
 The major gameplay systems required for the 430-point route are operational in
 the Glulx transcript suite.
@@ -115,12 +115,21 @@ direct commands.
 
 ## Movement Reporting Status
 
-Verbose mode now reports repeated-description locations after movement in the
-same style as Open Adventure C.  Generated forest rooms still share their
-intended description and fallback printed name, but movement reporting no
-longer suppresses their descriptions merely because adjacent rooms look alike.
-The same fix applies to other repeated-description regions, including maze
-rooms and repeated dead ends.  Explicit LOOK behavior is unchanged.
+Travel reporting now follows Adventure-style reporting modes for the repeated
+generated rooms that exposed the parity issue. Open Adventure C starts with a
+periodic brief-style mode (`abbnum = 5`), and Graham Nelson's `Advent.inf`
+starts in the Inform library's normal room-reporting mode. The Inform 7
+edition now matches the important player-facing behavior for those regions:
+startup/BRIEF travel reports repeated-description movement, explicit VERBOSE
+reports every move, and SUPERBRIEF remains abbreviated.
+
+Generated forest rooms still share their intended description and fallback
+printed name, but movement reporting no longer suppresses their descriptions
+merely because adjacent rooms look alike. The same fix applies to other
+repeated-description regions, including maze rooms and repeated dead ends.
+Ordinary generated travel and the upstream replay harness keep their previous
+movement path so scoring and cave-closing timing remain stable. Explicit LOOK
+behavior is unchanged.
 
 ## Known Limitations
 

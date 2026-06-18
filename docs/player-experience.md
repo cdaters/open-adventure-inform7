@@ -2,8 +2,8 @@
 
 Date: 2026-06-17
 
-Milestones 10B, 10C, 11A, 11C, and 11D reviewed common player commands and
-presentation issues while preserving RC1 gameplay parity.
+Milestones 10B, 10C, 11A, 11C, 11D, and 11D.1 reviewed common player commands
+and presentation issues while preserving RC1 gameplay parity.
 
 ## Goals
 
@@ -107,10 +107,10 @@ through a generated identity table.
 Inventory hides internal `WATER` and `OIL` carrier objects, so bottle contents
 do not appear as separate inventory items.
 
-### Verbose Repeated-Location Reporting
+### Travel Reporting Modes
 
-Milestone 11D corrects movement reporting for regions with repeated room text,
-including the forest and the alike/dead-end maze rooms.
+Milestones 11D and 11D.1 correct movement reporting for regions with repeated
+room text, including the forest and the alike/dead-end maze rooms.
 
 The issue was not the generated room descriptions themselves.  Forest rooms in
 `source/adventure.yaml` intentionally share the same long description and have
@@ -128,14 +128,20 @@ the room description.  OpenAdventure-dispatched travel also used Inform's
 low-level `move the player to ...` phrase, whose conditional description path
 does not model Open Adventure C's per-location abbreviation counter.
 
-Open Adventure C reports locations from `describe_location()`, choosing long
-or short text from a per-location `abbrev` counter and `abbnum`; it does not
-suppress output because another location has the same description or map tag.
-Graham Nelson's `Advent.inf` follows the Inform 6 library's normal
-verbose/brief location-reporting model.  The Inform 7 edition now follows the
-same player-facing rule: in verbose mode, movement through repeated-description
-regions continues to print the location description after each move.  LOOK
-remains unchanged.
+Open Adventure C starts with `abbnum = 5`, so it is not globally verbose at
+startup. It reports the full text on first arrival at a location, uses the
+short text for ordinary repeats, and periodically refreshes the long text.
+Graham Nelson's `Advent.inf` leaves the Inform 6 library in its normal startup
+reporting mode, which likewise reports a newly visited room without requiring
+the player to type VERBOSE.
+
+The Inform 7 edition now keeps explicit VERBOSE reporting on the generated
+travel path and adds a narrowly scoped BRIEF-mode report for generated rooms
+whose descriptions are intentionally repeated, such as the forest and
+alike/dead-end maze rooms. Ordinary non-repeated travel and the upstream replay
+harness keep their previous movement path, so scoring and cave closing timing
+remain unchanged. The startup sequence `w / n / n / e / s` therefore reports
+forest movement without requiring VERBOSE first. LOOK remains unchanged.
 
 ## Presentation Review
 
